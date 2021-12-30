@@ -58,6 +58,10 @@
 *::after {
   box-sizing: border-box;
 }
+
+.icons{
+  font-size: 48px;
+}
 .icons:hover {
   color: white;
   cursor:pointer;
@@ -132,6 +136,16 @@ h2, .h2 {
   .weight{
     display:none;
   }
+  h1, .h1 {
+    font-size: 1rem;
+  }
+  h5, .h5 {
+    font-size: 0.3rem !important;
+  }
+  .icons {
+    font-size: 0.3rem !important;
+  }
+
   }
 }
 h3, .h3 {

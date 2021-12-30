@@ -137,10 +137,10 @@ h2, .h2 {
     display:none;
   }
   h1, .h1 {
-    font-size: 1rem;
+    font-size: 1.3rem;
   }
   h5, .h5 {
-    font-size: 0.3rem !important;
+    font-size: 0.7rem !important;
   }
   .icons {
     font-size: 24px !important;

@@ -134,7 +134,7 @@ h2, .h2 {
 }
 @media (max-width: 1200px) {
   .weight{
-    display:none;
+    display:10%;
   }
   h1, .h1 {
     font-size: 1.3rem;

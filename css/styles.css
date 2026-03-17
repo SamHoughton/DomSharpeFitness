@@ -2436,32 +2436,66 @@ ul {
     margin-top: 48px;
 }
 
-.behold-placeholder {
+/* 6-tile preview grid (replaced by Behold embed once connected) */
+.insta-grid-preview {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 8px;
+}
+
+.insta-tile {
+    aspect-ratio: 1;
+    border-radius: 8px;
+    overflow: hidden;
+    display: block;
+    background: linear-gradient(135deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+    position: relative;
+    text-decoration: none;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.insta-tile:hover {
+    transform: scale(1.03);
+    opacity: 0.9;
+}
+
+.insta-tile-inner {
+    position: absolute;
+    inset: 0;
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 12px;
-    padding: 60px 24px;
-    border: 2px dashed var(--border);
-    border-radius: var(--radius-lg);
+    color: rgba(255, 255, 255, 0.25);
+    font-size: clamp(1.4rem, 3vw, 2.2rem);
+}
+
+.insta-feed-cta {
+    margin-top: 28px;
     text-align: center;
-    color: var(--text-muted);
 }
 
-.behold-ig-icon {
-    font-size: 3rem;
-    background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-}
-
-.behold-placeholder p {
+.insta-follow-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 28px;
+    border-radius: 50px;
+    background: linear-gradient(135deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+    color: #fff;
+    font-family: var(--font-heading);
     font-size: 15px;
-    color: var(--text-muted);
-    margin: 0;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-decoration: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
+
+.insta-follow-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(220, 39, 67, 0.35);
+}
+
+.insta-follow-btn i { font-size: 18px; }
 
 /* ============================================================
    WHATSAPP FLOATING BUTTON
@@ -2528,4 +2562,5 @@ ul {
     .credential-badge  { font-size: 12px; padding: 7px 12px; }
 
     .instagram-feed-section { padding: 60px 0; }
+    .insta-grid-preview { grid-template-columns: repeat(3, 1fr); gap: 6px; }
 }

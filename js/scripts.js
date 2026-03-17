@@ -245,6 +245,36 @@ if (statCounters.length) {
 }
 
 
+// === SCROLL PROGRESS BAR ===
+const scrollProgress = document.getElementById('scroll-progress');
+
+window.addEventListener('scroll', () => {
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const pct       = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+    scrollProgress.style.width = pct + '%';
+}, { passive: true });
+
+
+// === 3D CARD TILT (desktop only) ===
+if (!window.matchMedia('(hover: none)').matches) {
+    document.querySelectorAll('.service-card').forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+            const rect = card.getBoundingClientRect();
+            const x    = (e.clientX - rect.left) / rect.width  - 0.5;
+            const y    = (e.clientY - rect.top)  / rect.height - 0.5;
+            card.style.transition = 'border-color 0.3s ease, box-shadow 0.3s ease';
+            card.style.transform  = `perspective(600px) rotateY(${x * 10}deg) rotateX(${-y * 10}deg) translateY(-6px)`;
+        });
+
+        card.addEventListener('mouseleave', () => {
+            card.style.transition = '';
+            card.style.transform  = '';
+        });
+    });
+}
+
+
 // === ACTIVE NAV LINK on scroll ===
 const sections  = document.querySelectorAll('section[id]');
 const navAnchors = document.querySelectorAll('.nav-link');

@@ -134,14 +134,32 @@ if (form) {
             return;
         }
 
+        // Collect multi-select availability values into the hidden field
+        const availabilityInput = document.getElementById('availability');
+        if (availabilityInput && availabilityGroup) {
+            const selected = [...availabilityGroup.querySelectorAll('.toggle-btn.active')]
+                .map(b => b.dataset.value);
+            availabilityInput.value = selected.join(', ');
+        }
+
         const submitBtn = form.querySelector('.btn-submit');
         submitBtn.disabled = true;
         submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Sending...';
 
-        setTimeout(() => {
+        fetch('/', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: new URLSearchParams(new FormData(form)).toString()
+        })
+        .then(() => {
             form.style.display = 'none';
             formSuccess.classList.add('show');
-        }, 1200);
+        })
+        .catch(() => {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = '<span>Send Consultation Request</span> <i class="fa-solid fa-paper-plane"></i>';
+            shakeBorder(submitBtn);
+        });
     });
 }
 

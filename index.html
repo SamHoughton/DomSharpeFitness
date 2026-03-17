@@ -3,9 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Dom Sharpe — Personal Trainer in Hitchin at Bannatyne Fairfield. Specialising in 1:1 Coaching, Weight Training, Mobility and Weight Loss. Book your free consultation today.">
+    <meta name="description" content="Dom Sharpe — Personal Trainer in Hitchin at Bannatyne Fairfield. 1:1 coaching for weight training, fat loss, mobility and strength. Book your free consultation today.">
     <meta name="keywords" content="personal trainer Hitchin, Dom Sharpe, Bannatyne Fairfield, personal trainer Hertfordshire, weight loss Hitchin, strength training Hitchin, 1:1 coaching, personal trainer Stotfold">
-    <title>Dom Sharpe | Personal Trainer Hitchin | Bannatyne Fairfield</title>
+    <title>Dom Sharpe | Personal Trainer in Hitchin | 1:1 Coaching at Bannatyne Fairfield</title>
+
+    <!-- Open Graph -->
+    <meta property="og:type"        content="website">
+    <meta property="og:url"         content="https://domsharpefitness.netlify.app/">
+    <meta property="og:title"       content="Dom Sharpe | Personal Trainer in Hitchin">
+    <meta property="og:description" content="1:1 coaching for weight training, fat loss, mobility and strength at Bannatyne Fairfield, Hitchin. First session free.">
+    <meta property="og:image"       content="https://domsharpefitness.netlify.app/img/dom-transformation.jpg">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card"        content="summary_large_image">
+    <meta name="twitter:title"       content="Dom Sharpe | Personal Trainer in Hitchin">
+    <meta name="twitter:description" content="1:1 coaching for weight training, fat loss, mobility and strength. First session free.">
+    <meta name="twitter:image"       content="https://domsharpefitness.netlify.app/img/dom-transformation.jpg">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,6 +26,15 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous">
 
     <link rel="stylesheet" href="css/styles.css">
+
+    <!-- Google Analytics GA4 — replace G-XXXXXXXXXX with your Measurement ID -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-XXXXXXXXXX');
+    </script>
 </head>
 <body>
 
@@ -147,6 +169,26 @@
                         <span class="tag"><i class="fa-solid fa-handshake"></i> Accountability</span>
                     </div>
 
+                    <!-- Credentials — update with Dom's actual qualifications -->
+                    <div class="about-credentials">
+                        <div class="credential-badge">
+                            <i class="fa-solid fa-certificate"></i>
+                            <span>Level 3 Personal Trainer</span>
+                        </div>
+                        <div class="credential-badge">
+                            <i class="fa-solid fa-heart-pulse"></i>
+                            <span>First Aid Certified</span>
+                        </div>
+                        <div class="credential-badge">
+                            <i class="fa-solid fa-shield-halved"></i>
+                            <span>REPs Registered</span>
+                        </div>
+                        <div class="credential-badge">
+                            <i class="fa-solid fa-chart-line"></i>
+                            <span>InBody Certified</span>
+                        </div>
+                    </div>
+
                     <a href="https://www.instagram.com/sharpe.strength/" target="_blank" rel="noopener noreferrer" class="instagram-btn">
                         <i class="fa-brands fa-instagram"></i>
                         Follow @sharpe.strength
@@ -208,7 +250,7 @@
                         <i class="fa-solid fa-fire-flame-curved"></i>
                     </div>
                     <h3>Weight Loss Programme</h3>
-                    <p>Fat loss that actually lasts — no crash diets, no cutting out everything you enjoy. Just a plan you can stick to.</p>
+                    <p>Fat loss that actually lasts. No crash diets, no cutting out everything you enjoy. Just a plan you can stick to.</p>
                     <ul class="service-list">
                         <li><i class="fa-solid fa-check"></i> Practical nutrition guidance</li>
                         <li><i class="fa-solid fa-check"></i> Training that burns fat, not muscle</li>
@@ -615,7 +657,7 @@
                         <span class="price-currency">&pound;</span>
                         <span class="price-value">450</span>
                     </div>
-                    <p class="pricing-period">10 sessions — save &pound;50</p>
+                    <p class="pricing-period">10 sessions, save &pound;50</p>
                     <ul class="pricing-list">
                         <li><i class="fa-solid fa-check"></i> Everything in Single Session</li>
                         <li><i class="fa-solid fa-check"></i> Full progressive programme</li>
@@ -713,7 +755,7 @@
                         <i class="fa-solid fa-chevron-down faq-chevron"></i>
                     </button>
                     <div class="faq-answer">
-                        <p>Most clients notice a difference in how they feel within a few weeks — more energy, better movement, stronger in the gym. Visible physical changes typically follow after 6 to 8 weeks of consistent training and nutrition. Everyone's different.</p>
+                        <p>Most clients notice a difference in how they feel within a few weeks: more energy, better movement, stronger in the gym. Visible physical changes typically follow after 6 to 8 weeks of consistent training and nutrition. Everyone's different.</p>
                     </div>
                 </div>
 
@@ -770,10 +812,25 @@
                         </div>
                     </div>
 
+                    <div class="contact-map">
+                        <iframe
+                            title="Bannatyne Fairfield, Hitchin"
+                            src="https://maps.google.com/maps?q=Bannatyne+Health+Club+Hitchin+Fairfield&output=embed"
+                            width="100%"
+                            height="220"
+                            style="border:0;"
+                            allowfullscreen=""
+                            loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade">
+                        </iframe>
+                    </div>
+
                 </div>
 
                 <div class="contact-form-wrap reveal">
-                    <form class="consultation-form" id="consultation-form" novalidate>
+                    <form class="consultation-form" id="consultation-form" name="consultation" netlify novalidate>
+                        <input type="hidden" name="form-name" value="consultation">
+                        <input type="hidden" id="availability" name="availability">
 
                         <div class="form-row two-col">
                             <div class="form-group">
@@ -853,6 +910,33 @@
         </div>
     </section>
 
+    <!-- ===================== INSTAGRAM FEED ===================== -->
+    <section class="instagram-feed-section" id="instagram">
+        <div class="section-container">
+            <div class="section-eyebrow text-center">Follow Along</div>
+            <h2 class="section-title text-center">FOLLOW <span class="accent-text">@SHARPE.STRENGTH</span></h2>
+            <p class="section-sub text-center">Training content, client progress and behind-the-scenes from the gym floor.</p>
+
+            <!-- Behold Instagram feed embed -->
+            <!-- Sign up free at behold.so, connect @sharpe.strength, paste your embed code below in place of the placeholder div -->
+            <div class="insta-feed-wrap">
+                <div class="behold-placeholder">
+                    <i class="fa-brands fa-instagram behold-ig-icon"></i>
+                    <p>Instagram feed coming soon</p>
+                    <a href="https://www.instagram.com/sharpe.strength/" target="_blank" rel="noopener noreferrer" class="btn-ghost" style="margin-top:16px;">
+                        View @sharpe.strength
+                    </a>
+                </div>
+            </div>
+
+            <div class="text-center" style="margin-top: 32px;">
+                <a href="https://www.instagram.com/sharpe.strength/" target="_blank" rel="noopener noreferrer" class="btn-ghost">
+                    <i class="fa-brands fa-instagram"></i>&nbsp; Follow on Instagram
+                </a>
+            </div>
+        </div>
+    </section>
+
     <!-- ===================== FOOTER ===================== -->
     <footer class="footer">
         <div class="footer-inner">
@@ -886,9 +970,19 @@
         </div>
 
         <div class="footer-bottom">
-            <p>&copy; 2025 Dom Sharpe Fitness. All rights reserved.</p>
+            <p>&copy; 2026 Dom Sharpe Fitness. All rights reserved.</p>
         </div>
     </footer>
+
+    <!-- WhatsApp floating button — replace 447700000000 with Dom's actual number -->
+    <a href="https://wa.me/447700000000?text=Hi%20Dom%2C%20I%27d%20like%20to%20find%20out%20more%20about%20personal%20training."
+       class="whatsapp-float"
+       target="_blank"
+       rel="noopener noreferrer"
+       aria-label="Chat with Dom on WhatsApp">
+        <i class="fa-brands fa-whatsapp"></i>
+        <span class="whatsapp-tooltip">Chat on WhatsApp</span>
+    </a>
 
     <script src="js/scripts.js"></script>
 </body>

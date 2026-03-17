@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "dom-sharpe-fitness",
+      "runtimeExecutable": "C:\\Users\\samue\\AppData\\Local\\Zed\\node\\node-v24.11.0-win-x64\\node.exe",
+      "runtimeArgs": ["-e", "require('http').createServer((req,res)=>{const fs=require('fs'),path=require('path');let f=path.join('C:/Users/samue/Documents/GitHub/DomSharpeFitness',req.url==='/'?'/index.html':req.url);fs.readFile(f,(e,d)=>{if(e){res.writeHead(404);res.end();}else{const ext=path.extname(f);const m={'html':'text/html','css':'text/css','js':'application/javascript','png':'image/png','jpg':'image/jpeg','ico':'image/x-icon'};res.writeHead(200,{'Content-Type':m[ext.slice(1)]||'text/plain'});res.end(d);}});}).listen(3000)"],
+      "port": 3000
+    }
+  ]
+}

@@ -275,6 +275,132 @@ if (!window.matchMedia('(hover: none)').matches) {
 }
 
 
+// === BMI CALCULATOR ===
+(function () {
+    const btn        = document.getElementById('bmi-btn');
+    const resultBox  = document.getElementById('bmi-result');
+    const bmiValue   = document.getElementById('bmi-value');
+    const bmiCat     = document.getElementById('bmi-category');
+    const bmiMarker  = document.getElementById('bmi-marker');
+    const metricEl   = document.getElementById('bmi-metric');
+    const imperialEl = document.getElementById('bmi-imperial');
+    let   currentUnit = 'metric';
+
+    document.querySelectorAll('.unit-btn[data-calc="bmi"]').forEach(b => {
+        b.addEventListener('click', () => {
+            currentUnit = b.dataset.unit;
+            document.querySelectorAll('.unit-btn[data-calc="bmi"]').forEach(x => x.classList.remove('active'));
+            b.classList.add('active');
+            metricEl.classList.toggle('hidden', currentUnit !== 'metric');
+            imperialEl.classList.toggle('hidden', currentUnit !== 'imperial');
+            resultBox.classList.add('hidden');
+        });
+    });
+
+    btn.addEventListener('click', () => {
+        let heightM, weightKg;
+
+        if (currentUnit === 'metric') {
+            const h = parseFloat(document.getElementById('bmi-height-cm').value);
+            const w = parseFloat(document.getElementById('bmi-weight-kg').value);
+            if (!h || !w || h < 100 || w < 30) return shake(btn);
+            heightM  = h / 100;
+            weightKg = w;
+        } else {
+            const ft = parseFloat(document.getElementById('bmi-height-ft').value);
+            const inches = parseFloat(document.getElementById('bmi-height-in').value) || 0;
+            const lbs = parseFloat(document.getElementById('bmi-weight-lbs').value);
+            if (!ft || !lbs) return shake(btn);
+            heightM  = ((ft * 12) + inches) * 0.0254;
+            weightKg = lbs * 0.453592;
+        }
+
+        const bmi = weightKg / (heightM * heightM);
+        const rounded = Math.round(bmi * 10) / 10;
+
+        let category, markerPct, colour;
+        if      (bmi < 18.5) { category = 'Underweight'; markerPct = (bmi / 18.5) * 20;       colour = '#4a9eff'; }
+        else if (bmi < 25)   { category = 'Healthy';     markerPct = 20 + ((bmi - 18.5) / 6.5) * 30; colour = '#4caf50'; }
+        else if (bmi < 30)   { category = 'Overweight';  markerPct = 50 + ((bmi - 25) / 5) * 25;     colour = '#ff9800'; }
+        else                 { category = 'Obese';        markerPct = Math.min(75 + ((bmi - 30) / 10) * 25, 98); colour = '#f44336'; }
+
+        bmiValue.textContent  = rounded;
+        bmiValue.style.color  = colour;
+        bmiCat.textContent    = category;
+        bmiMarker.style.left  = markerPct + '%';
+
+        resultBox.classList.remove('hidden');
+    });
+})();
+
+
+// === 1 REP MAX CALCULATOR ===
+(function () {
+    const btn       = document.getElementById('orm-btn');
+    const resultBox = document.getElementById('orm-result');
+    const ormValue  = document.getElementById('orm-value');
+    const ormUnit   = document.getElementById('orm-unit-label');
+    const weightLbl = document.getElementById('orm-weight-label');
+    let   unit      = 'kg';
+
+    document.querySelectorAll('.unit-btn[data-calc="orm"]').forEach(b => {
+        b.addEventListener('click', () => {
+            unit = b.dataset.unit;
+            document.querySelectorAll('.unit-btn[data-calc="orm"]').forEach(x => x.classList.remove('active'));
+            b.classList.add('active');
+            weightLbl.textContent = `Weight Lifted (${unit})`;
+            ormUnit.textContent   = `Estimated 1RM (${unit})`;
+            resultBox.classList.add('hidden');
+        });
+    });
+
+    btn.addEventListener('click', () => {
+        const w = parseFloat(document.getElementById('orm-weight').value);
+        const r = parseInt(document.getElementById('orm-reps').value, 10);
+        if (!w || !r || r < 1 || r > 30 || w < 1) return shake(btn);
+
+        // Epley formula
+        const orm = w * (1 + r / 30);
+        const fmt = (pct) => (Math.round(orm * pct / 2.5) * 2.5).toFixed(1) + ' ' + unit;
+
+        ormValue.textContent = (Math.round(orm * 10) / 10) + ' ' + unit;
+        document.getElementById('orm-95').textContent = fmt(0.95);
+        document.getElementById('orm-85').textContent = fmt(0.85);
+        document.getElementById('orm-75').textContent = fmt(0.75);
+        document.getElementById('orm-65').textContent = fmt(0.65);
+        document.getElementById('orm-50').textContent = fmt(0.50);
+
+        resultBox.classList.remove('hidden');
+    });
+})();
+
+
+// === FAQ ACCORDION ===
+document.querySelectorAll('.faq-question').forEach(btn => {
+    btn.addEventListener('click', () => {
+        const answer   = btn.nextElementSibling;
+        const expanded = btn.getAttribute('aria-expanded') === 'true';
+
+        // Close all others
+        document.querySelectorAll('.faq-question').forEach(other => {
+            if (other !== btn) {
+                other.setAttribute('aria-expanded', 'false');
+                other.nextElementSibling.classList.remove('open');
+            }
+        });
+
+        btn.setAttribute('aria-expanded', String(!expanded));
+        answer.classList.toggle('open', !expanded);
+    });
+});
+
+
+function shake(el) {
+    el.style.outline = '2px solid #ff4444';
+    setTimeout(() => { el.style.outline = ''; }, 1500);
+}
+
+
 // === ACTIVE NAV LINK on scroll ===
 const sections  = document.querySelectorAll('section[id]');
 const navAnchors = document.querySelectorAll('.nav-link');

@@ -50,7 +50,7 @@ body {
     font-size: 16px;
     line-height: 1.7;
     -webkit-font-smoothing: antialiased;
-    overflow-x: hidden;
+    overflow-x: clip;
 }
 
 img {
@@ -171,6 +171,7 @@ ul {
     gap: 36px;
     flex: 1;
     justify-content: center;
+    list-style: none;
 }
 
 .nav-link {
@@ -802,6 +803,8 @@ ul {
     margin-bottom: 24px;
     padding-bottom: 24px;
     border-bottom: 1px solid var(--border);
+    list-style: none;
+    padding-left: 0;
 }
 
 .service-list li {
@@ -1699,7 +1702,7 @@ ul {
     .nav-links {
         position: fixed;
         top: 0;
-        right: -100%;
+        right: 0;
         bottom: 0;
         width: min(320px, 80vw);
         background: var(--bg-card);
@@ -1708,11 +1711,13 @@ ul {
         justify-content: center;
         gap: 40px;
         z-index: 999;
-        transition: right var(--transition);
+        transform: translateX(100%);
+        transition: transform var(--transition);
         padding: 80px 40px;
+        list-style: none;
     }
 
-    .nav-links.open { right: 0; }
+    .nav-links.open { transform: translateX(0); }
 
     .nav-link {
         font-size: 18px;
@@ -1798,4 +1803,503 @@ ul {
     .metric-value { font-size: 14px; }
 
     .inbody-feature { padding: 20px 16px; }
+
+    /* Calc mobile */
+    .calc-grid { grid-template-columns: 1fr; }
+    .calc-header { gap: 14px; }
+
+    /* Pricing mobile */
+    .pricing-grid { grid-template-columns: 1fr; }
+
+    /* FAQ mobile */
+    .faq-question { font-size: 15px; padding: 18px 0; }
+}
+
+
+/* ===================================================
+   CALCULATORS
+=================================================== */
+.calculators {
+    background: var(--bg);
+    padding: 100px 0;
+}
+
+.calc-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+    margin-top: 60px;
+}
+
+.calc-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 36px;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+}
+
+.calc-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 18px;
+}
+
+.calc-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: var(--radius);
+    background: var(--accent-glow);
+    border: 1px solid rgba(200, 146, 58, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    color: var(--accent);
+    font-size: 20px;
+}
+
+.calc-header h3 {
+    font-family: var(--font-heading);
+    font-size: 1.3rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+}
+
+.calc-desc {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.6;
+    margin: 0;
+}
+
+.calc-body {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    flex: 1;
+}
+
+.calc-unit-toggle {
+    display: flex;
+    gap: 8px;
+}
+
+.unit-btn {
+    padding: 7px 16px;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--text-muted);
+    font-family: var(--font-body);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    transition: all var(--transition);
+}
+
+.unit-btn.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #000;
+}
+
+.calc-fields {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+}
+
+.calc-fields.hidden { display: none; }
+
+.calc-field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.calc-field label {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+}
+
+.calc-field input {
+    background: var(--bg-alt);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 10px 14px;
+    color: var(--text);
+    font-family: var(--font-body);
+    font-size: 15px;
+    transition: border-color var(--transition);
+    width: 100%;
+}
+
+.calc-field input:focus {
+    outline: none;
+    border-color: var(--accent);
+}
+
+.calc-field input::placeholder { color: var(--text-faint); }
+
+.btn-calc {
+    padding: 12px 24px;
+    background: var(--accent);
+    color: #000;
+    border: none;
+    border-radius: var(--radius);
+    font-family: var(--font-body);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background var(--transition), transform var(--transition);
+    align-self: flex-start;
+}
+
+.btn-calc:hover {
+    background: var(--accent-dark);
+    transform: translateY(-1px);
+}
+
+.calc-result {
+    background: var(--bg-alt);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.calc-result.hidden { display: none; }
+
+.result-value-wrap {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+}
+
+.result-value {
+    font-family: var(--font-heading);
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: var(--accent);
+    line-height: 1;
+}
+
+.result-label {
+    font-size: 13px;
+    color: var(--text-muted);
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+/* BMI bar */
+.bmi-bar-wrap { margin-top: 4px; }
+
+.bmi-bar {
+    display: flex;
+    height: 10px;
+    border-radius: 5px;
+    overflow: hidden;
+    position: relative;
+    margin-bottom: 6px;
+}
+
+.bmi-zone {
+    flex: 1;
+    font-size: 9px;
+    letter-spacing: 0.3px;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.bmi-zone.underweight { background: #4a9eff; flex: 0.8; }
+.bmi-zone.healthy     { background: #4caf50; flex: 1.2; }
+.bmi-zone.overweight  { background: #ff9800; flex: 1; }
+.bmi-zone.obese       { background: #f44336; flex: 1; }
+
+.bmi-marker {
+    position: absolute;
+    top: -3px;
+    width: 4px;
+    height: 16px;
+    background: #fff;
+    border-radius: 2px;
+    z-index: 1;
+    transform: translateX(-50%);
+    transition: left 0.5s ease;
+}
+
+/* 1RM table */
+.orm-table {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    border-radius: var(--radius);
+    overflow: hidden;
+    border: 1px solid var(--border);
+}
+
+.orm-table-header,
+.orm-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 2fr;
+    gap: 8px;
+    padding: 8px 12px;
+    font-size: 12px;
+}
+
+.orm-table-header {
+    background: rgba(200, 146, 58, 0.15);
+    color: var(--accent);
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.orm-row {
+    background: var(--bg);
+    color: var(--text-muted);
+    border-top: 1px solid var(--border-light);
+}
+
+.orm-row:first-of-type { border-top: none; }
+
+.orm-row span:nth-child(2) {
+    color: var(--text);
+    font-weight: 600;
+}
+
+.calc-cta-note {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    font-size: 12px;
+    color: var(--text-muted);
+    line-height: 1.5;
+    padding-top: 8px;
+    border-top: 1px solid var(--border-light);
+}
+
+.calc-cta-note i { color: var(--accent); flex-shrink: 0; margin-top: 2px; }
+
+.calc-bottom-cta {
+    margin-top: 52px;
+}
+
+.calc-bottom-cta p {
+    color: var(--text-muted);
+    margin-bottom: 20px;
+}
+
+
+/* ===================================================
+   PRICING
+=================================================== */
+.pricing {
+    background: var(--bg-alt);
+    padding: 100px 0;
+}
+
+.pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-top: 60px;
+    align-items: start;
+}
+
+.pricing-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 36px 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    position: relative;
+}
+
+.pricing-card.featured {
+    border-color: var(--accent);
+    box-shadow: var(--shadow-accent);
+}
+
+.pricing-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: var(--radius);
+    background: var(--accent-glow);
+    border: 1px solid rgba(200, 146, 58, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--accent);
+    font-size: 18px;
+}
+
+.pricing-card h3 {
+    font-family: var(--font-heading);
+    font-size: 1.2rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.pricing-amount {
+    display: flex;
+    align-items: baseline;
+    gap: 4px;
+    line-height: 1;
+}
+
+.price-currency {
+    font-family: var(--font-heading);
+    font-size: 1.6rem;
+    color: var(--text-muted);
+    font-weight: 600;
+}
+
+.price-value {
+    font-family: var(--font-heading);
+    font-size: 3.6rem;
+    font-weight: 700;
+    color: var(--accent);
+}
+
+.pricing-period {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-top: -12px;
+}
+
+.pricing-list {
+    list-style: none;
+    padding-left: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.pricing-list li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    color: var(--text-muted);
+}
+
+.pricing-list i {
+    color: var(--accent);
+    font-size: 11px;
+    flex-shrink: 0;
+}
+
+.pricing-note {
+    margin-top: 40px;
+    color: var(--text-muted);
+    font-size: 14px;
+}
+
+.pricing-note a {
+    color: var(--accent);
+    text-decoration: underline;
+}
+
+
+/* ===================================================
+   FAQ
+=================================================== */
+.faq {
+    background: var(--bg);
+    padding: 100px 0;
+}
+
+.faq-list {
+    max-width: 800px;
+    margin: 60px auto 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+}
+
+.faq-item {
+    border-bottom: 1px solid var(--border);
+}
+
+.faq-item:last-child { border-bottom: none; }
+
+.faq-question {
+    width: 100%;
+    background: none;
+    border: none;
+    padding: 22px 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    text-align: left;
+    font-family: var(--font-body);
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text);
+    cursor: pointer;
+    transition: background var(--transition), color var(--transition);
+}
+
+.faq-question:hover { background: var(--bg-alt); }
+
+.faq-question[aria-expanded="true"] {
+    color: var(--accent);
+    background: var(--bg-alt);
+}
+
+.faq-chevron {
+    flex-shrink: 0;
+    color: var(--text-muted);
+    font-size: 13px;
+    transition: transform var(--transition);
+}
+
+.faq-question[aria-expanded="true"] .faq-chevron {
+    transform: rotate(180deg);
+    color: var(--accent);
+}
+
+.faq-answer {
+    display: none;
+    padding: 0 28px 22px;
+    color: var(--text-muted);
+    font-size: 15px;
+    line-height: 1.7;
+}
+
+.faq-answer.open { display: block; }
+
+.faq-cta {
+    margin-top: 52px;
+}
+
+.faq-cta p {
+    color: var(--text-muted);
+    margin-bottom: 20px;
 }

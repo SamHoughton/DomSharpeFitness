@@ -29,6 +29,8 @@
             <ul class="nav-links" id="nav-links">
                 <li><a href="#about" class="nav-link">About</a></li>
                 <li><a href="#services" class="nav-link">Services</a></li>
+                <li><a href="#pricing" class="nav-link">Pricing</a></li>
+                <li><a href="#faq" class="nav-link">FAQ</a></li>
                 <li><a href="#contact" class="nav-link">Consultation</a></li>
             </ul>
 
@@ -441,6 +443,299 @@
         </div>
     </section>
 
+    <!-- ===================== CALCULATORS ===================== -->
+    <section class="calculators" id="calculators">
+        <div class="section-container">
+            <div class="section-eyebrow">Free Tools</div>
+            <h2 class="section-title text-center">KNOW YOUR <span class="accent-text">NUMBERS</span></h2>
+            <p class="section-sub text-center">Use these as a starting point. Dom will take it from there.</p>
+
+            <div class="calc-grid">
+
+                <!-- BMI Calculator -->
+                <div class="calc-card reveal">
+                    <div class="calc-header">
+                        <div class="calc-icon"><i class="fa-solid fa-weight-scale"></i></div>
+                        <div>
+                            <h3>BMI Calculator</h3>
+                            <p class="calc-desc">Body Mass Index — a rough measure of whether your weight is in a healthy range for your height.</p>
+                        </div>
+                    </div>
+
+                    <div class="calc-body" id="bmi-calc">
+                        <div class="calc-unit-toggle">
+                            <button type="button" class="unit-btn active" data-unit="metric" data-calc="bmi">Metric</button>
+                            <button type="button" class="unit-btn" data-unit="imperial" data-calc="bmi">Imperial</button>
+                        </div>
+
+                        <div class="calc-fields" id="bmi-metric">
+                            <div class="calc-field">
+                                <label>Height (cm)</label>
+                                <input type="number" id="bmi-height-cm" placeholder="175" min="100" max="250">
+                            </div>
+                            <div class="calc-field">
+                                <label>Weight (kg)</label>
+                                <input type="number" id="bmi-weight-kg" placeholder="75" min="30" max="300">
+                            </div>
+                        </div>
+
+                        <div class="calc-fields hidden" id="bmi-imperial">
+                            <div class="calc-field">
+                                <label>Height (ft)</label>
+                                <input type="number" id="bmi-height-ft" placeholder="5" min="3" max="8">
+                            </div>
+                            <div class="calc-field">
+                                <label>Height (in)</label>
+                                <input type="number" id="bmi-height-in" placeholder="9" min="0" max="11">
+                            </div>
+                            <div class="calc-field">
+                                <label>Weight (lbs)</label>
+                                <input type="number" id="bmi-weight-lbs" placeholder="165" min="66" max="660">
+                            </div>
+                        </div>
+
+                        <button type="button" class="btn-calc" id="bmi-btn">Calculate BMI</button>
+
+                        <div class="calc-result hidden" id="bmi-result">
+                            <div class="result-value-wrap">
+                                <span class="result-value" id="bmi-value">--</span>
+                                <span class="result-label" id="bmi-category">--</span>
+                            </div>
+                            <div class="bmi-bar-wrap">
+                                <div class="bmi-bar">
+                                    <div class="bmi-marker" id="bmi-marker"></div>
+                                    <div class="bmi-zone underweight">Under</div>
+                                    <div class="bmi-zone healthy">Healthy</div>
+                                    <div class="bmi-zone overweight">Over</div>
+                                    <div class="bmi-zone obese">Obese</div>
+                                </div>
+                            </div>
+                            <div class="calc-cta-note">
+                                <i class="fa-solid fa-circle-info"></i>
+                                BMI doesn't measure body composition. Dom uses InBody scanning for a full picture.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 1RM Calculator -->
+                <div class="calc-card reveal">
+                    <div class="calc-header">
+                        <div class="calc-icon"><i class="fa-solid fa-dumbbell"></i></div>
+                        <div>
+                            <h3>1 Rep Max Calculator</h3>
+                            <p class="calc-desc">Estimate your one-rep max and see what you should be lifting at different training percentages.</p>
+                        </div>
+                    </div>
+
+                    <div class="calc-body" id="orm-calc">
+                        <div class="calc-unit-toggle">
+                            <button type="button" class="unit-btn active" data-unit="kg" data-calc="orm">kg</button>
+                            <button type="button" class="unit-btn" data-unit="lbs" data-calc="orm">lbs</button>
+                        </div>
+
+                        <div class="calc-fields">
+                            <div class="calc-field">
+                                <label id="orm-weight-label">Weight Lifted (kg)</label>
+                                <input type="number" id="orm-weight" placeholder="100" min="1" max="500">
+                            </div>
+                            <div class="calc-field">
+                                <label>Reps Completed</label>
+                                <input type="number" id="orm-reps" placeholder="5" min="1" max="30">
+                            </div>
+                        </div>
+
+                        <button type="button" class="btn-calc" id="orm-btn">Calculate 1RM</button>
+
+                        <div class="calc-result hidden" id="orm-result">
+                            <div class="result-value-wrap">
+                                <span class="result-value" id="orm-value">--</span>
+                                <span class="result-label" id="orm-unit-label">Estimated 1RM (kg)</span>
+                            </div>
+                            <div class="orm-table">
+                                <div class="orm-table-header">
+                                    <span>% of 1RM</span>
+                                    <span>Weight</span>
+                                    <span>Use for</span>
+                                </div>
+                                <div class="orm-row"><span>95%</span><span id="orm-95">--</span><span>Heavy singles</span></div>
+                                <div class="orm-row"><span>85%</span><span id="orm-85">--</span><span>Strength (2-4 reps)</span></div>
+                                <div class="orm-row"><span>75%</span><span id="orm-75">--</span><span>Hypertrophy (6-10 reps)</span></div>
+                                <div class="orm-row"><span>65%</span><span id="orm-65">--</span><span>Endurance (12-15 reps)</span></div>
+                                <div class="orm-row"><span>50%</span><span id="orm-50">--</span><span>Warm-up / technique</span></div>
+                            </div>
+                            <div class="calc-cta-note">
+                                <i class="fa-solid fa-circle-info"></i>
+                                Dom programmes around your actual numbers — no guessing.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="calc-bottom-cta text-center">
+                <p>Not sure what to do with your results? Dom will build a plan around them.</p>
+                <a href="#contact" class="btn-primary">Book a Free Consultation <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== PRICING ===================== -->
+    <section class="pricing" id="pricing">
+        <div class="section-container">
+            <div class="section-eyebrow">Invest in Yourself</div>
+            <h2 class="section-title text-center">SIMPLE, HONEST <span class="accent-text">PRICING</span></h2>
+            <p class="section-sub text-center">No hidden fees. No long contracts. Just good training.</p>
+
+            <div class="pricing-grid">
+
+                <div class="pricing-card reveal">
+                    <div class="pricing-icon"><i class="fa-solid fa-bolt"></i></div>
+                    <h3>Single Session</h3>
+                    <div class="pricing-amount">
+                        <span class="price-currency">&pound;</span>
+                        <span class="price-value">50</span>
+                    </div>
+                    <p class="pricing-period">per session</p>
+                    <ul class="pricing-list">
+                        <li><i class="fa-solid fa-check"></i> 1:1 with Dom</li>
+                        <li><i class="fa-solid fa-check"></i> Full session plan written for you</li>
+                        <li><i class="fa-solid fa-check"></i> Technique coaching throughout</li>
+                        <li><i class="fa-solid fa-check"></i> No commitment required</li>
+                    </ul>
+                    <a href="#contact" class="btn-ghost">Book a Session</a>
+                </div>
+
+                <div class="pricing-card featured reveal">
+                    <div class="featured-badge">Best Value</div>
+                    <div class="pricing-icon"><i class="fa-solid fa-fire-flame-curved"></i></div>
+                    <h3>Block of 10</h3>
+                    <div class="pricing-amount">
+                        <span class="price-currency">&pound;</span>
+                        <span class="price-value">450</span>
+                    </div>
+                    <p class="pricing-period">10 sessions — save &pound;50</p>
+                    <ul class="pricing-list">
+                        <li><i class="fa-solid fa-check"></i> Everything in Single Session</li>
+                        <li><i class="fa-solid fa-check"></i> Full progressive programme</li>
+                        <li><i class="fa-solid fa-check"></i> Weekly check-ins</li>
+                        <li><i class="fa-solid fa-check"></i> WhatsApp support</li>
+                        <li><i class="fa-solid fa-check"></i> Nutrition guidance</li>
+                    </ul>
+                    <a href="#contact" class="btn-primary">Get Started <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+
+                <div class="pricing-card reveal">
+                    <div class="pricing-icon"><i class="fa-solid fa-handshake"></i></div>
+                    <h3>Monthly Coaching</h3>
+                    <div class="pricing-amount">
+                        <span class="price-currency">&pound;</span>
+                        <span class="price-value">180</span>
+                    </div>
+                    <p class="pricing-period">per month (4 sessions)</p>
+                    <ul class="pricing-list">
+                        <li><i class="fa-solid fa-check"></i> 4 sessions per month</li>
+                        <li><i class="fa-solid fa-check"></i> Programme updated each month</li>
+                        <li><i class="fa-solid fa-check"></i> Progress tracking</li>
+                        <li><i class="fa-solid fa-check"></i> WhatsApp support</li>
+                    </ul>
+                    <a href="#contact" class="btn-ghost">Enquire</a>
+                </div>
+
+            </div>
+
+            <p class="pricing-note text-center">First consultation is always free. <a href="#contact">Get in touch</a> to find out which option suits you best.</p>
+        </div>
+    </section>
+
+    <!-- ===================== FAQ ===================== -->
+    <section class="faq" id="faq">
+        <div class="section-container">
+            <div class="section-eyebrow">Questions</div>
+            <h2 class="section-title text-center">GOT A <span class="accent-text">QUESTION?</span></h2>
+
+            <div class="faq-list">
+
+                <div class="faq-item reveal">
+                    <button class="faq-question" aria-expanded="false">
+                        Do I need to already be fit to start?
+                        <i class="fa-solid fa-chevron-down faq-chevron"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Not at all. Dom works with all levels — from complete beginners to experienced lifters. The programme is built around where you are right now, not where you think you should be.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item reveal">
+                    <button class="faq-question" aria-expanded="false">
+                        Where are sessions held?
+                        <i class="fa-solid fa-chevron-down faq-chevron"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>All sessions are at Bannatyne Fairfield, Kingsley Ave, Fairfield Park, Hitchin SG5 4JJ. The gym has a full range of equipment for weight training, cardio and mobility work.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item reveal">
+                    <button class="faq-question" aria-expanded="false">
+                        How long is each session?
+                        <i class="fa-solid fa-chevron-down faq-chevron"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Sessions are typically 60 minutes. The first session is slightly longer as Dom will go through your goals, any injuries or limitations, and how you train currently.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item reveal">
+                    <button class="faq-question" aria-expanded="false">
+                        What if I have an injury or health issue?
+                        <i class="fa-solid fa-chevron-down faq-chevron"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Let Dom know before your first session. He programmes around injuries and works closely with clients who have mobility issues, back pain, or long-term conditions. If something is outside his scope he will tell you honestly.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item reveal">
+                    <button class="faq-question" aria-expanded="false">
+                        Will I get a nutrition plan?
+                        <i class="fa-solid fa-chevron-down faq-chevron"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Dom provides practical nutrition guidance as part of his coaching — not a rigid meal plan, but realistic advice you can actually follow. He won't tell you to cut out everything you enjoy.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item reveal">
+                    <button class="faq-question" aria-expanded="false">
+                        How quickly will I see results?
+                        <i class="fa-solid fa-chevron-down faq-chevron"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Most clients notice a difference in how they feel within a few weeks — more energy, better movement, stronger in the gym. Visible physical changes typically follow after 6 to 8 weeks of consistent training and nutrition. Everyone's different.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item reveal">
+                    <button class="faq-question" aria-expanded="false">
+                        Can I cancel or reschedule sessions?
+                        <i class="fa-solid fa-chevron-down faq-chevron"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Yes. Dom asks for 24 hours notice where possible. Life happens — just message him directly and he will sort it out.</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="faq-cta text-center">
+                <p>Something else on your mind? Just ask.</p>
+                <a href="#contact" class="btn-ghost">Get in Touch</a>
+            </div>
+        </div>
+    </section>
+
     <!-- ===================== CONSULTATION FORM ===================== -->
     <section class="contact" id="contact">
         <div class="section-container">
@@ -573,6 +868,9 @@
                     <li><a href="#home">Home</a></li>
                     <li><a href="#about">About</a></li>
                     <li><a href="#services">Services</a></li>
+                    <li><a href="#calculators">Tools</a></li>
+                    <li><a href="#pricing">Pricing</a></li>
+                    <li><a href="#faq">FAQ</a></li>
                     <li><a href="#contact">Free Consultation</a></li>
                 </ul>
             </div>

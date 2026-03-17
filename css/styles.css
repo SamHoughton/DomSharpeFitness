@@ -1599,6 +1599,8 @@ ul {
 
 .footer-social-link:hover { color: var(--accent); }
 .footer-social-link i { color: var(--accent); font-size: 20px; }
+.footer-whatsapp-link i { color: #25d366; }
+.footer-whatsapp-link:hover { color: #25d366; }
 
 .footer-dm {
     font-size: 13px;

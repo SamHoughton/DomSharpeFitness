@@ -174,14 +174,90 @@ document.querySelectorAll('.read-more-btn').forEach(btn => {
 });
 
 
-// === PARALLAX: hero deco dumbbells ===
-const decoLeft  = document.querySelector('.hero-deco-left');
-const decoRight = document.querySelector('.hero-deco-right');
+// === INTERACTIVE BARBELL: mouse parallax ===
+const barbell = document.getElementById('hero-barbell');
+const hero    = document.getElementById('home');
 
-if (decoLeft && decoRight) {
+if (barbell && hero) {
+    let targetX = 0, targetY = 0, currentX = 0, currentY = 0;
+    let rafId = null;
+
+    hero.addEventListener('mousemove', (e) => {
+        const rect = hero.getBoundingClientRect();
+        const cx = rect.width / 2;
+        const cy = rect.height / 2;
+        targetX = ((e.clientX - rect.left) - cx) / cx * 18;
+        targetY = ((e.clientY - rect.top)  - cy) / cy * 10;
+        if (!rafId) rafId = requestAnimationFrame(animateBarbell);
+    });
+
+    hero.addEventListener('mouseleave', () => {
+        targetX = 0; targetY = 0;
+        if (!rafId) rafId = requestAnimationFrame(animateBarbell);
+    });
+
+    function animateBarbell() {
+        currentX += (targetX - currentX) * 0.06;
+        currentY += (targetY - currentY) * 0.06;
+        barbell.style.transform = `translate(calc(-50% + ${currentX}px), calc(-50% + ${currentY}px))`;
+        if (Math.abs(targetX - currentX) > 0.05 || Math.abs(targetY - currentY) > 0.05) {
+            rafId = requestAnimationFrame(animateBarbell);
+        } else {
+            rafId = null;
+        }
+    }
+
+    // Fade barbell out on scroll
     window.addEventListener('scroll', () => {
-        const y = window.scrollY;
-        decoLeft.style.transform  = `translateY(calc(-50% + ${y * 0.15}px)) rotate(-20deg)`;
-        decoRight.style.transform = `translateY(calc(-50% + ${y * 0.15}px)) rotate(20deg)`;
+        const scrolled = window.scrollY / (hero.offsetHeight * 0.5);
+        barbell.style.opacity = Math.max(0, 1 - scrolled);
     }, { passive: true });
 }
+
+
+// === ANIMATED STAT COUNTERS ===
+const statCounters = document.querySelectorAll('.stat-value[data-count]');
+
+if (statCounters.length) {
+    const counterObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (!entry.isIntersecting) return;
+            const el      = entry.target;
+            const target  = parseInt(el.dataset.count, 10);
+            const suffix  = el.dataset.suffix || '';
+            const duration = 1600;
+            const start    = performance.now();
+
+            function tick(now) {
+                const elapsed  = now - start;
+                const progress = Math.min(elapsed / duration, 1);
+                // ease-out cubic
+                const eased = 1 - Math.pow(1 - progress, 3);
+                el.textContent = Math.round(eased * target) + suffix;
+                if (progress < 1) requestAnimationFrame(tick);
+            }
+            requestAnimationFrame(tick);
+            counterObserver.unobserve(el);
+        });
+    }, { threshold: 0.5 });
+
+    statCounters.forEach(el => counterObserver.observe(el));
+}
+
+
+// === ACTIVE NAV LINK on scroll ===
+const sections  = document.querySelectorAll('section[id]');
+const navAnchors = document.querySelectorAll('.nav-link');
+
+const sectionObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            const id = entry.target.getAttribute('id');
+            navAnchors.forEach(a => {
+                a.classList.toggle('active', a.getAttribute('href') === `#${id}`);
+            });
+        }
+    });
+}, { rootMargin: '-40% 0px -55% 0px' });
+
+sections.forEach(s => sectionObserver.observe(s));

@@ -1,48 +1,632 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="" />
-        <meta name="author" content="" />
-        <title>Dom Sharpe Fitness</title>
-        <!-- Favicon-->
-        <script src="https://kit.fontawesome.com/9e4a8a1123.js" crossorigin="anonymous"></script>
-        <link href="https://cdn.lineicons.com/3.0/lineicons.css" rel="stylesheet">
-        <link rel="shortcut icon" type="image/favicon.ico"/>
-        <style>
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap');
-</style>
-        <!-- Core theme CSS (includes Bootstrap)-->
-        <link href="css/styles.css" rel="stylesheet" />
-    </head>
-    <body>
-        <div class="container">
-          <div class="maincontent">
-            <div class="text-center mt-5">
-              <div class="row">
-              <div class="col">
-                  <img class="weight" src="img\weight.png"></img>
-              </div>
-              <div class="col-7 col-mid overflow-hidden">
-                <h1><b>Dominic Sharpe</b></h1>
-                <h5>Personal Trainer  -  Strength and Conditioning  -  Weight Loss</h5>
-                <i class="icons lni lni-phone"><a href="tel:123-456-7890"></a></i>
-                <i class="icons lni lni-facebook"></i>
-                <i class="icons lni lni-instagram"></i>
-                <i class="icons lni lni-envelope"></i>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Dom Sharpe — Personal Trainer at Bannatyne Fairfield. Specialising in 1:1 Coaching, Weight Training, Mobility and Weight Loss. Book your free consultation today.">
+    <meta name="keywords" content="personal trainer, Dom Sharpe, Bannatyne Fairfield, weight loss, strength training, mobility, 1:1 coaching">
+    <title>Dom Sharpe | Personal Trainer &amp; Strength Coach</title>
 
-              </div>
-              <div class="col">
-                  <img class="weight" src="img\weight2.png"></img>
-              </div>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/9e4a8a1123.js" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+    <!-- ===================== NAVBAR ===================== -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#home" class="nav-logo">SHARPE<span class="accent">.</span>STRENGTH</a>
+
+            <ul class="nav-links" id="nav-links">
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#services" class="nav-link">Services</a></li>
+                <li><a href="#contact" class="nav-link">Consultation</a></li>
+            </ul>
+
+            <a href="#contact" class="nav-cta">Free Consultation</a>
+
+            <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile menu overlay -->
+    <div class="mobile-overlay" id="mobile-overlay"></div>
+
+    <!-- ===================== HERO ===================== -->
+    <section class="hero" id="home">
+        <div class="hero-bg-pattern"></div>
+
+        <div class="hero-deco hero-deco-left" aria-hidden="true">
+            <img src="img/weight.png" alt="">
+        </div>
+        <div class="hero-deco hero-deco-right" aria-hidden="true">
+            <img src="img/weight2.png" alt="">
+        </div>
+
+        <div class="hero-content">
+            <div class="hero-eyebrow">
+                <span class="eyebrow-dot"></span>
+                Personal Trainer &nbsp;&bull;&nbsp; Bannatyne Fairfield
+                <span class="eyebrow-dot"></span>
             </div>
-            </div>
+
+            <h1 class="hero-title">
+                TRAIN HARD.<br>
+                <span class="accent-text">LIVE STRONGER.</span>
+            </h1>
+
+            <p class="hero-subtitle">
+                Weight Training &amp; Mobility &nbsp;&bull;&nbsp; 1:1 Coaching &nbsp;&bull;&nbsp; Weight Loss &nbsp;&bull;&nbsp; Accountability
+            </p>
+
+            <div class="hero-actions">
+                <a href="#contact" class="btn-primary">
+                    Get Free Consultation
+                    <i class="fa-solid fa-arrow-right"></i>
+                </a>
+                <a href="#services" class="btn-ghost">View Services</a>
             </div>
         </div>
-        <!-- Bootstrap core JS-->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-        <!-- Core theme JS-->
-        <script src="js/scripts.js"></script>
-    </body>
+
+        <div class="hero-stats">
+            <div class="hero-stat">
+                <span class="stat-value">1:1</span>
+                <span class="stat-label">Personal Coaching</span>
+            </div>
+            <div class="stat-sep"></div>
+            <div class="hero-stat">
+                <span class="stat-value">FREE</span>
+                <span class="stat-label">First Consultation</span>
+            </div>
+            <div class="stat-sep"></div>
+            <div class="hero-stat">
+                <span class="stat-value">100%</span>
+                <span class="stat-label">Commitment to You</span>
+            </div>
+        </div>
+
+        <a href="#about" class="scroll-down" aria-label="Scroll down">
+            <i class="fa-solid fa-chevron-down"></i>
+        </a>
+    </section>
+
+    <!-- ===================== ABOUT ===================== -->
+    <section class="about" id="about">
+        <div class="section-container">
+            <div class="section-eyebrow">About Dom</div>
+
+            <div class="about-grid">
+                <div class="about-text reveal">
+                    <h2 class="section-title">I'VE BEEN WHERE <span class="accent-text">YOU ARE.</span></h2>
+                    <p class="about-lead">I didn't always look or feel like this. My own transformation between 2022 and 2025 is the reason I'm so passionate about helping others.</p>
+                    <p>Honestly — I didn't notice the change myself until I looked back at old photos. What made the difference wasn't some extreme diet or punishing programme. It was learning to enjoy my training, staying mindful (not strict) with food, and showing up consistently with discipline. I still drink. I still eat junk food — just in moderation, most of the time.</p>
+                    <p>I'm proud of what I've achieved, and even more passionate about helping others find that same balance and confidence. Based at Bannatyne Fairfield, I coach 1:1 across weight training, mobility, weight loss and accountability — building programmes around your life, not the other way round.</p>
+
+                    <div class="about-tags">
+                        <span class="tag"><i class="fa-solid fa-dumbbell"></i> Weight Training</span>
+                        <span class="tag"><i class="fa-solid fa-person-running"></i> Mobility</span>
+                        <span class="tag"><i class="fa-solid fa-fire-flame-curved"></i> Weight Loss</span>
+                        <span class="tag"><i class="fa-solid fa-trophy"></i> Strength</span>
+                        <span class="tag"><i class="fa-solid fa-handshake"></i> Accountability</span>
+                    </div>
+
+                    <a href="https://www.instagram.com/sharpe.strength/" target="_blank" rel="noopener noreferrer" class="instagram-btn">
+                        <i class="fa-brands fa-instagram"></i>
+                        Follow @sharpe.strength
+                    </a>
+                </div>
+
+                <div class="about-card-wrap reveal">
+                    <!-- Dom's transformation image -->
+                    <div class="about-transform-image">
+                        <img src="img/dom-transformation.jpg" alt="Dom Sharpe transformation 2022 to 2025">
+                        <div class="transform-years">
+                            <span class="year-badge before-year">2022</span>
+                            <i class="fa-solid fa-arrow-right"></i>
+                            <span class="year-badge after-year">2025</span>
+                        </div>
+                    </div>
+
+                    <div class="about-quote-card">
+                        <blockquote class="about-quote">
+                            "I'm proud of what I've achieved, and even more passionate about helping others find that same balance and confidence."
+                        </blockquote>
+                        <cite class="about-cite">— Dom Sharpe</cite>
+                        <div class="about-card-info">
+                            <span><i class="fa-solid fa-location-dot"></i> Bannatyne Fairfield</span>
+                            <span><i class="fa-brands fa-instagram"></i> @sharpe.strength</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== SERVICES ===================== -->
+    <section class="services" id="services">
+        <div class="section-container">
+            <div class="section-eyebrow">What I Offer</div>
+            <h2 class="section-title text-center">SERVICES BUILT FOR <span class="accent-text">RESULTS</span></h2>
+            <p class="section-sub text-center">Every service is tailored around your specific goals, lifestyle and experience level.</p>
+
+            <div class="services-grid">
+
+                <div class="service-card reveal">
+                    <div class="service-icon-wrap">
+                        <i class="fa-solid fa-dumbbell"></i>
+                    </div>
+                    <h3>1:1 Personal Training</h3>
+                    <p>Fully bespoke sessions built around your body and your goals. Every exercise, every rep — has a purpose.</p>
+                    <ul class="service-list">
+                        <li><i class="fa-solid fa-check"></i> Personalised programming</li>
+                        <li><i class="fa-solid fa-check"></i> Form &amp; technique coaching</li>
+                        <li><i class="fa-solid fa-check"></i> Progressive overload tracking</li>
+                    </ul>
+                    <a href="#contact" class="service-link">Book a session <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+
+                <div class="service-card featured reveal">
+                    <div class="featured-badge">Most Popular</div>
+                    <div class="service-icon-wrap">
+                        <i class="fa-solid fa-fire-flame-curved"></i>
+                    </div>
+                    <h3>Weight Loss Programme</h3>
+                    <p>A sustainable, science-backed approach to fat loss that doesn't kill your energy or your love of food.</p>
+                    <ul class="service-list">
+                        <li><i class="fa-solid fa-check"></i> Nutrition guidance</li>
+                        <li><i class="fa-solid fa-check"></i> Metabolic &amp; cardio training</li>
+                        <li><i class="fa-solid fa-check"></i> Weekly check-ins</li>
+                    </ul>
+                    <a href="#contact" class="service-link">Start your journey <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+
+                <div class="service-card reveal">
+                    <div class="service-icon-wrap">
+                        <i class="fa-solid fa-person-running"></i>
+                    </div>
+                    <h3>Mobility &amp; Strength</h3>
+                    <p>Move better, feel better, lift heavier. Improve your range of motion while building functional strength that lasts.</p>
+                    <ul class="service-list">
+                        <li><i class="fa-solid fa-check"></i> Movement screening</li>
+                        <li><i class="fa-solid fa-check"></i> Corrective exercise</li>
+                        <li><i class="fa-solid fa-check"></i> Flexibility programming</li>
+                    </ul>
+                    <a href="#contact" class="service-link">Improve your movement <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+
+                <div class="service-card reveal">
+                    <div class="service-icon-wrap">
+                        <i class="fa-solid fa-chart-line"></i>
+                    </div>
+                    <h3>Accountability Coaching</h3>
+                    <p>Stay on track with consistent check-ins, progress reviews, and the support to push through plateaus.</p>
+                    <ul class="service-list">
+                        <li><i class="fa-solid fa-check"></i> Regular progress reviews</li>
+                        <li><i class="fa-solid fa-check"></i> Goal setting sessions</li>
+                        <li><i class="fa-solid fa-check"></i> Direct message support</li>
+                    </ul>
+                    <a href="#contact" class="service-link">Stay accountable <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== WHY DOM ===================== -->
+    <section class="why">
+        <div class="section-container">
+            <div class="why-grid">
+                <div class="why-text reveal">
+                    <div class="section-eyebrow">Why Choose Dom</div>
+                    <h2 class="section-title">THE SHARPE <span class="accent-text">DIFFERENCE</span></h2>
+                    <p>Plenty of trainers will put you through a session. Dom will change how you think about training entirely.</p>
+                </div>
+                <div class="why-points">
+                    <div class="why-point reveal">
+                        <div class="why-icon"><i class="fa-solid fa-bullseye"></i></div>
+                        <div>
+                            <h4>Goal-Focused</h4>
+                            <p>Every session is structured around what you're trying to achieve — not a generic template.</p>
+                        </div>
+                    </div>
+                    <div class="why-point reveal">
+                        <div class="why-icon"><i class="fa-solid fa-shield-halved"></i></div>
+                        <div>
+                            <h4>Safe &amp; Effective</h4>
+                            <p>Training hard doesn't mean training recklessly. Technique and safety always come first.</p>
+                        </div>
+                    </div>
+                    <div class="why-point reveal">
+                        <div class="why-icon"><i class="fa-solid fa-clock-rotate-left"></i></div>
+                        <div>
+                            <h4>Flexible Scheduling</h4>
+                            <p>Sessions available mornings, afternoons and evenings — fitting around your life, not the other way around.</p>
+                        </div>
+                    </div>
+                    <div class="why-point reveal">
+                        <div class="why-icon"><i class="fa-solid fa-comments"></i></div>
+                        <div>
+                            <h4>Always Available</h4>
+                            <p>Got a question between sessions? Dom is always reachable to support your journey.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== TESTIMONIALS ===================== -->
+    <section class="testimonials" id="testimonials">
+        <div class="section-container">
+            <div class="section-eyebrow">Client Stories</div>
+            <h2 class="section-title text-center">REAL PEOPLE. <span class="accent-text">REAL RESULTS.</span></h2>
+            <p class="section-sub text-center">Don't take Dom's word for it — hear from the people he's already transformed.</p>
+
+            <div class="testimonials-grid">
+
+                <!-- Alex -->
+                <div class="testimonial-card reveal">
+                    <div class="testimonial-stars">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                    <div class="testimonial-result-badge">96kg &rarr; 79kg &bull; &minus;11% body fat</div>
+                    <div class="testimonial-body">
+                        <blockquote>When I first started working with Dom I was 96kg, overweight and with bad nutrition after a year or two of letting myself go! I wanted to get back on track but needed motivation and experience in how to do it. Dom has transformed me completely by working with me to lose body fat and retain muscle mass. I've gone from 96kg down to 79kg and lost 11% body fat. His workouts are never dull and we mix it up a fair bit to keep it fresh. He has also been key in my nutrition plan. Having had several trainers over the years Dom is by far the most personable, knowledgeable and motivating. And... we are still going, there's more work to do!</blockquote>
+                    </div>
+                    <button class="read-more-btn" aria-expanded="false">Read more <i class="fa-solid fa-chevron-down"></i></button>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">A</div>
+                        <div>
+                            <strong>Alex</strong>
+                            <a href="https://www.instagram.com/al.tilli/" target="_blank" rel="noopener noreferrer" class="testimonial-ig">@al.tilli</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Kat -->
+                <div class="testimonial-card reveal">
+                    <div class="testimonial-stars">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                    <div class="testimonial-result-badge">First marathon &bull; Zero pain</div>
+                    <div class="testimonial-body">
+                        <blockquote>I started training with Dom early this year after having struggled with lower back and hip pain/discomfort for months (if not actually years). Having strength trained for many years I was confident I knew what I was doing, but I was also training to run my first Marathon and the constant limitations of the pain was getting to me. Let me just say — what an absolute game changer. Working with Dom once a week not only gave me the results I was looking for but it has taught me so much and enabled me to improve all aspects of my strength and fitness in ways I truly didn't expect. Dom is beyond knowledgeable, committed, attentive, listens to your needs and tailors everything to suit you as an individual. In a relatively short space of time my overall strength and fitness has improved, my weight training has come on leaps and bounds, I ran that marathon with zero pain beating my goal time, and I'm enjoying every aspect of my training again. I'd recommend him to anyone at any level no matter what the goal. I can't rate him highly enough.</blockquote>
+                    </div>
+                    <button class="read-more-btn" aria-expanded="false">Read more <i class="fa-solid fa-chevron-down"></i></button>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">K</div>
+                        <div>
+                            <strong>Kat</strong>
+                            <a href="https://www.instagram.com/katjay82/" target="_blank" rel="noopener noreferrer" class="testimonial-ig">@katjay82</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Amber -->
+                <div class="testimonial-card reveal">
+                    <div class="testimonial-stars">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                    <div class="testimonial-result-badge">2+ years &bull; Best PT ever had</div>
+                    <div class="testimonial-body">
+                        <blockquote>I've been training with Dom at Sharpe Strength for over two years now, and I can honestly say he's the best PT I've ever had. His knowledge is incredible — he knows exactly how to tailor every session to my goals, pushing me to achieve more than I ever thought possible, while always keeping things safe, effective and fun! He's happy to answer my questions thoroughly so I'm always learning. But what really sets him apart is his kindness and approachable nature — I've never felt intimidated or out of my depth, just supported and encouraged every step of the way. If you want expert guidance, motivation, and real results, Sharpe Strength is the BEST decision you can make!</blockquote>
+                    </div>
+                    <button class="read-more-btn" aria-expanded="false">Read more <i class="fa-solid fa-chevron-down"></i></button>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">AM</div>
+                        <div>
+                            <strong>Amber</strong>
+                            <span class="testimonial-tag">Strength &bull; 2+ years</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sally-Anne -->
+                <div class="testimonial-card reveal">
+                    <div class="testimonial-stars">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                    <div class="testimonial-result-badge">Fat loss &bull; Strength &bull; Mobility</div>
+                    <div class="testimonial-body">
+                        <blockquote>Honestly, the best PT I've ever worked with. From day one, he met me exactly where I was — no ego, no judgement — just patience, encouragement, and genuine expertise. I came in feeling nervous, unsure and in the worst shape of my life, but his deep experience and constant support have not only kept me injury-free, but helped me build real confidence and learn skills I never thought I'd master. He's got a real knack for knowing what you need — not just generic fat loss plans or gym routines off the shelf. Thanks to his tailored programming, I've seen steady fat loss alongside real gains in strength and mobility. Movements that once felt impossible are now part of my weekly sessions. My body just works better now! If you want someone who genuinely cares, knows his stuff inside out, and has the patience of a saint, this is your guy. Can't recommend him enough.</blockquote>
+                    </div>
+                    <button class="read-more-btn" aria-expanded="false">Read more <i class="fa-solid fa-chevron-down"></i></button>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">SA</div>
+                        <div>
+                            <strong>Sally-Anne</strong>
+                            <span class="testimonial-tag">Weight Loss &bull; Mobility</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== TRANSFORMATIONS ===================== -->
+    <section class="transformations" id="transformations">
+        <div class="section-container">
+            <div class="section-eyebrow">Results</div>
+            <h2 class="section-title text-center">THE PROOF IS <span class="accent-text">IN THE NUMBERS.</span></h2>
+            <p class="section-sub text-center">Real data from real clients. Tracked with InBody body composition analysis.</p>
+
+            <!-- InBody featured result -->
+            <div class="inbody-feature reveal">
+                <div class="inbody-image-col">
+                    <img src="img/inbody-progress.jpg" alt="InBody body composition scan showing client progress - weight loss and muscle gain" class="inbody-img">
+                    <div class="inbody-caption">
+                        <i class="fa-solid fa-circle-check"></i>
+                        Tracked via InBody Body Composition Analysis
+                    </div>
+                </div>
+                <div class="inbody-stats-col">
+                    <div class="inbody-header">
+                        <div class="section-eyebrow">Client Progress Scan</div>
+                        <h3>Body Recomposition <span class="accent-text">Done Right</span></h3>
+                        <p>This is what consistency and accountability actually looks like — measured over 8 weeks with InBody scanning.</p>
+                    </div>
+                    <div class="inbody-metrics">
+                        <div class="inbody-metric">
+                            <div class="metric-icon down"><i class="fa-solid fa-arrow-trend-down"></i></div>
+                            <div class="metric-data">
+                                <span class="metric-value">23.1% <span class="metric-arrow">&rarr;</span> <span class="accent-text">18.9%</span></span>
+                                <span class="metric-label">Body Fat Percentage</span>
+                                <span class="metric-change negative">&minus;4.2% body fat</span>
+                            </div>
+                        </div>
+                        <div class="inbody-metric">
+                            <div class="metric-icon up"><i class="fa-solid fa-arrow-trend-up"></i></div>
+                            <div class="metric-data">
+                                <span class="metric-value">34.7kg <span class="metric-arrow">&rarr;</span> <span class="accent-text">36.2kg</span></span>
+                                <span class="metric-label">Skeletal Muscle Mass</span>
+                                <span class="metric-change positive">+1.5kg lean muscle</span>
+                            </div>
+                        </div>
+                        <div class="inbody-metric">
+                            <div class="metric-icon neutral"><i class="fa-solid fa-weight-scale"></i></div>
+                            <div class="metric-data">
+                                <span class="metric-value">79.8kg <span class="metric-arrow">&rarr;</span> <span class="accent-text">78.6kg</span></span>
+                                <span class="metric-label">Total Weight</span>
+                                <span class="metric-change">Scale barely moved — body changed entirely</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="inbody-insight">
+                        <i class="fa-solid fa-lightbulb"></i>
+                        <p>The scale only dropped 1.2kg — but the body composition shift is dramatic. Less fat, more muscle, better health. This is why Dom tracks beyond the scales.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Client before/after placeholders — to be filled with client photos -->
+            <div class="transformations-grid">
+
+                <div class="transformation-card reveal">
+                    <div class="transformation-images">
+                        <div class="transform-img-wrap">
+                            <div class="transform-placeholder"><span>Before</span></div>
+                            <span class="transform-label before">Before</span>
+                        </div>
+                        <div class="transform-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+                        <div class="transform-img-wrap">
+                            <div class="transform-placeholder after-bg"><span>After</span></div>
+                            <span class="transform-label after">After</span>
+                        </div>
+                    </div>
+                    <div class="transformation-info">
+                        <strong>Client Transformation</strong>
+                        <span>Coming soon</span>
+                    </div>
+                </div>
+
+                <div class="transformation-card reveal">
+                    <div class="transformation-images">
+                        <div class="transform-img-wrap">
+                            <div class="transform-placeholder"><span>Before</span></div>
+                            <span class="transform-label before">Before</span>
+                        </div>
+                        <div class="transform-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+                        <div class="transform-img-wrap">
+                            <div class="transform-placeholder after-bg"><span>After</span></div>
+                            <span class="transform-label after">After</span>
+                        </div>
+                    </div>
+                    <div class="transformation-info">
+                        <strong>Client Transformation</strong>
+                        <span>Coming soon</span>
+                    </div>
+                </div>
+
+                <div class="transformation-card reveal">
+                    <div class="transformation-images">
+                        <div class="transform-img-wrap">
+                            <div class="transform-placeholder"><span>Before</span></div>
+                            <span class="transform-label before">Before</span>
+                        </div>
+                        <div class="transform-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+                        <div class="transform-img-wrap">
+                            <div class="transform-placeholder after-bg"><span>After</span></div>
+                            <span class="transform-label after">After</span>
+                        </div>
+                    </div>
+                    <div class="transformation-info">
+                        <strong>Client Transformation</strong>
+                        <span>Coming soon</span>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="transformations-cta text-center">
+                <p>Ready to write your own story?</p>
+                <a href="#contact" class="btn-primary">Get Your Free Consultation <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== CONSULTATION FORM ===================== -->
+    <section class="contact" id="contact">
+        <div class="section-container">
+            <div class="contact-grid">
+
+                <div class="contact-info reveal">
+                    <div class="section-eyebrow">Free Consultation</div>
+                    <h2 class="section-title">START YOUR <span class="accent-text">JOURNEY</span></h2>
+                    <p>Ready to make a change? Fill in the form and Dom will be in touch to arrange your free consultation — no commitment, no pressure, just an honest conversation about your goals.</p>
+
+                    <div class="contact-details">
+                        <div class="contact-detail-item">
+                            <div class="contact-detail-icon"><i class="fa-brands fa-instagram"></i></div>
+                            <div>
+                                <span class="detail-label">Instagram</span>
+                                <a href="https://www.instagram.com/sharpe.strength/" target="_blank" rel="noopener noreferrer">@sharpe.strength</a>
+                            </div>
+                        </div>
+                        <div class="contact-detail-item">
+                            <div class="contact-detail-icon"><i class="fa-solid fa-location-dot"></i></div>
+                            <div>
+                                <span class="detail-label">Location</span>
+                                <span>Bannatyne Fairfield</span>
+                            </div>
+                        </div>
+                        <div class="contact-detail-item">
+                            <div class="contact-detail-icon"><i class="fa-solid fa-gift"></i></div>
+                            <div>
+                                <span class="detail-label">First Session</span>
+                                <span>Free Consultation</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="contact-dumbbell" aria-hidden="true">
+                        <img src="img/weight2.png" alt="">
+                    </div>
+                </div>
+
+                <div class="contact-form-wrap reveal">
+                    <form class="consultation-form" id="consultation-form" novalidate>
+
+                        <div class="form-row two-col">
+                            <div class="form-group">
+                                <label for="name">Your Name <span class="required">*</span></label>
+                                <input type="text" id="name" name="name" placeholder="John Smith" autocomplete="name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email Address <span class="required">*</span></label>
+                                <input type="email" id="email" name="email" placeholder="john@example.com" autocomplete="email" required>
+                            </div>
+                        </div>
+
+                        <div class="form-row two-col">
+                            <div class="form-group">
+                                <label for="phone">Phone Number</label>
+                                <input type="tel" id="phone" name="phone" placeholder="+44 7700 000000" autocomplete="tel">
+                            </div>
+                            <div class="form-group">
+                                <label for="goal">Primary Goal <span class="required">*</span></label>
+                                <div class="select-wrap">
+                                    <select id="goal" name="goal" required>
+                                        <option value="" disabled selected>Select your goal...</option>
+                                        <option value="weight-loss">Weight Loss</option>
+                                        <option value="strength">Build Strength</option>
+                                        <option value="mobility">Improve Mobility</option>
+                                        <option value="body-comp">Body Composition</option>
+                                        <option value="general">General Fitness</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                    <i class="fa-solid fa-chevron-down select-arrow"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Experience Level <span class="required">*</span></label>
+                            <div class="toggle-group" id="experience-group">
+                                <button type="button" class="toggle-btn" data-value="beginner">Beginner</button>
+                                <button type="button" class="toggle-btn" data-value="intermediate">Intermediate</button>
+                                <button type="button" class="toggle-btn" data-value="advanced">Advanced</button>
+                            </div>
+                            <input type="hidden" id="experience" name="experience" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Best Time to Train</label>
+                            <div class="toggle-group multi" id="availability-group">
+                                <button type="button" class="toggle-btn" data-value="morning">Morning</button>
+                                <button type="button" class="toggle-btn" data-value="afternoon">Afternoon</button>
+                                <button type="button" class="toggle-btn" data-value="evening">Evening</button>
+                                <button type="button" class="toggle-btn" data-value="weekend">Weekends</button>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="message">Tell Dom About Your Goals</label>
+                            <textarea id="message" name="message" rows="4" placeholder="What are you looking to achieve? Any injuries or limitations? Anything else Dom should know..."></textarea>
+                        </div>
+
+                        <button type="submit" class="btn-submit">
+                            <span>Send Consultation Request</span>
+                            <i class="fa-solid fa-paper-plane"></i>
+                        </button>
+
+                        <p class="form-note">Your details will only be used to contact you about your consultation. No spam, ever.</p>
+                    </form>
+
+                    <div class="form-success" id="form-success">
+                        <div class="success-icon"><i class="fa-solid fa-circle-check"></i></div>
+                        <h3>Request Sent!</h3>
+                        <p>Dom will be in touch shortly to arrange your free consultation. Get ready to start your journey!</p>
+                        <a href="#home" class="btn-ghost">Back to Top</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== FOOTER ===================== -->
+    <footer class="footer">
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <div class="footer-logo">SHARPE<span class="accent">.</span>STRENGTH</div>
+                <p>Personal Trainer &amp; Strength Coach</p>
+                <p>Bannatyne Fairfield &nbsp;&bull;&nbsp; Weight Training &nbsp;&bull;&nbsp; Mobility &nbsp;&bull;&nbsp; Weight Loss</p>
+            </div>
+
+            <div class="footer-nav">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#contact">Free Consultation</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-social-col">
+                <h4>Follow the Journey</h4>
+                <a href="https://www.instagram.com/sharpe.strength/" target="_blank" rel="noopener noreferrer" class="footer-social-link">
+                    <i class="fa-brands fa-instagram"></i>
+                    @sharpe.strength
+                </a>
+                <p class="footer-dm">DM for a free consultation</p>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2025 Dom Sharpe Fitness. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/scripts.js"></script>
+</body>
 </html>

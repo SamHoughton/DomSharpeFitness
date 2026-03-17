@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 100" width="440" height="100">
+  <!-- Double Open Chevron -->
+  <polyline points="8,8 36,50 8,92" fill="none" stroke="#ffffff" stroke-width="8" stroke-linecap="square" stroke-linejoin="miter"/>
+  <polyline points="30,8 58,50 30,92" fill="none" stroke="#C8923A" stroke-width="8" stroke-linecap="square" stroke-linejoin="miter"/>
+  <!-- Divider -->
+  <line x1="76" y1="20" x2="76" y2="80" stroke="rgba(255,255,255,0.25)" stroke-width="1.5"/>
+  <!-- SHARPE -->
+  <text x="94" y="60" font-family="Impact, 'Arial Black', sans-serif" font-size="46px" fill="#ffffff" letter-spacing="4">SHARPE</text>
+  <!-- STRENGTH -->
+  <text x="96" y="84" font-family="'Helvetica Neue', Arial, sans-serif" font-weight="300" font-size="14px" fill="rgba(255,255,255,0.4)" letter-spacing="13">STRENGTH</text>
+</svg>

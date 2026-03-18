@@ -1,0 +1,81 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  passwordHash String
+  role         Role     @default(CLIENT)
+  name         String
+  phone        String?
+  goal         String?
+  experience   String?
+  createdAt    DateTime @default(now())
+
+  checkIns         CheckIn[]
+  sentMessages     Message[] @relation("SentMessages")
+  receivedMessages Message[] @relation("ReceivedMessages")
+}
+
+enum Role {
+  ADMIN
+  CLIENT
+}
+
+model Consultation {
+  id           String             @id @default(cuid())
+  name         String
+  email        String
+  phone        String?
+  goal         String
+  experience   String
+  availability String?
+  message      String?
+  status       ConsultationStatus @default(NEW)
+  createdAt    DateTime           @default(now())
+}
+
+enum ConsultationStatus {
+  NEW
+  CONTACTED
+  CONVERTED
+}
+
+model CheckIn {
+  id         String   @id @default(cuid())
+  clientId   String
+  client     User     @relation(fields: [clientId], references: [id], onDelete: Cascade)
+  weekDate   DateTime
+  weightKg   Float?
+  bodyFatPct Float?
+  waistCm    Float?
+  hipsCm     Float?
+  chestCm    Float?
+  armsCm     Float?
+  thighsCm   Float?
+  notes      String?
+  photoUrl   String?
+  createdAt  DateTime @default(now())
+
+  @@index([clientId])
+}
+
+model Message {
+  id        String    @id @default(cuid())
+  fromId    String
+  toId      String
+  from      User      @relation("SentMessages", fields: [fromId], references: [id], onDelete: Cascade)
+  to        User      @relation("ReceivedMessages", fields: [toId], references: [id], onDelete: Cascade)
+  body      String
+  readAt    DateTime?
+  createdAt DateTime  @default(now())
+
+  @@index([fromId, toId])
+  @@index([toId, fromId])
+}

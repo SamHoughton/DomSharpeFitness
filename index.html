@@ -45,7 +45,13 @@
     <nav class="navbar" id="navbar">
         <div class="nav-container">
             <a href="#home" class="nav-logo">
-                <img src="img/sharpe-strength-logo.svg" alt="Sharpe Strength" class="nav-logo-img">
+                <svg class="nav-logo-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 100" aria-label="Sharpe Strength" role="img">
+                    <polyline class="logo-ch logo-ch-1" points="8,8 36,50 8,92" fill="none" stroke="#ffffff" stroke-width="8" stroke-linecap="square" stroke-linejoin="miter"/>
+                    <polyline class="logo-ch logo-ch-2" points="30,8 58,50 30,92" fill="none" stroke="#C8923A" stroke-width="8" stroke-linecap="square" stroke-linejoin="miter"/>
+                    <line class="logo-div" x1="76" y1="20" x2="76" y2="80" stroke="rgba(255,255,255,0.25)" stroke-width="1.5"/>
+                    <text class="logo-txt logo-txt-1" x="94" y="60" font-family="Impact, 'Arial Black', sans-serif" font-size="46px" fill="#ffffff" letter-spacing="4">SHARPE</text>
+                    <text class="logo-txt logo-txt-2" x="96" y="84" font-family="'Helvetica Neue', Arial, sans-serif" font-weight="300" font-size="14px" fill="rgba(255,255,255,0.4)" letter-spacing="13">STRENGTH</text>
+                </svg>
             </a>
 
             <ul class="nav-links" id="nav-links">
@@ -155,7 +161,7 @@
             <div class="section-eyebrow">About Dom</div>
 
             <div class="about-grid">
-                <div class="about-text reveal">
+                <div class="about-text reveal reveal-left">
                     <h2 class="section-title">I'VE BEEN WHERE <span class="accent-text">YOU ARE.</span></h2>
                     <p class="about-lead">I didn't always look or feel like this. My own transformation between 2022 and 2025 is the reason I'm so passionate about helping others.</p>
                     <p>Honestly, I didn't notice the change myself until I looked back at old photos. What made the difference wasn't some extreme diet or punishing programme. It was learning to enjoy my training, staying mindful (not strict) with food, and showing up consistently. I still drink. I still eat junk food, just in moderation most of the time.</p>
@@ -191,15 +197,25 @@
                     </a>
                 </div>
 
-                <div class="about-card-wrap reveal">
-                    <!-- Dom's transformation image -->
-                    <div class="about-transform-image">
-                        <img src="img/dom-transformation.jpg" alt="Dom Sharpe transformation 2022 to 2025">
-                        <div class="transform-years">
-                            <span class="year-badge before-year">2022</span>
-                            <i class="fa-solid fa-arrow-right"></i>
-                            <span class="year-badge after-year">2025</span>
+                <div class="about-card-wrap reveal reveal-right">
+                    <!-- Dom's transformation — drag-to-reveal before/after slider -->
+                    <div class="ba-slider" id="ba-slider" role="img" aria-label="Dom Sharpe transformation — drag to compare 2022 and 2025">
+                        <div class="ba-before">
+                            <img src="img/dom-transformation.jpg" class="ba-img" alt="Dom Sharpe 2022">
+                            <span class="ba-label ba-label-before">2022</span>
                         </div>
+                        <div class="ba-after" id="ba-after">
+                            <img src="img/dom-transformation.jpg" class="ba-img" alt="Dom Sharpe 2025">
+                            <span class="ba-label ba-label-after">2025</span>
+                        </div>
+                        <div class="ba-handle" id="ba-handle" aria-hidden="true">
+                            <div class="ba-handle-line"></div>
+                            <div class="ba-handle-btn">
+                                <i class="fa-solid fa-chevron-left"></i>
+                                <i class="fa-solid fa-chevron-right"></i>
+                            </div>
+                        </div>
+                        <span class="ba-drag-hint" id="ba-drag-hint"><i class="fa-solid fa-left-right"></i> Drag to compare</span>
                     </div>
 
                     <div class="about-quote-card">
@@ -330,6 +346,88 @@
         </div>
     </section>
 
+    <!-- ===================== CLIENT QUIZ ===================== -->
+    <section class="quiz-section" id="quiz">
+        <div class="section-container">
+            <div class="section-eyebrow text-center">Find Your Fit</div>
+            <h2 class="section-title text-center">WHAT KIND OF <span class="accent-text">CLIENT ARE YOU?</span></h2>
+            <p class="section-sub text-center">Three quick questions. Get your recommended programme.</p>
+
+            <div class="quiz-wrap reveal">
+                <div class="quiz-progress-bar-wrap">
+                    <div class="quiz-progress-fill" id="quiz-progress-fill"></div>
+                </div>
+
+                <!-- Step 1 -->
+                <div class="quiz-step active" data-step="1">
+                    <p class="quiz-q">What's your main goal?</p>
+                    <div class="quiz-options">
+                        <button class="quiz-opt" data-key="goal" data-val="fat">
+                            <i class="fa-solid fa-fire-flame-curved"></i><span>Lose Fat</span>
+                        </button>
+                        <button class="quiz-opt" data-key="goal" data-val="muscle">
+                            <i class="fa-solid fa-dumbbell"></i><span>Build Muscle</span>
+                        </button>
+                        <button class="quiz-opt" data-key="goal" data-val="mobility">
+                            <i class="fa-solid fa-person-running"></i><span>Move Better</span>
+                        </button>
+                        <button class="quiz-opt" data-key="goal" data-val="accountability">
+                            <i class="fa-solid fa-chart-line"></i><span>Stay on Track</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="quiz-step" data-step="2">
+                    <p class="quiz-q">How would you describe your training history?</p>
+                    <div class="quiz-options">
+                        <button class="quiz-opt" data-key="experience" data-val="beginner">
+                            <i class="fa-solid fa-seedling"></i><span>Just starting out</span>
+                        </button>
+                        <button class="quiz-opt" data-key="experience" data-val="some">
+                            <i class="fa-solid fa-bolt"></i><span>Trained before</span>
+                        </button>
+                        <button class="quiz-opt" data-key="experience" data-val="regular">
+                            <i class="fa-solid fa-trophy"></i><span>Train regularly</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="quiz-step" data-step="3">
+                    <p class="quiz-q">How often can you commit to sessions?</p>
+                    <div class="quiz-options">
+                        <button class="quiz-opt" data-key="frequency" data-val="once">
+                            <i class="fa-solid fa-calendar-day"></i><span>Once a week</span>
+                        </button>
+                        <button class="quiz-opt" data-key="frequency" data-val="few">
+                            <i class="fa-solid fa-calendar-week"></i><span>2&ndash;3 times</span>
+                        </button>
+                        <button class="quiz-opt" data-key="frequency" data-val="often">
+                            <i class="fa-solid fa-calendar-check"></i><span>4+ sessions</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Result -->
+                <div class="quiz-step quiz-result-step" data-step="result">
+                    <div class="quiz-result-icon"><i class="fa-solid fa-circle-check"></i></div>
+                    <p class="quiz-result-eyebrow">Your recommended programme</p>
+                    <p class="quiz-result-name" id="quiz-result-name">Weight Loss Programme</p>
+                    <p class="quiz-result-desc" id="quiz-result-desc"></p>
+                    <div class="quiz-result-actions">
+                        <a href="#contact" class="btn-primary">Get Started <i class="fa-solid fa-arrow-right"></i></a>
+                        <button class="quiz-restart-btn" id="quiz-restart">
+                            <i class="fa-solid fa-rotate-left"></i> Start over
+                        </button>
+                    </div>
+                </div>
+
+                <p class="quiz-step-count" id="quiz-step-count">Question 1 of 3</p>
+            </div>
+        </div>
+    </section>
+
     <!-- ===================== TESTIMONIALS ===================== -->
     <section class="testimonials" id="testimonials">
         <div class="section-container">
@@ -337,84 +435,108 @@
             <h2 class="section-title text-center">REAL PEOPLE. <span class="accent-text">REAL RESULTS.</span></h2>
             <p class="section-sub text-center">Don't take Dom's word for it. Hear from the people he trains.</p>
 
-            <div class="testimonials-grid">
+            <!-- Testimonial carousel -->
+            <div class="tc-carousel reveal" id="tc-carousel">
+                <div class="tc-track-wrap">
+                    <div class="tc-track" id="tc-track">
 
-                <!-- Alex -->
-                <div class="testimonial-card reveal">
-                    <div class="testimonial-stars">
-                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-                    </div>
-                    <div class="testimonial-result-badge">96kg &rarr; 79kg &bull; &minus;11% body fat</div>
-                    <div class="testimonial-body">
-                        <blockquote>When I first started working with Dom I was 96kg, overweight and with bad nutrition after a year or two of letting myself go! I wanted to get back on track but needed motivation and experience in how to do it. Dom has transformed me completely by working with me to lose body fat and retain muscle mass. I've gone from 96kg down to 79kg and lost 11% body fat. His workouts are never dull and we mix it up a fair bit to keep it fresh. He has also been key in my nutrition plan. Having had several trainers over the years Dom is by far the most personable, knowledgeable and motivating. And... we are still going, there's more work to do!</blockquote>
-                    </div>
-                    <button class="read-more-btn" aria-expanded="false">Read more <i class="fa-solid fa-chevron-down"></i></button>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">A</div>
-                        <div>
-                            <strong>Alex</strong>
-                            <a href="https://www.instagram.com/al.tilli/" target="_blank" rel="noopener noreferrer" class="testimonial-ig">@al.tilli</a>
+                        <!-- Slide: Alex -->
+                        <div class="tc-slide">
+                            <div class="testimonial-card">
+                                <div class="testimonial-stars">
+                                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                                </div>
+                                <div class="testimonial-result-badge">96kg &rarr; 79kg &bull; &minus;11% body fat</div>
+                                <div class="testimonial-body expanded">
+                                    <blockquote>When I first started working with Dom I was 96kg, overweight and with bad nutrition after a year or two of letting myself go! I wanted to get back on track but needed motivation and experience in how to do it. Dom has transformed me completely by working with me to lose body fat and retain muscle mass. I've gone from 96kg down to 79kg and lost 11% body fat. His workouts are never dull and we mix it up a fair bit to keep it fresh. He has also been key in my nutrition plan. Having had several trainers over the years Dom is by far the most personable, knowledgeable and motivating. And... we are still going, there's more work to do!</blockquote>
+                                </div>
+                                <div class="testimonial-author">
+                                    <div class="author-avatar">A</div>
+                                    <div>
+                                        <strong>Alex</strong>
+                                        <a href="https://www.instagram.com/al.tilli/" target="_blank" rel="noopener noreferrer" class="testimonial-ig">@al.tilli</a>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
+
+                        <!-- Slide: Kat -->
+                        <div class="tc-slide">
+                            <div class="testimonial-card">
+                                <div class="testimonial-stars">
+                                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                                </div>
+                                <div class="testimonial-result-badge">First marathon &bull; Zero pain</div>
+                                <div class="testimonial-body expanded">
+                                    <blockquote>I started training with Dom early this year after having struggled with lower back and hip pain/discomfort for months (if not actually years). Having strength trained for many years I was confident I knew what I was doing, but I was also training to run my first Marathon and the constant limitations of the pain was getting to me. Let me just say — what an absolute game changer. Working with Dom once a week not only gave me the results I was looking for but it has taught me so much and enabled me to improve all aspects of my strength and fitness in ways I truly didn't expect. Dom is beyond knowledgeable, committed, attentive, listens to your needs and tailors everything to suit you as an individual. In a relatively short space of time my overall strength and fitness has improved, my weight training has come on leaps and bounds, I ran that marathon with zero pain beating my goal time, and I'm enjoying every aspect of my training again. I'd recommend him to anyone at any level no matter what the goal. I can't rate him highly enough.</blockquote>
+                                </div>
+                                <div class="testimonial-author">
+                                    <div class="author-avatar">K</div>
+                                    <div>
+                                        <strong>Kat</strong>
+                                        <a href="https://www.instagram.com/katjay82/" target="_blank" rel="noopener noreferrer" class="testimonial-ig">@katjay82</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Slide: Amber -->
+                        <div class="tc-slide">
+                            <div class="testimonial-card">
+                                <div class="testimonial-stars">
+                                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                                </div>
+                                <div class="testimonial-result-badge">2+ years &bull; Best PT ever had</div>
+                                <div class="testimonial-body expanded">
+                                    <blockquote>I've been training with Dom at Sharpe Strength for over two years now, and I can honestly say he's the best PT I've ever had. His knowledge is incredible — he knows exactly how to tailor every session to my goals, pushing me to achieve more than I ever thought possible, while always keeping things safe, effective and fun! He's happy to answer my questions thoroughly so I'm always learning. But what really sets him apart is his kindness and approachable nature — I've never felt intimidated or out of my depth, just supported and encouraged every step of the way. If you want expert guidance, motivation, and real results, Sharpe Strength is the BEST decision you can make!</blockquote>
+                                </div>
+                                <div class="testimonial-author">
+                                    <div class="author-avatar">AM</div>
+                                    <div>
+                                        <strong>Amber</strong>
+                                        <span class="testimonial-tag">Strength &bull; 2+ years</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Slide: Sally-Anne -->
+                        <div class="tc-slide">
+                            <div class="testimonial-card">
+                                <div class="testimonial-stars">
+                                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                                </div>
+                                <div class="testimonial-result-badge">Fat loss &bull; Strength &bull; Mobility</div>
+                                <div class="testimonial-body expanded">
+                                    <blockquote>Honestly, the best PT I've ever worked with. From day one, he met me exactly where I was — no ego, no judgement — just patience, encouragement, and genuine expertise. I came in feeling nervous, unsure and in the worst shape of my life, but his deep experience and constant support have not only kept me injury-free, but helped me build real confidence and learn skills I never thought I'd master. He's got a real knack for knowing what you need — not just generic fat loss plans or gym routines off the shelf. Thanks to his tailored programming, I've seen steady fat loss alongside real gains in strength and mobility. Movements that once felt impossible are now part of my weekly sessions. My body just works better now! If you want someone who genuinely cares, knows his stuff inside out, and has the patience of a saint, this is your guy. Can't recommend him enough.</blockquote>
+                                </div>
+                                <div class="testimonial-author">
+                                    <div class="author-avatar">SA</div>
+                                    <div>
+                                        <strong>Sally-Anne</strong>
+                                        <span class="testimonial-tag">Weight Loss &bull; Mobility</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
 
-                <!-- Kat -->
-                <div class="testimonial-card reveal">
-                    <div class="testimonial-stars">
-                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                <div class="tc-controls">
+                    <button class="tc-btn" id="tc-prev" aria-label="Previous testimonial">
+                        <i class="fa-solid fa-chevron-left"></i>
+                    </button>
+                    <div class="tc-dots" id="tc-dots">
+                        <button class="tc-dot active" aria-label="Testimonial 1 of 4"></button>
+                        <button class="tc-dot" aria-label="Testimonial 2 of 4"></button>
+                        <button class="tc-dot" aria-label="Testimonial 3 of 4"></button>
+                        <button class="tc-dot" aria-label="Testimonial 4 of 4"></button>
                     </div>
-                    <div class="testimonial-result-badge">First marathon &bull; Zero pain</div>
-                    <div class="testimonial-body">
-                        <blockquote>I started training with Dom early this year after having struggled with lower back and hip pain/discomfort for months (if not actually years). Having strength trained for many years I was confident I knew what I was doing, but I was also training to run my first Marathon and the constant limitations of the pain was getting to me. Let me just say — what an absolute game changer. Working with Dom once a week not only gave me the results I was looking for but it has taught me so much and enabled me to improve all aspects of my strength and fitness in ways I truly didn't expect. Dom is beyond knowledgeable, committed, attentive, listens to your needs and tailors everything to suit you as an individual. In a relatively short space of time my overall strength and fitness has improved, my weight training has come on leaps and bounds, I ran that marathon with zero pain beating my goal time, and I'm enjoying every aspect of my training again. I'd recommend him to anyone at any level no matter what the goal. I can't rate him highly enough.</blockquote>
-                    </div>
-                    <button class="read-more-btn" aria-expanded="false">Read more <i class="fa-solid fa-chevron-down"></i></button>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">K</div>
-                        <div>
-                            <strong>Kat</strong>
-                            <a href="https://www.instagram.com/katjay82/" target="_blank" rel="noopener noreferrer" class="testimonial-ig">@katjay82</a>
-                        </div>
-                    </div>
+                    <button class="tc-btn" id="tc-next" aria-label="Next testimonial">
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </button>
                 </div>
-
-                <!-- Amber -->
-                <div class="testimonial-card reveal">
-                    <div class="testimonial-stars">
-                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-                    </div>
-                    <div class="testimonial-result-badge">2+ years &bull; Best PT ever had</div>
-                    <div class="testimonial-body">
-                        <blockquote>I've been training with Dom at Sharpe Strength for over two years now, and I can honestly say he's the best PT I've ever had. His knowledge is incredible — he knows exactly how to tailor every session to my goals, pushing me to achieve more than I ever thought possible, while always keeping things safe, effective and fun! He's happy to answer my questions thoroughly so I'm always learning. But what really sets him apart is his kindness and approachable nature — I've never felt intimidated or out of my depth, just supported and encouraged every step of the way. If you want expert guidance, motivation, and real results, Sharpe Strength is the BEST decision you can make!</blockquote>
-                    </div>
-                    <button class="read-more-btn" aria-expanded="false">Read more <i class="fa-solid fa-chevron-down"></i></button>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">AM</div>
-                        <div>
-                            <strong>Amber</strong>
-                            <span class="testimonial-tag">Strength &bull; 2+ years</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Sally-Anne -->
-                <div class="testimonial-card reveal">
-                    <div class="testimonial-stars">
-                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-                    </div>
-                    <div class="testimonial-result-badge">Fat loss &bull; Strength &bull; Mobility</div>
-                    <div class="testimonial-body">
-                        <blockquote>Honestly, the best PT I've ever worked with. From day one, he met me exactly where I was — no ego, no judgement — just patience, encouragement, and genuine expertise. I came in feeling nervous, unsure and in the worst shape of my life, but his deep experience and constant support have not only kept me injury-free, but helped me build real confidence and learn skills I never thought I'd master. He's got a real knack for knowing what you need — not just generic fat loss plans or gym routines off the shelf. Thanks to his tailored programming, I've seen steady fat loss alongside real gains in strength and mobility. Movements that once felt impossible are now part of my weekly sessions. My body just works better now! If you want someone who genuinely cares, knows his stuff inside out, and has the patience of a saint, this is your guy. Can't recommend him enough.</blockquote>
-                    </div>
-                    <button class="read-more-btn" aria-expanded="false">Read more <i class="fa-solid fa-chevron-down"></i></button>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">SA</div>
-                        <div>
-                            <strong>Sally-Anne</strong>
-                            <span class="testimonial-tag">Weight Loss &bull; Mobility</span>
-                        </div>
-                    </div>
-                </div>
-
             </div>
         </div>
     </section>
@@ -441,30 +563,58 @@
                         <h3>Body Recomposition <span class="accent-text">Done Right</span></h3>
                         <p>This is what consistency and accountability actually looks like, measured over 8 weeks with InBody scanning.</p>
                     </div>
-                    <div class="inbody-metrics">
-                        <div class="inbody-metric">
-                            <div class="metric-icon down"><i class="fa-solid fa-arrow-trend-down"></i></div>
-                            <div class="metric-data">
-                                <span class="metric-value">23.1% <span class="metric-arrow">&rarr;</span> <span class="accent-text">18.9%</span></span>
-                                <span class="metric-label">Body Fat Percentage</span>
-                                <span class="metric-change negative">&minus;4.2% body fat</span>
+                    <!-- Animated ring charts for InBody metrics -->
+                    <div class="inbody-rings" id="inbody-rings">
+                        <div class="ring-metric">
+                            <svg class="ring-svg" viewBox="0 0 100 100" aria-hidden="true">
+                                <circle class="ring-bg" cx="50" cy="50" r="40"/>
+                                <circle class="ring-track" cx="50" cy="50" r="40"/>
+                                <circle class="ring-fill ring-fat"
+                                        cx="50" cy="50" r="40"
+                                        stroke-dasharray="251.3"
+                                        stroke-dashoffset="251.3"
+                                        data-target="133"
+                                        stroke="#C8923A"/>
+                            </svg>
+                            <div class="ring-center">
+                                <span class="ring-value" data-from="23.1" data-to="18.9" data-suffix="%">23.1%</span>
                             </div>
+                            <div class="ring-label">Body Fat</div>
+                            <div class="ring-change negative"><i class="fa-solid fa-arrow-down"></i> &minus;4.2%</div>
                         </div>
-                        <div class="inbody-metric">
-                            <div class="metric-icon up"><i class="fa-solid fa-arrow-trend-up"></i></div>
-                            <div class="metric-data">
-                                <span class="metric-value">34.7kg <span class="metric-arrow">&rarr;</span> <span class="accent-text">36.2kg</span></span>
-                                <span class="metric-label">Skeletal Muscle Mass</span>
-                                <span class="metric-change positive">+1.5kg lean muscle</span>
+                        <div class="ring-metric">
+                            <svg class="ring-svg" viewBox="0 0 100 100" aria-hidden="true">
+                                <circle class="ring-bg" cx="50" cy="50" r="40"/>
+                                <circle class="ring-track" cx="50" cy="50" r="40"/>
+                                <circle class="ring-fill ring-muscle"
+                                        cx="50" cy="50" r="40"
+                                        stroke-dasharray="251.3"
+                                        stroke-dashoffset="251.3"
+                                        data-target="69"
+                                        stroke="#19c878"/>
+                            </svg>
+                            <div class="ring-center">
+                                <span class="ring-value" data-from="34.7" data-to="36.2" data-suffix="kg">34.7kg</span>
                             </div>
+                            <div class="ring-label">Skeletal Muscle</div>
+                            <div class="ring-change positive"><i class="fa-solid fa-arrow-up"></i> +1.5kg</div>
                         </div>
-                        <div class="inbody-metric">
-                            <div class="metric-icon neutral"><i class="fa-solid fa-weight-scale"></i></div>
-                            <div class="metric-data">
-                                <span class="metric-value">79.8kg <span class="metric-arrow">&rarr;</span> <span class="accent-text">78.6kg</span></span>
-                                <span class="metric-label">Total Weight</span>
-                                <span class="metric-change">Scale barely moved. Body changed entirely</span>
+                        <div class="ring-metric">
+                            <svg class="ring-svg" viewBox="0 0 100 100" aria-hidden="true">
+                                <circle class="ring-bg" cx="50" cy="50" r="40"/>
+                                <circle class="ring-track" cx="50" cy="50" r="40"/>
+                                <circle class="ring-fill ring-weight"
+                                        cx="50" cy="50" r="40"
+                                        stroke-dasharray="251.3"
+                                        stroke-dashoffset="251.3"
+                                        data-target="197"
+                                        stroke="rgba(255,255,255,0.4)"/>
+                            </svg>
+                            <div class="ring-center">
+                                <span class="ring-value" data-from="79.8" data-to="78.6" data-suffix="kg">79.8kg</span>
                             </div>
+                            <div class="ring-label">Total Weight</div>
+                            <div class="ring-change neutral"><i class="fa-solid fa-minus"></i> &minus;1.2kg</div>
                         </div>
                     </div>
                     <div class="inbody-insight">

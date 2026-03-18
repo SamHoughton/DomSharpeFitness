@@ -435,3 +435,301 @@ const sectionObserver = new IntersectionObserver((entries) => {
 }, { rootMargin: '-40% 0px -55% 0px' });
 
 sections.forEach(s => sectionObserver.observe(s));
+
+
+// ============================================================
+//  INTERACTIVE FEATURES — Animations & Interactivity
+// ============================================================
+
+// === REVEAL VARIANTS (left / right / scale) ===
+const variantRevealObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+            const el = entry.target;
+            const siblings = el.parentElement.querySelectorAll('.reveal-left, .reveal-right, .reveal-scale');
+            const idx = Array.from(siblings).indexOf(el);
+            setTimeout(() => el.classList.add('visible'), idx * 100);
+            variantRevealObserver.unobserve(el);
+        }
+    });
+}, { threshold: 0.12 });
+
+document.querySelectorAll('.reveal-left, .reveal-right, .reveal-scale').forEach(el => {
+    variantRevealObserver.observe(el);
+});
+
+
+// === PARALLAX HERO BACKGROUND ===
+const heroBgPattern = document.querySelector('.hero-bg-pattern');
+const heroSection   = document.getElementById('home');
+
+if (heroBgPattern && heroSection) {
+    heroBgPattern.classList.add('hero-bg-parallax');
+    window.addEventListener('scroll', () => {
+        const scrolled = window.scrollY;
+        if (scrolled < heroSection.offsetHeight * 1.2) {
+            heroBgPattern.style.transform = `translateY(${scrolled * 0.35}px)`;
+        }
+    }, { passive: true });
+}
+
+
+// === BEFORE / AFTER TRANSFORMATION SLIDER ===
+(function () {
+    const slider  = document.getElementById('ba-slider');
+    const baAfter = document.getElementById('ba-after');
+    const baHandle = document.getElementById('ba-handle');
+    const baHint  = document.getElementById('ba-drag-hint');
+    if (!slider || !baAfter || !baHandle) return;
+
+    let isDragging = false;
+    let hintHidden = false;
+
+    function getPct(clientX) {
+        const rect = slider.getBoundingClientRect();
+        return Math.max(5, Math.min(95, ((clientX - rect.left) / rect.width) * 100));
+    }
+
+    function setPosition(pct) {
+        baAfter.style.clipPath  = `inset(0 0 0 ${pct}%)`;
+        baHandle.style.left     = `${pct}%`;
+        if (!hintHidden) {
+            hintHidden = true;
+            baHint && baHint.classList.add('hidden');
+        }
+    }
+
+    // Mouse
+    slider.addEventListener('mousedown', (e) => {
+        isDragging = true;
+        setPosition(getPct(e.clientX));
+        e.preventDefault();
+    });
+    document.addEventListener('mousemove', (e) => {
+        if (isDragging) setPosition(getPct(e.clientX));
+    });
+    document.addEventListener('mouseup', () => { isDragging = false; });
+
+    // Touch
+    slider.addEventListener('touchstart', (e) => {
+        setPosition(getPct(e.touches[0].clientX));
+    }, { passive: true });
+    slider.addEventListener('touchmove', (e) => {
+        setPosition(getPct(e.touches[0].clientX));
+    }, { passive: true });
+
+    // Intro sweep animation on scroll into view (100 → 50)
+    const baObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (!entry.isIntersecting) return;
+            let startTs = null;
+            function animateIntro(ts) {
+                if (!startTs) startTs = ts;
+                const t     = Math.min((ts - startTs) / 900, 1);
+                const eased = 1 - Math.pow(1 - t, 3);
+                const pct   = 100 - eased * 50; // sweeps from 100 to 50
+                baAfter.style.clipPath = `inset(0 0 0 ${pct}%)`;
+                baHandle.style.left    = `${pct}%`;
+                if (t < 1) requestAnimationFrame(animateIntro);
+            }
+            setTimeout(() => requestAnimationFrame(animateIntro), 500);
+            baObserver.unobserve(entry.target);
+        });
+    }, { threshold: 0.3 });
+    baObserver.observe(slider);
+})();
+
+
+// === TESTIMONIAL CAROUSEL ===
+(function () {
+    const carousel = document.getElementById('tc-carousel');
+    const track    = document.getElementById('tc-track');
+    const dots     = document.querySelectorAll('.tc-dot');
+    const prevBtn  = document.getElementById('tc-prev');
+    const nextBtn  = document.getElementById('tc-next');
+    if (!track) return;
+
+    const slides = track.querySelectorAll('.tc-slide');
+    let current  = 0;
+    let timer    = null;
+
+    function goTo(idx) {
+        current = ((idx % slides.length) + slides.length) % slides.length;
+        track.style.transform = `translateX(-${current * 100}%)`;
+        dots.forEach((d, i) => d.classList.toggle('active', i === current));
+    }
+
+    function next() { goTo(current + 1); }
+    function prev() { goTo(current - 1); }
+
+    function startAuto() { timer = setInterval(next, 5500); }
+    function stopAuto()  { clearInterval(timer); }
+
+    nextBtn && nextBtn.addEventListener('click', () => { stopAuto(); next(); startAuto(); });
+    prevBtn && prevBtn.addEventListener('click', () => { stopAuto(); prev(); startAuto(); });
+
+    dots.forEach((dot, i) => {
+        dot.addEventListener('click', () => { stopAuto(); goTo(i); startAuto(); });
+    });
+
+    carousel.addEventListener('mouseenter', stopAuto);
+    carousel.addEventListener('mouseleave', startAuto);
+
+    // Touch swipe
+    let touchStartX = null;
+    carousel.addEventListener('touchstart', (e) => {
+        touchStartX = e.touches[0].clientX;
+    }, { passive: true });
+    carousel.addEventListener('touchend', (e) => {
+        if (touchStartX === null) return;
+        const diff = touchStartX - e.changedTouches[0].clientX;
+        if (Math.abs(diff) > 48) {
+            stopAuto();
+            diff > 0 ? next() : prev();
+            startAuto();
+        }
+        touchStartX = null;
+    }, { passive: true });
+
+    startAuto();
+})();
+
+
+// === CLIENT QUIZ ===
+(function () {
+    const quizWrap    = document.querySelector('.quiz-wrap');
+    const steps       = quizWrap ? quizWrap.querySelectorAll('.quiz-step') : [];
+    const progressFill = document.getElementById('quiz-progress-fill');
+    const stepCount   = document.getElementById('quiz-step-count');
+    const restartBtn  = document.getElementById('quiz-restart');
+    if (!quizWrap || !steps.length) return;
+
+    const answers = {};
+    let currentStep = 1;
+
+    const results = {
+        fat: {
+            name: 'Weight Loss Programme',
+            desc: 'Sustainable fat loss without crash diets. Practical nutrition guidance plus training that burns fat and keeps muscle.'
+        },
+        muscle: {
+            name: '1:1 Personal Training',
+            desc: 'A full programme built around you. Technique coaching, progressive overload, and real accountability every session.'
+        },
+        mobility: {
+            name: 'Mobility & Strength',
+            desc: 'Move better, lift better, feel better. Corrective exercise, flexibility work and injury prevention built in.'
+        },
+        accountability: {
+            name: 'Accountability Coaching',
+            desc: 'Regular check-ins, honest reviews and someone in your corner every time motivation drops. Consistency guaranteed.'
+        }
+    };
+
+    function showStep(step) {
+        steps.forEach(s => s.classList.remove('active'));
+        const target = quizWrap.querySelector(`[data-step="${step}"]`);
+        if (target) target.classList.add('active');
+
+        if (step === 'result') {
+            if (progressFill) progressFill.style.width = '100%';
+            if (stepCount) stepCount.style.display = 'none';
+            renderResult();
+        } else {
+            const n = parseInt(step, 10);
+            if (progressFill) progressFill.style.width = `${(n - 1) / 3 * 100}%`;
+            if (stepCount) {
+                stepCount.style.display = 'block';
+                stepCount.textContent   = `Question ${n} of 3`;
+            }
+        }
+        currentStep = step;
+    }
+
+    function renderResult() {
+        const r = results[answers.goal] || results.muscle;
+        const nameEl = document.getElementById('quiz-result-name');
+        const descEl = document.getElementById('quiz-result-desc');
+        if (nameEl) nameEl.textContent = r.name;
+        if (descEl) descEl.textContent = r.desc;
+    }
+
+    quizWrap.querySelectorAll('.quiz-opt').forEach(opt => {
+        opt.addEventListener('click', () => {
+            const key = opt.dataset.key;
+            const val = opt.dataset.val;
+            answers[key] = val;
+
+            // highlight selection
+            opt.closest('.quiz-options').querySelectorAll('.quiz-opt')
+               .forEach(o => o.classList.remove('selected'));
+            opt.classList.add('selected');
+
+            // advance after brief visual confirm
+            setTimeout(() => {
+                const next = currentStep === 3 ? 'result' : currentStep + 1;
+                showStep(next);
+            }, 320);
+        });
+    });
+
+    restartBtn && restartBtn.addEventListener('click', () => {
+        Object.keys(answers).forEach(k => delete answers[k]);
+        quizWrap.querySelectorAll('.quiz-opt').forEach(o => o.classList.remove('selected'));
+        showStep(1);
+    });
+})();
+
+
+// === INBODY ANIMATED RING CHARTS ===
+(function () {
+    const ringsContainer = document.getElementById('inbody-rings');
+    if (!ringsContainer) return;
+
+    let animated = false;
+
+    function animateRings() {
+        if (animated) return;
+        animated = true;
+
+        const fills = ringsContainer.querySelectorAll('.ring-fill');
+        fills.forEach((circle, i) => {
+            const target = parseFloat(circle.dataset.target);
+            setTimeout(() => {
+                circle.style.strokeDashoffset = target;
+            }, i * 180);
+        });
+
+        // Animate ring-value counters from→to
+        const values = ringsContainer.querySelectorAll('.ring-value');
+        values.forEach((el, i) => {
+            const from     = parseFloat(el.dataset.from);
+            const to       = parseFloat(el.dataset.to);
+            const suffix   = el.dataset.suffix || '';
+            const duration = 1200;
+            const delay    = i * 180;
+
+            setTimeout(() => {
+                const start = performance.now();
+                function tick(now) {
+                    const progress = Math.min((now - start) / duration, 1);
+                    const eased    = 1 - Math.pow(1 - progress, 3);
+                    const val      = from + (to - from) * eased;
+                    el.textContent = val.toFixed(1) + suffix;
+                    if (progress < 1) requestAnimationFrame(tick);
+                }
+                requestAnimationFrame(tick);
+            }, delay + 300);
+        });
+    }
+
+    const ringObserver = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting) {
+            animateRings();
+            ringObserver.disconnect();
+        }
+    }, { threshold: 0.3 });
+
+    ringObserver.observe(ringsContainer);
+})();
+

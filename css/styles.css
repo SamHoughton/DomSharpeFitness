@@ -2670,29 +2670,31 @@ ul {
     position: absolute;
     inset: 0;
     overflow: hidden;
+    /* background-image gives a guaranteed clean 50/50 split:
+       200% width renders the full collage at 2× container width,
+       so left/right positioning reveals exactly the left or right half. */
+    background-image: url('../img/dom-transformation.jpg');
+    background-size: 200% 100%;
+    background-repeat: no-repeat;
 }
 
-.ba-before .ba-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: 0% center;
-    pointer-events: none;
-    display: block;
+.ba-before {
+    background-position: left center;
 }
 
 .ba-after {
+    background-position: right center;
     clip-path: inset(0 0 0 50%);
     transition: none;
 }
 
-.ba-after .ba-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: 100% center;
+/* Keep <img> in HTML for screen-reader alt text; hide visually */
+.ba-img {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
     pointer-events: none;
-    display: block;
 }
 
 .ba-label {

@@ -5,7 +5,7 @@ const { Resend } = require('resend');
 const { authenticate, adminOnly } = require('../middleware/auth');
 
 const prisma = new PrismaClient();
-const resend = new Resend(process.env.RESEND_API_KEY);
+const getResend = () => new Resend(process.env.RESEND_API_KEY);
 
 // GET /api/clients — admin: list all clients
 router.get('/', authenticate, adminOnly, async (req, res) => {
@@ -47,7 +47,7 @@ router.post('/', authenticate, adminOnly, async (req, res) => {
       : 'https://yoursite.netlify.app/portal.html';
 
     try {
-      await resend.emails.send({
+      await getResend().emails.send({
         from: 'Dom Sharpe — Sharpe Strength <noreply@sharpestrength.co.uk>',
         to: email,
         subject: 'Your Sharpe Strength client portal is ready',

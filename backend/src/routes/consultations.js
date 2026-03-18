@@ -4,7 +4,7 @@ const { Resend } = require('resend');
 const { authenticate, adminOnly } = require('../middleware/auth');
 
 const prisma = new PrismaClient();
-const resend = new Resend(process.env.RESEND_API_KEY);
+const getResend = () => new Resend(process.env.RESEND_API_KEY);
 
 // POST /api/consultations — public, submit enquiry form
 router.post('/', async (req, res) => {
@@ -21,7 +21,7 @@ router.post('/', async (req, res) => {
   // Email notification to Dom
   if (process.env.RESEND_API_KEY && process.env.DOM_EMAIL) {
     try {
-      await resend.emails.send({
+      await getResend().emails.send({
         from: 'Sharpe Strength Website <noreply@sharpestrength.co.uk>',
         to: process.env.DOM_EMAIL,
         subject: `New consultation enquiry — ${name}`,

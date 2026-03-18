@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Client Portal — Sharpe Strength</title>
+  <link rel="icon" href="/img/favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+  <style>
+    :root {
+      --bg: #0f0f0f; --bg-alt: #161616; --bg-card: #1a1a1a;
+      --border: rgba(255,255,255,0.10); --accent: #C8923A; --accent-dark: #a87530;
+      --text: #fff; --text-muted: rgba(255,255,255,0.45);
+      --font-h: 'Oswald', sans-serif; --font-b: 'Montserrat', sans-serif;
+      --radius: 8px;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: var(--bg); color: var(--text); font-family: var(--font-b); font-size: 14px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+    a { color: inherit; text-decoration: none; }
+    button { cursor: pointer; font-family: var(--font-b); }
+
+    /* ── LOGIN ── */
+    #login-screen {
+      min-height: 100vh; display: flex; align-items: center; justify-content: center;
+      background: radial-gradient(ellipse at 50% 30%, rgba(200,146,58,0.08) 0%, transparent 70%);
+    }
+    .login-box {
+      background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px;
+      padding: 48px 40px; width: 100%; max-width: 400px; text-align: center;
+    }
+    .login-logo { font-family: var(--font-h); font-size: 1.6rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 8px; }
+    .login-logo span { color: var(--accent); }
+    .login-sub { color: var(--text-muted); margin-bottom: 32px; font-size: 13px; }
+    .field { margin-bottom: 16px; text-align: left; }
+    .field label { display: block; font-size: 12px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: var(--text-muted); margin-bottom: 6px; }
+    .field input { width: 100%; background: var(--bg-alt); border: 1px solid var(--border); border-radius: var(--radius); padding: 10px 14px; color: var(--text); font-family: var(--font-b); font-size: 14px; outline: none; transition: border-color .2s; }
+    .field input:focus { border-color: var(--accent); }
+    .btn-primary { width: 100%; background: var(--accent); color: #fff; border: none; border-radius: var(--radius); padding: 12px; font-family: var(--font-h); font-size: 1rem; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; transition: background .2s; margin-top: 8px; }
+    .btn-primary:hover { background: var(--accent-dark); }
+    #login-error { color: #e05c5c; font-size: 13px; margin-top: 12px; display: none; }
+
+    /* ── APP SHELL ── */
+    #app { display: none; }
+
+    /* Top nav */
+    .topnav {
+      position: sticky; top: 0; background: var(--bg-alt); border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 24px; height: 60px; z-index: 100;
+    }
+    .topnav-brand { font-family: var(--font-h); font-size: 1.1rem; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; }
+    .topnav-brand span { color: var(--accent); }
+    .topnav-tabs { display: flex; gap: 4px; }
+    .tab-btn {
+      display: flex; align-items: center; gap: 8px; padding: 8px 16px; border-radius: var(--radius);
+      border: none; background: none; color: var(--text-muted); font-size: 13px; font-weight: 500;
+      cursor: pointer; transition: all .2s; position: relative;
+    }
+    .tab-btn:hover { background: rgba(255,255,255,0.04); color: var(--text); }
+    .tab-btn.active { background: rgba(200,146,58,0.10); color: var(--accent); }
+    .tab-badge { background: var(--accent); color: #fff; border-radius: 10px; padding: 1px 6px; font-size: 10px; font-weight: 700; }
+    .topnav-user { display: flex; align-items: center; gap: 12px; }
+    .topnav-name { font-size: 13px; color: var(--text-muted); }
+    .topnav-name strong { color: var(--text); display: block; }
+    .btn-logout { background: none; border: 1px solid var(--border); color: var(--text-muted); border-radius: var(--radius); padding: 6px 12px; font-size: 12px; transition: all .2s; }
+    .btn-logout:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* Content */
+    .content { max-width: 900px; margin: 0 auto; padding: 32px 24px; }
+    .tab-page { display: none; }
+    .tab-page.active { display: block; }
+    .page-title { font-family: var(--font-h); font-size: 1.6rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+    .page-subtitle { color: var(--text-muted); font-size: 13px; margin-bottom: 28px; }
+
+    /* Cards */
+    .panel { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 24px; margin-bottom: 24px; }
+    .panel-title { font-family: var(--font-h); font-size: 1rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 20px; }
+    .stats-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 14px; margin-bottom: 24px; }
+    .stat-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 18px; }
+    .stat-value { font-family: var(--font-h); font-size: 1.8rem; font-weight: 700; color: var(--accent); }
+    .stat-label { font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; margin-top: 3px; }
+    .chart-wrap { position: relative; height: 240px; }
+
+    /* Check-in form */
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    @media (max-width: 560px) { .form-grid { grid-template-columns: 1fr; } }
+    .form-field { display: flex; flex-direction: column; gap: 5px; }
+    .form-field.full { grid-column: 1 / -1; }
+    .form-field label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); }
+    .form-field input, .form-field textarea {
+      background: var(--bg-alt); border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 9px 12px; color: var(--text); font-family: var(--font-b); font-size: 14px; outline: none; transition: border-color .2s;
+    }
+    .form-field input:focus, .form-field textarea:focus { border-color: var(--accent); }
+    .form-field .unit { font-size: 11px; color: var(--text-muted); margin-top: 3px; }
+    .photo-drop {
+      background: var(--bg-alt); border: 2px dashed var(--border); border-radius: var(--radius);
+      padding: 28px; text-align: center; cursor: pointer; transition: border-color .2s;
+    }
+    .photo-drop:hover, .photo-drop.over { border-color: var(--accent); }
+    .photo-drop i { font-size: 24px; color: var(--text-muted); margin-bottom: 8px; }
+    .photo-drop p { font-size: 12px; color: var(--text-muted); }
+    #photo-preview { max-height: 160px; border-radius: var(--radius); margin-top: 12px; display: none; }
+    .btn-submit-full {
+      width: 100%; background: var(--accent); color: #fff; border: none; border-radius: var(--radius);
+      padding: 13px; font-family: var(--font-h); font-size: 1rem; font-weight: 600;
+      letter-spacing: 1px; text-transform: uppercase; margin-top: 8px; transition: background .2s;
+    }
+    .btn-submit-full:hover { background: var(--accent-dark); }
+    .btn-submit-full:disabled { opacity: 0.5; cursor: not-allowed; }
+
+    /* History table */
+    .table-wrap { overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    thead th { text-align: left; padding: 10px 12px; color: var(--text-muted); font-weight: 600; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; border-bottom: 1px solid var(--border); }
+    tbody td { padding: 11px 12px; border-bottom: 1px solid rgba(255,255,255,0.04); vertical-align: middle; }
+    tbody tr:last-child td { border-bottom: none; }
+
+    /* Messages */
+    .conversation { display: flex; flex-direction: column; height: 500px; }
+    .msg-list { flex: 1; overflow-y: auto; padding: 16px; display: flex; flex-direction: column; gap: 10px; }
+    .msg { max-width: 75%; padding: 10px 14px; border-radius: 12px; font-size: 13px; line-height: 1.5; }
+    .msg.mine { align-self: flex-end; background: var(--accent); color: #fff; border-radius: 12px 12px 4px 12px; }
+    .msg.theirs { align-self: flex-start; background: var(--bg-alt); border-radius: 12px 12px 12px 4px; }
+    .msg-meta { font-size: 10px; color: rgba(255,255,255,0.5); margin-top: 4px; }
+    .msg-sender { font-size: 11px; font-weight: 600; color: var(--accent); margin-bottom: 3px; }
+    .msg-input-row { display: flex; gap: 10px; padding: 16px; border-top: 1px solid var(--border); }
+    .msg-input { flex: 1; background: var(--bg-alt); border: 1px solid var(--border); border-radius: var(--radius); padding: 10px 14px; color: var(--text); font-family: var(--font-b); font-size: 13px; outline: none; resize: none; }
+    .msg-input:focus { border-color: var(--accent); }
+    .msg-send { background: var(--accent); color: #fff; border: none; border-radius: var(--radius); padding: 10px 18px; font-size: 13px; font-weight: 600; transition: background .2s; }
+    .msg-send:hover { background: var(--accent-dark); }
+
+    /* Toast */
+    #toast { position: fixed; bottom: 24px; right: 24px; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 12px 20px; font-size: 13px; z-index: 999; transform: translateY(80px); opacity: 0; transition: all .3s; }
+    #toast.show { transform: translateY(0); opacity: 1; }
+    #toast.success { border-color: #50c878; color: #50c878; }
+    #toast.error { border-color: #e05c5c; color: #e05c5c; }
+
+    .empty { text-align: center; color: var(--text-muted); padding: 40px 0; font-size: 13px; }
+    .success-box { background: rgba(80,200,120,0.08); border: 1px solid rgba(80,200,120,0.25); border-radius: var(--radius); padding: 16px 20px; font-size: 13px; color: #50c878; margin-bottom: 20px; display: none; }
+  </style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="login-screen">
+  <div class="login-box">
+    <div class="login-logo">Sharpe <span>Strength</span></div>
+    <div class="login-sub">Client Portal</div>
+    <div class="field">
+      <label>Email</label>
+      <input type="email" id="login-email" autocomplete="email" placeholder="you@email.com">
+    </div>
+    <div class="field">
+      <label>Password</label>
+      <input type="password" id="login-password" autocomplete="current-password" placeholder="••••••••">
+    </div>
+    <button class="btn-primary" id="login-btn">Sign In</button>
+    <div id="login-error">Incorrect email or password.</div>
+  </div>
+</div>
+
+<!-- APP -->
+<div id="app">
+  <nav class="topnav">
+    <div class="topnav-brand">Sharpe <span>Strength</span></div>
+    <div class="topnav-tabs">
+      <button class="tab-btn active" data-tab="progress"><i class="fa-solid fa-chart-line"></i> My Progress</button>
+      <button class="tab-btn" data-tab="checkin"><i class="fa-solid fa-plus-circle"></i> Check In</button>
+      <button class="tab-btn" data-tab="messages"><i class="fa-solid fa-message"></i> Messages <span class="tab-badge" id="msg-badge" style="display:none"></span></button>
+    </div>
+    <div class="topnav-user">
+      <div class="topnav-name"><strong id="client-name">—</strong>Client Portal</div>
+      <button class="btn-logout" id="logout-btn"><i class="fa-solid fa-right-from-bracket"></i></button>
+    </div>
+  </nav>
+
+  <div class="content">
+
+    <!-- PROGRESS -->
+    <div class="tab-page active" id="tab-progress">
+      <div class="page-title">My Progress</div>
+      <div class="page-subtitle">Your journey with Sharpe Strength</div>
+
+      <div class="stats-row" id="progress-stats">
+        <div class="stat-card"><div class="stat-value" id="ps-checkins">—</div><div class="stat-label">Total Check-ins</div></div>
+        <div class="stat-card"><div class="stat-value" id="ps-weight">—</div><div class="stat-label">Latest Weight (kg)</div></div>
+        <div class="stat-card"><div class="stat-value" id="ps-bf">—</div><div class="stat-label">Latest Body Fat %</div></div>
+        <div class="stat-card"><div class="stat-value" id="ps-change">—</div><div class="stat-label">Weight Change (kg)</div></div>
+      </div>
+
+      <div class="panel" id="chart-panel" style="display:none">
+        <div class="panel-title">Progress Over Time</div>
+        <div class="chart-wrap"><canvas id="progress-chart"></canvas></div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-title">Check-in History</div>
+        <div id="history-table"><div class="empty">Loading…</div></div>
+      </div>
+    </div>
+
+    <!-- CHECK IN -->
+    <div class="tab-page" id="tab-checkin">
+      <div class="page-title">Weekly Check-in</div>
+      <div class="page-subtitle">Log this week's stats for Dom to review</div>
+
+      <div class="success-box" id="checkin-success">
+        <i class="fa-solid fa-circle-check"></i> Check-in submitted! Dom will review it shortly.
+      </div>
+
+      <div class="panel">
+        <form id="checkin-form">
+          <div class="form-grid">
+            <div class="form-field">
+              <label>Week Date *</label>
+              <input type="date" id="ci-date" required>
+            </div>
+            <div class="form-field">
+              <label>Weight</label>
+              <input type="number" id="ci-weight" step="0.1" placeholder="e.g. 82.5">
+              <span class="unit">kg</span>
+            </div>
+            <div class="form-field">
+              <label>Body Fat %</label>
+              <input type="number" id="ci-bf" step="0.1" placeholder="e.g. 18.5">
+              <span class="unit">%</span>
+            </div>
+            <div class="form-field">
+              <label>Waist</label>
+              <input type="number" id="ci-waist" step="0.5" placeholder="e.g. 84">
+              <span class="unit">cm</span>
+            </div>
+            <div class="form-field">
+              <label>Hips</label>
+              <input type="number" id="ci-hips" step="0.5" placeholder="e.g. 96">
+              <span class="unit">cm</span>
+            </div>
+            <div class="form-field">
+              <label>Chest</label>
+              <input type="number" id="ci-chest" step="0.5" placeholder="e.g. 100">
+              <span class="unit">cm</span>
+            </div>
+            <div class="form-field">
+              <label>Arms</label>
+              <input type="number" id="ci-arms" step="0.5" placeholder="e.g. 36">
+              <span class="unit">cm</span>
+            </div>
+            <div class="form-field">
+              <label>Thighs</label>
+              <input type="number" id="ci-thighs" step="0.5" placeholder="e.g. 58">
+              <span class="unit">cm</span>
+            </div>
+            <div class="form-field full">
+              <label>Notes</label>
+              <textarea id="ci-notes" rows="3" placeholder="How was your week? Any injuries, wins, or things you want Dom to know?"></textarea>
+            </div>
+            <div class="form-field full">
+              <label>Progress Photo (optional)</label>
+              <div class="photo-drop" id="photo-drop">
+                <i class="fa-solid fa-camera"></i>
+                <p>Click to select or drag &amp; drop a photo</p>
+                <input type="file" id="ci-photo" accept="image/*" style="display:none">
+                <img id="photo-preview" alt="Preview">
+              </div>
+            </div>
+          </div>
+          <button type="submit" class="btn-submit-full" id="checkin-btn">Submit Check-in</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- MESSAGES -->
+    <div class="tab-page" id="tab-messages">
+      <div class="page-title">Messages</div>
+      <div class="page-subtitle">Direct line to Dom</div>
+      <div class="panel" style="padding:0;overflow:hidden">
+        <div class="conversation">
+          <div class="msg-list" id="msg-list"><div class="empty">Loading…</div></div>
+          <div class="msg-input-row">
+            <textarea class="msg-input" id="msg-input" placeholder="Message Dom…" rows="2"></textarea>
+            <button class="msg-send" id="msg-send-btn"><i class="fa-solid fa-paper-plane"></i></button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div id="toast"></div>
+
+<script>
+  // ── CONFIG ──────────────────────────────────────────────
+  const API = (window.RAILWAY_API_URL || '').replace(/\/$/, '');
+
+  // ── STATE ───────────────────────────────────────────────
+  let token = localStorage.getItem('client_token');
+  let currentUser = null;
+  let adminId = null;
+  let progressChart = null;
+
+  // ── HELPERS ─────────────────────────────────────────────
+  async function api(path, opts = {}) {
+    const headers = { 'Authorization': `Bearer ${token}`, ...opts.headers };
+    if (!(opts.body instanceof FormData)) headers['Content-Type'] = 'application/json';
+    const res = await fetch(API + path, {
+      ...opts,
+      headers,
+      body: opts.body instanceof FormData ? opts.body : (opts.body ? JSON.stringify(opts.body) : undefined),
+    });
+    if (!res.ok) throw new Error((await res.json().catch(() => ({}))).error || res.statusText);
+    return res.json();
+  }
+
+  function toast(msg, type = 'success') {
+    const el = document.getElementById('toast');
+    el.textContent = msg;
+    el.className = `show ${type}`;
+    clearTimeout(el._t);
+    el._t = setTimeout(() => el.classList.remove('show'), 3500);
+  }
+
+  function fmt(dateStr) {
+    return new Date(dateStr).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+  }
+
+  // ── AUTH ────────────────────────────────────────────────
+  async function login() {
+    const email = document.getElementById('login-email').value.trim();
+    const password = document.getElementById('login-password').value;
+    const btn = document.getElementById('login-btn');
+    const err = document.getElementById('login-error');
+
+    btn.textContent = 'Signing in…';
+    btn.disabled = true;
+    err.style.display = 'none';
+
+    try {
+      const data = await fetch(API + '/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password }),
+      }).then(r => r.json());
+
+      if (!data.token) throw new Error(data.error || 'Login failed');
+      if (data.user.role !== 'CLIENT') throw new Error('This portal is for clients only');
+
+      token = data.token;
+      currentUser = data.user;
+      localStorage.setItem('client_token', token);
+      showApp();
+    } catch (e) {
+      err.textContent = e.message;
+      err.style.display = 'block';
+    } finally {
+      btn.textContent = 'Sign In';
+      btn.disabled = false;
+    }
+  }
+
+  function logout() {
+    token = null;
+    currentUser = null;
+    localStorage.removeItem('client_token');
+    document.getElementById('app').style.display = 'none';
+    document.getElementById('login-screen').style.display = 'flex';
+  }
+
+  // ── APP ──────────────────────────────────────────────────
+  async function showApp() {
+    document.getElementById('login-screen').style.display = 'none';
+    document.getElementById('app').style.display = 'block';
+
+    if (!currentUser) {
+      try { currentUser = await api('/api/auth/me'); }
+      catch { return logout(); }
+    }
+
+    document.getElementById('client-name').textContent = currentUser.name;
+
+    // Set today's date as default for check-in
+    document.getElementById('ci-date').value = new Date().toISOString().split('T')[0];
+
+    loadProgress();
+    loadUnreadCount();
+    setInterval(loadUnreadCount, 30000);
+  }
+
+  // ── TABS ─────────────────────────────────────────────────
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const tab = btn.dataset.tab;
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.tab-page').forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById(`tab-${tab}`).classList.add('active');
+      if (tab === 'messages') loadMessages();
+      if (tab === 'progress') loadProgress();
+    });
+  });
+
+  // ── PROGRESS ─────────────────────────────────────────────
+  async function loadProgress() {
+    try {
+      const checkins = await api('/api/checkins');
+
+      document.getElementById('ps-checkins').textContent = checkins.length;
+
+      const withWeight = checkins.filter(c => c.weightKg);
+      const withBf = checkins.filter(c => c.bodyFatPct);
+
+      document.getElementById('ps-weight').textContent = withWeight[0]?.weightKg ?? '—';
+      document.getElementById('ps-bf').textContent = withBf[0]?.bodyFatPct ?? '—';
+
+      if (withWeight.length >= 2) {
+        const change = (withWeight[0].weightKg - withWeight[withWeight.length - 1].weightKg).toFixed(1);
+        const sign = change > 0 ? '+' : '';
+        document.getElementById('ps-change').textContent = `${sign}${change}`;
+      } else {
+        document.getElementById('ps-change').textContent = '—';
+      }
+
+      // Chart
+      if (withWeight.length > 1) {
+        document.getElementById('chart-panel').style.display = '';
+        const labels = [...withWeight].reverse().map(c => fmt(c.weekDate));
+        const weights = [...withWeight].reverse().map(c => c.weightKg);
+        const bfLabels = [...withBf].reverse().map(c => fmt(c.weekDate));
+        const bfValues = [...withBf].reverse().map(c => c.bodyFatPct);
+
+        if (progressChart) progressChart.destroy();
+        const ctx = document.getElementById('progress-chart').getContext('2d');
+        progressChart = new Chart(ctx, {
+          type: 'line',
+          data: {
+            labels,
+            datasets: [
+              {
+                label: 'Weight (kg)',
+                data: weights,
+                borderColor: '#C8923A',
+                backgroundColor: 'rgba(200,146,58,0.10)',
+                tension: 0.35,
+                fill: true,
+                yAxisID: 'y',
+              },
+              ...(bfValues.length > 1 ? [{
+                label: 'Body Fat %',
+                data: bfValues,
+                borderColor: '#64a0f0',
+                backgroundColor: 'rgba(100,160,240,0.08)',
+                tension: 0.35,
+                fill: true,
+                yAxisID: 'y1',
+              }] : []),
+            ],
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { legend: { labels: { color: '#fff', font: { family: 'Montserrat', size: 12 } } } },
+            scales: {
+              x: { ticks: { color: 'rgba(255,255,255,0.4)', font: { size: 11 } }, grid: { color: 'rgba(255,255,255,0.05)' } },
+              y: { ticks: { color: '#C8923A', font: { size: 11 } }, grid: { color: 'rgba(255,255,255,0.05)' }, position: 'left' },
+              y1: { ticks: { color: '#64a0f0', font: { size: 11 } }, grid: { drawOnChartArea: false }, position: 'right', display: bfValues.length > 1 },
+            },
+          },
+        });
+      }
+
+      // History table
+      document.getElementById('history-table').innerHTML = checkins.length
+        ? `<div class="table-wrap"><table>
+            <thead><tr><th>Date</th><th>Weight</th><th>Body Fat</th><th>Waist</th><th>Hips</th><th>Chest</th><th>Arms</th><th>Thighs</th><th>Photo</th></tr></thead>
+            <tbody>${checkins.map(c => `<tr>
+              <td style="white-space:nowrap">${fmt(c.weekDate)}</td>
+              <td>${c.weightKg ? c.weightKg + ' kg' : '—'}</td>
+              <td>${c.bodyFatPct ? c.bodyFatPct + '%' : '—'}</td>
+              <td>${c.waistCm ? c.waistCm + ' cm' : '—'}</td>
+              <td>${c.hipsCm ? c.hipsCm + ' cm' : '—'}</td>
+              <td>${c.chestCm ? c.chestCm + ' cm' : '—'}</td>
+              <td>${c.armsCm ? c.armsCm + ' cm' : '—'}</td>
+              <td>${c.thighsCm ? c.thighsCm + ' cm' : '—'}</td>
+              <td>${c.photoUrl ? `<a href="${c.photoUrl}" target="_blank" style="color:var(--accent)"><i class="fa-solid fa-image"></i></a>` : '—'}</td>
+            </tr>`).join('')}</tbody>
+          </table></div>`
+        : '<div class="empty">No check-ins yet — submit your first one above!</div>';
+
+    } catch (e) {
+      document.getElementById('history-table').innerHTML = `<div class="empty">${e.message}</div>`;
+    }
+  }
+
+  // ── CHECK-IN FORM ─────────────────────────────────────────
+  const photoDrop = document.getElementById('photo-drop');
+  const photoInput = document.getElementById('ci-photo');
+  const photoPreview = document.getElementById('photo-preview');
+
+  photoDrop.addEventListener('click', () => photoInput.click());
+  photoDrop.addEventListener('dragover', e => { e.preventDefault(); photoDrop.classList.add('over'); });
+  photoDrop.addEventListener('dragleave', () => photoDrop.classList.remove('over'));
+  photoDrop.addEventListener('drop', e => {
+    e.preventDefault();
+    photoDrop.classList.remove('over');
+    const file = e.dataTransfer.files[0];
+    if (file) previewPhoto(file);
+  });
+  photoInput.addEventListener('change', e => {
+    if (e.target.files[0]) previewPhoto(e.target.files[0]);
+  });
+
+  function previewPhoto(file) {
+    const reader = new FileReader();
+    reader.onload = ev => {
+      photoPreview.src = ev.target.result;
+      photoPreview.style.display = 'block';
+    };
+    reader.readAsDataURL(file);
+    // Swap the file into the input
+    const dt = new DataTransfer();
+    dt.items.add(file);
+    photoInput.files = dt.files;
+  }
+
+  document.getElementById('checkin-form').addEventListener('submit', async e => {
+    e.preventDefault();
+    const btn = document.getElementById('checkin-btn');
+    btn.textContent = 'Submitting…';
+    btn.disabled = true;
+
+    try {
+      const fd = new FormData();
+      fd.append('weekDate', document.getElementById('ci-date').value);
+      const fields = { weightKg: 'ci-weight', bodyFatPct: 'ci-bf', waistCm: 'ci-waist', hipsCm: 'ci-hips', chestCm: 'ci-chest', armsCm: 'ci-arms', thighsCm: 'ci-thighs' };
+      Object.entries(fields).forEach(([key, id]) => {
+        const val = document.getElementById(id).value;
+        if (val) fd.append(key, val);
+      });
+      const notes = document.getElementById('ci-notes').value;
+      if (notes) fd.append('notes', notes);
+      const photo = photoInput.files[0];
+      if (photo) fd.append('photo', photo);
+
+      await fetch(API + '/api/checkins', {
+        method: 'POST',
+        headers: { 'Authorization': `Bearer ${token}` },
+        body: fd,
+      }).then(async r => {
+        if (!r.ok) throw new Error((await r.json()).error || r.statusText);
+        return r.json();
+      });
+
+      document.getElementById('checkin-success').style.display = 'block';
+      document.getElementById('checkin-form').reset();
+      photoPreview.style.display = 'none';
+      document.getElementById('ci-date').value = new Date().toISOString().split('T')[0];
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      setTimeout(() => document.getElementById('checkin-success').style.display = 'none', 5000);
+
+    } catch (err) {
+      toast(err.message, 'error');
+    } finally {
+      btn.textContent = 'Submit Check-in';
+      btn.disabled = false;
+    }
+  });
+
+  // ── MESSAGES ─────────────────────────────────────────────
+  async function getAdminId() {
+    if (adminId) return adminId;
+    // We get admin ID from the first message or by sending one
+    // The server resolves admin on its end — we just need any admin user ID
+    // Use a special endpoint or get it from conversations
+    try {
+      const msgs = await api('/api/messages/' + 'admin'); // will fail but that's ok
+    } catch {}
+    return null;
+  }
+
+  async function loadMessages() {
+    const list = document.getElementById('msg-list');
+    list.innerHTML = '<div class="empty">Loading…</div>';
+    try {
+      const messages = await api('/api/messages/admin-thread');
+      renderMessages(messages);
+    } catch {
+      list.innerHTML = '<div class="empty">Send a message to start your conversation with Dom.</div>';
+    }
+  }
+
+  function renderMessages(messages) {
+    const list = document.getElementById('msg-list');
+    if (!messages.length) {
+      list.innerHTML = '<div class="empty">No messages yet — say hello to Dom!</div>';
+      return;
+    }
+    list.innerHTML = messages.map(m => `
+      <div class="msg ${m.from.id === currentUser.id ? 'mine' : 'theirs'}">
+        ${m.from.id !== currentUser.id ? `<div class="msg-sender">${m.from.name}</div>` : ''}
+        ${m.body}
+        <div class="msg-meta">${new Date(m.createdAt).toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' })} · ${fmt(m.createdAt)}</div>
+      </div>
+    `).join('');
+    list.scrollTop = list.scrollHeight;
+    loadUnreadCount();
+  }
+
+  async function sendMessage() {
+    const input = document.getElementById('msg-input');
+    const body = input.value.trim();
+    if (!body) return;
+    input.value = '';
+
+    try {
+      // Post to /api/messages with toId = admin
+      // Server will find admin by role
+      await fetch(API + '/api/messages', {
+        method: 'POST',
+        headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' },
+        body: JSON.stringify({ toRole: 'ADMIN', body }),
+      }).then(async r => {
+        if (!r.ok) throw new Error((await r.json()).error || r.statusText);
+        return r.json();
+      });
+      loadMessages();
+    } catch (e) {
+      toast(e.message, 'error');
+      input.value = body;
+    }
+  }
+
+  async function loadUnreadCount() {
+    try {
+      const { count } = await api('/api/messages/unread/count');
+      const badge = document.getElementById('msg-badge');
+      badge.textContent = count;
+      badge.style.display = count ? '' : 'none';
+    } catch {}
+  }
+
+  document.getElementById('msg-send-btn').addEventListener('click', sendMessage);
+  document.getElementById('msg-input').addEventListener('keydown', e => {
+    if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); }
+  });
+
+  // ── EVENTS ────────────────────────────────────────────────
+  document.getElementById('login-btn').addEventListener('click', login);
+  document.getElementById('login-password').addEventListener('keydown', e => { if (e.key === 'Enter') login(); });
+  document.getElementById('logout-btn').addEventListener('click', logout);
+
+  // ── INIT ─────────────────────────────────────────────────
+  if (token) showApp();
+</script>
+</body>
+</html>

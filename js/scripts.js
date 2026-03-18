@@ -733,3 +733,41 @@ if (heroBgPattern && heroSection) {
     ringObserver.observe(ringsContainer);
 })();
 
+
+
+// === PAGE INTRO STING ===
+(function () {
+    const intro  = document.getElementById('page-intro');
+    if (!intro) return;
+
+    // Skip if reduced motion
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        intro.remove();
+        return;
+    }
+
+    // Only run once per browser session
+    if (sessionStorage.getItem('intro-seen')) {
+        intro.remove();
+        return;
+    }
+    sessionStorage.setItem('intro-seen', '1');
+
+    // Lock scroll while intro plays
+    document.body.style.overflow = 'hidden';
+
+    // Timing:
+    //   0.08s  → ch-1 starts drawing (0.38s duration → done at 0.46s)
+    //   0.26s  → ch-2 starts drawing (0.38s duration → done at 0.64s)
+    //   + 0.22s hold after last chevron finishes
+    //   = trigger exit at ~0.86s
+    const exitDelay = 860;
+
+    setTimeout(() => {
+        intro.classList.add('intro-exit');
+        document.body.style.overflow = '';
+
+        // Remove from DOM after transition completes
+        intro.addEventListener('transitionend', () => intro.remove(), { once: true });
+    }, exitDelay);
+})();

@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin — Sharpe Strength</title>
+  <link rel="icon" href="/img/favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+  <style>
+    :root {
+      --bg: #0f0f0f; --bg-alt: #161616; --bg-card: #1a1a1a;
+      --border: rgba(255,255,255,0.10); --accent: #C8923A; --accent-dark: #a87530;
+      --text: #fff; --text-muted: rgba(255,255,255,0.45);
+      --font-h: 'Oswald', sans-serif; --font-b: 'Montserrat', sans-serif;
+      --radius: 8px; --sidebar-w: 240px;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: var(--bg); color: var(--text); font-family: var(--font-b); font-size: 14px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+    a { color: inherit; text-decoration: none; }
+    button { cursor: pointer; font-family: var(--font-b); }
+
+    /* ── LOGIN ── */
+    #login-screen {
+      min-height: 100vh; display: flex; align-items: center; justify-content: center;
+      background: radial-gradient(ellipse at 50% 30%, rgba(200,146,58,0.08) 0%, transparent 70%);
+    }
+    .login-box {
+      background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px;
+      padding: 48px 40px; width: 100%; max-width: 400px; text-align: center;
+    }
+    .login-logo { font-family: var(--font-h); font-size: 1.6rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 8px; }
+    .login-logo span { color: var(--accent); }
+    .login-sub { color: var(--text-muted); margin-bottom: 32px; font-size: 13px; }
+    .field { margin-bottom: 16px; text-align: left; }
+    .field label { display: block; font-size: 12px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: var(--text-muted); margin-bottom: 6px; }
+    .field input { width: 100%; background: var(--bg-alt); border: 1px solid var(--border); border-radius: var(--radius); padding: 10px 14px; color: var(--text); font-family: var(--font-b); font-size: 14px; outline: none; transition: border-color .2s; }
+    .field input:focus { border-color: var(--accent); }
+    .btn-primary { width: 100%; background: var(--accent); color: #fff; border: none; border-radius: var(--radius); padding: 12px; font-family: var(--font-h); font-size: 1rem; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; transition: background .2s; margin-top: 8px; }
+    .btn-primary:hover { background: var(--accent-dark); }
+    #login-error { color: #e05c5c; font-size: 13px; margin-top: 12px; display: none; }
+
+    /* ── APP SHELL ── */
+    #app { display: none; min-height: 100vh; }
+
+    /* Sidebar */
+    .sidebar {
+      position: fixed; top: 0; left: 0; width: var(--sidebar-w); height: 100vh;
+      background: var(--bg-alt); border-right: 1px solid var(--border);
+      display: flex; flex-direction: column; z-index: 100;
+    }
+    .sidebar-brand { padding: 24px 20px; border-bottom: 1px solid var(--border); }
+    .sidebar-brand-name { font-family: var(--font-h); font-size: 1.1rem; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; }
+    .sidebar-brand-name span { color: var(--accent); }
+    .sidebar-brand-sub { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+    nav { flex: 1; padding: 16px 0; }
+    .nav-item { display: flex; align-items: center; gap: 12px; padding: 12px 20px; color: var(--text-muted); font-size: 13px; font-weight: 500; cursor: pointer; transition: all .2s; border-left: 3px solid transparent; }
+    .nav-item:hover { background: rgba(255,255,255,0.04); color: var(--text); }
+    .nav-item.active { color: var(--accent); border-left-color: var(--accent); background: rgba(200,146,58,0.06); }
+    .nav-item i { width: 18px; text-align: center; }
+    .nav-badge { margin-left: auto; background: var(--accent); color: #fff; border-radius: 10px; padding: 1px 7px; font-size: 11px; font-weight: 600; }
+    .sidebar-footer { padding: 16px 20px; border-top: 1px solid var(--border); }
+    .sidebar-user { font-size: 13px; color: var(--text-muted); margin-bottom: 10px; }
+    .sidebar-user strong { display: block; color: var(--text); }
+    .btn-logout { background: none; border: 1px solid var(--border); color: var(--text-muted); border-radius: var(--radius); padding: 7px 14px; font-size: 12px; width: 100%; transition: all .2s; }
+    .btn-logout:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* Main content */
+    .main { margin-left: var(--sidebar-w); padding: 32px; min-height: 100vh; }
+    .page-header { margin-bottom: 28px; }
+    .page-title { font-family: var(--font-h); font-size: 1.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
+    .page-subtitle { color: var(--text-muted); font-size: 13px; margin-top: 4px; }
+
+    /* Panels */
+    .panel { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 24px; margin-bottom: 24px; }
+    .panel-title { font-family: var(--font-h); font-size: 1.1rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 20px; }
+
+    /* Stats row */
+    .stats-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 16px; margin-bottom: 24px; }
+    .stat-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 20px; }
+    .stat-value { font-family: var(--font-h); font-size: 2rem; font-weight: 700; color: var(--accent); }
+    .stat-label { font-size: 12px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; margin-top: 4px; }
+
+    /* Tables */
+    .table-wrap { overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    thead th { text-align: left; padding: 10px 14px; color: var(--text-muted); font-weight: 600; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; border-bottom: 1px solid var(--border); }
+    tbody td { padding: 12px 14px; border-bottom: 1px solid rgba(255,255,255,0.04); vertical-align: middle; }
+    tbody tr:last-child td { border-bottom: none; }
+    tbody tr:hover td { background: rgba(255,255,255,0.02); }
+    .badge { display: inline-block; padding: 2px 10px; border-radius: 20px; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .5px; }
+    .badge-new { background: rgba(200,146,58,0.15); color: var(--accent); }
+    .badge-contacted { background: rgba(100,160,240,0.15); color: #64a0f0; }
+    .badge-converted { background: rgba(80,200,120,0.15); color: #50c878; }
+
+    /* Buttons */
+    .btn { border: none; border-radius: var(--radius); padding: 7px 14px; font-size: 12px; font-weight: 600; transition: all .2s; }
+    .btn-accent { background: var(--accent); color: #fff; }
+    .btn-accent:hover { background: var(--accent-dark); }
+    .btn-ghost { background: transparent; border: 1px solid var(--border); color: var(--text-muted); }
+    .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+    .btn-danger { background: rgba(224,92,92,0.15); border: 1px solid rgba(224,92,92,0.3); color: #e05c5c; }
+    .btn-danger:hover { background: rgba(224,92,92,0.25); }
+    .btn-sm { padding: 5px 10px; font-size: 11px; }
+    .btn-row { display: flex; gap: 8px; align-items: center; }
+
+    /* Forms */
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .form-field { display: flex; flex-direction: column; gap: 6px; }
+    .form-field.full { grid-column: 1 / -1; }
+    .form-field label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); }
+    .form-field input, .form-field select, .form-field textarea {
+      background: var(--bg-alt); border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 9px 12px; color: var(--text); font-family: var(--font-b); font-size: 13px; outline: none; transition: border-color .2s;
+    }
+    .form-field input:focus, .form-field select:focus, .form-field textarea:focus { border-color: var(--accent); }
+    .form-field select option { background: var(--bg-card); }
+    .form-actions { margin-top: 20px; display: flex; gap: 10px; }
+
+    /* Modal */
+    .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.7); z-index: 200; display: none; align-items: center; justify-content: center; }
+    .modal-overlay.open { display: flex; }
+    .modal { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 32px; width: 100%; max-width: 520px; max-height: 90vh; overflow-y: auto; position: relative; }
+    .modal-title { font-family: var(--font-h); font-size: 1.2rem; font-weight: 700; text-transform: uppercase; margin-bottom: 24px; }
+    .modal-close { position: absolute; top: 16px; right: 16px; background: none; border: none; color: var(--text-muted); font-size: 18px; cursor: pointer; }
+    .modal-close:hover { color: var(--text); }
+
+    /* Client detail view */
+    .back-btn { display: inline-flex; align-items: center; gap: 8px; color: var(--text-muted); font-size: 13px; cursor: pointer; margin-bottom: 20px; transition: color .2s; border: none; background: none; }
+    .back-btn:hover { color: var(--accent); }
+    .client-meta { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin-bottom: 24px; }
+    .meta-item { background: var(--bg-alt); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px 16px; }
+    .meta-label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); margin-bottom: 4px; }
+    .meta-value { font-weight: 600; }
+
+    /* Conversation */
+    .conversation { display: flex; flex-direction: column; height: 480px; }
+    .msg-list { flex: 1; overflow-y: auto; padding: 16px; display: flex; flex-direction: column; gap: 10px; }
+    .msg { max-width: 72%; padding: 10px 14px; border-radius: 12px; font-size: 13px; line-height: 1.5; }
+    .msg.mine { align-self: flex-end; background: var(--accent); color: #fff; border-radius: 12px 12px 4px 12px; }
+    .msg.theirs { align-self: flex-start; background: var(--bg-alt); color: var(--text); border-radius: 12px 12px 12px 4px; }
+    .msg-meta { font-size: 10px; color: rgba(255,255,255,0.5); margin-top: 4px; }
+    .msg-input-row { display: flex; gap: 10px; padding: 16px; border-top: 1px solid var(--border); }
+    .msg-input { flex: 1; background: var(--bg-alt); border: 1px solid var(--border); border-radius: var(--radius); padding: 10px 14px; color: var(--text); font-family: var(--font-b); font-size: 13px; outline: none; resize: none; }
+    .msg-input:focus { border-color: var(--accent); }
+    .msg-send { background: var(--accent); color: #fff; border: none; border-radius: var(--radius); padding: 10px 18px; font-size: 13px; font-weight: 600; transition: background .2s; }
+    .msg-send:hover { background: var(--accent-dark); }
+
+    .conv-list { display: flex; flex-direction: column; gap: 1px; }
+    .conv-item { display: flex; align-items: center; gap: 14px; padding: 14px 16px; border-radius: var(--radius); cursor: pointer; transition: background .15s; }
+    .conv-item:hover, .conv-item.active { background: rgba(200,146,58,0.08); }
+    .conv-avatar { width: 38px; height: 38px; border-radius: 50%; background: var(--accent); display: flex; align-items: center; justify-content: center; font-family: var(--font-h); font-weight: 700; font-size: .9rem; flex-shrink: 0; }
+    .conv-info { flex: 1; min-width: 0; }
+    .conv-name { font-weight: 600; font-size: 13px; }
+    .conv-preview { font-size: 12px; color: var(--text-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .conv-unread { background: var(--accent); color: #fff; border-radius: 10px; padding: 1px 8px; font-size: 11px; font-weight: 700; flex-shrink: 0; }
+
+    /* Chart */
+    .chart-wrap { position: relative; height: 260px; }
+
+    /* Hidden pages */
+    .tab-page { display: none; }
+    .tab-page.active { display: block; }
+
+    /* Toasts */
+    #toast { position: fixed; bottom: 24px; right: 24px; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 12px 20px; font-size: 13px; z-index: 999; transform: translateY(80px); opacity: 0; transition: all .3s; }
+    #toast.show { transform: translateY(0); opacity: 1; }
+    #toast.success { border-color: #50c878; color: #50c878; }
+    #toast.error { border-color: #e05c5c; color: #e05c5c; }
+
+    .empty { text-align: center; color: var(--text-muted); padding: 48px 0; font-size: 13px; }
+    .select-sm { background: var(--bg-alt); border: 1px solid var(--border); color: var(--text); border-radius: var(--radius); padding: 5px 8px; font-size: 12px; }
+  </style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="login-screen">
+  <div class="login-box">
+    <div class="login-logo">Sharpe <span>Strength</span></div>
+    <div class="login-sub">Admin Portal</div>
+    <div class="field">
+      <label>Email</label>
+      <input type="email" id="login-email" placeholder="dom@sharpestrength.co.uk" autocomplete="email">
+    </div>
+    <div class="field">
+      <label>Password</label>
+      <input type="password" id="login-password" placeholder="••••••••" autocomplete="current-password">
+    </div>
+    <button class="btn-primary" id="login-btn">Sign In</button>
+    <div id="login-error">Incorrect email or password.</div>
+  </div>
+</div>
+
+<!-- APP -->
+<div id="app">
+  <aside class="sidebar">
+    <div class="sidebar-brand">
+      <div class="sidebar-brand-name">Sharpe <span>Strength</span></div>
+      <div class="sidebar-brand-sub">Admin Dashboard</div>
+    </div>
+    <nav>
+      <div class="nav-item active" data-tab="overview"><i class="fa-solid fa-chart-line"></i> Overview</div>
+      <div class="nav-item" data-tab="consultations"><i class="fa-solid fa-inbox"></i> Consultations <span class="nav-badge" id="badge-consultations" style="display:none"></span></div>
+      <div class="nav-item" data-tab="clients"><i class="fa-solid fa-users"></i> Clients</div>
+      <div class="nav-item" data-tab="messages"><i class="fa-solid fa-message"></i> Messages <span class="nav-badge" id="badge-messages" style="display:none"></span></div>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="sidebar-user">Signed in as<strong id="admin-name">—</strong></div>
+      <button class="btn-logout" id="logout-btn"><i class="fa-solid fa-right-from-bracket"></i> Sign out</button>
+    </div>
+  </aside>
+
+  <main class="main">
+
+    <!-- OVERVIEW -->
+    <div class="tab-page active" id="tab-overview">
+      <div class="page-header">
+        <div class="page-title">Overview</div>
+        <div class="page-subtitle">Welcome back, <span id="overview-name">Dom</span></div>
+      </div>
+      <div class="stats-row">
+        <div class="stat-card"><div class="stat-value" id="stat-clients">—</div><div class="stat-label">Active Clients</div></div>
+        <div class="stat-card"><div class="stat-value" id="stat-checkins">—</div><div class="stat-label">Check-ins This Week</div></div>
+        <div class="stat-card"><div class="stat-value" id="stat-enquiries">—</div><div class="stat-label">New Enquiries</div></div>
+        <div class="stat-card"><div class="stat-value" id="stat-messages">—</div><div class="stat-label">Unread Messages</div></div>
+      </div>
+      <div class="panel">
+        <div class="panel-title">Recent Consultations</div>
+        <div id="overview-consultations"><div class="empty">Loading…</div></div>
+      </div>
+    </div>
+
+    <!-- CONSULTATIONS -->
+    <div class="tab-page" id="tab-consultations">
+      <div class="page-header" style="display:flex;align-items:center;justify-content:space-between">
+        <div>
+          <div class="page-title">Consultations</div>
+          <div class="page-subtitle">Incoming enquiries from the website</div>
+        </div>
+        <select class="select-sm" id="consultation-filter">
+          <option value="">All</option>
+          <option value="NEW">New</option>
+          <option value="CONTACTED">Contacted</option>
+          <option value="CONVERTED">Converted</option>
+        </select>
+      </div>
+      <div class="panel">
+        <div class="table-wrap" id="consultations-table"><div class="empty">Loading…</div></div>
+      </div>
+    </div>
+
+    <!-- CLIENTS -->
+    <div class="tab-page" id="tab-clients">
+      <div id="clients-list-view">
+        <div class="page-header" style="display:flex;align-items:center;justify-content:space-between">
+          <div>
+            <div class="page-title">Clients</div>
+            <div class="page-subtitle">Manage client accounts</div>
+          </div>
+          <button class="btn btn-accent" id="add-client-btn"><i class="fa-solid fa-plus"></i> Add Client</button>
+        </div>
+        <div class="panel">
+          <div class="table-wrap" id="clients-table"><div class="empty">Loading…</div></div>
+        </div>
+      </div>
+
+      <!-- Client detail -->
+      <div id="client-detail-view" style="display:none">
+        <button class="back-btn" id="back-to-clients"><i class="fa-solid fa-arrow-left"></i> All Clients</button>
+        <div id="client-detail-content"></div>
+      </div>
+    </div>
+
+    <!-- MESSAGES -->
+    <div class="tab-page" id="tab-messages">
+      <div class="page-header">
+        <div class="page-title">Messages</div>
+        <div class="page-subtitle">Conversations with your clients</div>
+      </div>
+      <div style="display:grid;grid-template-columns:280px 1fr;gap:20px;align-items:start">
+        <div class="panel" style="padding:12px">
+          <div class="conv-list" id="conv-list"><div class="empty">Loading…</div></div>
+        </div>
+        <div class="panel" style="padding:0;overflow:hidden" id="msg-panel">
+          <div class="empty" style="padding:48px">Select a conversation</div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<!-- Add Client Modal -->
+<div class="modal-overlay" id="add-client-modal">
+  <div class="modal">
+    <button class="modal-close" id="close-add-client"><i class="fa-solid fa-xmark"></i></button>
+    <div class="modal-title">Add New Client</div>
+    <div class="form-grid">
+      <div class="form-field"><label>Name *</label><input type="text" id="nc-name" placeholder="Jane Smith"></div>
+      <div class="form-field"><label>Email *</label><input type="email" id="nc-email" placeholder="jane@email.com"></div>
+      <div class="form-field"><label>Phone</label><input type="tel" id="nc-phone" placeholder="+44 7700 000000"></div>
+      <div class="form-field">
+        <label>Goal</label>
+        <select id="nc-goal">
+          <option value="">Select goal</option>
+          <option>Weight Loss</option>
+          <option>Build Strength</option>
+          <option>Improve Mobility</option>
+          <option>Body Composition</option>
+          <option>General Fitness</option>
+        </select>
+      </div>
+      <div class="form-field">
+        <label>Experience</label>
+        <select id="nc-experience">
+          <option value="">Select level</option>
+          <option>Beginner</option>
+          <option>Intermediate</option>
+          <option>Advanced</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-actions">
+      <button class="btn btn-accent" id="create-client-btn">Create Account &amp; Send Welcome Email</button>
+      <button class="btn btn-ghost" id="cancel-add-client">Cancel</button>
+    </div>
+    <div id="add-client-result" style="margin-top:16px;display:none"></div>
+  </div>
+</div>
+
+<div id="toast"></div>
+
+<script>
+  // ── CONFIG ──────────────────────────────────────────────
+  const API = (window.RAILWAY_API_URL || '').replace(/\/$/, '');
+  // Set RAILWAY_API_URL in a <script> tag before this file loads, or replace
+  // the empty string above with your Railway URL after deploying:
+  // e.g. const API = 'https://domsharpefitness-api.up.railway.app';
+
+  // ── STATE ───────────────────────────────────────────────
+  let token = localStorage.getItem('admin_token');
+  let currentUser = null;
+  let currentConvClientId = null;
+  let msgPollTimer = null;
+  let activeClientId = null;
+  let clientChart = null;
+
+  // ── HELPERS ─────────────────────────────────────────────
+  async function api(path, opts = {}) {
+    const res = await fetch(API + path, {
+      ...opts,
+      headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json', ...opts.headers },
+      body: opts.body ? JSON.stringify(opts.body) : undefined,
+    });
+    if (!res.ok) throw new Error((await res.json().catch(() => ({}))).error || res.statusText);
+    return res.json();
+  }
+
+  function toast(msg, type = 'success') {
+    const el = document.getElementById('toast');
+    el.textContent = msg;
+    el.className = `show ${type}`;
+    clearTimeout(el._t);
+    el._t = setTimeout(() => el.classList.remove('show'), 3500);
+  }
+
+  function fmt(dateStr) {
+    return new Date(dateStr).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+  }
+
+  function initials(name) {
+    return name.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2);
+  }
+
+  // ── AUTH ────────────────────────────────────────────────
+  async function login() {
+    const email = document.getElementById('login-email').value.trim();
+    const password = document.getElementById('login-password').value;
+    const btn = document.getElementById('login-btn');
+    const err = document.getElementById('login-error');
+
+    btn.textContent = 'Signing in…';
+    btn.disabled = true;
+    err.style.display = 'none';
+
+    try {
+      const data = await fetch(API + '/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password }),
+      }).then(r => r.json());
+
+      if (!data.token) throw new Error(data.error || 'Login failed');
+      if (data.user.role !== 'ADMIN') throw new Error('Admin access only');
+
+      token = data.token;
+      currentUser = data.user;
+      localStorage.setItem('admin_token', token);
+      showApp();
+    } catch (e) {
+      err.textContent = e.message;
+      err.style.display = 'block';
+    } finally {
+      btn.textContent = 'Sign In';
+      btn.disabled = false;
+    }
+  }
+
+  function logout() {
+    token = null;
+    currentUser = null;
+    localStorage.removeItem('admin_token');
+    clearInterval(msgPollTimer);
+    document.getElementById('app').style.display = 'none';
+    document.getElementById('login-screen').style.display = 'flex';
+  }
+
+  // ── APP BOOTSTRAP ────────────────────────────────────────
+  async function showApp() {
+    document.getElementById('login-screen').style.display = 'none';
+    document.getElementById('app').style.display = 'block';
+
+    if (!currentUser) {
+      try { currentUser = await api('/api/auth/me'); }
+      catch { return logout(); }
+    }
+
+    document.getElementById('admin-name').textContent = currentUser.name;
+    document.getElementById('overview-name').textContent = currentUser.name.split(' ')[0];
+
+    loadOverview();
+    loadBadges();
+    msgPollTimer = setInterval(loadBadges, 30000);
+  }
+
+  // ── TABS ─────────────────────────────────────────────────
+  document.querySelectorAll('.nav-item').forEach(item => {
+    item.addEventListener('click', () => {
+      const tab = item.dataset.tab;
+      document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+      document.querySelectorAll('.tab-page').forEach(p => p.classList.remove('active'));
+      item.classList.add('active');
+      document.getElementById(`tab-${tab}`).classList.add('active');
+
+      if (tab === 'consultations') loadConsultations();
+      if (tab === 'clients') { showClientsList(); loadClients(); }
+      if (tab === 'messages') loadConversations();
+    });
+  });
+
+  // ── BADGES ───────────────────────────────────────────────
+  async function loadBadges() {
+    try {
+      const [consultations, msgs] = await Promise.all([
+        api('/api/consultations?status=NEW'),
+        api('/api/messages/unread/count'),
+      ]);
+      const cb = document.getElementById('badge-consultations');
+      const mb = document.getElementById('badge-messages');
+      cb.textContent = consultations.length;
+      cb.style.display = consultations.length ? '' : 'none';
+      mb.textContent = msgs.count;
+      mb.style.display = msgs.count ? '' : 'none';
+      document.getElementById('stat-enquiries').textContent = consultations.length;
+      document.getElementById('stat-messages').textContent = msgs.count;
+    } catch {}
+  }
+
+  // ── OVERVIEW ─────────────────────────────────────────────
+  async function loadOverview() {
+    try {
+      const [clients, checkins, consultations] = await Promise.all([
+        api('/api/clients'),
+        api('/api/checkins'),
+        api('/api/consultations?status=NEW'),
+      ]);
+
+      document.getElementById('stat-clients').textContent = clients.length;
+
+      const oneWeekAgo = new Date(); oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
+      const weekCheckins = checkins.filter(c => new Date(c.createdAt) > oneWeekAgo);
+      document.getElementById('stat-checkins').textContent = weekCheckins.length;
+
+      const recent = consultations.slice(0, 5);
+      document.getElementById('overview-consultations').innerHTML = recent.length
+        ? renderConsultationsTable(recent, true)
+        : '<div class="empty">No new enquiries</div>';
+    } catch (e) {
+      console.error(e);
+    }
+  }
+
+  // ── CONSULTATIONS ─────────────────────────────────────────
+  async function loadConsultations(status = '') {
+    document.getElementById('consultations-table').innerHTML = '<div class="empty">Loading…</div>';
+    try {
+      const consultations = await api(`/api/consultations${status ? `?status=${status}` : ''}`);
+      document.getElementById('consultations-table').innerHTML = consultations.length
+        ? renderConsultationsTable(consultations)
+        : '<div class="empty">No consultations found</div>';
+    } catch (e) {
+      document.getElementById('consultations-table').innerHTML = `<div class="empty">${e.message}</div>`;
+    }
+  }
+
+  function renderConsultationsTable(rows, compact = false) {
+    return `<table>
+      <thead><tr>
+        <th>Name</th><th>Email</th><th>Goal</th><th>Experience</th>
+        ${!compact ? '<th>Availability</th>' : ''}<th>Date</th><th>Status</th>${!compact ? '<th></th>' : ''}
+      </tr></thead>
+      <tbody>${rows.map(c => `<tr>
+        <td><strong>${c.name}</strong></td>
+        <td><a href="mailto:${c.email}" style="color:var(--accent)">${c.email}</a>${c.phone ? `<br><small style="color:var(--text-muted)">${c.phone}</small>` : ''}</td>
+        <td>${c.goal}</td>
+        <td>${c.experience}</td>
+        ${!compact ? `<td>${c.availability || '—'}</td>` : ''}
+        <td style="white-space:nowrap">${fmt(c.createdAt)}</td>
+        <td><span class="badge badge-${c.status.toLowerCase()}">${c.status}</span></td>
+        ${!compact ? `<td>
+          <div class="btn-row">
+            <select class="select-sm" onchange="updateConsultationStatus('${c.id}', this.value)">
+              <option value="NEW" ${c.status==='NEW'?'selected':''}>New</option>
+              <option value="CONTACTED" ${c.status==='CONTACTED'?'selected':''}>Contacted</option>
+              <option value="CONVERTED" ${c.status==='CONVERTED'?'selected':''}>Converted</option>
+            </select>
+          </div>
+        </td>` : ''}
+      </tr>`).join('')}</tbody>
+    </table>`;
+  }
+
+  async function updateConsultationStatus(id, status) {
+    try {
+      await api(`/api/consultations/${id}`, { method: 'PATCH', body: { status } });
+      toast('Status updated');
+      loadConsultations(document.getElementById('consultation-filter').value);
+      loadBadges();
+    } catch (e) { toast(e.message, 'error'); }
+  }
+
+  document.getElementById('consultation-filter').addEventListener('change', e => {
+    loadConsultations(e.target.value);
+  });
+
+  // ── CLIENTS ───────────────────────────────────────────────
+  async function loadClients() {
+    document.getElementById('clients-table').innerHTML = '<div class="empty">Loading…</div>';
+    try {
+      const clients = await api('/api/clients');
+      document.getElementById('clients-table').innerHTML = clients.length
+        ? `<table>
+            <thead><tr><th>Name</th><th>Email</th><th>Goal</th><th>Experience</th><th>Check-ins</th><th>Since</th><th></th></tr></thead>
+            <tbody>${clients.map(c => `<tr>
+              <td><strong>${c.name}</strong></td>
+              <td>${c.email}</td>
+              <td>${c.goal || '—'}</td>
+              <td>${c.experience || '—'}</td>
+              <td>${c._count.checkIns}</td>
+              <td style="white-space:nowrap">${fmt(c.createdAt)}</td>
+              <td>
+                <div class="btn-row">
+                  <button class="btn btn-ghost btn-sm" onclick="viewClient('${c.id}')"><i class="fa-solid fa-eye"></i> View</button>
+                  <button class="btn btn-danger btn-sm" onclick="deleteClient('${c.id}', '${c.name}')"><i class="fa-solid fa-trash"></i></button>
+                </div>
+              </td>
+            </tr>`).join('')}</tbody>
+          </table>`
+        : '<div class="empty">No clients yet. Add your first client!</div>';
+    } catch (e) {
+      document.getElementById('clients-table').innerHTML = `<div class="empty">${e.message}</div>`;
+    }
+  }
+
+  async function viewClient(id) {
+    activeClientId = id;
+    document.getElementById('clients-list-view').style.display = 'none';
+    document.getElementById('client-detail-view').style.display = 'block';
+    document.getElementById('client-detail-content').innerHTML = '<div class="empty">Loading…</div>';
+
+    try {
+      const client = await api(`/api/clients/${id}`);
+      renderClientDetail(client);
+    } catch (e) {
+      document.getElementById('client-detail-content').innerHTML = `<div class="empty">${e.message}</div>`;
+    }
+  }
+
+  function renderClientDetail(client) {
+    const checkins = client.checkIns;
+
+    const weightsData = checkins.filter(c => c.weightKg).reverse();
+    const bfData = checkins.filter(c => c.bodyFatPct).reverse();
+    const labels = weightsData.map(c => fmt(c.weekDate));
+
+    document.getElementById('client-detail-content').innerHTML = `
+      <div class="page-header" style="display:flex;align-items:center;justify-content:space-between">
+        <div>
+          <div class="page-title">${client.name}</div>
+          <div class="page-subtitle">${client.email}${client.phone ? ` · ${client.phone}` : ''}</div>
+        </div>
+        <div class="btn-row">
+          <button class="btn btn-ghost btn-sm" onclick="resetPassword('${client.id}')"><i class="fa-solid fa-key"></i> Reset Password</button>
+          <button class="btn btn-accent btn-sm" onclick="openMsgFromClient('${client.id}')"><i class="fa-solid fa-message"></i> Message</button>
+        </div>
+      </div>
+      <div class="client-meta">
+        <div class="meta-item"><div class="meta-label">Goal</div><div class="meta-value">${client.goal || '—'}</div></div>
+        <div class="meta-item"><div class="meta-label">Experience</div><div class="meta-value">${client.experience || '—'}</div></div>
+        <div class="meta-item"><div class="meta-label">Total Check-ins</div><div class="meta-value">${checkins.length}</div></div>
+        <div class="meta-item"><div class="meta-label">Latest Weight</div><div class="meta-value">${checkins.find(c => c.weightKg)?.weightKg ?? '—'} ${checkins.find(c => c.weightKg) ? 'kg' : ''}</div></div>
+        <div class="meta-item"><div class="meta-label">Latest Body Fat</div><div class="meta-value">${checkins.find(c => c.bodyFatPct)?.bodyFatPct ?? '—'} ${checkins.find(c => c.bodyFatPct) ? '%' : ''}</div></div>
+        <div class="meta-item"><div class="meta-label">Client Since</div><div class="meta-value">${fmt(client.createdAt)}</div></div>
+      </div>
+
+      ${weightsData.length > 1 ? `
+      <div class="panel">
+        <div class="panel-title">Progress Charts</div>
+        <div class="chart-wrap"><canvas id="client-chart"></canvas></div>
+      </div>` : ''}
+
+      <div class="panel">
+        <div class="panel-title">Check-in History</div>
+        ${checkins.length ? `
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Date</th><th>Weight (kg)</th><th>Body Fat %</th><th>Waist</th><th>Hips</th><th>Chest</th><th>Arms</th><th>Thighs</th><th>Notes</th><th>Photo</th></tr></thead>
+            <tbody>${checkins.map(c => `<tr>
+              <td style="white-space:nowrap">${fmt(c.weekDate)}</td>
+              <td>${c.weightKg ?? '—'}</td>
+              <td>${c.bodyFatPct ?? '—'}</td>
+              <td>${c.waistCm ?? '—'}</td>
+              <td>${c.hipsCm ?? '—'}</td>
+              <td>${c.chestCm ?? '—'}</td>
+              <td>${c.armsCm ?? '—'}</td>
+              <td>${c.thighsCm ?? '—'}</td>
+              <td style="max-width:200px;font-size:12px">${c.notes || '—'}</td>
+              <td>${c.photoUrl ? `<a href="${c.photoUrl}" target="_blank" style="color:var(--accent)"><i class="fa-solid fa-image"></i></a>` : '—'}</td>
+            </tr>`).join('')}</tbody>
+          </table>
+        </div>` : '<div class="empty">No check-ins yet</div>'}
+      </div>`;
+
+    // Render chart
+    if (weightsData.length > 1) {
+      if (clientChart) clientChart.destroy();
+      const ctx = document.getElementById('client-chart').getContext('2d');
+      clientChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels,
+          datasets: [
+            {
+              label: 'Weight (kg)',
+              data: weightsData.map(c => c.weightKg),
+              borderColor: '#C8923A',
+              backgroundColor: 'rgba(200,146,58,0.08)',
+              tension: 0.3,
+              fill: true,
+              yAxisID: 'y',
+            },
+            ...(bfData.length > 1 ? [{
+              label: 'Body Fat %',
+              data: bfData.map(c => c.bodyFatPct),
+              borderColor: '#64a0f0',
+              backgroundColor: 'rgba(100,160,240,0.08)',
+              tension: 0.3,
+              fill: true,
+              yAxisID: 'y1',
+            }] : []),
+          ],
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: { legend: { labels: { color: '#fff', font: { family: 'Montserrat' } } } },
+          scales: {
+            x: { ticks: { color: 'rgba(255,255,255,0.45)' }, grid: { color: 'rgba(255,255,255,0.06)' } },
+            y: { ticks: { color: '#C8923A' }, grid: { color: 'rgba(255,255,255,0.06)' }, position: 'left' },
+            y1: { ticks: { color: '#64a0f0' }, grid: { drawOnChartArea: false }, position: 'right', display: bfData.length > 1 },
+          },
+        },
+      });
+    }
+  }
+
+  function showClientsList() {
+    document.getElementById('clients-list-view').style.display = '';
+    document.getElementById('client-detail-view').style.display = 'none';
+    activeClientId = null;
+  }
+
+  document.getElementById('back-to-clients').addEventListener('click', showClientsList);
+
+  async function deleteClient(id, name) {
+    if (!confirm(`Remove ${name} and all their data? This cannot be undone.`)) return;
+    try {
+      await api(`/api/clients/${id}`, { method: 'DELETE' });
+      toast(`${name} removed`);
+      loadClients();
+    } catch (e) { toast(e.message, 'error'); }
+  }
+
+  async function resetPassword(id) {
+    if (!confirm('Reset this client\'s password? A new temporary password will be generated.')) return;
+    try {
+      const { newPassword } = await api(`/api/clients/${id}/reset-password`, { method: 'POST' });
+      alert(`New password: ${newPassword}\n\nPlease send this to the client securely.`);
+    } catch (e) { toast(e.message, 'error'); }
+  }
+
+  // Add client modal
+  document.getElementById('add-client-btn').addEventListener('click', () => {
+    document.getElementById('add-client-modal').classList.add('open');
+    document.getElementById('add-client-result').style.display = 'none';
+  });
+  document.getElementById('close-add-client').addEventListener('click', closeAddClientModal);
+  document.getElementById('cancel-add-client').addEventListener('click', closeAddClientModal);
+  document.getElementById('add-client-modal').addEventListener('click', e => {
+    if (e.target === document.getElementById('add-client-modal')) closeAddClientModal();
+  });
+
+  function closeAddClientModal() {
+    document.getElementById('add-client-modal').classList.remove('open');
+    ['nc-name','nc-email','nc-phone'].forEach(id => document.getElementById(id).value = '');
+    document.getElementById('nc-goal').value = '';
+    document.getElementById('nc-experience').value = '';
+  }
+
+  document.getElementById('create-client-btn').addEventListener('click', async () => {
+    const btn = document.getElementById('create-client-btn');
+    const name = document.getElementById('nc-name').value.trim();
+    const email = document.getElementById('nc-email').value.trim();
+    const phone = document.getElementById('nc-phone').value.trim();
+    const goal = document.getElementById('nc-goal').value;
+    const experience = document.getElementById('nc-experience').value;
+
+    if (!name || !email) { toast('Name and email are required', 'error'); return; }
+
+    btn.textContent = 'Creating…';
+    btn.disabled = true;
+
+    try {
+      const { client, tempPassword } = await api('/api/clients', {
+        method: 'POST',
+        body: { name, email, phone, goal, experience },
+      });
+      const result = document.getElementById('add-client-result');
+      result.style.display = 'block';
+      result.innerHTML = `<div style="background:rgba(80,200,120,0.1);border:1px solid rgba(80,200,120,0.3);border-radius:8px;padding:14px;font-size:13px">
+        <strong style="color:#50c878">Account created!</strong><br>
+        A welcome email with login details has been sent to ${client.email}.<br>
+        <small style="color:var(--text-muted)">Temporary password: <code>${tempPassword}</code></small>
+      </div>`;
+      loadClients();
+    } catch (e) {
+      toast(e.message, 'error');
+    } finally {
+      btn.textContent = 'Create Account & Send Welcome Email';
+      btn.disabled = false;
+    }
+  });
+
+  // ── MESSAGES ──────────────────────────────────────────────
+  async function loadConversations() {
+    document.getElementById('conv-list').innerHTML = '<div class="empty">Loading…</div>';
+    try {
+      const convs = await api('/api/messages/conversations');
+      if (!convs.length) {
+        document.getElementById('conv-list').innerHTML = '<div class="empty">No clients yet</div>';
+        return;
+      }
+      document.getElementById('conv-list').innerHTML = convs.map(({ client, latest, unread }) => `
+        <div class="conv-item ${currentConvClientId === client.id ? 'active' : ''}" onclick="openConversation('${client.id}', '${client.name}')">
+          <div class="conv-avatar">${initials(client.name)}</div>
+          <div class="conv-info">
+            <div class="conv-name">${client.name}</div>
+            <div class="conv-preview">${latest?.body || 'No messages yet'}</div>
+          </div>
+          ${unread ? `<span class="conv-unread">${unread}</span>` : ''}
+        </div>
+      `).join('');
+    } catch (e) {
+      document.getElementById('conv-list').innerHTML = `<div class="empty">${e.message}</div>`;
+    }
+  }
+
+  async function openConversation(clientId, clientName) {
+    currentConvClientId = clientId;
+    // Update active state
+    document.querySelectorAll('.conv-item').forEach(el => el.classList.remove('active'));
+    event?.currentTarget?.classList.add('active');
+
+    const panel = document.getElementById('msg-panel');
+    panel.innerHTML = `
+      <div class="conversation">
+        <div style="padding:16px 20px;border-bottom:1px solid var(--border);font-weight:600;font-size:14px">${clientName}</div>
+        <div class="msg-list" id="msg-list">Loading…</div>
+        <div class="msg-input-row">
+          <textarea class="msg-input" id="msg-input" placeholder="Message ${clientName}…" rows="2"></textarea>
+          <button class="msg-send" onclick="sendMessage('${clientId}')"><i class="fa-solid fa-paper-plane"></i></button>
+        </div>
+      </div>`;
+
+    document.getElementById('msg-input').addEventListener('keydown', e => {
+      if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(clientId); }
+    });
+
+    await loadMessages(clientId);
+  }
+
+  async function loadMessages(clientId) {
+    const list = document.getElementById('msg-list');
+    if (!list) return;
+    try {
+      const messages = await api(`/api/messages/${clientId}`);
+      if (!messages.length) {
+        list.innerHTML = '<div style="text-align:center;color:var(--text-muted);padding:32px;font-size:13px">No messages yet. Say hi!</div>';
+        return;
+      }
+      list.innerHTML = messages.map(m => `
+        <div class="msg ${m.from.role === 'ADMIN' ? 'mine' : 'theirs'}">
+          ${m.body}
+          <div class="msg-meta">${new Date(m.createdAt).toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' })} · ${fmt(m.createdAt)}</div>
+        </div>
+      `).join('');
+      list.scrollTop = list.scrollHeight;
+      loadBadges();
+    } catch (e) {
+      if (list) list.innerHTML = `<div class="empty">${e.message}</div>`;
+    }
+  }
+
+  async function sendMessage(toId) {
+    const input = document.getElementById('msg-input');
+    const body = input?.value.trim();
+    if (!body) return;
+    input.value = '';
+    try {
+      await api('/api/messages', { method: 'POST', body: { toId, body } });
+      await loadMessages(toId);
+    } catch (e) { toast(e.message, 'error'); }
+  }
+
+  function openMsgFromClient(clientId) {
+    document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+    document.querySelectorAll('.tab-page').forEach(p => p.classList.remove('active'));
+    document.querySelector('[data-tab="messages"]').classList.add('active');
+    document.getElementById('tab-messages').classList.add('active');
+    loadConversations().then(() => openConversation(clientId, ''));
+  }
+
+  // ── EVENTS ────────────────────────────────────────────────
+  document.getElementById('login-btn').addEventListener('click', login);
+  document.getElementById('login-password').addEventListener('keydown', e => { if (e.key === 'Enter') login(); });
+  document.getElementById('logout-btn').addEventListener('click', logout);
+
+  // ── INIT ─────────────────────────────────────────────────
+  if (token) {
+    showApp();
+  }
+</script>
+</body>
+</html>

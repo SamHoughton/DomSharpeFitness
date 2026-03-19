@@ -4,6 +4,20 @@ const { authMiddleware } = require('../middleware/auth');
 
 const router = express.Router();
 
+// GET /api/messages/unread/count — Dom only
+router.get('/unread/count', authMiddleware, async (req, res) => {
+  try {
+    if (!req.user.is_dom) return res.status(403).json({ error: 'Forbidden' });
+    const { rows } = await db.query(
+      `SELECT COUNT(*)::int AS count FROM messages WHERE sender = 'client' AND read_at IS NULL`
+    );
+    res.json({ count: rows[0].count });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
 // GET /api/messages
 //   Client → own thread (marks Dom's messages as read)
 //   Dom    → ?clientId=UUID  (marks client's messages as read)

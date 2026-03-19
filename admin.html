@@ -481,7 +481,7 @@
       document.getElementById('stat-clients').textContent = clients.length;
 
       const oneWeekAgo = new Date(); oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
-      const weekCheckins = checkins.filter(c => new Date(c.createdAt) > oneWeekAgo);
+      const weekCheckins = checkins.filter(c => new Date(c.created_at) > oneWeekAgo);
       document.getElementById('stat-checkins').textContent = weekCheckins.length;
 
       const recent = consultations.slice(0, 5);
@@ -518,7 +518,7 @@
         <td>${c.goal}</td>
         <td>${c.experience}</td>
         ${!compact ? `<td>${c.availability || '—'}</td>` : ''}
-        <td style="white-space:nowrap">${fmt(c.createdAt)}</td>
+        <td style="white-space:nowrap">${fmt(c.created_at)}</td>
         <td><span class="badge badge-${c.status.toLowerCase()}">${c.status}</span></td>
         ${!compact ? `<td>
           <div class="btn-row">
@@ -560,7 +560,7 @@
               <td>${c.goal || '—'}</td>
               <td>${c.experience || '—'}</td>
               <td>${c._count.checkIns}</td>
-              <td style="white-space:nowrap">${fmt(c.createdAt)}</td>
+              <td style="white-space:nowrap">${fmt(c.created_at)}</td>
               <td>
                 <div class="btn-row">
                   <button class="btn btn-ghost btn-sm" onclick="viewClient('${c.id}')"><i class="fa-solid fa-eye"></i> View</button>
@@ -594,7 +594,7 @@
 
     const weightsData = checkins.filter(c => c.weightKg).reverse();
     const bfData = checkins.filter(c => c.bodyFatPct).reverse();
-    const labels = weightsData.map(c => fmt(c.weekDate));
+    const labels = weightsData.map(c => fmt(c.week_date));
 
     document.getElementById('client-detail-content').innerHTML = `
       <div class="page-header" style="display:flex;align-items:center;justify-content:space-between">
@@ -613,7 +613,7 @@
         <div class="meta-item"><div class="meta-label">Total Check-ins</div><div class="meta-value">${checkins.length}</div></div>
         <div class="meta-item"><div class="meta-label">Latest Weight</div><div class="meta-value">${checkins.find(c => c.weightKg)?.weightKg ?? '—'} ${checkins.find(c => c.weightKg) ? 'kg' : ''}</div></div>
         <div class="meta-item"><div class="meta-label">Latest Body Fat</div><div class="meta-value">${checkins.find(c => c.bodyFatPct)?.bodyFatPct ?? '—'} ${checkins.find(c => c.bodyFatPct) ? '%' : ''}</div></div>
-        <div class="meta-item"><div class="meta-label">Client Since</div><div class="meta-value">${fmt(client.createdAt)}</div></div>
+        <div class="meta-item"><div class="meta-label">Client Since</div><div class="meta-value">${fmt(client.created_at)}</div></div>
       </div>
 
       ${weightsData.length > 1 ? `
@@ -629,7 +629,7 @@
           <table>
             <thead><tr><th>Date</th><th>Weight (kg)</th><th>Body Fat %</th><th>Waist</th><th>Hips</th><th>Chest</th><th>Arms</th><th>Thighs</th><th>Notes</th><th>Photo</th></tr></thead>
             <tbody>${checkins.map(c => `<tr>
-              <td style="white-space:nowrap">${fmt(c.weekDate)}</td>
+              <td style="white-space:nowrap">${fmt(c.week_date)}</td>
               <td>${c.weightKg ?? '—'}</td>
               <td>${c.bodyFatPct ?? '—'}</td>
               <td>${c.waistCm ?? '—'}</td>
@@ -824,7 +824,7 @@
       list.innerHTML = messages.map(m => `
         <div class="msg ${m.from.role === 'ADMIN' ? 'mine' : 'theirs'}">
           ${m.body}
-          <div class="msg-meta">${new Date(m.createdAt).toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' })} · ${fmt(m.createdAt)}</div>
+          <div class="msg-meta">${new Date(m.created_at).toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' })} · ${fmt(m.created_at)}</div>
         </div>
       `).join('');
       list.scrollTop = list.scrollHeight;

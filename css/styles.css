@@ -2674,7 +2674,7 @@ ul {
        200% width renders the full collage at 2× container width,
        so left/right positioning reveals exactly the left or right half. */
     background-image: url('../img/dom-transformation.jpg');
-    background-size: 200% 100%;
+    background-size: 200% auto;
     background-repeat: no-repeat;
 }
 

@@ -5,11 +5,15 @@ const { authMiddleware, domOnly } = require('../middleware/auth');
 
 const router = express.Router();
 
+const esc = s => String(s ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+
 // POST /api/consultations — public (called from the main site form)
 router.post('/', async (req, res) => {
   try {
     const { name, email, goal, experience, availability, message } = req.body;
     if (!name || !email) return res.status(400).json({ error: 'Name and email required' });
+    if (name.length > 100 || email.length > 200) return res.status(400).json({ error: 'Input too long' });
+    if (message && message.length > 2000) return res.status(400).json({ error: 'Message too long' });
 
     const { rows } = await db.query(
       `INSERT INTO consultations (name, email, goal, experience, availability, message)
@@ -23,15 +27,15 @@ router.post('/', async (req, res) => {
       resend.emails.send({
         from:    process.env.RESEND_FROM || 'onboarding@resend.dev',
         to:      process.env.DOM_EMAIL,
-        subject: `New consultation request from ${name}`,
+        subject: `New consultation request from ${esc(name)}`,
         html: `
           <h2>New Consultation Request</h2>
-          <p><strong>Name:</strong> ${name}</p>
-          <p><strong>Email:</strong> <a href="mailto:${email}">${email}</a></p>
-          <p><strong>Goal:</strong> ${goal || 'Not specified'}</p>
-          <p><strong>Experience:</strong> ${experience || 'Not specified'}</p>
-          <p><strong>Availability:</strong> ${availability || 'Not specified'}</p>
-          <p><strong>Message:</strong> ${message || 'None'}</p>
+          <p><strong>Name:</strong> ${esc(name)}</p>
+          <p><strong>Email:</strong> <a href="mailto:${esc(email)}">${esc(email)}</a></p>
+          <p><strong>Goal:</strong> ${esc(goal) || 'Not specified'}</p>
+          <p><strong>Experience:</strong> ${esc(experience) || 'Not specified'}</p>
+          <p><strong>Availability:</strong> ${esc(availability) || 'Not specified'}</p>
+          <p><strong>Message:</strong> ${esc(message) || 'None'}</p>
         `
       }).catch(console.error);
     }

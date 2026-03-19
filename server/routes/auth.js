@@ -11,6 +11,7 @@ router.post('/login', async (req, res) => {
   try {
     const { email, password } = req.body;
     if (!email || !password) return res.status(400).json({ error: 'Email and password required' });
+    if (email.length > 200 || password.length > 200) return res.status(400).json({ error: 'Input too long' });
 
     const { rows } = await db.query('SELECT * FROM profiles WHERE email = $1', [email.toLowerCase().trim()]);
     const user = rows[0];
@@ -22,7 +23,7 @@ router.post('/login', async (req, res) => {
     const token = jwt.sign(
       { id: user.id, email: user.email, name: user.name, is_dom: user.is_dom },
       process.env.JWT_SECRET,
-      { expiresIn: '30d' }
+      { expiresIn: '7d' }
     );
 
     res.json({

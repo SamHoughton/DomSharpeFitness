@@ -13,7 +13,7 @@ router.post('/', authMiddleware, domOnly, async (req, res) => {
     const { name, email, goal, experience } = req.body;
     if (!name || !email) return res.status(400).json({ error: 'Name and email required' });
 
-    const tempPassword = crypto.randomBytes(5).toString('hex'); // e.g. "a3f9c2e1b4"
+    const tempPassword = crypto.randomBytes(12).toString('hex'); // 24 hex chars, 96 bits entropy
     const hash = await bcrypt.hash(tempPassword, 10);
 
     const { rows } = await db.query(

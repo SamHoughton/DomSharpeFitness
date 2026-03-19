@@ -200,6 +200,26 @@ ul {
 .nav-link:hover::after,
 .nav-link.active::after { width: 100%; }
 
+.nav-login {
+    font-family: var(--font-body);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--accent);
+    background: transparent;
+    border: 1px solid var(--accent);
+    padding: 9px 18px;
+    border-radius: var(--radius);
+    white-space: nowrap;
+    transition: background var(--transition), color var(--transition);
+}
+
+.nav-login:hover {
+    background: var(--accent);
+    color: var(--bg);
+}
+
 .nav-cta {
     font-family: var(--font-body);
     font-size: 13px;
@@ -1732,6 +1752,7 @@ ul {
 
     .hamburger { display: flex; }
     .nav-cta { display: none; }
+    .nav-login { display: none; }
 
     /* Hero */
     .hero-barbell-wrap { animation: none; }

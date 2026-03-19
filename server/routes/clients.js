@@ -1,8 +1,34 @@
 const express = require('express');
+const bcrypt  = require('bcrypt');
+const crypto  = require('crypto');
 const db = require('../db');
 const { authMiddleware, domOnly } = require('../middleware/auth');
 
 const router = express.Router();
+
+// POST /api/clients — create a client account, Dom only
+router.post('/', authMiddleware, domOnly, async (req, res) => {
+  try {
+    const { name, email, goal, experience } = req.body;
+    if (!name || !email) return res.status(400).json({ error: 'Name and email required' });
+
+    const tempPassword = crypto.randomBytes(5).toString('hex'); // e.g. "a3f9c2e1b4"
+    const hash = await bcrypt.hash(tempPassword, 10);
+
+    const { rows } = await db.query(
+      `INSERT INTO profiles (email, name, password_hash, goal, experience)
+       VALUES ($1, $2, $3, $4, $5)
+       RETURNING id, email, name, goal, experience, created_at`,
+      [email.toLowerCase().trim(), name.trim(), hash, goal || null, experience || null]
+    );
+
+    res.status(201).json({ client: rows[0], tempPassword });
+  } catch (err) {
+    if (err.code === '23505') return res.status(409).json({ error: 'Email already registered' });
+    console.error(err);
+    res.status(500).json({ error: 'Server error' });
+  }
+});
 
 // GET /api/clients — all clients with stats, Dom only
 router.get('/', authMiddleware, domOnly, async (req, res) => {

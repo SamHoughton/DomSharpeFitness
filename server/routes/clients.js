@@ -30,15 +30,62 @@ router.post('/', authMiddleware, domOnly, async (req, res) => {
         from: process.env.RESEND_FROM,
         to: rows[0].email,
         subject: 'Welcome to Sharpe Strength — your login details',
-        html: `
-          <h2>Welcome to Sharpe Strength, ${rows[0].name}!</h2>
-          <p>Dom has set up your client portal. Here are your login details:</p>
-          <p><strong>Login page:</strong> <a href="https://sharpestrength.com/portal.html">sharpestrength.com/portal.html</a></p>
-          <p><strong>Email:</strong> ${rows[0].email}</p>
-          <p><strong>Temporary password:</strong> <code>${tempPassword}</code></p>
-          <p>Please log in and change your password as soon as possible.</p>
-          <p>— Dom Sharpe</p>
-        `
+        html: `<!DOCTYPE html>
+<html>
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
+<body style="margin:0;padding:0;background:#0a0a0a;font-family:'Helvetica Neue',Arial,sans-serif">
+  <table width="100%" cellpadding="0" cellspacing="0" style="background:#0a0a0a;padding:40px 20px">
+    <tr><td align="center">
+      <table width="560" cellpadding="0" cellspacing="0" style="max-width:560px;width:100%">
+
+        <!-- Header -->
+        <tr>
+          <td style="background:#111;border-top:3px solid #C8923A;padding:32px;text-align:center">
+            <div style="font-size:22px;font-weight:800;letter-spacing:4px;color:#fff">SHARPE</div>
+            <div style="font-size:13px;font-weight:600;letter-spacing:6px;color:#C8923A;margin-top:2px">STRENGTH</div>
+          </td>
+        </tr>
+
+        <!-- Body -->
+        <tr>
+          <td style="background:#181818;padding:40px 32px">
+            <p style="color:#C8923A;font-size:12px;font-weight:700;letter-spacing:3px;margin:0 0 16px">WELCOME TO THE TEAM</p>
+            <h1 style="color:#fff;font-size:24px;font-weight:800;margin:0 0 24px;line-height:1.3">Hi ${rows[0].name},</h1>
+            <p style="color:#ccc;font-size:15px;line-height:1.7;margin:0 0 24px">Dom has set up your personal client portal. Log in to track your progress, submit weekly check-ins, and message Dom directly.</p>
+
+            <!-- Credentials box -->
+            <table width="100%" cellpadding="0" cellspacing="0" style="background:#111;border:1px solid #2a2a2a;border-radius:8px;margin:0 0 32px">
+              <tr><td style="padding:24px">
+                <p style="color:#888;font-size:11px;font-weight:700;letter-spacing:2px;margin:0 0 16px">YOUR LOGIN DETAILS</p>
+                <p style="margin:0 0 10px"><span style="color:#888;font-size:13px">Email</span><br><span style="color:#fff;font-size:15px;font-weight:600">${rows[0].email}</span></p>
+                <p style="margin:0"><span style="color:#888;font-size:13px">Temporary Password</span><br><span style="color:#C8923A;font-size:18px;font-weight:700;letter-spacing:2px;font-family:monospace">${tempPassword}</span></p>
+              </td></tr>
+            </table>
+
+            <!-- CTA button -->
+            <table cellpadding="0" cellspacing="0" style="margin:0 auto 32px">
+              <tr><td style="background:#C8923A;border-radius:4px">
+                <a href="https://sharpestrength.com/portal.html" style="display:block;padding:14px 32px;color:#000;font-weight:800;font-size:14px;letter-spacing:2px;text-decoration:none">ACCESS YOUR PORTAL →</a>
+              </td></tr>
+            </table>
+
+            <p style="color:#666;font-size:13px;line-height:1.6;margin:0">Change your password after your first login. If you have any questions, just reply to this email or message Dom through the portal.</p>
+          </td>
+        </tr>
+
+        <!-- Footer -->
+        <tr>
+          <td style="background:#111;padding:24px 32px;text-align:center;border-top:1px solid #222">
+            <p style="color:#444;font-size:12px;margin:0">Sharpe Strength · Bannatyne Fairfield, Hitchin</p>
+            <p style="margin:6px 0 0"><a href="https://sharpestrength.com" style="color:#C8923A;font-size:12px;text-decoration:none">sharpestrength.com</a></p>
+          </td>
+        </tr>
+
+      </table>
+    </td></tr>
+  </table>
+</body>
+</html>`
       }).catch(console.error);
     }
 

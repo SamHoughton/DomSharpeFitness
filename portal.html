@@ -347,7 +347,7 @@
       }).then(r => r.json());
 
       if (!data.token) throw new Error(data.error || 'Login failed');
-      if (data.user.role !== 'CLIENT') throw new Error('This portal is for clients only');
+      if (data.user.is_dom) throw new Error('This portal is for clients only');
 
       token = data.token;
       currentUser = data.user;

@@ -528,6 +528,7 @@
               <option value="CONVERTED" ${c.status==='CONVERTED'?'selected':''}>Converted</option>
             </select>
             <button class="btn btn-sm btn-danger" onclick="deleteConsultation('${c.id}')">Delete</button>
+            ${c.status === 'CONVERTED' ? `<button class="btn btn-sm btn-accent" onclick="convertToClient('${c.id}', '${c.name}', '${c.email}')">+ Add as Client</button>` : ''}
           </div>
         </td>` : ''}
       </tr>`).join('')}</tbody>
@@ -553,6 +554,22 @@
     } catch (e) { toast(e.message, 'error'); }
   }
 
+  function convertToClient(consultationId, name, email) {
+    // Switch to clients tab and open add modal pre-filled
+    document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+    document.querySelectorAll('.tab-page').forEach(p => p.classList.remove('active'));
+    document.querySelector('[data-tab="clients"]').classList.add('active');
+    document.getElementById('tab-clients').classList.add('active');
+    loadClients();
+    document.getElementById('add-client-modal').classList.add('open');
+    document.getElementById('add-client-result').style.display = 'none';
+    // Pre-fill name and email if inputs exist
+    const nameInput = document.querySelector('#add-client-modal [name="name"], #add-client-modal input[placeholder*="name" i], #add-client-modal #client-name');
+    const emailInput = document.querySelector('#add-client-modal [name="email"], #add-client-modal input[type="email"]');
+    if (nameInput) nameInput.value = name;
+    if (emailInput) emailInput.value = email;
+  }
+
   document.getElementById('consultation-filter').addEventListener('change', e => {
     loadConsultations(e.target.value);
   });
@@ -575,7 +592,7 @@
               <td>
                 <div class="btn-row">
                   <button class="btn btn-ghost btn-sm" onclick="viewClient('${c.id}')"><i class="fa-solid fa-eye"></i> View</button>
-                  <button class="btn btn-danger btn-sm" onclick="deleteClient('${c.id}', '${c.name}')"><i class="fa-solid fa-trash"></i></button>
+                  <button class="btn btn-danger btn-sm" data-id="${c.id}" data-name="${c.name.replace(/'/g, '&#39;')}" onclick="deleteClient(this.dataset.id, this.dataset.name)"><i class="fa-solid fa-trash"></i></button>
                 </div>
               </td>
             </tr>`).join('')}</tbody>
@@ -828,13 +845,13 @@
     const list = document.getElementById('msg-list');
     if (!list) return;
     try {
-      const messages = await api(`/api/messages/${clientId}`);
+      const messages = await api(`/api/messages?clientId=${clientId}`);
       if (!messages.length) {
         list.innerHTML = '<div style="text-align:center;color:var(--text-muted);padding:32px;font-size:13px">No messages yet. Say hi!</div>';
         return;
       }
       list.innerHTML = messages.map(m => `
-        <div class="msg ${m.from.role === 'ADMIN' ? 'mine' : 'theirs'}">
+        <div class="msg ${m.sender === 'dom' ? 'mine' : 'theirs'}">
           ${m.body}
           <div class="msg-meta">${new Date(m.created_at).toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' })} · ${fmt(m.created_at)}</div>
         </div>
@@ -852,7 +869,7 @@
     if (!body) return;
     input.value = '';
     try {
-      await api('/api/messages', { method: 'POST', body: { toId, body } });
+      await api('/api/messages', { method: 'POST', body: { clientId: toId, body } });
       await loadMessages(toId);
     } catch (e) { toast(e.message, 'error'); }
   }

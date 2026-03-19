@@ -386,8 +386,6 @@
     document.getElementById('ci-date').value = new Date().toISOString().split('T')[0];
 
     loadProgress();
-    loadUnreadCount();
-    setInterval(loadUnreadCount, 30000);
   }
 
   // ── TABS ─────────────────────────────────────────────────
@@ -410,14 +408,14 @@
 
       document.getElementById('ps-checkins').textContent = checkins.length;
 
-      const withWeight = checkins.filter(c => c.weightKg);
-      const withBf = checkins.filter(c => c.bodyFatPct);
+      const withWeight = checkins.filter(c => c.weight_kg);
+      const withBf = checkins.filter(c => c.body_fat_pct);
 
-      document.getElementById('ps-weight').textContent = withWeight[0]?.weightKg ?? '—';
-      document.getElementById('ps-bf').textContent = withBf[0]?.bodyFatPct ?? '—';
+      document.getElementById('ps-weight').textContent = withWeight[0]?.weight_kg ?? '—';
+      document.getElementById('ps-bf').textContent = withBf[0]?.body_fat_pct ?? '—';
 
       if (withWeight.length >= 2) {
-        const change = (withWeight[0].weightKg - withWeight[withWeight.length - 1].weightKg).toFixed(1);
+        const change = (withWeight[0].weight_kg - withWeight[withWeight.length - 1].weight_kg).toFixed(1);
         const sign = change > 0 ? '+' : '';
         document.getElementById('ps-change').textContent = `${sign}${change}`;
       } else {
@@ -427,10 +425,10 @@
       // Chart
       if (withWeight.length > 1) {
         document.getElementById('chart-panel').style.display = '';
-        const labels = [...withWeight].reverse().map(c => fmt(c.weekDate));
-        const weights = [...withWeight].reverse().map(c => c.weightKg);
-        const bfLabels = [...withBf].reverse().map(c => fmt(c.weekDate));
-        const bfValues = [...withBf].reverse().map(c => c.bodyFatPct);
+        const labels = [...withWeight].reverse().map(c => fmt(c.week_date));
+        const weights = [...withWeight].reverse().map(c => c.weight_kg);
+        const bfLabels = [...withBf].reverse().map(c => fmt(c.week_date));
+        const bfValues = [...withBf].reverse().map(c => c.body_fat_pct);
 
         if (progressChart) progressChart.destroy();
         const ctx = document.getElementById('progress-chart').getContext('2d');
@@ -477,9 +475,9 @@
         ? `<div class="table-wrap"><table>
             <thead><tr><th>Date</th><th>Weight</th><th>Body Fat</th><th>Waist</th><th>Hips</th><th>Chest</th><th>Arms</th><th>Thighs</th><th>Photo</th></tr></thead>
             <tbody>${checkins.map(c => `<tr>
-              <td style="white-space:nowrap">${fmt(c.weekDate)}</td>
-              <td>${c.weightKg ? c.weightKg + ' kg' : '—'}</td>
-              <td>${c.bodyFatPct ? c.bodyFatPct + '%' : '—'}</td>
+              <td style="white-space:nowrap">${fmt(c.week_date)}</td>
+              <td>${c.weight_kg ? c.weight_kg + ' kg' : '—'}</td>
+              <td>${c.body_fat_pct ? c.body_fat_pct + '%' : '—'}</td>
               <td>${c.waistCm ? c.waistCm + ' cm' : '—'}</td>
               <td>${c.hipsCm ? c.hipsCm + ' cm' : '—'}</td>
               <td>${c.chestCm ? c.chestCm + ' cm' : '—'}</td>
@@ -585,7 +583,7 @@
     const list = document.getElementById('msg-list');
     list.innerHTML = '<div class="empty">Loading…</div>';
     try {
-      const messages = await api('/api/messages/admin-thread');
+      const messages = await api('/api/messages');
       renderMessages(messages);
     } catch {
       list.innerHTML = '<div class="empty">Send a message to start your conversation with Dom.</div>';
@@ -599,14 +597,13 @@
       return;
     }
     list.innerHTML = messages.map(m => `
-      <div class="msg ${m.from.id === currentUser.id ? 'mine' : 'theirs'}">
-        ${m.from.id !== currentUser.id ? `<div class="msg-sender">${m.from.name}</div>` : ''}
+      <div class="msg ${m.sender === 'client' ? 'mine' : 'theirs'}">
+        ${m.sender !== 'client' ? `<div class="msg-sender">Dom</div>` : ''}
         ${m.body}
-        <div class="msg-meta">${new Date(m.createdAt).toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' })} · ${fmt(m.createdAt)}</div>
+        <div class="msg-meta">${new Date(m.created_at).toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' })} · ${fmt(m.created_at)}</div>
       </div>
     `).join('');
     list.scrollTop = list.scrollHeight;
-    loadUnreadCount();
   }
 
   async function sendMessage() {
@@ -621,7 +618,7 @@
       await fetch(API + '/api/messages', {
         method: 'POST',
         headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' },
-        body: JSON.stringify({ toRole: 'ADMIN', body }),
+        body: JSON.stringify({ body }),
       }).then(async r => {
         if (!r.ok) throw new Error((await r.json()).error || r.statusText);
         return r.json();
@@ -631,15 +628,6 @@
       toast(e.message, 'error');
       input.value = body;
     }
-  }
-
-  async function loadUnreadCount() {
-    try {
-      const { count } = await api('/api/messages/unread/count');
-      const badge = document.getElementById('msg-badge');
-      badge.textContent = count;
-      badge.style.display = count ? '' : 'none';
-    } catch {}
   }
 
   document.getElementById('msg-send-btn').addEventListener('click', sendMessage);

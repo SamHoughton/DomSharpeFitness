@@ -4,6 +4,27 @@ const { authMiddleware } = require('../middleware/auth');
 
 const router = express.Router();
 
+// GET /api/messages/conversations — Dom only, list of clients with messages
+router.get('/conversations', authMiddleware, async (req, res) => {
+  try {
+    if (!req.user.is_dom) return res.status(403).json({ error: 'Forbidden' });
+    const { rows } = await db.query(`
+      SELECT p.id, p.name, p.email,
+        COUNT(m.id) FILTER (WHERE m.sender = 'client' AND m.read_at IS NULL)::int AS unread,
+        MAX(m.created_at) AS last_message
+      FROM profiles p
+      JOIN messages m ON m.profile_id = p.id
+      WHERE p.is_dom = FALSE
+      GROUP BY p.id
+      ORDER BY last_message DESC
+    `);
+    res.json(rows);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
 // GET /api/messages/unread/count — Dom only
 router.get('/unread/count', authMiddleware, async (req, res) => {
   try {

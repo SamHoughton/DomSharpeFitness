@@ -1,6 +1,7 @@
 const express = require('express');
 const bcrypt  = require('bcrypt');
 const crypto  = require('crypto');
+const { Resend } = require('resend');
 const db = require('../db');
 const { authMiddleware, domOnly } = require('../middleware/auth');
 
@@ -21,6 +22,25 @@ router.post('/', authMiddleware, domOnly, async (req, res) => {
        RETURNING id, email, name, goal, experience, created_at`,
       [email.toLowerCase().trim(), name.trim(), hash, goal || null, experience || null]
     );
+
+    // Send welcome email to client
+    if (process.env.RESEND_API_KEY && process.env.RESEND_FROM) {
+      const resend = new Resend(process.env.RESEND_API_KEY);
+      resend.emails.send({
+        from: process.env.RESEND_FROM,
+        to: rows[0].email,
+        subject: 'Welcome to Sharpe Strength — your login details',
+        html: `
+          <h2>Welcome to Sharpe Strength, ${rows[0].name}!</h2>
+          <p>Dom has set up your client portal. Here are your login details:</p>
+          <p><strong>Login page:</strong> <a href="https://sharpestrength.com/portal.html">sharpestrength.com/portal.html</a></p>
+          <p><strong>Email:</strong> ${rows[0].email}</p>
+          <p><strong>Temporary password:</strong> <code>${tempPassword}</code></p>
+          <p>Please log in and change your password as soon as possible.</p>
+          <p>— Dom Sharpe</p>
+        `
+      }).catch(console.error);
+    }
 
     res.status(201).json({ client: rows[0], tempPassword });
   } catch (err) {

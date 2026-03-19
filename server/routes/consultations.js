@@ -21,7 +21,7 @@ router.post('/', async (req, res) => {
     if (process.env.RESEND_API_KEY && process.env.DOM_EMAIL) {
       const resend = new Resend(process.env.RESEND_API_KEY);
       resend.emails.send({
-        from:    'onboarding@resend.dev',
+        from:    process.env.RESEND_FROM || 'onboarding@resend.dev',
         to:      process.env.DOM_EMAIL,
         subject: `New consultation request from ${name}`,
         html: `

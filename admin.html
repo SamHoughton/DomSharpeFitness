@@ -527,6 +527,7 @@
               <option value="CONTACTED" ${c.status==='CONTACTED'?'selected':''}>Contacted</option>
               <option value="CONVERTED" ${c.status==='CONVERTED'?'selected':''}>Converted</option>
             </select>
+            <button class="btn btn-sm btn-danger" onclick="deleteConsultation('${c.id}')">Delete</button>
           </div>
         </td>` : ''}
       </tr>`).join('')}</tbody>
@@ -535,8 +536,18 @@
 
   async function updateConsultationStatus(id, status) {
     try {
-      await api(`/api/consultations/${id}`, { method: 'PATCH', body: { status } });
+      await api(`/api/consultations/${id}`, { method: 'PUT', body: { status: status.toLowerCase() } });
       toast('Status updated');
+      loadConsultations(document.getElementById('consultation-filter').value);
+      loadBadges();
+    } catch (e) { toast(e.message, 'error'); }
+  }
+
+  async function deleteConsultation(id) {
+    if (!confirm('Delete this consultation?')) return;
+    try {
+      await api(`/api/consultations/${id}`, { method: 'DELETE' });
+      toast('Consultation deleted');
       loadConsultations(document.getElementById('consultation-filter').value);
       loadBadges();
     } catch (e) { toast(e.message, 'error'); }

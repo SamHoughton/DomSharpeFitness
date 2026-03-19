@@ -73,4 +73,16 @@ router.put('/:id', authMiddleware, domOnly, async (req, res) => {
   }
 });
 
+// DELETE /api/consultations/:id — Dom only
+router.delete('/:id', authMiddleware, domOnly, async (req, res) => {
+  try {
+    const { rows } = await db.query('DELETE FROM consultations WHERE id = $1 RETURNING id', [req.params.id]);
+    if (!rows[0]) return res.status(404).json({ error: 'Not found' });
+    res.json({ success: true });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
 module.exports = router;

@@ -570,7 +570,7 @@
               <td>${c.email}</td>
               <td>${c.goal || '—'}</td>
               <td>${c.experience || '—'}</td>
-              <td>${c._count.checkIns}</td>
+              <td>${c.check_in_count}</td>
               <td style="white-space:nowrap">${fmt(c.created_at)}</td>
               <td>
                 <div class="btn-row">
@@ -593,18 +593,19 @@
     document.getElementById('client-detail-content').innerHTML = '<div class="empty">Loading…</div>';
 
     try {
-      const client = await api(`/api/clients/${id}`);
-      renderClientDetail(client);
+      const [client, checkins] = await Promise.all([
+        api(`/api/clients/${id}`),
+        api(`/api/checkins?clientId=${id}`)
+      ]);
+      renderClientDetail(client, checkins);
     } catch (e) {
       document.getElementById('client-detail-content').innerHTML = `<div class="empty">${e.message}</div>`;
     }
   }
 
-  function renderClientDetail(client) {
-    const checkins = client.checkIns;
-
-    const weightsData = checkins.filter(c => c.weightKg).reverse();
-    const bfData = checkins.filter(c => c.bodyFatPct).reverse();
+  function renderClientDetail(client, checkins) {
+    const weightsData = checkins.filter(c => c.weight_kg).reverse();
+    const bfData = checkins.filter(c => c.body_fat_pct).reverse();
     const labels = weightsData.map(c => fmt(c.week_date));
 
     document.getElementById('client-detail-content').innerHTML = `
@@ -622,8 +623,8 @@
         <div class="meta-item"><div class="meta-label">Goal</div><div class="meta-value">${client.goal || '—'}</div></div>
         <div class="meta-item"><div class="meta-label">Experience</div><div class="meta-value">${client.experience || '—'}</div></div>
         <div class="meta-item"><div class="meta-label">Total Check-ins</div><div class="meta-value">${checkins.length}</div></div>
-        <div class="meta-item"><div class="meta-label">Latest Weight</div><div class="meta-value">${checkins.find(c => c.weightKg)?.weightKg ?? '—'} ${checkins.find(c => c.weightKg) ? 'kg' : ''}</div></div>
-        <div class="meta-item"><div class="meta-label">Latest Body Fat</div><div class="meta-value">${checkins.find(c => c.bodyFatPct)?.bodyFatPct ?? '—'} ${checkins.find(c => c.bodyFatPct) ? '%' : ''}</div></div>
+        <div class="meta-item"><div class="meta-label">Latest Weight</div><div class="meta-value">${checkins.find(c => c.weight_kg)?.weight_kg ?? '—'} ${checkins.find(c => c.weight_kg) ? 'kg' : ''}</div></div>
+        <div class="meta-item"><div class="meta-label">Latest Body Fat</div><div class="meta-value">${checkins.find(c => c.body_fat_pct)?.body_fat_pct ?? '—'} ${checkins.find(c => c.body_fat_pct) ? '%' : ''}</div></div>
         <div class="meta-item"><div class="meta-label">Client Since</div><div class="meta-value">${fmt(client.created_at)}</div></div>
       </div>
 
@@ -641,15 +642,15 @@
             <thead><tr><th>Date</th><th>Weight (kg)</th><th>Body Fat %</th><th>Waist</th><th>Hips</th><th>Chest</th><th>Arms</th><th>Thighs</th><th>Notes</th><th>Photo</th></tr></thead>
             <tbody>${checkins.map(c => `<tr>
               <td style="white-space:nowrap">${fmt(c.week_date)}</td>
-              <td>${c.weightKg ?? '—'}</td>
-              <td>${c.bodyFatPct ?? '—'}</td>
-              <td>${c.waistCm ?? '—'}</td>
-              <td>${c.hipsCm ?? '—'}</td>
-              <td>${c.chestCm ?? '—'}</td>
-              <td>${c.armsCm ?? '—'}</td>
-              <td>${c.thighsCm ?? '—'}</td>
+              <td>${c.weight_kg ?? '—'}</td>
+              <td>${c.body_fat_pct ?? '—'}</td>
+              <td>${c.waist_cm ?? '—'}</td>
+              <td>${c.hips_cm ?? '—'}</td>
+              <td>${c.chest_cm ?? '—'}</td>
+              <td>${c.left_arm_cm ?? '—'}</td>
+              <td>${c.left_thigh_cm ?? '—'}</td>
               <td style="max-width:200px;font-size:12px">${c.notes || '—'}</td>
-              <td>${c.photoUrl ? `<a href="${c.photoUrl}" target="_blank" style="color:var(--accent)"><i class="fa-solid fa-image"></i></a>` : '—'}</td>
+              <td>${c.photo_url ? `<a href="${c.photo_url}" target="_blank" style="color:var(--accent)"><i class="fa-solid fa-image"></i></a>` : '—'}</td>
             </tr>`).join('')}</tbody>
           </table>
         </div>` : '<div class="empty">No check-ins yet</div>'}
@@ -666,7 +667,7 @@
           datasets: [
             {
               label: 'Weight (kg)',
-              data: weightsData.map(c => c.weightKg),
+              data: weightsData.map(c => c.weight_kg),
               borderColor: '#C8923A',
               backgroundColor: 'rgba(200,146,58,0.08)',
               tension: 0.3,
@@ -675,7 +676,7 @@
             },
             ...(bfData.length > 1 ? [{
               label: 'Body Fat %',
-              data: bfData.map(c => c.bodyFatPct),
+              data: bfData.map(c => c.body_fat_pct),
               borderColor: '#64a0f0',
               backgroundColor: 'rgba(100,160,240,0.08)',
               tension: 0.3,

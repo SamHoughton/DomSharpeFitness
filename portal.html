@@ -532,8 +532,8 @@
 
     try {
       const fd = new FormData();
-      fd.append('weekDate', document.getElementById('ci-date').value);
-      const fields = { weightKg: 'ci-weight', bodyFatPct: 'ci-bf', waistCm: 'ci-waist', hipsCm: 'ci-hips', chestCm: 'ci-chest', armsCm: 'ci-arms', thighsCm: 'ci-thighs' };
+      fd.append('week_date', document.getElementById('ci-date').value);
+      const fields = { weight_kg: 'ci-weight', body_fat_pct: 'ci-bf', waist_cm: 'ci-waist', hips_cm: 'ci-hips', chest_cm: 'ci-chest', left_arm_cm: 'ci-arms', left_thigh_cm: 'ci-thighs' };
       Object.entries(fields).forEach(([key, id]) => {
         const val = document.getElementById(id).value;
         if (val) fd.append(key, val);

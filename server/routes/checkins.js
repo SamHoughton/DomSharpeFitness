@@ -7,22 +7,25 @@ const { authMiddleware } = require('../middleware/auth');
 
 const router = express.Router();
 
-cloudinary.config({
-  cloud_name:  process.env.CLOUDINARY_CLOUD_NAME,
-  api_key:     process.env.CLOUDINARY_API_KEY,
-  api_secret:  process.env.CLOUDINARY_API_SECRET
-});
-
-const storage = new CloudinaryStorage({
-  cloudinary,
-  params: {
-    folder:          'sharpe-strength/progress',
-    allowed_formats: ['jpg', 'jpeg', 'png', 'webp'],
-    transformation:  [{ width: 1200, crop: 'limit', quality: 'auto' }]
-  }
-});
-
-const upload = multer({ storage, limits: { fileSize: 15 * 1024 * 1024 } });
+let upload;
+if (process.env.CLOUDINARY_CLOUD_NAME && process.env.CLOUDINARY_API_KEY) {
+  cloudinary.config({
+    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+    api_key:    process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_API_SECRET
+  });
+  const storage = new CloudinaryStorage({
+    cloudinary,
+    params: {
+      folder:          'sharpe-strength/progress',
+      allowed_formats: ['jpg', 'jpeg', 'png', 'webp'],
+      transformation:  [{ width: 1200, crop: 'limit', quality: 'auto' }]
+    }
+  });
+  upload = multer({ storage, limits: { fileSize: 15 * 1024 * 1024 } });
+} else {
+  upload = multer({ storage: multer.memoryStorage(), limits: { fileSize: 15 * 1024 * 1024 } });
+}
 
 // GET /api/checkins
 //   Client → own check-ins

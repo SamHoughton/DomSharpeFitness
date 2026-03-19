@@ -146,14 +146,22 @@ if (form) {
         submitBtn.disabled = true;
         submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Sending...';
 
-        fetch('/', {
+        const availability = document.getElementById('availability')?.value || '';
+        const message      = document.getElementById('message')?.value || '';
+
+        fetch(API_URL + '/api/consultations', {
             method: 'POST',
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-            body: new URLSearchParams(new FormData(form)).toString()
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ name, email, goal, experience, availability, message })
         })
-        .then(() => {
-            form.style.display = 'none';
-            formSuccess.classList.add('show');
+        .then(r => r.json())
+        .then(data => {
+            if (data.success) {
+                form.style.display = 'none';
+                formSuccess.classList.add('show');
+            } else {
+                throw new Error(data.error || 'Failed');
+            }
         })
         .catch(() => {
             submitBtn.disabled = false;

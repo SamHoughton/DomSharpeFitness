@@ -802,14 +802,14 @@
         document.getElementById('conv-list').innerHTML = '<div class="empty">No clients yet</div>';
         return;
       }
-      document.getElementById('conv-list').innerHTML = convs.map(({ client, latest, unread }) => `
-        <div class="conv-item ${currentConvClientId === client.id ? 'active' : ''}" onclick="openConversation('${client.id}', '${client.name}')">
-          <div class="conv-avatar">${initials(client.name)}</div>
+      document.getElementById('conv-list').innerHTML = convs.map(c => `
+        <div class="conv-item ${currentConvClientId === c.id ? 'active' : ''}" onclick="openConversation('${c.id}', '${c.name}')">
+          <div class="conv-avatar">${initials(c.name)}</div>
           <div class="conv-info">
-            <div class="conv-name">${client.name}</div>
-            <div class="conv-preview">${latest?.body || 'No messages yet'}</div>
+            <div class="conv-name">${c.name}</div>
+            <div class="conv-preview">Last message ${fmt(c.last_message)}</div>
           </div>
-          ${unread ? `<span class="conv-unread">${unread}</span>` : ''}
+          ${c.unread ? `<span class="conv-unread">${c.unread}</span>` : ''}
         </div>
       `).join('');
     } catch (e) {

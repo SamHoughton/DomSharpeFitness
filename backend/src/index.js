@@ -48,5 +48,9 @@ async function seedAdmin() {
 
 app.listen(PORT, async () => {
   console.log(`Server running on port ${PORT}`);
-  await seedAdmin();
+  try {
+    await seedAdmin();
+  } catch (err) {
+    console.error('seedAdmin failed (non-fatal):', err.message);
+  }
 });

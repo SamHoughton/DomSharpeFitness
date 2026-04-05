@@ -42,26 +42,16 @@ router.post('/', authenticate, adminOnly, async (req, res) => {
 
   // Email welcome message with login details
   if (process.env.RESEND_API_KEY) {
-    const portalUrl = process.env.FRONTEND_URL
-      ? `${process.env.FRONTEND_URL}/portal.html`
-      : 'https://yoursite.netlify.app/portal.html';
-
     try {
       await getResend().emails.send({
         from: 'Dom Sharpe — Sharpe Strength <noreply@sharpestrength.co.uk>',
         to: email,
-        subject: 'Your Sharpe Strength client portal is ready',
+        subject: 'Welcome to Sharpe Strength',
         html: `
           <div style="font-family:sans-serif;max-width:600px;margin:0 auto">
             <h2 style="color:#C8923A">Welcome to Sharpe Strength, ${name}!</h2>
-            <p>Dom has set up your personal client portal where you can log your weekly check-ins, track your progress, and message Dom directly.</p>
-            <h3>Your login details</h3>
-            <table style="width:100%;border-collapse:collapse">
-              <tr><td style="padding:8px;font-weight:bold;width:140px">Portal URL</td><td style="padding:8px"><a href="${portalUrl}">${portalUrl}</a></td></tr>
-              <tr style="background:#f9f9f9"><td style="padding:8px;font-weight:bold">Email</td><td style="padding:8px">${email}</td></tr>
-              <tr><td style="padding:8px;font-weight:bold">Password</td><td style="padding:8px">${tempPassword}</td></tr>
-            </table>
-            <p style="margin-top:16px;color:#666;font-size:13px">Please change your password after your first login.</p>
+            <p>Dom has added you as a client. You'll receive further details about accessing your client portal soon.</p>
+            <p style="margin-top:16px;color:#666;font-size:13px">Questions? Reply to this email or message Dom directly.</p>
           </div>
         `,
       });

@@ -3446,7 +3446,7 @@ ul {
     aspect-ratio: 5 / 4;
     height: auto;
     object-fit: cover;
-    object-position: center 34%;
+    object-position: center 45%;
     display: block;
 }
 
@@ -3476,16 +3476,25 @@ ul {
 
 .result-scan-link:hover { color: var(--accent); border-color: var(--accent); }
 
+/* Absolutely positioned so the image contributes no intrinsic height. It was
+   taking its natural 1600px portrait aspect, forcing the card to ~700px and
+   stranding the copy at the top with a huge void underneath. Now the card is
+   sized by its text and the photo fills whatever that comes to. */
 .result-card-featured .result-card-media {
-    width: 38%;
-    max-width: 340px;
+    position: relative;
+    width: 34%;
+    max-width: 300px;
+    align-self: stretch;
 }
 
 .result-card-featured .result-card-media img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
     height: 100%;
-    min-height: 340px;
     aspect-ratio: auto;
-    object-position: center 34%;
+    min-height: 0;
+    object-fit: cover;
 }
 
 /* If the screenshot has not been added yet, collapse the slot cleanly instead
@@ -3554,7 +3563,9 @@ ul {
     margin: 8px 0 12px;
 }
 
-.result-card-featured .result-card-body h4 { font-size: clamp(1.5rem, 2.6vw, 2rem); }
+.result-card-featured .result-card-body { padding: 28px; gap: 0; }
+.result-card-featured .result-card-body h4 { font-size: clamp(1.4rem, 2.2vw, 1.85rem); }
+.result-card-featured .result-card-note { margin-bottom: 24px; max-width: 62ch; }
 
 .result-card-note {
     font-size: 13.5px;
@@ -3640,8 +3651,12 @@ ul {
 @media (max-width: 1000px) {
     .results-gallery { grid-template-columns: repeat(2, 1fr); }
     .result-card-featured { flex-direction: column; }
-    .result-card-featured .result-card-media { width: 100%; max-width: none; }
-    .result-card-featured .result-card-media img { height: 280px; min-height: 0; }
+    .result-card-featured .result-card-media {
+        position: relative;
+        width: 100%;
+        max-width: none;
+        aspect-ratio: 5 / 4;
+    }
 }
 
 @media (max-width: 700px) {

@@ -43,6 +43,10 @@
     --shadow-accent: none;
 
     --rule: 1px solid rgba(255, 255, 255, 0.14);
+
+    /* Single source of truth for the page gutter. The swipe rails bleed to the
+       screen edge with a matching negative margin, so these must stay in sync. */
+    --container-pad: 24px;
 }
 
 /* === RESET & BASE === */
@@ -64,6 +68,17 @@ body {
     line-height: 1.7;
     -webkit-font-smoothing: antialiased;
     overflow-x: clip;
+    /* Stop iOS inflating type in landscape */
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+    /* No rubber-band chaining to the page behind an open menu */
+    overscroll-behavior-y: none;
+}
+
+/* The default is a translucent blue box, which looks broken on a black and
+   amber site. Replace it with an amber wash. */
+a, button, summary, label, [role="button"], input, select, textarea {
+    -webkit-tap-highlight-color: rgba(200, 146, 58, 0.22);
 }
 
 img {
@@ -80,6 +95,9 @@ a {
 ul {
     list-style: none;
 }
+
+/* Swipe rails are a phone affordance; hidden by default. */
+.swipe-hint { display: none; }
 
 /* === SKIP LINK === */
 .skip-link {
@@ -109,7 +127,7 @@ ul {
 .section-container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 24px;
+    padding: 0 var(--container-pad);
 }
 
 /* Section index.
@@ -366,14 +384,6 @@ ul {
     margin-bottom: 24px;
 }
 
-.eyebrow-dot {
-    display: inline-block;
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: var(--accent);
-    flex-shrink: 0;
-}
 
 .hero-title {
     font-family: var(--font-heading);
@@ -1634,8 +1644,8 @@ ul {
 }
 
 .footer-brand p {
-    font-size: 13px;
-    color: var(--text-faint);
+    font-size: 13.5px;
+    color: rgba(255, 255, 255, 0.55);
     margin-bottom: 6px;
     line-height: 1.6;
 }
@@ -1658,14 +1668,14 @@ ul {
 
 .footer-nav a {
     font-size: 14px;
-    color: var(--text-faint);
+    color: rgba(255, 255, 255, 0.62);
     transition: color var(--transition);
 }
 
 .footer-nav a:hover { color: var(--accent); }
 
 .footer-social-link {
-    display: inline-flex;
+    display: flex;
     align-items: center;
     gap: 10px;
     font-size: 15px;
@@ -1676,13 +1686,21 @@ ul {
 }
 
 .footer-social-link:hover { color: var(--accent); }
-.footer-social-link i { color: var(--accent); font-size: 20px; }
-.footer-whatsapp-link i { color: #25d366; }
-.footer-whatsapp-link:hover { color: #25d366; }
+.footer-social-link i {
+    color: var(--accent);
+    font-size: 15px;
+    width: 20px;
+    text-align: center;
+    flex-shrink: 0;
+}
 
 .footer-dm {
     font-size: 13px;
-    color: var(--text-faint);
+    color: rgba(255, 255, 255, 0.5);
+    margin-top: 14px;
+    padding-top: 14px;
+    border-top: var(--rule);
+    max-width: 30ch;
 }
 
 .footer-bottom {
@@ -3419,13 +3437,44 @@ ul {
     flex-shrink: 0;
 }
 
+/* These are portrait phone screenshots of a scanner screen, roughly 0.46 to
+   0.81 aspect. Squeezed into a landscape box they showed a thin unreadable
+   band. Give them a taller frame and bias the crop to where the readout
+   actually sits, then let anyone open the original to check the numbers. */
 .result-card-media img {
     width: 100%;
-    height: 260px;
+    aspect-ratio: 5 / 4;
+    height: auto;
     object-fit: cover;
-    object-position: center 30%;
+    object-position: center 34%;
     display: block;
 }
+
+.result-card-media {
+    background: #0b0b0b;
+}
+
+.result-scan-link {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.85);
+    background: rgba(0, 0, 0, 0.66);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: var(--radius);
+    padding: 5px 10px;
+    transition: color var(--transition), border-color var(--transition);
+}
+
+.result-scan-link:hover { color: var(--accent); border-color: var(--accent); }
 
 .result-card-featured .result-card-media {
     width: 38%;
@@ -3435,6 +3484,8 @@ ul {
 .result-card-featured .result-card-media img {
     height: 100%;
     min-height: 340px;
+    aspect-ratio: auto;
+    object-position: center 34%;
 }
 
 /* If the screenshot has not been added yet, collapse the slot cleanly instead
@@ -4002,4 +4053,332 @@ textarea:focus-visible,
 .result-value {
     font-weight: 600;
     letter-spacing: -0.02em;
+}
+
+
+/* ===================================================
+   MOBILE
+   Phones are the majority of this site's traffic, so this block is treated as
+   a first-class layout rather than a set of overrides.
+=================================================== */
+
+/* --- Thumb-reachable action bar --------------------------------------- */
+.action-bar { display: none; }
+
+@media (max-width: 768px) {
+    .action-bar {
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 900;
+        display: flex;
+        gap: 10px;
+        padding: 10px 14px;
+        /* Clear the iPhone home indicator */
+        padding-bottom: calc(10px + env(safe-area-inset-bottom, 0px));
+        background: rgba(12, 12, 12, 0.94);
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+        border-top: 1px solid var(--border);
+        transform: translateY(100%);
+        transition: transform 0.22s ease;
+    }
+
+    .action-bar.is-visible { transform: translateY(0); }
+
+    .action-bar-primary {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 50px;
+        background: var(--accent);
+        color: var(--bg);
+        font-family: var(--font-body);
+        font-size: 15px;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        border-radius: var(--radius);
+    }
+
+    .action-bar-primary:active { background: var(--accent-dark); }
+
+    .action-bar-wa {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 50px;
+        min-height: 50px;
+        background: #25d366;
+        color: #062e12;
+        font-size: 22px;
+        border-radius: var(--radius);
+        flex-shrink: 0;
+    }
+
+    /* The floating bubble is redundant once the bar exists. */
+    .whatsapp-float { display: none; }
+
+    /* Keep the last section clear of the bar */
+    .footer-bottom { padding-bottom: calc(76px + env(safe-area-inset-bottom, 0px)); }
+}
+
+@media (max-width: 768px) {
+    /* --- iOS zoom guard ---
+       Safari zooms the whole page whenever a focused field is under 16px.
+       Every input on this site was 13 to 15px, so every tap on the form
+       yanked the layout sideways. 16px minimum, no exceptions. */
+    input, select, textarea,
+    .form-group input, .form-group select, .form-group textarea,
+    .calc-field input, .quiz-capture input {
+        font-size: 16px;
+    }
+
+    .form-group input, .form-group textarea, .form-group select { padding: 13px 15px; }
+    .calc-field input { padding: 13px 15px; }
+
+    /* --- Readability ---
+       Body copy was sitting at 12 to 14px across most of the page. */
+    body { font-size: 16px; line-height: 1.65; }
+
+    .section-sub { font-size: 16px; margin-bottom: 34px; }
+    .about-lead { font-size: 17px; }
+    .about-text p, .why-point p, .faq-answer p { font-size: 15.5px; }
+    .service-card p, .pricing-desc, .result-card-note { font-size: 15px; line-height: 1.6; }
+    .service-list li, .pricing-list li { font-size: 15px; }
+    .testimonial-card blockquote { font-size: 15.5px; line-height: 1.7; }
+    .form-group label { font-size: 12px; }
+    .consent-label { font-size: 14.5px; }
+    .footer-nav a, .footer-social-link { font-size: 15px; }
+
+    /* --- Section rhythm ---
+       The page ran to 26 screens. Tighten the vertical padding everywhere
+       rather than deleting content. */
+    /* Each section sets its own 100px padding via a class, which outranks a
+       bare `section` selector, so target the classes directly. */
+    .about, .services, .why, .quiz-section, .testimonials, .transformations,
+    .calculators, .pricing, .faq, .contact, .instagram-feed-section {
+        padding: 54px 0;
+    }
+    :root { --container-pad: 18px; }
+    .section-title { font-size: clamp(1.75rem, 8vw, 2.2rem); max-width: none; }
+    .section-index { margin-bottom: 16px; }
+}
+
+@media (max-width: 768px) {
+    /* --- Results: the tallest section on the page at 4822px --- */
+    .inbody-feature { padding: 18px; gap: 20px; }
+
+    /* A 519px tall phone screenshot is a lot of scroll for a supporting image.
+       Crop it to a readable band instead. */
+    .inbody-img {
+        max-height: 300px;
+        width: auto;
+        object-fit: contain;
+    }
+
+    .inbody-rings { gap: 10px; }
+    .ring-svg { max-width: 84px; }
+    .inbody-insight { padding: 14px; font-size: 14px; }
+
+    .results-gallery-title { margin-top: 44px; }
+    .results-gallery { gap: 14px; }
+    .result-card-body { padding: 18px; }
+    .result-card-media img { height: 180px; }
+
+    /* Metrics as a compact 3-up strip rather than three stacked rows. */
+    .result-card-featured .result-metrics,
+    .result-metrics { grid-template-columns: repeat(3, 1fr); }
+
+    .result-metric {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+        padding: 10px;
+    }
+
+    .result-metric dt { font-size: 9.5px; letter-spacing: 0.06em; }
+    .result-metric dd { font-size: 11px; }
+    .result-metric dd strong { font-size: 14px; display: block; }
+    .metric-delta { font-size: 11px; padding: 2px 7px; }
+
+    /* --- Contact: 2400px, mostly chrome around the form --- */
+    .contact-map iframe { height: 170px; }
+    .contact-details { gap: 12px; }
+    .contact-detail-item { padding: 10px 0; }
+    .contact-locations { margin-top: 20px; }
+
+    /* --- Services and pricing --- */
+    .service-card { padding: 22px 20px; }
+    .pricing-card { padding: 28px 20px; gap: 12px; }
+    .pricing-amount .price-value { font-size: 2.6rem; }
+
+    /* --- About --- */
+    .about-grid { gap: 28px; }
+    .about-tags { gap: 6px; }
+    .about-quote-card { padding: 20px; }
+
+    /* --- Testimonials --- */
+    .testimonial-card { padding: 22px 20px; }
+}
+
+/* Small phones (iPhone SE, older Androids at 360px) */
+@media (max-width: 380px) {
+    :root { --container-pad: 15px; }
+    .hero-pills li { font-size: 11px; padding: 6px 11px; }
+    .result-metric dd strong { font-size: 13px; }
+    .action-bar-primary { font-size: 14px; letter-spacing: 0.02em; }
+}
+
+/* Landscape phones: the hero should not demand a full portrait screen */
+@media (max-width: 900px) and (orientation: landscape) and (max-height: 500px) {
+    .hero { min-height: auto; padding-top: 96px; }
+    .hero-grid { padding-bottom: 28px; }
+    .hero-stats { display: none; }
+}
+
+@media (max-width: 768px) {
+    /* --- Swipe rails ---
+       Four stacked cards is ~2100px of scrolling per section. As a horizontal
+       scroll-snap rail it is one card tall and reads like a native carousel,
+       which is the expected gesture on a phone. Nothing is hidden: the rail is
+       a normal scroll container, so keyboard and screen readers reach every
+       card in order. */
+    .services-grid,
+    .pricing-grid,
+    .results-gallery {
+        display: flex;
+        grid-template-rows: none;
+        gap: 12px;
+        overflow-x: auto;
+        overflow-y: hidden;
+        scroll-snap-type: x mandatory;
+        scroll-padding-left: var(--container-pad);
+        /* Bleed to the screen edges so cards can sit flush */
+        margin-left: calc(var(--container-pad) * -1);
+        margin-right: calc(var(--container-pad) * -1);
+        padding: 4px var(--container-pad) 14px;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+    }
+
+    .services-grid::-webkit-scrollbar,
+    .pricing-grid::-webkit-scrollbar,
+    .results-gallery::-webkit-scrollbar { display: none; }
+
+    .service-card,
+    .pricing-card,
+    .result-card {
+        display: flex;
+        flex-direction: column;
+        grid-row: auto;
+        grid-column: auto;
+        flex: 0 0 82vw;
+        max-width: 340px;
+        scroll-snap-align: start;
+    }
+
+    /* The featured result no longer spans a row in a flex rail */
+    .result-card-featured { flex: 0 0 88vw; max-width: 360px; }
+    .result-card-featured .result-card-media { width: 100%; max-width: none; }
+    .result-card-featured .result-card-media img { height: 180px; min-height: 0; }
+
+    /* Badges sit on the top border, so the rail needs headroom */
+    .pricing-grid { padding-top: 14px; }
+
+    /* Scroll affordance */
+    .swipe-hint {
+        display: flex !important;
+        align-items: center;
+        gap: 8px;
+        font-family: var(--font-mono);
+        font-size: 11px;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--text-muted);
+        margin: -6px 0 14px;
+    }
+
+    .swipe-hint::after {
+        content: '';
+        flex: 1;
+        height: 1px;
+        background: rgba(255, 255, 255, 0.1);
+    }
+}
+
+
+/* ===================================================
+   COOKIE CONSENT
+=================================================== */
+.consent {
+    position: fixed;
+    left: 16px;
+    right: 16px;
+    bottom: 16px;
+    bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+    z-index: 1200;
+    max-width: 560px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    flex-wrap: wrap;
+    padding: 16px 18px;
+    background: rgba(14, 14, 14, 0.97);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    transform: translateY(140%);
+    transition: transform 0.22s ease;
+}
+
+.consent.is-visible { transform: translateY(0); }
+.consent[hidden] { display: none; }
+
+.consent-copy {
+    flex: 1 1 240px;
+    font-size: 13px;
+    line-height: 1.55;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.consent-copy a { color: var(--accent); text-decoration: underline; text-underline-offset: 2px; }
+
+.consent-actions { display: flex; gap: 8px; flex-shrink: 0; }
+
+.consent-btn {
+    font-family: var(--font-body);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 10px 18px;
+    min-height: 42px;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--text-muted);
+    transition: all var(--transition);
+}
+
+.consent-decline:hover { border-color: rgba(255, 255, 255, 0.35); color: var(--text); }
+
+.consent-accept {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: var(--bg);
+}
+
+.consent-accept:hover { background: var(--accent-dark); color: #fff; }
+
+/* Lift the action bar clear while the banner is up */
+@media (max-width: 768px) {
+    body.has-consent-banner .action-bar { transform: translateY(100%); }
+    .consent { flex-direction: column; align-items: stretch; }
+    .consent-actions { justify-content: stretch; }
+    .consent-btn { flex: 1; }
 }

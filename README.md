@@ -72,23 +72,48 @@ DomSharpeFitness/
   proper training shot exists. To bring one back, add a `.hero-portrait` div
   after `.hero-content` and set `.hero-grid` to two columns. There is a comment
   marking the spot in `index.html`.
-- **Results gallery screenshots.** The four cards in the results gallery read
-  their figures from typeset HTML, so they work already. The InBody photos are
-  optional evidence and each card hides its own image slot if the file is
-  missing. To add them, save the scans into `/img` as:
-  `result-21kg-cut.jpg` (96.5kg to 74.6kg), `result-10kg-cut.jpg`
-  (91.5kg to 81.8kg), `result-first-month.jpg` (99.7kg to 98.0kg) and
-  `result-recomp.jpg` (muscle +1.8kg).
 - **Lead emails.** `DOM_EMAIL` must be set to `sharp.strength1@gmail.com` in the
   Railway service variables, along with `RESEND_API_KEY`. Without them the form
   saves enquiries to the database but sends no email. See "API" below.
 - **Credentials.** Level 3 PT / First Aid / REPs badges in the About section
   need confirming before they stay up.
-- **Google Analytics.** Off by default. Set `GA_MEASUREMENT_ID` in the head of
-  `index.html` to switch it on.
+- **Google Analytics and Google Ads.** Off until you paste two IDs into
+  `js/analytics.js`. See "Analytics" below.
 - **Instagram feed.** The section is an honest "follow" panel. To show real
   posts, connect @sharpe.strength at behold.so and paste the embed where the
   comment marks it in `index.html`.
+
+
+## Analytics
+
+Everything is wired and waiting on IDs. Open `js/analytics.js` and set:
+
+| Constant | Where to get it |
+| --- | --- |
+| `GA4_ID` | analytics.google.com, Admin, Data streams, your web stream. `G-XXXXXXXXXX` |
+| `ADS_ID` | ads.google.com, Tools, Conversions. `AW-XXXXXXXXX` |
+| `ADS_CONVERSIONS` | One label per conversion action you create in Ads. `AW-XXXXXXXXX/AbC-D_efGh` |
+
+Leave any of them `null` and that part simply does not load.
+
+Consent is handled with Google Consent Mode v2 and starts fully denied, so no
+cookies are written until a visitor accepts on the banner. This is what UK GDPR
+and PECR require. The banner only appears once at least one ID is set.
+
+Events already tracked:
+
+| Event | Fires when |
+| --- | --- |
+| `generate_lead` (`consultation`) | Consultation form sends successfully |
+| `generate_lead` (`whatsapp`) | Any WhatsApp link tapped, with location |
+| `generate_lead` (`phone`) | Any `tel:` link tapped |
+| `quiz_complete` | Quiz reaches the result, with all three answers |
+| `select_item` | A pricing tier CTA is clicked, with the tier name |
+| `cta_click` | Any "book" CTA, labelled hero / section / action_bar / footer |
+| `email_click`, `instagram_click` | Outbound contact taps |
+
+To check wiring before the IDs exist, run `SS_DEBUG = true` in the console and
+click around: every event logs instead of sending.
 
 
 ## Running Locally
@@ -119,6 +144,11 @@ Dom's admin account is created once via `POST /api/auth/setup-dom` using
   logo draw-on and intro sting were all removed as they read as dated and
   janked on mobile. Do not reintroduce looping animation.
 - Tap targets are 44px minimum below 1024px. Check any new control against it.
+- Inputs are never below 16px on mobile. Anything smaller makes iOS Safari zoom
+  the page on focus.
+- `--container-pad` is the single source of truth for the page gutter. The
+  mobile swipe rails bleed to the screen edge with a matching negative margin,
+  so never hardcode one without the other.
 
 ### Deliberately avoided
 

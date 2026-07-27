@@ -18,12 +18,12 @@
     # Railway API the consultation form posts to.
     Content-Security-Policy = """
       default-src 'self';
-      script-src 'self' 'unsafe-inline' https://www.googletagmanager.com;
+      script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.googleadservices.com https://googleads.g.doubleclick.net;
       style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com;
       font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com;
-      img-src 'self' data: https://www.googletagmanager.com https://*.google-analytics.com https://maps.gstatic.com https://*.googleapis.com;
+      img-src 'self' data: https://www.googletagmanager.com https://*.google-analytics.com https://*.googleadservices.com https://googleads.g.doubleclick.net https://www.google.com https://www.google.co.uk https://maps.gstatic.com https://*.googleapis.com;
       frame-src https://maps.google.com https://www.google.com;
-      connect-src 'self' https://domsharpefitness-production.up.railway.app https://*.google-analytics.com;
+      connect-src 'self' https://domsharpefitness-production.up.railway.app https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com https://*.g.doubleclick.net;
       form-action 'self';
       base-uri 'self';
       object-src 'none';

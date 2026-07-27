@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#0f0f0f">
     <meta name="description" content="Dom Sharpe, Personal Trainer in Hitchin and Letchworth. 1:1 coaching for weight training, fat loss, mobility and strength at Bannatyne Fairfield and Studio 180. Book your free consultation today.">
     <meta name="keywords" content="personal trainer Hitchin, personal trainer Letchworth, Dom Sharpe, Bannatyne Fairfield, Studio 180 Letchworth, personal trainer Hertfordshire, weight loss Hitchin, strength training Letchworth, 1:1 coaching, personal trainer Stotfold">
     <title>Dom Sharpe | Personal Trainer in Hitchin &amp; Letchworth | 1:1 Coaching</title>
@@ -30,27 +31,8 @@
 
     <link rel="stylesheet" href="css/styles.css">
 
-    <!-- ============================================================
-         GOOGLE ANALYTICS (GA4)
-         Currently OFF. To turn it on, put your real Measurement ID
-         (Analytics → Admin → Data streams) in GA_MEASUREMENT_ID below.
-         Leaving it as null means no dead request is made on every visit.
-         ============================================================ -->
-    <script>
-        const GA_MEASUREMENT_ID = null; // e.g. 'G-AB12CD34EF'
-
-        if (GA_MEASUREMENT_ID) {
-            const s = document.createElement('script');
-            s.async = true;
-            s.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_MEASUREMENT_ID;
-            document.head.appendChild(s);
-
-            window.dataLayer = window.dataLayer || [];
-            window.gtag = function () { dataLayer.push(arguments); };
-            gtag('js', new Date());
-            gtag('config', GA_MEASUREMENT_ID, { anonymize_ip: true });
-        }
-    </script>
+    <!-- Analytics: GA4 + Google Ads. Paste your IDs in js/analytics.js -->
+    <script src="js/analytics.js"></script>
 
     <!-- ===================== STRUCTURED DATA ===================== -->
     <script type="application/ld+json">
@@ -267,7 +249,6 @@
         <div class="hero-grid">
             <div class="hero-content">
                 <div class="hero-eyebrow">
-                    <span class="eyebrow-dot"></span>
                     Personal Trainer &nbsp;&bull;&nbsp; Hitchin &nbsp;&bull;&nbsp; Letchworth
                 </div>
 
@@ -413,14 +394,16 @@
             <h3 class="results-gallery-title">More client results</h3>
             <p class="results-gallery-sub">Every number below is a real InBody scan. No estimates, no guesswork.</p>
 
+            <p class="swipe-hint"><i class="fa-solid fa-arrow-right-long"></i> Swipe</p>
             <div class="results-gallery">
 
                 <article class="result-card result-card-featured">
                     <div class="result-card-media">
-                        <img src="img/result-21kg-cut.jpg"
+                        <img src="img/inbody-progress5.jpeg"
                              alt="InBody scan: weight down from 96.5kg to 74.6kg and body fat down from 28.2% to 8.7% over four years"
                              decoding="async" fetchpriority="low"
                              onerror="this.closest('.result-card-media').classList.add('no-image')">
+                        <a class="result-scan-link" href="img/inbody-progress5.jpeg" target="_blank" rel="noopener noreferrer">Full scan</a>
                     </div>
                     <div class="result-card-body">
                         <span class="result-card-period">InBody &middot; Jan 2022 &rarr; Nov 2025 &nbsp;&bull;&nbsp; Nearly 4 years</span>
@@ -448,10 +431,11 @@
 
                 <article class="result-card">
                     <div class="result-card-media">
-                        <img src="img/result-10kg-cut.jpg"
+                        <img src="img/inbody-progress2.jpeg"
                              alt="InBody scan: weight down from 91.5kg to 81.8kg, body fat down from 24.2% to 15.4%"
                              decoding="async" fetchpriority="low"
                              onerror="this.closest('.result-card-media').classList.add('no-image')">
+                        <a class="result-scan-link" href="img/inbody-progress2.jpeg" target="_blank" rel="noopener noreferrer">Full scan</a>
                     </div>
                     <div class="result-card-body">
                         <span class="result-card-period">InBody &middot; Nov 2024 &rarr; Jun 2025 &nbsp;&bull;&nbsp; 7 months</span>
@@ -479,10 +463,11 @@
 
                 <article class="result-card">
                     <div class="result-card-media">
-                        <img src="img/result-first-month.jpg"
+                        <img src="img/inbody-progress3.jpeg"
                              alt="InBody scan: body fat down from 32.8% to 30.6% and muscle up 0.7kg in one month"
                              decoding="async" fetchpriority="low"
                              onerror="this.closest('.result-card-media').classList.add('no-image')">
+                        <a class="result-scan-link" href="img/inbody-progress3.jpeg" target="_blank" rel="noopener noreferrer">Full scan</a>
                     </div>
                     <div class="result-card-body">
                         <span class="result-card-period">InBody &middot; Jul &rarr; Aug 2025 &nbsp;&bull;&nbsp; 1 month</span>
@@ -510,10 +495,11 @@
 
                 <article class="result-card">
                     <div class="result-card-media">
-                        <img src="img/result-recomp.jpg"
+                        <img src="img/inbody-progress4.jpeg"
                              alt="InBody scan: muscle up 1.8kg and body fat down 4.2% with bodyweight almost unchanged"
                              decoding="async" fetchpriority="low"
                              onerror="this.closest('.result-card-media').classList.add('no-image')">
+                        <a class="result-scan-link" href="img/inbody-progress4.jpeg" target="_blank" rel="noopener noreferrer">Full scan</a>
                     </div>
                     <div class="result-card-body">
                         <span class="result-card-period">InBody &middot; Jan &rarr; Feb 2026 &nbsp;&bull;&nbsp; 7 weeks</span>
@@ -627,6 +613,7 @@
             <h2 class="section-title">TRAINING THAT ACTUALLY WORKS</h2>
             <p class="section-sub">Four things Dom coaches. Most clients end up doing some mix of all four.</p>
 
+            <p class="swipe-hint"><i class="fa-solid fa-arrow-right-long"></i> Swipe</p>
             <div class="services-grid">
 
                 <div class="service-card">
@@ -1086,6 +1073,7 @@
             <h2 class="section-title">SIMPLE, HONEST PRICING</h2>
             <p class="section-sub">Everything Dom charges, in one place. No joining fee, nothing tying you in.</p>
 
+            <p class="swipe-hint"><i class="fa-solid fa-arrow-right-long"></i> Swipe</p>
             <div class="pricing-grid">
 
                 <div class="pricing-card">
@@ -1543,7 +1531,7 @@
         </div>
     </footer>
 
-    <!-- WhatsApp floating button -->
+    <!-- WhatsApp floating button (desktop only; phones get the action bar) -->
     <a href="https://wa.me/447375219353?text=Hi%20Dom%2C%20I%27d%20like%20to%20find%20out%20more%20about%20personal%20training."
        class="whatsapp-float"
        target="_blank"
@@ -1552,6 +1540,32 @@
         <i class="fa-brands fa-whatsapp"></i>
         <span class="whatsapp-tooltip">Chat on WhatsApp</span>
     </a>
+
+    <!-- Thumb-reachable action bar. Phones only, and it gets out of the way
+         once you actually reach the consultation form. -->
+    <div class="action-bar" id="action-bar">
+        <a href="#contact" class="action-bar-primary">Book free consultation</a>
+        <a href="https://wa.me/447375219353?text=Hi%20Dom%2C%20I%27d%20like%20to%20find%20out%20more%20about%20personal%20training."
+           class="action-bar-wa" target="_blank" rel="noopener noreferrer"
+           aria-label="Message Dom on WhatsApp">
+            <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
+        </a>
+    </div>
+
+    <!-- Cookie consent. Required before analytics or ads cookies under UK
+         GDPR/PECR. Hidden until analytics.js decides it is needed. -->
+    <div class="consent" id="consent-banner" role="dialog" aria-live="polite"
+         aria-label="Cookie consent" hidden>
+        <p class="consent-copy">
+            We use cookies to measure how the site is doing and how people find it.
+            Nothing is set until you choose.
+            <a href="privacy.html">Privacy policy</a>.
+        </p>
+        <div class="consent-actions">
+            <button type="button" class="consent-btn consent-decline" id="consent-decline">Decline</button>
+            <button type="button" class="consent-btn consent-accept" id="consent-accept">Accept</button>
+        </div>
+    </div>
 
     <script src="js/config.js"></script>
     <script src="js/scripts.js"></script>

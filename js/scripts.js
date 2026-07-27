@@ -152,6 +152,13 @@ if (form) {
         function succeed() {
             form.style.display = 'none';
             formSuccess.classList.add('show');
+            // The conversion that matters. Fires once, only on a real send.
+            if (window.SharpeAnalytics) {
+                window.SharpeAnalytics.lead('consultation', {
+                    goal: goal,
+                    experience: experience
+                });
+            }
         }
 
         function resetBtn() {
@@ -232,6 +239,35 @@ if (statCounters.length) {
 
     statCounters.forEach(el => counterObserver.observe(el));
 }
+
+
+// === MOBILE ACTION BAR ===
+// Appears once the hero CTA has scrolled away, hides again over the contact
+// form so it never covers the thing it is pointing at.
+(function () {
+    const bar = document.getElementById('action-bar');
+    if (!bar) return;
+
+    const hero    = document.getElementById('home');
+    const contact = document.getElementById('contact');
+    let visible = false;
+
+    function update() {
+        const past  = hero ? window.scrollY > hero.offsetHeight * 0.6 : true;
+        const atForm = contact
+            ? contact.getBoundingClientRect().top < window.innerHeight * 0.8
+            : false;
+        const next = past && !atForm;
+        if (next !== visible) {
+            visible = next;
+            bar.classList.toggle('is-visible', next);
+        }
+    }
+
+    window.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update, { passive: true });
+    update();
+})();
 
 
 // === SCROLL PROGRESS BAR ===
@@ -609,7 +645,16 @@ sections.forEach(s => sectionObserver.observe(s));
 
     function showStep(step) {
         setStepUI(step);
-        if (step === 'result') renderResult();
+        if (step === 'result') {
+            renderResult();
+            if (window.SharpeAnalytics) {
+                window.SharpeAnalytics.track('quiz_complete', {
+                    goal: answers.goal,
+                    experience: answers.experience,
+                    frequency: answers.frequency
+                });
+            }
+        }
     }
 
     function renderResult() {
@@ -767,4 +812,29 @@ sections.forEach(s => sectionObserver.observe(s));
     }, { threshold: 0.3 });
 
     ringObserver.observe(ringsContainer);
+})();
+
+
+// === COOKIE CONSENT ===
+// Only shown when analytics is actually configured and the visitor has not
+// already chosen. Sits above the mobile action bar so neither blocks the other.
+(function () {
+    const banner = document.getElementById('consent-banner');
+    const A = window.SharpeAnalytics;
+    if (!banner || !A) return;
+
+    if (!A.enabled || A.storedConsent()) return;
+
+    banner.hidden = false;
+    requestAnimationFrame(() => banner.classList.add('is-visible'));
+    document.body.classList.add('has-consent-banner');
+
+    function close() {
+        banner.classList.remove('is-visible');
+        document.body.classList.remove('has-consent-banner');
+        setTimeout(() => { banner.hidden = true; }, 220);
+    }
+
+    document.getElementById('consent-accept').addEventListener('click', () => { A.grant(); close(); });
+    document.getElementById('consent-decline').addEventListener('click', () => { A.deny(); close(); });
 })();

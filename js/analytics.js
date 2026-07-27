@@ -26,7 +26,7 @@ window.SharpeAnalytics = (function () {
     'use strict';
 
     // ---- CONFIG -----------------------------------------------------------
-    const GA4_ID = null;   // e.g. 'G-AB12CD34EF'
+    const GA4_ID = 'G-E7SYPMW2RL';
     const ADS_ID = null;   // e.g. 'AW-123456789'
 
     // Conversion labels from Google Ads. Fill in the ones you create.

@@ -57,7 +57,7 @@ DomSharpeFitness/
 - Why Dom: key differentiators
 - Quiz: three questions, recommends a programme and hands the answers to the form
 - Testimonials: four real client reviews in a carousel with a pause control
-- Calculators: BMI and 1 Rep Max
+- Calculators: BMI and 1 Rep Max. Desktop only, hidden below 768px
 - Pricing: 1-2-1 session, 6-Week Coaching, 6-Week Coaching + App (recommended),
   6-Week Programme + Check-ins. Each has a collapsible "what's included" panel,
   open by default above 1200px
@@ -77,8 +77,8 @@ DomSharpeFitness/
   saves enquiries to the database but sends no email. See "API" below.
 - **Credentials.** Level 3 PT / First Aid / REPs badges in the About section
   need confirming before they stay up.
-- **Google Analytics and Google Ads.** Off until you paste two IDs into
-  `js/analytics.js`. See "Analytics" below.
+- **Google Ads.** GA4 is live. Ads is still off until `ADS_ID` and the
+  conversion labels are set in `js/analytics.js`. See "Analytics" below.
 - **Instagram feed.** The section is an honest "follow" panel. To show real
   posts, connect @sharpe.strength at behold.so and paste the embed where the
   comment marks it in `index.html`.
@@ -90,7 +90,7 @@ Everything is wired and waiting on IDs. Open `js/analytics.js` and set:
 
 | Constant | Where to get it |
 | --- | --- |
-| `GA4_ID` | analytics.google.com, Admin, Data streams, your web stream. `G-XXXXXXXXXX` |
+| `GA4_ID` | Set: `G-E7SYPMW2RL` |
 | `ADS_ID` | ads.google.com, Tools, Conversions. `AW-XXXXXXXXX` |
 | `ADS_CONVERSIONS` | One label per conversion action you create in Ads. `AW-XXXXXXXXX/AbC-D_efGh` |
 
@@ -149,6 +149,8 @@ Dom's admin account is created once via `POST /api/auth/setup-dom` using
 - `--container-pad` is the single source of truth for the page gutter. The
   mobile swipe rails bleed to the screen edge with a matching negative margin,
   so never hardcode one without the other.
+- Section numbers come from a CSS counter, not hardcoded digits, so hiding a
+  section at a breakpoint renumbers the rest rather than leaving a gap.
 
 ### Deliberately avoided
 

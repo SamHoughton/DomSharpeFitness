@@ -4382,3 +4382,27 @@ textarea:focus-visible,
     .consent-actions { justify-content: stretch; }
     .consent-btn { flex: 1; }
 }
+
+
+/* ===================================================
+   SECTION NUMBERING
+   Counter rather than hardcoded digits, so hiding a section on a breakpoint
+   renumbers the rest instead of leaving a gap in the sequence.
+=================================================== */
+main { counter-reset: section; }
+
+.section-index { counter-increment: section; }
+
+.section-num::before {
+    content: counter(section, decimal-leading-zero);
+}
+
+/* ===================================================
+   CALCULATORS: desktop only
+   BMI and 1RM are nice-to-haves that cost ~1350px of scrolling on a phone,
+   next to InBody data that makes BMI look crude anyway.
+=================================================== */
+@media (max-width: 768px) {
+    .calculators,
+    .nav-tools-link { display: none; }
+}

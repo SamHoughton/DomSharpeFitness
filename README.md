@@ -25,6 +25,7 @@ DomSharpeFitness/
 ├── privacy.html                 # Privacy policy (UK GDPR)
 ├── personal-trainer-hitchin.html     # Location landing page
 ├── personal-trainer-letchworth.html  # Location landing page
+├── gyms-in-hitchin.html              # Content guide targeting "gyms in hitchin" (1,600/mo)
 ├── admin.html                   # Dom's consultation-leads dashboard
 ├── robots.txt
 ├── sitemap.xml

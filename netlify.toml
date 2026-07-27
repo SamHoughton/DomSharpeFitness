@@ -79,3 +79,13 @@
   from = "/personal-trainer-letchworth"
   to = "/personal-trainer-letchworth.html"
   status = 200
+
+[[redirects]]
+  from = "/gyms-in-hitchin.html"
+  to = "/gyms-in-hitchin"
+  status = 301
+
+[[redirects]]
+  from = "/gyms-in-hitchin"
+  to = "/gyms-in-hitchin.html"
+  status = 200

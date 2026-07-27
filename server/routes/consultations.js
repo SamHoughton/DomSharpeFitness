@@ -7,7 +7,7 @@ const router = express.Router();
 
 const esc = s => String(s ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 
-// POST /api/consultations — public (called from the main site form)
+// POST /api/consultations - public (called from the main site form)
 router.post('/', async (req, res) => {
   try {
     const { name, email, goal, experience, availability, message } = req.body;
@@ -21,12 +21,15 @@ router.post('/', async (req, res) => {
       [name.trim(), email.toLowerCase().trim(), goal || null, experience || null, availability || null, message || null]
     );
 
-    // Email Dom — fire and forget
     if (process.env.RESEND_API_KEY && process.env.DOM_EMAIL) {
       const resend = new Resend(process.env.RESEND_API_KEY);
+      const from   = process.env.RESEND_FROM || 'onboarding@resend.dev';
+
+      // Notify Dom, fire and forget
       resend.emails.send({
-        from:    process.env.RESEND_FROM || 'onboarding@resend.dev',
-        to:      process.env.DOM_EMAIL,
+        from,
+        to:       process.env.DOM_EMAIL,
+        reply_to: email,
         subject: `New consultation request from ${esc(name)}`,
         html: `
           <h2>New Consultation Request</h2>
@@ -38,6 +41,37 @@ router.post('/', async (req, res) => {
           <p><strong>Message:</strong> ${esc(message) || 'None'}</p>
         `
       }).catch(console.error);
+
+      // Auto-reply to the enquirer so they get an instant acknowledgement
+      // rather than silence until Dom picks it up.
+      const firstName = String(name).trim().split(/\s+/)[0];
+      resend.emails.send({
+        from,
+        to:       email,
+        reply_to: process.env.DOM_EMAIL,
+        subject: 'Thanks for getting in touch - Sharpe Strength',
+        html: `
+          <p>Hi ${esc(firstName)},</p>
+          <p>
+            Thanks for requesting a free consultation. I've got your enquiry and
+            I'll be in touch within 24 hours to find a time that works for you.
+          </p>
+          <p>
+            If it's easier, you can message me directly on WhatsApp on
+            <a href="https://wa.me/447375219353">07375 219353</a>.
+          </p>
+          <p>Speak soon,<br>Dom</p>
+          <hr>
+          <p style="font-size:12px;color:#777">
+            Sharpe Strength &middot; Bannatyne Fairfield, Kingsley Ave, Hitchin SG5 4JJ
+          </p>
+        `
+      }).catch(console.error);
+    } else {
+      console.warn(
+        '[consultations] RESEND_API_KEY/DOM_EMAIL not set, enquiry saved to the ' +
+        'database but no notification email was sent.'
+      );
     }
 
     res.status(201).json({ success: true });
@@ -47,7 +81,7 @@ router.post('/', async (req, res) => {
   }
 });
 
-// GET /api/consultations — Dom only
+// GET /api/consultations - Dom only
 router.get('/', authMiddleware, domOnly, async (req, res) => {
   try {
     const { rows } = await db.query('SELECT * FROM consultations ORDER BY created_at DESC');
@@ -58,7 +92,7 @@ router.get('/', authMiddleware, domOnly, async (req, res) => {
   }
 });
 
-// PUT /api/consultations/:id — update status, Dom only
+// PUT /api/consultations/:id - update status, Dom only
 router.put('/:id', authMiddleware, domOnly, async (req, res) => {
   try {
     const { status } = req.body;
@@ -77,7 +111,7 @@ router.put('/:id', authMiddleware, domOnly, async (req, res) => {
   }
 });
 
-// DELETE /api/consultations/:id — Dom only
+// DELETE /api/consultations/:id - Dom only
 router.delete('/:id', authMiddleware, domOnly, async (req, res) => {
   try {
     const { rows } = await db.query('DELETE FROM consultations WHERE id = $1 RETURNING id', [req.params.id]);

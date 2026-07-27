@@ -1,10 +1,12 @@
 /* ===================================================
-   DOM SHARPE FITNESS — Custom Styles
+   DOM SHARPE FITNESS - Custom Styles
    Dark theme, amber accent, Sharpe Strength brand
 =================================================== */
 
-/* === FONTS & ROOT VARIABLES === */
-@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap');
+/* === ROOT VARIABLES ===
+   Fonts are loaded via <link> in the document head. There used to be a
+   duplicate @import here, which is render-blocking and serialised behind this
+   stylesheet, strictly slower for exactly the same fonts. */
 
 :root {
     --bg:          #0f0f0f;
@@ -20,7 +22,11 @@
 
     --text:        #ffffff;
     --text-muted:  rgba(255, 255, 255, 0.45);
+    /* Decorative only: 1.8:1 against the page background, so never use it for
+       text a visitor actually needs to read. */
     --text-faint:  rgba(255, 255, 255, 0.20);
+    /* Placeholders and other low-emphasis text that still has to be legible. */
+    --text-placeholder: rgba(255, 255, 255, 0.46);
 
     --font-heading: 'Oswald', sans-serif;
     --font-body:    'Montserrat', sans-serif;
@@ -68,9 +74,33 @@ ul {
     list-style: none;
 }
 
+/* === SKIP LINK === */
+.skip-link {
+    position: fixed;
+    top: 8px;
+    left: 8px;
+    z-index: 2000;
+    background: var(--accent);
+    color: #111;
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 12px 20px;
+    border-radius: var(--radius);
+    transform: translateY(-150%);
+    transition: transform 0.2s ease;
+}
+
+.skip-link:focus { transform: translateY(0); }
+
 /* === UTILITY === */
 .accent { color: var(--accent); }
-.accent-text { color: var(--accent); animation: glowPulse 3s ease-in-out infinite; }
+.accent-text { color: var(--accent); }
+
+/* The glow was previously on every .accent-text: 13 elements animating forever.
+   Reserve it for the hero headline only. */
+.hero-title .accent-text { animation: glowPulse 3s ease-in-out infinite; }
 .text-center { text-align: center; }
 
 .section-container {
@@ -200,25 +230,8 @@ ul {
 .nav-link:hover::after,
 .nav-link.active::after { width: 100%; }
 
-.nav-login {
-    font-family: var(--font-body);
-    font-size: 13px;
-    font-weight: 700;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    color: var(--accent);
-    background: transparent;
-    border: 1px solid var(--accent);
-    padding: 9px 18px;
-    border-radius: var(--radius);
-    white-space: nowrap;
-    transition: background var(--transition), color var(--transition);
-}
-
-.nav-login:hover {
-    background: var(--accent);
-    color: var(--bg);
-}
+/* Duplicate of the CTA that only appears inside the mobile menu. */
+.nav-cta-mobile { display: none; }
 
 .nav-cta {
     font-family: var(--font-body);
@@ -276,12 +289,12 @@ ul {
 =================================================== */
 .hero {
     position: relative;
-    min-height: 100vh;
+    min-height: 100svh;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    padding: 120px 24px 0;
+    justify-content: flex-start;
+    padding: 130px 0 0;
     overflow: hidden;
     background: radial-gradient(ellipse at 50% 0%, rgba(200,146,58,0.08) 0%, transparent 60%),
                 var(--bg);
@@ -329,11 +342,24 @@ ul {
     66%       { transform: translate(-50%, -50%) translateY(6px) rotate(1deg); }
 }
 
-.hero-content {
+/* Two-column hero: copy on the left, portrait on the right. */
+.hero-grid {
     position: relative;
     z-index: 1;
-    text-align: center;
-    max-width: 860px;
+    flex: 1;                 /* absorb the free space so the stats bar sits flush at the bottom */
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px 56px;
+    display: grid;
+    grid-template-columns: 1.05fr 0.95fr;
+    align-items: center;
+    align-content: center;
+    gap: 56px;
+}
+
+.hero-content {
+    text-align: left;
     animation: fadeUp 1s ease both;
 }
 
@@ -343,7 +369,7 @@ ul {
     gap: 10px;
     font-size: 12px;
     font-weight: 600;
-    letter-spacing: 4px;
+    letter-spacing: 3px;
     text-transform: uppercase;
     color: var(--accent);
     margin-bottom: 24px;
@@ -355,35 +381,153 @@ ul {
     height: 6px;
     border-radius: 50%;
     background: var(--accent);
+    flex-shrink: 0;
     animation: dotPulse 2s ease-in-out infinite;
 }
 
 .hero-title {
     font-family: var(--font-heading);
-    font-size: clamp(3.5rem, 10vw, 7rem);
+    font-size: clamp(2.9rem, 6.4vw, 5.6rem);
     font-weight: 700;
     letter-spacing: 2px;
-    line-height: 1;
+    line-height: 0.98;
     text-transform: uppercase;
     color: var(--text);
-    margin-bottom: 24px;
+    margin-bottom: 20px;
 }
 
 .hero-subtitle {
-    font-size: 15px;
-    font-weight: 500;
-    letter-spacing: 1.5px;
-    color: var(--text-muted);
-    margin-bottom: 40px;
-    text-transform: uppercase;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.65;
+    letter-spacing: 0;
+    color: rgba(255, 255, 255, 0.72);
+    max-width: 46ch;
+    margin-bottom: 26px;
+    text-transform: none;
 }
+
+.hero-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 32px;
+    list-style: none;
+}
+
+.hero-pills li {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    color: rgba(255, 255, 255, 0.75);
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--border-light);
+    border-radius: 100px;
+    padding: 7px 14px;
+    white-space: nowrap;
+}
+
+.hero-pills i { color: var(--accent); font-size: 11px; }
 
 .hero-actions {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     gap: 16px;
     flex-wrap: wrap;
+}
+
+.hero-reassure {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    flex-wrap: wrap;
+    margin-top: 22px;
+    font-size: 12.5px;
+    font-weight: 500;
+    color: var(--text-muted);
+}
+
+.hero-reassure i { color: #5fd98c; }
+
+/* === HERO PORTRAIT ===
+   Placeholder crop: shows the top-right (2025) quadrant of the transformation
+   collage. To use a real photo, replace the background-image below with e.g.
+   url('../img/dom-hero.jpg') and set background-size: cover; background-position: center; */
+.hero-portrait {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    /* Cap the width (not the height) so the crop never distorts while still
+       keeping the whole hero close to a single viewport height. */
+    max-width: 470px;
+    justify-self: end;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border);
+    overflow: hidden;
+    background-image: url('../img/dom-transformation.jpg');
+    background-size: 200% 200%;
+    background-position: 100% 0%;
+    background-repeat: no-repeat;
+    box-shadow: 0 24px 70px rgba(0, 0, 0, 0.55), var(--shadow-accent);
+    animation: fadeUp 1s 0.15s ease both;
+}
+
+/* Bottom scrim so the location tag stays legible over any photo. */
+.hero-portrait::after {
+    content: '';
+    position: absolute;
+    inset: auto 0 0 0;
+    height: 45%;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.85), transparent);
+    pointer-events: none;
+}
+
+.hero-portrait-tag {
+    position: absolute;
+    left: 16px;
+    bottom: 16px;
+    z-index: 1;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    color: #fff;
+    background: rgba(0, 0, 0, 0.55);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 100px;
+    padding: 7px 14px;
+}
+
+.hero-portrait-tag i { color: var(--accent); }
+
+@media (max-width: 900px) {
+    .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 36px;
+        max-width: 560px;
+    }
+
+    .hero-content { text-align: center; }
+    .hero-subtitle { margin-left: auto; margin-right: auto; }
+    .hero-eyebrow,
+    .hero-pills,
+    .hero-actions,
+    .hero-reassure { justify-content: center; }
+
+    /* Photo first on mobile, it is the strongest thing above the fold. */
+    .hero-portrait {
+        order: -1;
+        aspect-ratio: 5 / 4;
+        max-width: 420px;
+        margin: 0 auto;
+    }
 }
 
 /* Buttons */
@@ -455,12 +599,12 @@ ul {
     transform: translateY(-2px);
 }
 
-/* Hero stats bar */
+/* Hero stats bar: sits in normal flow as the hero's last flex item. The grid
+   above it has flex:1 and absorbs the free space, so this always lands flush at
+   the bottom and can never overlap the hero content. */
 .hero-stats {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
+    width: 100%;
+    flex-shrink: 0;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -503,19 +647,8 @@ ul {
     background: var(--border);
 }
 
-.scroll-down {
-    position: absolute;
-    bottom: 100px;
-    left: 50%;
-    transform: translateX(-50%);
-    color: var(--text-faint);
-    font-size: 18px;
-    z-index: 2;
-    animation: bounce 2s infinite;
-    transition: color var(--transition);
-}
-
-.scroll-down:hover { color: var(--accent); }
+/* The scroll cue was removed. The hero now ends in a visible stats bar, which
+   is a clearer affordance than a floating chevron. */
 
 
 /* ===================================================
@@ -741,6 +874,10 @@ ul {
     padding: 32px 28px;
     position: relative;
     overflow: hidden;
+    /* Column layout so the price and CTA sit flush at the bottom of every card,
+       regardless of how much copy each one carries. */
+    display: flex;
+    flex-direction: column;
     transition: transform var(--transition), border-color var(--transition), box-shadow var(--transition);
 }
 
@@ -1410,7 +1547,7 @@ ul {
 
 .form-group input::placeholder,
 .form-group textarea::placeholder {
-    color: var(--text-faint);
+    color: var(--text-placeholder);
 }
 
 .form-group input:focus,
@@ -1717,26 +1854,34 @@ ul {
     }
 }
 
-@media (max-width: 768px) {
+/* ── NAVBAR: collapse to the hamburger ──
+   The desktop nav needs ~1000px for the links plus the CTA button. Below that
+   the CTA used to overflow the viewport and get silently clipped by
+   `overflow-x: clip`, so the primary call to action disappeared on tablets and
+   small laptops. Collapse early instead. */
+@media (max-width: 1024px) {
     .nav-logo-img { height: 30px; }
+    .nav-logo-svg { width: 150px; }
 
-    /* Navbar mobile */
     .nav-links {
         position: fixed;
         top: 0;
         right: 0;
         bottom: 0;
-        width: min(320px, 80vw);
+        width: min(320px, 82vw);
         background: var(--bg-card);
         border-left: 1px solid var(--border);
         flex-direction: column;
         justify-content: center;
-        gap: 40px;
+        align-items: stretch;
+        text-align: center;
+        gap: 34px;
         z-index: 999;
         transform: translateX(100%);
         transition: transform var(--transition);
-        padding: 80px 40px;
+        padding: 80px 36px;
         list-style: none;
+        overflow-y: auto;
     }
 
     .nav-links.open { transform: translateX(0); }
@@ -1746,14 +1891,31 @@ ul {
         color: var(--text);
     }
 
+    .nav-link::after { left: 50%; transform: translateX(-50%); }
+
+    /* The header CTA button is hidden here, so surface it inside the menu. */
+    .nav-cta-mobile { display: block; }
+
+    .nav-cta-mobile .nav-link {
+        display: block;
+        background: var(--accent);
+        color: var(--bg);
+        font-weight: 700;
+        border-radius: var(--radius);
+        padding: 14px 20px;
+    }
+
+    .nav-cta-mobile .nav-link::after { display: none; }
+
     .mobile-overlay.show {
         display: block;
     }
 
     .hamburger { display: flex; }
     .nav-cta { display: none; }
-    .nav-login { display: none; }
+}
 
+@media (max-width: 768px) {
     /* Hero */
     .hero-barbell-wrap { animation: none; }
     .accent-text { animation: none; }
@@ -1769,7 +1931,6 @@ ul {
         height: 1px;
     }
 
-    .scroll-down { display: none; }
 
     /* Services */
     .services-grid {
@@ -1958,11 +2119,17 @@ ul {
 }
 
 .calc-field input:focus {
-    outline: none;
     border-color: var(--accent);
 }
 
-.calc-field input::placeholder { color: var(--text-faint); }
+/* Keep the shared focus ring. This rule used to set `outline: none` and, being
+   more specific, silently stripped the ring from every calculator input. */
+.calc-field input:focus-visible {
+    outline: 3px solid var(--accent);
+    outline-offset: 3px;
+}
+
+.calc-field input::placeholder { color: var(--text-placeholder); }
 
 .btn-calc {
     padding: 12px 24px;
@@ -2133,10 +2300,16 @@ ul {
 
 .pricing-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
     margin-top: 60px;
-    align-items: start;
+    /* stretch, not start, otherwise the cards are all different heights and
+       the CTA buttons end up at different vertical positions. */
+    align-items: stretch;
+}
+
+@media (max-width: 1200px) {
+    .pricing-grid { grid-template-columns: repeat(2, 1fr); gap: 24px; }
 }
 
 .pricing-card {
@@ -2154,6 +2327,16 @@ ul {
     border-color: var(--accent);
     box-shadow: var(--shadow-accent);
 }
+
+/* Push the CTA to the bottom so all three buttons line up across the row. */
+.pricing-card .btn-ghost,
+.pricing-card .btn-primary {
+    margin-top: auto;
+    justify-content: center;
+    text-align: center;
+}
+
+.pricing-list { flex: 1; }
 
 .pricing-icon {
     width: 44px;
@@ -2320,7 +2503,7 @@ ul {
 
 
 /* ===================================================
-   RESPONSIVE — new sections (must be after base styles)
+   RESPONSIVE - new sections (must be after base styles)
 =================================================== */
 
 /* Reduce all section vertical padding on tablet/mobile */
@@ -2440,11 +2623,20 @@ ul {
     line-height: 0;
 }
 
+/* Google's embed has no dark theme, so a bright white map was the loudest
+   visual clash on the page. Invert + re-rotate hue to sit in the dark palette,
+   then lift it back to full colour on interaction. */
 .contact-map iframe {
     width: 100%;
     height: 220px;
     display: block;
-    filter: grayscale(30%) contrast(1.05);
+    filter: invert(0.92) hue-rotate(180deg) saturate(0.75) contrast(0.9);
+    transition: filter var(--transition);
+}
+
+.contact-map:hover iframe,
+.contact-map:focus-within iframe {
+    filter: none;
 }
 
 /* ============================================================
@@ -2459,42 +2651,65 @@ ul {
     margin-top: 48px;
 }
 
-/* 6-tile preview grid (replaced by Behold embed once connected) */
-.insta-grid-preview {
+/* Follow panel. Replaced the old 6-tile icon grid, which looked like a broken
+   feed because it never showed real posts. */
+.insta-panel {
     display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    gap: 8px;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    gap: 28px;
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 36px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-lg);
 }
 
-.insta-tile {
-    aspect-ratio: 1;
-    border-radius: 8px;
-    overflow: hidden;
-    display: block;
-    background: linear-gradient(135deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
-    position: relative;
-    text-decoration: none;
-    transition: transform 0.2s ease, opacity 0.2s ease;
-}
-
-.insta-tile:hover {
-    transform: scale(1.03);
-    opacity: 0.9;
-}
-
-.insta-tile-inner {
-    position: absolute;
-    inset: 0;
+.insta-panel-icon {
+    width: 68px;
+    height: 68px;
+    flex-shrink: 0;
+    border-radius: 18px;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: rgba(255, 255, 255, 0.25);
-    font-size: clamp(1.4rem, 3vw, 2.2rem);
+    font-size: 30px;
+    color: #fff;
+    background: linear-gradient(135deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
 }
 
-.insta-feed-cta {
-    margin-top: 28px;
-    text-align: center;
+.insta-panel-body h3 {
+    font-family: var(--font-heading);
+    font-size: 1.35rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+
+.insta-panel-body p {
+    color: var(--text-muted);
+    font-size: 14.5px;
+    margin-bottom: 22px;
+}
+
+.insta-panel-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: center;
+}
+
+@media (max-width: 640px) {
+    .insta-panel {
+        grid-template-columns: 1fr;
+        text-align: center;
+        justify-items: center;
+        padding: 28px 22px;
+    }
+
+    .insta-panel-actions { justify-content: center; }
 }
 
 .insta-follow-btn {
@@ -2585,7 +2800,6 @@ ul {
     .credential-badge  { font-size: 12px; padding: 7px 12px; }
 
     .instagram-feed-section { padding: 60px 0; }
-    .insta-grid-preview { grid-template-columns: repeat(3, 1fr); gap: 6px; }
 }
 
 
@@ -3259,7 +3473,7 @@ ul {
         0 100%
     );
 
-    /* Exit transition — strong ease-in so it accelerates off-screen */
+    /* Exit transition: strong ease-in so it accelerates off-screen */
     transition: transform 0.72s cubic-bezier(0.4, 0, 1, 1);
     will-change: transform;
 }
@@ -3287,7 +3501,726 @@ ul {
     to { stroke-dashoffset: 0; }
 }
 
-/* Skip intro entirely for reduced-motion users */
+/* ===================================================
+   NEW COMPONENTS
+=================================================== */
+
+/* --- Service card price anchor --- */
+.service-price {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-top: auto;
+    padding-top: 18px;
+}
+
+/* --- Pricing: secondary badge on the non-featured card --- */
+.pricing-badge-alt {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--bg-card);
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    font-family: var(--font-body);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 5px 16px;
+    border-radius: 100px;
+    white-space: nowrap;
+}
+
+/* --- Quiz: back button + step counter row --- */
+.quiz-footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 28px;
+    min-height: 24px;
+}
+
+.quiz-back-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    font-family: var(--font-body);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: color var(--transition);
+}
+
+.quiz-back-btn:hover { color: var(--accent); }
+.quiz-back-btn[hidden] { display: none; }
+
+/* --- Quiz: recommended plan summary --- */
+.quiz-result-plan {
+    max-width: 420px;
+    margin: 24px auto 0;
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius);
+    overflow: hidden;
+}
+
+.quiz-plan-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 12px 18px;
+    font-size: 13px;
+    text-align: left;
+}
+
+.quiz-plan-row + .quiz-plan-row { border-top: 1px solid var(--border-light); }
+
+.quiz-plan-label { color: var(--text-muted); }
+
+.quiz-plan-value {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    color: var(--accent);
+    text-align: right;
+}
+
+/* --- Quiz: email capture --- */
+.quiz-capture {
+    max-width: 420px;
+    margin: 24px auto 0;
+    text-align: left;
+}
+
+.quiz-capture label {
+    display: block;
+    font-size: 12.5px;
+    color: var(--text-muted);
+    margin-bottom: 10px;
+    line-height: 1.5;
+}
+
+.quiz-capture input {
+    width: 100%;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 12px 16px;
+    color: var(--text);
+    font-family: var(--font-body);
+    font-size: 14px;
+    outline: none;
+    transition: border-color var(--transition);
+}
+
+.quiz-capture input:focus { border-color: var(--accent); }
+
+/* --- Form: pre-fill notice, honeypot, consent, errors --- */
+.form-prefill-note {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 16px;
+    padding: 12px 16px;
+    border: 1px solid rgba(95, 217, 140, 0.35);
+    background: rgba(95, 217, 140, 0.08);
+    border-radius: var(--radius);
+    font-size: 13px;
+    color: #8fe6b0;
+}
+
+.form-prefill-note[hidden] { display: none; }
+.form-prefill-note i { color: #5fd98c; }
+
+/* Visually hidden but still reachable by bots that ignore CSS. */
+.form-hp {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    white-space: nowrap;
+}
+
+.form-consent { margin-top: 4px; }
+
+.consent-label {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--text-muted);
+    cursor: pointer;
+    text-transform: none;
+    letter-spacing: 0;
+    font-weight: 400;
+}
+
+.consent-label input[type="checkbox"] {
+    width: 17px;
+    height: 17px;
+    margin-top: 2px;
+    flex-shrink: 0;
+    accent-color: var(--accent);
+    cursor: pointer;
+}
+
+.form-error {
+    margin-top: 14px;
+    padding: 12px 16px;
+    border: 1px solid rgba(255, 128, 128, 0.35);
+    background: rgba(255, 68, 68, 0.08);
+    border-radius: var(--radius);
+    color: #ff9d9d;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.form-error[hidden] { display: none; }
+
+/* ===================================================
+   CLIENT RESULTS GALLERY
+=================================================== */
+.results-gallery-title {
+    font-family: var(--font-heading);
+    font-size: clamp(1.6rem, 3.4vw, 2.3rem);
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    text-align: center;
+    margin-top: 80px;
+}
+
+.results-gallery-sub {
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 15px;
+    margin: 10px auto 44px;
+    max-width: 520px;
+}
+
+.results-gallery {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+}
+
+.result-card {
+    display: flex;
+    flex-direction: column;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+.result-card:hover {
+    border-color: rgba(200, 146, 58, 0.45);
+    box-shadow: var(--shadow);
+}
+
+/* The standout result spans the full row and runs side by side. */
+.result-card-featured {
+    grid-column: 1 / -1;
+    flex-direction: row;
+    align-items: stretch;
+    border-color: var(--accent);
+    box-shadow: var(--shadow-accent);
+}
+
+.result-card-media {
+    position: relative;
+    background: var(--bg-alt);
+    flex-shrink: 0;
+}
+
+.result-card-media img {
+    width: 100%;
+    height: 260px;
+    object-fit: cover;
+    object-position: center 30%;
+    display: block;
+}
+
+.result-card-featured .result-card-media {
+    width: 38%;
+    max-width: 340px;
+}
+
+.result-card-featured .result-card-media img {
+    height: 100%;
+    min-height: 340px;
+}
+
+/* If the screenshot has not been added yet, collapse the slot cleanly instead
+   of showing a broken image. */
+.result-card-media.no-image { display: none; }
+
+.result-card-verify {
+    position: absolute;
+    left: 12px;
+    bottom: 12px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: #fff;
+    background: rgba(0, 0, 0, 0.72);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 100px;
+    padding: 5px 12px;
+}
+
+.result-card-verify i { color: #5fd98c; }
+
+.result-card-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 24px;
+}
+
+.result-card-flag {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    align-self: flex-start;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent);
+    background: var(--accent-glow);
+    border: 1px solid rgba(200, 146, 58, 0.35);
+    border-radius: 100px;
+    padding: 5px 14px;
+    margin-bottom: 14px;
+}
+
+.result-card-period {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+}
+
+.result-card-body h4 {
+    font-family: var(--font-heading);
+    font-size: 1.3rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    line-height: 1.2;
+    margin: 8px 0 12px;
+}
+
+.result-card-featured .result-card-body h4 { font-size: clamp(1.5rem, 2.6vw, 2rem); }
+
+.result-card-note {
+    font-size: 13.5px;
+    line-height: 1.65;
+    color: var(--text-muted);
+    margin-bottom: 20px;
+}
+
+.result-metrics {
+    margin-top: auto;
+    display: grid;
+    gap: 1px;
+    background: var(--border-light);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius);
+    overflow: hidden;
+}
+
+.result-card-featured .result-metrics { grid-template-columns: repeat(3, 1fr); }
+
+.result-metric {
+    background: var(--bg-alt);
+    padding: 12px 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.result-card-featured .result-metric {
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 6px;
+}
+
+.result-metric dt {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+}
+
+.result-metric dd {
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.62);
+    margin: 0;
+}
+
+.result-metric dd strong {
+    font-family: var(--font-heading);
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: 0.5px;
+}
+
+.result-metric dd i {
+    font-size: 9px;
+    margin: 0 3px;
+    color: var(--text-faint);
+}
+
+.metric-delta {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    padding: 3px 10px;
+    border-radius: 100px;
+    white-space: nowrap;
+}
+
+.metric-delta i { font-size: 10px; }
+.metric-delta.down { color: #5fd98c; background: rgba(95, 217, 140, 0.12); }
+.metric-delta.up   { color: #5fd98c; background: rgba(95, 217, 140, 0.12); }
+.metric-delta.hold { color: var(--text-muted); background: rgba(255, 255, 255, 0.05); }
+
+@media (max-width: 1000px) {
+    .results-gallery { grid-template-columns: repeat(2, 1fr); }
+    .result-card-featured { flex-direction: column; }
+    .result-card-featured .result-card-media { width: 100%; max-width: none; }
+    .result-card-featured .result-card-media img { height: 280px; min-height: 0; }
+}
+
+@media (max-width: 700px) {
+    .results-gallery { grid-template-columns: 1fr; }
+    .result-card-featured .result-metrics { grid-template-columns: 1fr; }
+    .result-card-featured .result-metric {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+    }
+    .result-card-media img { height: 220px; }
+}
+
+/* --- Pricing: short description + collapsible "what's included" ---
+   A disclosure rather than a hover tooltip: hover does not exist on touch, and
+   most visitors are on a phone. Open by default on wide screens where there is
+   room, collapsed on smaller ones. --- */
+.pricing-desc {
+    font-size: 13.5px;
+    line-height: 1.6;
+    color: var(--text-muted);
+    margin-top: -6px;
+}
+
+.pricing-details {
+    border-top: 1px solid var(--border-light);
+    padding-top: 14px;
+}
+
+.pricing-details summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    cursor: pointer;
+    list-style: none;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--accent);
+    transition: color var(--transition);
+}
+
+.pricing-details summary::-webkit-details-marker { display: none; }
+.pricing-details summary:hover { color: #e0ae56; }
+
+.pricing-details summary i {
+    font-size: 11px;
+    transition: transform var(--transition);
+}
+
+.pricing-details[open] summary { margin-bottom: 14px; }
+.pricing-details[open] summary i { transform: rotate(180deg); }
+
+.pricing-details .pricing-list { margin: 0; }
+
+/* --- Contact: location switcher --- */
+.contact-locations { margin-top: 28px; }
+
+.contact-locations-title {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 12px;
+}
+
+.contact-locations-title i { color: var(--accent); margin-right: 6px; }
+
+.location-tabs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.location-tab {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    text-align: left;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 14px 16px;
+    color: var(--text-muted);
+    font-family: var(--font-body);
+    cursor: pointer;
+    transition: border-color var(--transition), background var(--transition), color var(--transition);
+}
+
+.location-tab strong {
+    font-family: var(--font-heading);
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    color: var(--text);
+}
+
+.location-tab span { font-size: 12px; line-height: 1.4; }
+
+.location-tab:hover { border-color: rgba(200, 146, 58, 0.5); }
+
+.location-tab.active {
+    border-color: var(--accent);
+    background: rgba(200, 146, 58, 0.08);
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.location-tab.active strong { color: var(--accent); }
+
+@media (max-width: 520px) {
+    .location-tabs { grid-template-columns: 1fr; }
+}
+
+/* --- Legal pages (privacy policy) --- */
+.legal-main { padding: 140px 0 80px; }
+
+.legal-container {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+.legal-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 32px;
+    transition: color var(--transition);
+}
+
+.legal-back:hover { color: var(--accent); }
+
+.legal-title {
+    font-family: var(--font-heading);
+    font-size: clamp(2.2rem, 6vw, 3.4rem);
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    line-height: 1.05;
+    margin-bottom: 10px;
+}
+
+.legal-updated {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-bottom: 36px;
+}
+
+.legal-lead {
+    font-size: 16.5px;
+    line-height: 1.75;
+    color: rgba(255, 255, 255, 0.8);
+    padding: 20px 24px;
+    border-left: 3px solid var(--accent);
+    background: var(--bg-alt);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    margin-bottom: 40px;
+}
+
+.legal-container h2 {
+    font-family: var(--font-heading);
+    font-size: 1.35rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--text);
+    margin: 40px 0 14px;
+}
+
+.legal-container p {
+    color: rgba(255, 255, 255, 0.72);
+    margin-bottom: 16px;
+}
+
+.legal-container a:not(.legal-back):not(.btn-primary) {
+    color: var(--accent);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+.legal-list {
+    list-style: none;
+    margin: 0 0 18px;
+    padding: 0;
+}
+
+.legal-list li {
+    position: relative;
+    padding-left: 26px;
+    margin-bottom: 10px;
+    color: rgba(255, 255, 255, 0.72);
+}
+
+.legal-list li::before {
+    content: '';
+    position: absolute;
+    left: 6px;
+    top: 12px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+}
+
+.legal-cta {
+    margin-top: 48px;
+    padding-top: 32px;
+    border-top: 1px solid var(--border-light);
+}
+
+/* --- Footer legal --- */
+.footer-legal { margin-top: 6px; }
+
+.footer-legal a {
+    color: var(--text-muted);
+    font-size: 13px;
+    transition: color var(--transition);
+}
+
+.footer-legal a:hover { color: var(--accent); }
+
+
+/* ===================================================
+   ACCESSIBILITY
+=================================================== */
+
+/* Placeholders were rgba(255,255,255,0.20), about 1.8:1 against the page,
+   effectively invisible. This lands at ~4.6:1. */
+::placeholder { color: rgba(255, 255, 255, 0.46); opacity: 1; }
+
+/* A single visible focus ring for every interactive element. Previously only
+   form inputs had one, which made the site very hard to navigate by keyboard. */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+[tabindex]:focus-visible {
+    outline: 3px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 4px;
+}
+
+/* Keep the ring readable on top of the accent-coloured buttons. */
+.btn-primary:focus-visible,
+.nav-cta:focus-visible,
+.btn-submit:focus-visible,
+.btn-calc:focus-visible {
+    outline-color: #fff;
+    outline-offset: 3px;
+}
+
+/* Give every control a comfortable touch target on phones. */
+@media (pointer: coarse) {
+    .tc-dot { min-width: 24px; min-height: 24px; }
+    .tc-btn,
+    .faq-question,
+    .toggle-btn,
+    .unit-btn { min-height: 44px; }
+}
+
+
+/* ===================================================
+   REDUCED MOTION
+   Previously this only hid the intro sting while every other animation kept
+   running. Now it covers the whole site.
+=================================================== */
 @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+        scroll-behavior: auto !important;
+    }
+
+    html { scroll-behavior: auto; }
+
     #page-intro { display: none; }
+
+    /* Reveal-on-scroll elements must not stay stuck at opacity 0. */
+    .reveal,
+    .reveal-left,
+    .reveal-right,
+    .reveal-scale {
+        opacity: 1 !important;
+        transform: none !important;
+    }
+
+    .hero-barbell-wrap,
+    .hero-title .accent-text,
+    .eyebrow-dot,
+    .service-card.featured::before {
+        animation: none !important;
+    }
 }

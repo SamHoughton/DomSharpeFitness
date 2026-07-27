@@ -1,7 +1,12 @@
 {
   "permissions": {
     "allow": [
-      "WebFetch(domain:docs.railway.com)"
+      "WebFetch(domain:docs.railway.com)",
+      "PowerShell(Get-ChildItem -Path \"img\",\"css\",\"js\" -File | Select-Object Name, @{n='KB';e={[math]::Round\\($_.Length/1KB,1\\)}} | Format-Table -AutoSize)",
+      "WebSearch",
+      "WebFetch(domain:www.webcitz.com)",
+      "WebFetch(domain:mypersonaltrainerwebsite.com)",
+      "Bash(sort -u -t: -k2)"
     ]
   }
 }

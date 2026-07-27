@@ -48,9 +48,6 @@ app.get('/health', (_req, res) => res.json({ ok: true }));
 
 app.use('/api/auth',          authLimiter, require('./routes/auth'));
 app.use('/api/consultations', consultationLimiter, require('./routes/consultations'));
-app.use('/api/clients',       require('./routes/clients'));
-app.use('/api/checkins',      require('./routes/checkins'));
-app.use('/api/messages',      require('./routes/messages'));
 
 // Global error handler
 app.use((err, _req, res, _next) => {

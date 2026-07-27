@@ -1,18 +1,16 @@
--- Run this once against your Railway Postgres database
--- Railway dashboard → your Postgres service → Query tab
+-- Runs automatically on every Railway deploy (see migrate.js).
+-- Safe to re-run: everything is CREATE ... IF NOT EXISTS.
 
 CREATE EXTENSION IF NOT EXISTS "pgcrypto";
 
--- Client accounts (+ Dom's own account)
+-- Admin account (Dom). Created once via POST /api/auth/setup-dom.
 CREATE TABLE IF NOT EXISTS profiles (
-  id           UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  email        TEXT UNIQUE NOT NULL,
+  id            UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  email         TEXT UNIQUE NOT NULL,
   password_hash TEXT NOT NULL,
-  name         TEXT NOT NULL,
-  goal         TEXT,
-  experience   TEXT,
-  is_dom       BOOLEAN DEFAULT FALSE,
-  created_at   TIMESTAMPTZ DEFAULT NOW()
+  name          TEXT NOT NULL,
+  is_dom        BOOLEAN DEFAULT FALSE,
+  created_at    TIMESTAMPTZ DEFAULT NOW()
 );
 
 -- Public consultation form submissions
@@ -28,41 +26,18 @@ CREATE TABLE IF NOT EXISTS consultations (
   created_at   TIMESTAMPTZ DEFAULT NOW()
 );
 
--- Weekly client check-ins
-CREATE TABLE IF NOT EXISTS check_ins (
-  id              UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  profile_id      UUID NOT NULL REFERENCES profiles(id) ON DELETE CASCADE,
-  week_date       DATE NOT NULL,
-  -- Body composition
-  weight_kg       NUMERIC(5,2),
-  body_fat_pct    NUMERIC(4,1),
-  -- Measurements (cm)
-  waist_cm        NUMERIC(5,1),
-  hips_cm         NUMERIC(5,1),
-  chest_cm        NUMERIC(5,1),
-  left_arm_cm     NUMERIC(5,1),
-  right_arm_cm    NUMERIC(5,1),
-  left_thigh_cm   NUMERIC(5,1),
-  right_thigh_cm  NUMERIC(5,1),
-  -- Lifestyle
-  steps           INTEGER,
-  sleep_hours     NUMERIC(3,1),
-  mood_score      INTEGER CHECK (mood_score BETWEEN 1 AND 10),
-  energy_score    INTEGER CHECK (energy_score BETWEEN 1 AND 10),
-  calories        INTEGER,
-  nutrition_notes TEXT,
-  -- Media & notes
-  photo_url       TEXT,
-  notes           TEXT,
-  created_at      TIMESTAMPTZ DEFAULT NOW()
-);
+CREATE INDEX IF NOT EXISTS consultations_created_at_idx ON consultations (created_at DESC);
+CREATE INDEX IF NOT EXISTS consultations_status_idx     ON consultations (status);
 
--- Messages between Dom and each client
-CREATE TABLE IF NOT EXISTS messages (
-  id         UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  profile_id UUID NOT NULL REFERENCES profiles(id) ON DELETE CASCADE,
-  sender     TEXT NOT NULL CHECK (sender IN ('dom', 'client')),
-  body       TEXT NOT NULL,
-  read_at    TIMESTAMPTZ,
-  created_at TIMESTAMPTZ DEFAULT NOW()
-);
+-- ---------------------------------------------------------------------------
+-- The client portal was removed. The tables below are no longer used by the
+-- API, but they are NOT dropped automatically because they may still hold real
+-- client data. Once you have exported anything you want to keep, run these by
+-- hand in the Railway query console:
+--
+--   DROP TABLE IF EXISTS check_ins;
+--   DROP TABLE IF EXISTS messages;
+--   ALTER TABLE profiles DROP COLUMN IF EXISTS goal;
+--   ALTER TABLE profiles DROP COLUMN IF EXISTS experience;
+--   DELETE FROM profiles WHERE is_dom = FALSE;
+-- ---------------------------------------------------------------------------

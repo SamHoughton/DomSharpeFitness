@@ -3,22 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Dom Sharpe — Personal Trainer in Hitchin at Bannatyne Fairfield. 1:1 coaching for weight training, fat loss, mobility and strength. Book your free consultation today.">
-    <meta name="keywords" content="personal trainer Hitchin, Dom Sharpe, Bannatyne Fairfield, personal trainer Hertfordshire, weight loss Hitchin, strength training Hitchin, 1:1 coaching, personal trainer Stotfold">
-    <title>Dom Sharpe | Personal Trainer in Hitchin | 1:1 Coaching at Bannatyne Fairfield</title>
+    <meta name="description" content="Dom Sharpe, Personal Trainer in Hitchin and Letchworth. 1:1 coaching for weight training, fat loss, mobility and strength at Bannatyne Fairfield and Studio 180. Book your free consultation today.">
+    <meta name="keywords" content="personal trainer Hitchin, personal trainer Letchworth, Dom Sharpe, Bannatyne Fairfield, Studio 180 Letchworth, personal trainer Hertfordshire, weight loss Hitchin, strength training Letchworth, 1:1 coaching, personal trainer Stotfold">
+    <title>Dom Sharpe | Personal Trainer in Hitchin &amp; Letchworth | 1:1 Coaching</title>
 
     <!-- Open Graph -->
     <meta property="og:type"        content="website">
     <meta property="og:url"         content="https://domsharpefitness.netlify.app/">
-    <meta property="og:title"       content="Dom Sharpe | Personal Trainer in Hitchin">
-    <meta property="og:description" content="1:1 coaching for weight training, fat loss, mobility and strength at Bannatyne Fairfield, Hitchin. First session free.">
+    <meta property="og:title"       content="Dom Sharpe | Personal Trainer in Hitchin &amp; Letchworth">
+    <meta property="og:description" content="1:1 coaching for weight training, fat loss, mobility and strength at Bannatyne Fairfield, Hitchin and Studio 180, Letchworth. First consultation free.">
     <meta property="og:image"       content="https://domsharpefitness.netlify.app/img/dom-transformation.jpg">
 
     <!-- Twitter Card -->
     <meta name="twitter:card"        content="summary_large_image">
-    <meta name="twitter:title"       content="Dom Sharpe | Personal Trainer in Hitchin">
-    <meta name="twitter:description" content="1:1 coaching for weight training, fat loss, mobility and strength. First session free.">
+    <meta name="twitter:title"       content="Dom Sharpe | Personal Trainer in Hitchin &amp; Letchworth">
+    <meta name="twitter:description" content="1:1 coaching for weight training, fat loss, mobility and strength. First consultation free.">
     <meta name="twitter:image"       content="https://domsharpefitness.netlify.app/img/dom-transformation.jpg">
+
+    <link rel="canonical" href="https://domsharpefitness.netlify.app/">
+    <link rel="icon" href="img/favicon.ico">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -27,16 +30,192 @@
 
     <link rel="stylesheet" href="css/styles.css">
 
-    <!-- Google Analytics GA4 — replace G-XXXXXXXXXX with your Measurement ID -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <!-- ============================================================
+         GOOGLE ANALYTICS (GA4)
+         Currently OFF. To turn it on, put your real Measurement ID
+         (Analytics → Admin → Data streams) in GA_MEASUREMENT_ID below.
+         Leaving it as null means no dead request is made on every visit.
+         ============================================================ -->
     <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'G-XXXXXXXXXX');
+        const GA_MEASUREMENT_ID = null; // e.g. 'G-AB12CD34EF'
+
+        if (GA_MEASUREMENT_ID) {
+            const s = document.createElement('script');
+            s.async = true;
+            s.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_MEASUREMENT_ID;
+            document.head.appendChild(s);
+
+            window.dataLayer = window.dataLayer || [];
+            window.gtag = function () { dataLayer.push(arguments); };
+            gtag('js', new Date());
+            gtag('config', GA_MEASUREMENT_ID, { anonymize_ip: true });
+        }
+    </script>
+
+    <!-- ===================== STRUCTURED DATA ===================== -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": ["LocalBusiness", "HealthAndBeautyBusiness"],
+          "@id": "https://domsharpefitness.netlify.app/#business",
+          "name": "Sharpe Strength, Dom Sharpe Personal Training",
+          "description": "1:1 personal training in Hitchin and Letchworth for weight loss, strength, mobility and accountability. Based at Bannatyne Fairfield and Studio 180.",
+          "url": "https://domsharpefitness.netlify.app/",
+          "telephone": "+447375219353",
+          "email": "sharp.strength1@gmail.com",
+          "image": "https://domsharpefitness.netlify.app/img/dom-transformation.jpg",
+          "priceRange": "££",
+          "currenciesAccepted": "GBP",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Bannatyne Health Club, Kingsley Avenue, Fairfield Park",
+            "addressLocality": "Hitchin",
+            "addressRegion": "Hertfordshire",
+            "postalCode": "SG5 4JJ",
+            "addressCountry": "GB"
+          },
+          "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": 51.9805,
+            "longitude": -0.2757
+          },
+          "location": [
+            {
+              "@type": "Place",
+              "name": "Bannatyne Health Club, Fairfield",
+              "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "Kingsley Avenue, Fairfield Park",
+                "addressLocality": "Hitchin",
+                "addressRegion": "Hertfordshire",
+                "postalCode": "SG5 4JJ",
+                "addressCountry": "GB"
+              }
+            },
+            {
+              "@type": "Place",
+              "name": "Studio 180",
+              "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "Unit 8, Business Centre East, Fifth Avenue",
+                "addressLocality": "Letchworth Garden City",
+                "addressRegion": "Hertfordshire",
+                "postalCode": "SG6 2TS",
+                "addressCountry": "GB"
+              }
+            }
+          ],
+          "areaServed": [
+            { "@type": "City", "name": "Hitchin" },
+            { "@type": "City", "name": "Letchworth Garden City" },
+            { "@type": "City", "name": "Stotfold" },
+            { "@type": "City", "name": "Baldock" }
+          ],
+          "sameAs": ["https://www.instagram.com/sharpe.strength/"],
+          "founder": { "@id": "https://domsharpefitness.netlify.app/#dom" },
+          "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "5",
+            "reviewCount": "4",
+            "bestRating": "5"
+          },
+          "hasOfferCatalog": {
+            "@type": "OfferCatalog",
+            "name": "Personal Training Services",
+            "itemListElement": [
+              {
+                "@type": "Offer",
+                "name": "1-2-1 Personal Training",
+                "price": "42",
+                "priceCurrency": "GBP",
+                "description": "A personalised 60-minute coaching session designed around your goals, experience and ability.",
+                "itemOffered": { "@type": "Service", "name": "1-2-1 Personal Training Session" }
+              },
+              {
+                "@type": "Offer",
+                "name": "6-Week Coaching",
+                "price": "252",
+                "priceCurrency": "GBP",
+                "description": "Six weekly 60-minute sessions with a progressive programme, goal setting and ongoing accountability.",
+                "itemOffered": { "@type": "Service", "name": "6-Week Personal Training Package" }
+              },
+              {
+                "@type": "Offer",
+                "name": "6-Week Coaching + App",
+                "price": "288",
+                "priceCurrency": "GBP",
+                "description": "Weekly personal training plus a personalised programme delivered through the app, with video demos and direct messaging support.",
+                "itemOffered": { "@type": "Service", "name": "6-Week Coaching with App Programming" }
+              },
+              {
+                "@type": "Offer",
+                "name": "6-Week Programme + Weekly Check-ins",
+                "price": "180",
+                "priceCurrency": "GBP",
+                "description": "A personalised 6-week app programme with weekly check-ins, for people confident training independently.",
+                "itemOffered": { "@type": "Service", "name": "Online Coaching with Weekly Check-ins" }
+              }
+            ]
+          }
+        },
+        {
+          "@type": "Person",
+          "@id": "https://domsharpefitness.netlify.app/#dom",
+          "name": "Dom Sharpe",
+          "jobTitle": "Personal Trainer",
+          "worksFor": { "@id": "https://domsharpefitness.netlify.app/#business" },
+          "sameAs": ["https://www.instagram.com/sharpe.strength/"]
+        },
+        {
+          "@type": "FAQPage",
+          "@id": "https://domsharpefitness.netlify.app/#faq",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "Do I need to already be fit to start?",
+              "acceptedAnswer": { "@type": "Answer", "text": "Not at all. Dom works with all levels, from complete beginners to experienced lifters. The programme is built around where you are right now, not where you think you should be." }
+            },
+            {
+              "@type": "Question",
+              "name": "Where are sessions held?",
+              "acceptedAnswer": { "@type": "Answer", "text": "Dom coaches from two venues: Bannatyne Fairfield, Kingsley Ave, Fairfield Park, Hitchin SG5 4JJ, a full health club with a complete range of equipment; and Studio 180, Unit 8 Business Centre East, Fifth Ave, Letchworth SG6 2TS, a private personal training studio. Let Dom know which is easier for you." }
+            },
+            {
+              "@type": "Question",
+              "name": "How long is each session?",
+              "acceptedAnswer": { "@type": "Answer", "text": "Sessions are typically 60 minutes. The first session is slightly longer as Dom will go through your goals, any injuries or limitations, and how you train currently." }
+            },
+            {
+              "@type": "Question",
+              "name": "What if I have an injury or health issue?",
+              "acceptedAnswer": { "@type": "Answer", "text": "Let Dom know before your first session. He programmes around injuries and works closely with clients who have mobility issues, back pain, or long-term conditions. If something is outside his scope he will tell you honestly." }
+            },
+            {
+              "@type": "Question",
+              "name": "Will I get a nutrition plan?",
+              "acceptedAnswer": { "@type": "Answer", "text": "Dom provides practical nutrition guidance as part of his coaching. Not a rigid meal plan, but realistic advice you can actually follow." }
+            },
+            {
+              "@type": "Question",
+              "name": "How quickly will I see results?",
+              "acceptedAnswer": { "@type": "Answer", "text": "Most clients notice a difference in how they feel within a few weeks: more energy, better movement, stronger in the gym. Visible physical changes typically follow after 6 to 8 weeks of consistent training and nutrition." }
+            },
+            {
+              "@type": "Question",
+              "name": "Can I cancel or reschedule sessions?",
+              "acceptedAnswer": { "@type": "Answer", "text": "Yes. Dom asks for 24 hours notice where possible. Life happens, just message him directly and he will sort it out." }
+            }
+          ]
+        }
+      ]
+    }
     </script>
 </head>
 <body>
+
+    <a href="#main" class="skip-link">Skip to content</a>
 
     <!-- Scroll progress indicator -->
     <div class="scroll-progress" id="scroll-progress"></div>
@@ -57,15 +236,15 @@
             <ul class="nav-links" id="nav-links">
                 <li><a href="#about" class="nav-link">About</a></li>
                 <li><a href="#services" class="nav-link">Services</a></li>
+                <li><a href="#transformations" class="nav-link">Results</a></li>
                 <li><a href="#pricing" class="nav-link">Pricing</a></li>
                 <li><a href="#faq" class="nav-link">FAQ</a></li>
-                <li><a href="#contact" class="nav-link">Consultation</a></li>
+                <li class="nav-cta-mobile"><a href="#contact" class="nav-link">Free Consultation</a></li>
             </ul>
 
-            <a href="portal.html" class="nav-login">Client Login</a>
             <a href="#contact" class="nav-cta">Free Consultation</a>
 
-            <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+            <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-links">
                 <span></span>
                 <span></span>
                 <span></span>
@@ -76,11 +255,13 @@
     <!-- Mobile menu overlay -->
     <div class="mobile-overlay" id="mobile-overlay"></div>
 
+    <main id="main">
+
     <!-- ===================== HERO ===================== -->
     <section class="hero" id="home">
         <div class="hero-bg-pattern"></div>
 
-        <!-- Animated SVG barbell — replaces old PNG dumbbells -->
+        <!-- Animated SVG barbell, replaces old PNG dumbbells -->
         <div class="hero-barbell-wrap" id="hero-barbell" aria-hidden="true">
             <svg class="hero-barbell-svg" viewBox="0 0 900 160" xmlns="http://www.w3.org/2000/svg" fill="none">
                 <!-- Left outer plate -->
@@ -109,28 +290,52 @@
             </svg>
         </div>
 
-        <div class="hero-content">
-            <div class="hero-eyebrow">
-                <span class="eyebrow-dot"></span>
-                Personal Trainer &nbsp;&bull;&nbsp; Hitchin &nbsp;&bull;&nbsp; Bannatyne Fairfield
-                <span class="eyebrow-dot"></span>
+        <div class="hero-grid">
+            <div class="hero-content">
+                <div class="hero-eyebrow">
+                    <span class="eyebrow-dot"></span>
+                    Personal Trainer &nbsp;&bull;&nbsp; Hitchin &nbsp;&bull;&nbsp; Letchworth
+                </div>
+
+                <h1 class="hero-title">
+                    TRAIN HARD.<br>
+                    <span class="accent-text">LIVE STRONGER.</span>
+                </h1>
+
+                <p class="hero-subtitle">
+                    1:1 coaching in Hitchin for people who want to lose fat, get strong and
+                    actually keep it up. Built around your life, not a template.
+                </p>
+
+                <ul class="hero-pills">
+                    <li><i class="fa-solid fa-dumbbell"></i> Weight Training</li>
+                    <li><i class="fa-solid fa-fire-flame-curved"></i> Weight Loss</li>
+                    <li><i class="fa-solid fa-person-running"></i> Mobility</li>
+                    <li><i class="fa-solid fa-handshake"></i> Accountability</li>
+                </ul>
+
+                <div class="hero-actions">
+                    <a href="#contact" class="btn-primary">
+                        Get Free Consultation
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                    <a href="#services" class="btn-ghost">View Services</a>
+                </div>
+
+                <p class="hero-reassure">
+                    <i class="fa-solid fa-circle-check"></i>
+                    First consultation is free &nbsp;&bull;&nbsp; No contracts &nbsp;&bull;&nbsp; All levels welcome
+                </p>
             </div>
 
-            <h1 class="hero-title">
-                TRAIN HARD.<br>
-                <span class="accent-text">LIVE STRONGER.</span>
-            </h1>
-
-            <p class="hero-subtitle">
-                Weight Training &amp; Mobility &nbsp;&bull;&nbsp; 1:1 Coaching &nbsp;&bull;&nbsp; Weight Loss &nbsp;&bull;&nbsp; Accountability
-            </p>
-
-            <div class="hero-actions">
-                <a href="#contact" class="btn-primary">
-                    Get Free Consultation
-                    <i class="fa-solid fa-arrow-right"></i>
-                </a>
-                <a href="#services" class="btn-ghost">View Services</a>
+            <!-- Hero portrait.
+                 Placeholder: crops the 2025 half of the transformation collage.
+                 To swap in a proper training shot, drop the file into /img and
+                 change the --hero-portrait background-image in css/styles.css. -->
+            <div class="hero-portrait" role="img" aria-label="Dom Sharpe, personal trainer in Hitchin and Letchworth">
+                <span class="hero-portrait-tag">
+                    <i class="fa-solid fa-location-dot"></i> Hitchin &amp; Letchworth
+                </span>
             </div>
         </div>
 
@@ -151,9 +356,6 @@
             </div>
         </div>
 
-        <a href="#about" class="scroll-down" aria-label="Scroll down">
-            <i class="fa-solid fa-chevron-down"></i>
-        </a>
     </section>
 
     <!-- ===================== ABOUT ===================== -->
@@ -166,7 +368,7 @@
                     <h2 class="section-title">I'VE BEEN WHERE <span class="accent-text">YOU ARE.</span></h2>
                     <p class="about-lead">I didn't always look or feel like this. My own transformation between 2022 and 2025 is the reason I'm so passionate about helping others.</p>
                     <p>Honestly, I didn't notice the change myself until I looked back at old photos. What made the difference wasn't some extreme diet or punishing programme. It was learning to enjoy my training, staying mindful (not strict) with food, and showing up consistently. I still drink. I still eat junk food, just in moderation most of the time.</p>
-                    <p>I'm proud of what I've achieved, and even more passionate about helping others find that same balance and confidence. Based at Bannatyne Fairfield, I coach 1:1 across weight training, mobility, weight loss and accountability. Programmes built around your life, not the other way round.</p>
+                    <p>I'm proud of what I've achieved, and even more passionate about helping others find that same balance and confidence. I coach 1:1 from Bannatyne Fairfield in Hitchin and Studio 180 in Letchworth, across weight training, mobility, weight loss and accountability. Programmes built around your life, not the other way round.</p>
 
                     <div class="about-tags">
                         <span class="tag"><i class="fa-solid fa-dumbbell"></i> Weight Training</span>
@@ -176,7 +378,7 @@
                         <span class="tag"><i class="fa-solid fa-handshake"></i> Accountability</span>
                     </div>
 
-                    <!-- Credentials — update with Dom's actual qualifications -->
+                    <!-- Credentials: update with Dom's actual qualifications -->
                     <div class="about-credentials">
                         <div class="credential-badge">
                             <i class="fa-solid fa-certificate"></i>
@@ -199,8 +401,8 @@
                 </div>
 
                 <div class="about-card-wrap reveal reveal-right">
-                    <!-- Dom's transformation — drag-to-reveal before/after slider -->
-                    <div class="ba-slider" id="ba-slider" role="img" aria-label="Dom Sharpe transformation — drag to compare 2022 and 2025">
+                    <!-- Dom's transformation: drag-to-reveal before/after slider -->
+                    <div class="ba-slider" id="ba-slider" role="img" aria-label="Dom Sharpe transformation, drag to compare 2022 and 2025">
                         <div class="ba-before">
                             <img src="img/dom-transformation.jpg" class="ba-img" alt="Dom Sharpe 2022">
                             <span class="ba-label ba-label-before">2022</span>
@@ -223,9 +425,9 @@
                         <blockquote class="about-quote">
                             I'm proud of what I've achieved, and even more passionate about helping others find that same balance and confidence.
                         </blockquote>
-                        <cite class="about-cite">— Dom Sharpe</cite>
+                        <cite class="about-cite">Dom Sharpe</cite>
                         <div class="about-card-info">
-                            <span><i class="fa-solid fa-location-dot"></i> Bannatyne Fairfield</span>
+                            <span><i class="fa-solid fa-location-dot"></i> Hitchin &amp; Letchworth</span>
                             <span><i class="fa-brands fa-instagram"></i> @sharpe.strength</span>
                         </div>
                     </div>
@@ -254,6 +456,7 @@
                         <li><i class="fa-solid fa-check"></i> Technique coaching every session</li>
                         <li><i class="fa-solid fa-check"></i> Progressive overload built in</li>
                     </ul>
+                    <p class="service-price">From &pound;42 per session</p>
                     <a href="#contact" class="service-link">Book a session <i class="fa-solid fa-arrow-right"></i></a>
                 </div>
 
@@ -269,6 +472,7 @@
                         <li><i class="fa-solid fa-check"></i> Training that burns fat, not muscle</li>
                         <li><i class="fa-solid fa-check"></i> Weekly check-ins</li>
                     </ul>
+                    <p class="service-price">From &pound;42 per session</p>
                     <a href="#contact" class="service-link">Get started <i class="fa-solid fa-arrow-right"></i></a>
                 </div>
 
@@ -283,6 +487,7 @@
                         <li><i class="fa-solid fa-check"></i> Corrective exercise</li>
                         <li><i class="fa-solid fa-check"></i> Flexibility work built in</li>
                     </ul>
+                    <p class="service-price">From &pound;42 per session</p>
                     <a href="#contact" class="service-link">Start moving better <i class="fa-solid fa-arrow-right"></i></a>
                 </div>
 
@@ -297,6 +502,7 @@
                         <li><i class="fa-solid fa-check"></i> Goal setting and tracking</li>
                         <li><i class="fa-solid fa-check"></i> Direct message support</li>
                     </ul>
+                    <p class="service-price">Included with coaching</p>
                     <a href="#contact" class="service-link">Stay on track <i class="fa-solid fa-arrow-right"></i></a>
                 </div>
 
@@ -363,16 +569,16 @@
                 <div class="quiz-step active" data-step="1">
                     <p class="quiz-q">What's your main goal?</p>
                     <div class="quiz-options">
-                        <button class="quiz-opt" data-key="goal" data-val="fat">
+                        <button type="button" class="quiz-opt" aria-pressed="false" data-key="goal" data-val="fat">
                             <i class="fa-solid fa-fire-flame-curved"></i><span>Lose Fat</span>
                         </button>
-                        <button class="quiz-opt" data-key="goal" data-val="muscle">
+                        <button type="button" class="quiz-opt" aria-pressed="false" data-key="goal" data-val="muscle">
                             <i class="fa-solid fa-dumbbell"></i><span>Build Muscle</span>
                         </button>
-                        <button class="quiz-opt" data-key="goal" data-val="mobility">
+                        <button type="button" class="quiz-opt" aria-pressed="false" data-key="goal" data-val="mobility">
                             <i class="fa-solid fa-person-running"></i><span>Move Better</span>
                         </button>
-                        <button class="quiz-opt" data-key="goal" data-val="accountability">
+                        <button type="button" class="quiz-opt" aria-pressed="false" data-key="goal" data-val="accountability">
                             <i class="fa-solid fa-chart-line"></i><span>Stay on Track</span>
                         </button>
                     </div>
@@ -382,13 +588,13 @@
                 <div class="quiz-step" data-step="2">
                     <p class="quiz-q">How would you describe your training history?</p>
                     <div class="quiz-options">
-                        <button class="quiz-opt" data-key="experience" data-val="beginner">
+                        <button type="button" class="quiz-opt" aria-pressed="false" data-key="experience" data-val="beginner">
                             <i class="fa-solid fa-seedling"></i><span>Just starting out</span>
                         </button>
-                        <button class="quiz-opt" data-key="experience" data-val="some">
+                        <button type="button" class="quiz-opt" aria-pressed="false" data-key="experience" data-val="some">
                             <i class="fa-solid fa-bolt"></i><span>Trained before</span>
                         </button>
-                        <button class="quiz-opt" data-key="experience" data-val="regular">
+                        <button type="button" class="quiz-opt" aria-pressed="false" data-key="experience" data-val="regular">
                             <i class="fa-solid fa-trophy"></i><span>Train regularly</span>
                         </button>
                     </div>
@@ -398,13 +604,13 @@
                 <div class="quiz-step" data-step="3">
                     <p class="quiz-q">How often can you commit to sessions?</p>
                     <div class="quiz-options">
-                        <button class="quiz-opt" data-key="frequency" data-val="once">
+                        <button type="button" class="quiz-opt" aria-pressed="false" data-key="frequency" data-val="once">
                             <i class="fa-solid fa-calendar-day"></i><span>Once a week</span>
                         </button>
-                        <button class="quiz-opt" data-key="frequency" data-val="few">
+                        <button type="button" class="quiz-opt" aria-pressed="false" data-key="frequency" data-val="few">
                             <i class="fa-solid fa-calendar-week"></i><span>2&ndash;3 times</span>
                         </button>
-                        <button class="quiz-opt" data-key="frequency" data-val="often">
+                        <button type="button" class="quiz-opt" aria-pressed="false" data-key="frequency" data-val="often">
                             <i class="fa-solid fa-calendar-check"></i><span>4+ sessions</span>
                         </button>
                     </div>
@@ -416,15 +622,39 @@
                     <p class="quiz-result-eyebrow">Your recommended programme</p>
                     <p class="quiz-result-name" id="quiz-result-name">Weight Loss Programme</p>
                     <p class="quiz-result-desc" id="quiz-result-desc"></p>
+
+                    <div class="quiz-result-plan" id="quiz-result-plan">
+                        <div class="quiz-plan-row">
+                            <span class="quiz-plan-label">Suggested starting point</span>
+                            <span class="quiz-plan-value" id="quiz-plan-name">-</span>
+                        </div>
+                        <div class="quiz-plan-row">
+                            <span class="quiz-plan-label">Typical investment</span>
+                            <span class="quiz-plan-value" id="quiz-plan-price">-</span>
+                        </div>
+                    </div>
+
+                    <div class="quiz-capture">
+                        <label for="quiz-email">Want Dom to build this around you? Drop your email and we'll pre-fill your consultation request.</label>
+                        <input type="email" id="quiz-email" placeholder="you@example.com" autocomplete="email" inputmode="email">
+                    </div>
+
                     <div class="quiz-result-actions">
-                        <a href="#contact" class="btn-primary">Get Started <i class="fa-solid fa-arrow-right"></i></a>
-                        <button class="quiz-restart-btn" id="quiz-restart">
+                        <button type="button" class="btn-primary" id="quiz-continue">
+                            Continue to Free Consultation <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                        <button type="button" class="quiz-restart-btn" id="quiz-restart">
                             <i class="fa-solid fa-rotate-left"></i> Start over
                         </button>
                     </div>
                 </div>
 
-                <p class="quiz-step-count" id="quiz-step-count">Question 1 of 3</p>
+                <div class="quiz-footer">
+                    <button type="button" class="quiz-back-btn" id="quiz-back" hidden>
+                        <i class="fa-solid fa-arrow-left"></i> Back
+                    </button>
+                    <p class="quiz-step-count" id="quiz-step-count">Question 1 of 3</p>
+                </div>
             </div>
         </div>
     </section>
@@ -437,7 +667,7 @@
             <p class="section-sub text-center">Don't take Dom's word for it. Hear from the people he trains.</p>
 
             <!-- Testimonial carousel -->
-            <div class="tc-carousel reveal" id="tc-carousel">
+            <div class="tc-carousel reveal" id="tc-carousel" role="group" aria-roledescription="carousel" aria-label="Client testimonials">
                 <div class="tc-track-wrap">
                     <div class="tc-track" id="tc-track">
 
@@ -469,7 +699,7 @@
                                 </div>
                                 <div class="testimonial-result-badge">First marathon &bull; Zero pain</div>
                                 <div class="testimonial-body expanded">
-                                    <blockquote>I started training with Dom early this year after having struggled with lower back and hip pain/discomfort for months (if not actually years). Having strength trained for many years I was confident I knew what I was doing, but I was also training to run my first Marathon and the constant limitations of the pain was getting to me. Let me just say — what an absolute game changer. Working with Dom once a week not only gave me the results I was looking for but it has taught me so much and enabled me to improve all aspects of my strength and fitness in ways I truly didn't expect. Dom is beyond knowledgeable, committed, attentive, listens to your needs and tailors everything to suit you as an individual. In a relatively short space of time my overall strength and fitness has improved, my weight training has come on leaps and bounds, I ran that marathon with zero pain beating my goal time, and I'm enjoying every aspect of my training again. I'd recommend him to anyone at any level no matter what the goal. I can't rate him highly enough.</blockquote>
+                                    <blockquote>I started training with Dom early this year after having struggled with lower back and hip pain/discomfort for months (if not actually years). Having strength trained for many years I was confident I knew what I was doing, but I was also training to run my first Marathon and the constant limitations of the pain was getting to me. Let me just say, what an absolute game changer. Working with Dom once a week not only gave me the results I was looking for but it has taught me so much and enabled me to improve all aspects of my strength and fitness in ways I truly didn't expect. Dom is beyond knowledgeable, committed, attentive, listens to your needs and tailors everything to suit you as an individual. In a relatively short space of time my overall strength and fitness has improved, my weight training has come on leaps and bounds, I ran that marathon with zero pain beating my goal time, and I'm enjoying every aspect of my training again. I'd recommend him to anyone at any level no matter what the goal. I can't rate him highly enough.</blockquote>
                                 </div>
                                 <div class="testimonial-author">
                                     <div class="author-avatar">K</div>
@@ -489,7 +719,7 @@
                                 </div>
                                 <div class="testimonial-result-badge">2+ years &bull; Best PT ever had</div>
                                 <div class="testimonial-body expanded">
-                                    <blockquote>I've been training with Dom at Sharpe Strength for over two years now, and I can honestly say he's the best PT I've ever had. His knowledge is incredible — he knows exactly how to tailor every session to my goals, pushing me to achieve more than I ever thought possible, while always keeping things safe, effective and fun! He's happy to answer my questions thoroughly so I'm always learning. But what really sets him apart is his kindness and approachable nature — I've never felt intimidated or out of my depth, just supported and encouraged every step of the way. If you want expert guidance, motivation, and real results, Sharpe Strength is the BEST decision you can make!</blockquote>
+                                    <blockquote>I've been training with Dom at Sharpe Strength for over two years now, and I can honestly say he's the best PT I've ever had. His knowledge is incredible. He knows exactly how to tailor every session to my goals, pushing me to achieve more than I ever thought possible, while always keeping things safe, effective and fun! He's happy to answer my questions thoroughly so I'm always learning. But what really sets him apart is his kindness and approachable nature. I've never felt intimidated or out of my depth, just supported and encouraged every step of the way. If you want expert guidance, motivation, and real results, Sharpe Strength is the BEST decision you can make!</blockquote>
                                 </div>
                                 <div class="testimonial-author">
                                     <div class="author-avatar">AM</div>
@@ -509,7 +739,7 @@
                                 </div>
                                 <div class="testimonial-result-badge">Fat loss &bull; Strength &bull; Mobility</div>
                                 <div class="testimonial-body expanded">
-                                    <blockquote>Honestly, the best PT I've ever worked with. From day one, he met me exactly where I was — no ego, no judgement — just patience, encouragement, and genuine expertise. I came in feeling nervous, unsure and in the worst shape of my life, but his deep experience and constant support have not only kept me injury-free, but helped me build real confidence and learn skills I never thought I'd master. He's got a real knack for knowing what you need — not just generic fat loss plans or gym routines off the shelf. Thanks to his tailored programming, I've seen steady fat loss alongside real gains in strength and mobility. Movements that once felt impossible are now part of my weekly sessions. My body just works better now! If you want someone who genuinely cares, knows his stuff inside out, and has the patience of a saint, this is your guy. Can't recommend him enough.</blockquote>
+                                    <blockquote>Honestly, the best PT I've ever worked with. From day one, he met me exactly where I was, no ego, no judgement, just patience, encouragement, and genuine expertise. I came in feeling nervous, unsure and in the worst shape of my life, but his deep experience and constant support have not only kept me injury-free, but helped me build real confidence and learn skills I never thought I'd master. He's got a real knack for knowing what you need, not just generic fat loss plans or gym routines off the shelf. Thanks to his tailored programming, I've seen steady fat loss alongside real gains in strength and mobility. Movements that once felt impossible are now part of my weekly sessions. My body just works better now! If you want someone who genuinely cares, knows his stuff inside out, and has the patience of a saint, this is your guy. Can't recommend him enough.</blockquote>
                                 </div>
                                 <div class="testimonial-author">
                                     <div class="author-avatar">SA</div>
@@ -525,17 +755,20 @@
                 </div>
 
                 <div class="tc-controls">
-                    <button class="tc-btn" id="tc-prev" aria-label="Previous testimonial">
+                    <button type="button" class="tc-btn" id="tc-prev" aria-label="Previous testimonial">
                         <i class="fa-solid fa-chevron-left"></i>
                     </button>
                     <div class="tc-dots" id="tc-dots">
-                        <button class="tc-dot active" aria-label="Testimonial 1 of 4"></button>
-                        <button class="tc-dot" aria-label="Testimonial 2 of 4"></button>
-                        <button class="tc-dot" aria-label="Testimonial 3 of 4"></button>
-                        <button class="tc-dot" aria-label="Testimonial 4 of 4"></button>
+                        <button type="button" class="tc-dot active" aria-label="Testimonial 1 of 4" aria-current="true"></button>
+                        <button type="button" class="tc-dot" aria-label="Testimonial 2 of 4" aria-current="false"></button>
+                        <button type="button" class="tc-dot" aria-label="Testimonial 3 of 4" aria-current="false"></button>
+                        <button type="button" class="tc-dot" aria-label="Testimonial 4 of 4" aria-current="false"></button>
                     </div>
-                    <button class="tc-btn" id="tc-next" aria-label="Next testimonial">
+                    <button type="button" class="tc-btn" id="tc-next" aria-label="Next testimonial">
                         <i class="fa-solid fa-chevron-right"></i>
+                    </button>
+                    <button type="button" class="tc-btn tc-btn-play" id="tc-play" aria-label="Pause testimonials" aria-pressed="false">
+                        <i class="fa-solid fa-pause"></i>
                     </button>
                 </div>
             </div>
@@ -552,7 +785,7 @@
             <!-- InBody featured result -->
             <div class="inbody-feature reveal">
                 <div class="inbody-image-col">
-                    <img src="img/inbody-progress.jpg" alt="InBody body composition scan showing client progress - weight loss and muscle gain" class="inbody-img">
+                    <img src="img/inbody-progress.jpg" alt="InBody body composition scan showing an 8 week client progress: body fat down from 23.1% to 18.9%, skeletal muscle up from 34.7kg to 36.2kg" class="inbody-img" width="640" height="1138" loading="lazy" decoding="async">
                     <div class="inbody-caption">
                         <i class="fa-solid fa-circle-check"></i>
                         Tracked via InBody Body Composition Analysis
@@ -623,6 +856,146 @@
                         <p>The scale only dropped 1.2kg, but the body composition shift is dramatic. Less fat, more muscle, better health. This is why Dom tracks beyond the scales.</p>
                     </div>
                 </div>
+            </div>
+
+            <!-- ===== CLIENT RESULTS GALLERY =====
+                 Numbers are typeset rather than left inside the screenshots, so
+                 they're readable, searchable and on-brand. The scan photo sits
+                 alongside as evidence and hides itself if the file is missing. -->
+            <h3 class="results-gallery-title">More <span class="accent-text">client results</span></h3>
+            <p class="results-gallery-sub">Every number below is a real InBody scan. No estimates, no guesswork.</p>
+
+            <div class="results-gallery">
+
+                <article class="result-card result-card-featured reveal">
+                    <div class="result-card-media">
+                        <img src="img/result-21kg-cut.jpg"
+                             alt="InBody scan: weight down from 96.5kg to 74.6kg and body fat down from 28.2% to 8.7% over four years"
+                             decoding="async" fetchpriority="low"
+                             onerror="this.closest('.result-card-media').classList.add('no-image')">
+                        <span class="result-card-verify"><i class="fa-solid fa-circle-check"></i> InBody verified</span>
+                    </div>
+                    <div class="result-card-body">
+                        <span class="result-card-flag"><i class="fa-solid fa-trophy"></i> Standout result</span>
+                        <span class="result-card-period">Jan 2022 &rarr; Nov 2025 &nbsp;&bull;&nbsp; Nearly 4 years</span>
+                        <h4>21.9kg down. 28.2% to 8.7% body fat.</h4>
+                        <p class="result-card-note">This is what consistency actually looks like over the long run. Almost 22kg off the scale, body fat down by more than two thirds, and skeletal muscle within a kilo of where it started. Not a transformation challenge, just years of turning up and doing the work.</p>
+                        <dl class="result-metrics">
+                            <div class="result-metric">
+                                <dt>Body Fat</dt>
+                                <dd>28.2% <i class="fa-solid fa-arrow-right"></i> <strong>8.7%</strong></dd>
+                                <span class="metric-delta down"><i class="fa-solid fa-arrow-down"></i> 19.5%</span>
+                            </div>
+                            <div class="result-metric">
+                                <dt>Weight</dt>
+                                <dd>96.5kg <i class="fa-solid fa-arrow-right"></i> <strong>74.6kg</strong></dd>
+                                <span class="metric-delta down"><i class="fa-solid fa-arrow-down"></i> 21.9kg</span>
+                            </div>
+                            <div class="result-metric">
+                                <dt>Muscle</dt>
+                                <dd>40.2kg <i class="fa-solid fa-arrow-right"></i> <strong>39.3kg</strong></dd>
+                                <span class="metric-delta hold">Held</span>
+                            </div>
+                        </dl>
+                    </div>
+                </article>
+
+                <article class="result-card reveal">
+                    <div class="result-card-media">
+                        <img src="img/result-10kg-cut.jpg"
+                             alt="InBody scan: weight down from 91.5kg to 81.8kg, body fat down from 24.2% to 15.4%"
+                             decoding="async" fetchpriority="low"
+                             onerror="this.closest('.result-card-media').classList.add('no-image')">
+                        <span class="result-card-verify"><i class="fa-solid fa-circle-check"></i> InBody verified</span>
+                    </div>
+                    <div class="result-card-body">
+                        <span class="result-card-period">Nov 2024 &rarr; Jun 2025 &nbsp;&bull;&nbsp; 7 months</span>
+                        <h4>9.7kg down, muscle held</h4>
+                        <p class="result-card-note">A proper cut. Nearly 10kg off the scale and body fat almost halved, while skeletal muscle stayed essentially untouched. That's the difference between losing fat and just losing weight.</p>
+                        <dl class="result-metrics">
+                            <div class="result-metric">
+                                <dt>Body Fat</dt>
+                                <dd>24.2% <i class="fa-solid fa-arrow-right"></i> <strong>15.4%</strong></dd>
+                                <span class="metric-delta down"><i class="fa-solid fa-arrow-down"></i> 8.8%</span>
+                            </div>
+                            <div class="result-metric">
+                                <dt>Weight</dt>
+                                <dd>91.5kg <i class="fa-solid fa-arrow-right"></i> <strong>81.8kg</strong></dd>
+                                <span class="metric-delta down"><i class="fa-solid fa-arrow-down"></i> 9.7kg</span>
+                            </div>
+                            <div class="result-metric">
+                                <dt>Muscle</dt>
+                                <dd>40.2kg <i class="fa-solid fa-arrow-right"></i> <strong>39.9kg</strong></dd>
+                                <span class="metric-delta hold">Held</span>
+                            </div>
+                        </dl>
+                    </div>
+                </article>
+
+                <article class="result-card reveal">
+                    <div class="result-card-media">
+                        <img src="img/result-first-month.jpg"
+                             alt="InBody scan: body fat down from 32.8% to 30.6% and muscle up 0.7kg in one month"
+                             decoding="async" fetchpriority="low"
+                             onerror="this.closest('.result-card-media').classList.add('no-image')">
+                        <span class="result-card-verify"><i class="fa-solid fa-circle-check"></i> InBody verified</span>
+                    </div>
+                    <div class="result-card-body">
+                        <span class="result-card-period">Jul &rarr; Aug 2025 &nbsp;&bull;&nbsp; 1 month</span>
+                        <h4>Fat down and muscle up, in four weeks</h4>
+                        <p class="result-card-note">The scale barely moved, and that's the point. Body fat down 2.2% with muscle actually going up, one month into training. This is why Dom doesn't judge progress on bodyweight alone.</p>
+                        <dl class="result-metrics">
+                            <div class="result-metric">
+                                <dt>Body Fat</dt>
+                                <dd>32.8% <i class="fa-solid fa-arrow-right"></i> <strong>30.6%</strong></dd>
+                                <span class="metric-delta down"><i class="fa-solid fa-arrow-down"></i> 2.2%</span>
+                            </div>
+                            <div class="result-metric">
+                                <dt>Muscle</dt>
+                                <dd>38.6kg <i class="fa-solid fa-arrow-right"></i> <strong>39.3kg</strong></dd>
+                                <span class="metric-delta up"><i class="fa-solid fa-arrow-up"></i> 0.7kg</span>
+                            </div>
+                            <div class="result-metric">
+                                <dt>Weight</dt>
+                                <dd>99.7kg <i class="fa-solid fa-arrow-right"></i> <strong>98.0kg</strong></dd>
+                                <span class="metric-delta down"><i class="fa-solid fa-arrow-down"></i> 1.7kg</span>
+                            </div>
+                        </dl>
+                    </div>
+                </article>
+
+                <article class="result-card reveal">
+                    <div class="result-card-media">
+                        <img src="img/result-recomp.jpg"
+                             alt="InBody scan: muscle up 1.8kg and body fat down 4.2% with bodyweight almost unchanged"
+                             decoding="async" fetchpriority="low"
+                             onerror="this.closest('.result-card-media').classList.add('no-image')">
+                        <span class="result-card-verify"><i class="fa-solid fa-circle-check"></i> InBody verified</span>
+                    </div>
+                    <div class="result-card-body">
+                        <span class="result-card-period">Jan &rarr; Feb 2026 &nbsp;&bull;&nbsp; 7 weeks</span>
+                        <h4>Textbook body recomposition</h4>
+                        <p class="result-card-note">Bodyweight up 0.3kg. If you only owned bathroom scales you'd think nothing happened. In reality: 1.8kg of muscle gained and 4.2% body fat lost in seven weeks.</p>
+                        <dl class="result-metrics">
+                            <div class="result-metric">
+                                <dt>Muscle</dt>
+                                <dd>25.1kg <i class="fa-solid fa-arrow-right"></i> <strong>26.9kg</strong></dd>
+                                <span class="metric-delta up"><i class="fa-solid fa-arrow-up"></i> 1.8kg</span>
+                            </div>
+                            <div class="result-metric">
+                                <dt>Body Fat</dt>
+                                <dd>30.8% <i class="fa-solid fa-arrow-right"></i> <strong>26.6%</strong></dd>
+                                <span class="metric-delta down"><i class="fa-solid fa-arrow-down"></i> 4.2%</span>
+                            </div>
+                            <div class="result-metric">
+                                <dt>Weight</dt>
+                                <dd>66.1kg <i class="fa-solid fa-arrow-right"></i> <strong>66.4kg</strong></dd>
+                                <span class="metric-delta hold">+0.3kg</span>
+                            </div>
+                        </dl>
+                    </div>
+                </article>
+
             </div>
 
             <div class="transformations-cta text-center">
@@ -781,54 +1154,93 @@
 
                 <div class="pricing-card reveal">
                     <div class="pricing-icon"><i class="fa-solid fa-bolt"></i></div>
-                    <h3>Single Session</h3>
+                    <h3>1-2-1 Personal Training</h3>
                     <div class="pricing-amount">
                         <span class="price-currency">&pound;</span>
-                        <span class="price-value">50</span>
+                        <span class="price-value">42</span>
                     </div>
                     <p class="pricing-period">per session</p>
-                    <ul class="pricing-list">
-                        <li><i class="fa-solid fa-check"></i> 1:1 with Dom</li>
-                        <li><i class="fa-solid fa-check"></i> Full session plan written for you</li>
-                        <li><i class="fa-solid fa-check"></i> Technique coaching throughout</li>
-                        <li><i class="fa-solid fa-check"></i> No commitment required</li>
-                    </ul>
+                    <p class="pricing-desc">A personalised coaching session designed around your goals, experience and ability. Whether you want to build strength, lose weight, improve mobility or just feel more confident in the gym, every session is tailored to help you progress safely and effectively.</p>
+                    <details class="pricing-details">
+                        <summary>What's included <i class="fa-solid fa-chevron-down"></i></summary>
+                        <ul class="pricing-list">
+                            <li><i class="fa-solid fa-check"></i> 60-minute 1-2-1 coaching session</li>
+                            <li><i class="fa-solid fa-check"></i> Personalised exercise selection</li>
+                            <li><i class="fa-solid fa-check"></i> Technique coaching and movement correction</li>
+                            <li><i class="fa-solid fa-check"></i> Progress tracking</li>
+                            <li><i class="fa-solid fa-check"></i> Expert guidance throughout your session</li>
+                        </ul>
+                    </details>
                     <a href="#contact" class="btn-ghost">Book a Session</a>
                 </div>
 
-                <div class="pricing-card featured reveal">
-                    <div class="featured-badge">Best Value</div>
-                    <div class="pricing-icon"><i class="fa-solid fa-fire-flame-curved"></i></div>
-                    <h3>Block of 10</h3>
+                <div class="pricing-card reveal">
+                    <div class="pricing-icon"><i class="fa-solid fa-calendar-week"></i></div>
+                    <h3>6-Week Coaching</h3>
                     <div class="pricing-amount">
                         <span class="price-currency">&pound;</span>
-                        <span class="price-value">450</span>
+                        <span class="price-value">252</span>
                     </div>
-                    <p class="pricing-period">10 sessions, save &pound;50</p>
-                    <ul class="pricing-list">
-                        <li><i class="fa-solid fa-check"></i> Everything in Single Session</li>
-                        <li><i class="fa-solid fa-check"></i> Full progressive programme</li>
-                        <li><i class="fa-solid fa-check"></i> Weekly check-ins</li>
-                        <li><i class="fa-solid fa-check"></i> WhatsApp support</li>
-                        <li><i class="fa-solid fa-check"></i> Nutrition guidance</li>
-                    </ul>
+                    <p class="pricing-period">&pound;42 per week</p>
+                    <p class="pricing-desc">Perfect if you want consistent face-to-face coaching and the accountability to actually stick with it.</p>
+                    <details class="pricing-details">
+                        <summary>What's included <i class="fa-solid fa-chevron-down"></i></summary>
+                        <ul class="pricing-list">
+                            <li><i class="fa-solid fa-check"></i> 1 x 60-minute session each week (6 sessions)</li>
+                            <li><i class="fa-solid fa-check"></i> Progressive 6-week training programme</li>
+                            <li><i class="fa-solid fa-check"></i> Weekly coaching and progression</li>
+                            <li><i class="fa-solid fa-check"></i> Goal setting and progress tracking</li>
+                            <li><i class="fa-solid fa-check"></i> Ongoing accountability</li>
+                        </ul>
+                    </details>
+                    <a href="#contact" class="btn-ghost">Enquire</a>
+                </div>
+
+                <div class="pricing-card featured reveal">
+                    <div class="featured-badge"><i class="fa-solid fa-star"></i> Recommended</div>
+                    <div class="pricing-icon"><i class="fa-solid fa-fire-flame-curved"></i></div>
+                    <h3>6-Week Coaching + App</h3>
+                    <div class="pricing-amount">
+                        <span class="price-currency">&pound;</span>
+                        <span class="price-value">288</span>
+                    </div>
+                    <p class="pricing-period">&pound;48 per week</p>
+                    <p class="pricing-desc">The complete package. Weekly personal training plus a personalised programme in the app, giving you the structure and support to get the best possible results.</p>
+                    <details class="pricing-details">
+                        <summary>What's included <i class="fa-solid fa-chevron-down"></i></summary>
+                        <ul class="pricing-list">
+                            <li><i class="fa-solid fa-check"></i> Everything in 6-Week Coaching</li>
+                            <li><i class="fa-solid fa-check"></i> Personalised programme through the app</li>
+                            <li><i class="fa-solid fa-check"></i> Exercise demonstration videos</li>
+                            <li><i class="fa-solid fa-check"></i> Workout and progress tracking</li>
+                            <li><i class="fa-solid fa-check"></i> Direct messaging support</li>
+                            <li><i class="fa-solid fa-check"></i> Extra accountability between sessions</li>
+                        </ul>
+                    </details>
                     <a href="#contact" class="btn-primary">Get Started <i class="fa-solid fa-arrow-right"></i></a>
                 </div>
 
                 <div class="pricing-card reveal">
-                    <div class="pricing-icon"><i class="fa-solid fa-handshake"></i></div>
-                    <h3>Monthly Coaching</h3>
+                    <div class="pricing-badge-alt">Best Value</div>
+                    <div class="pricing-icon"><i class="fa-solid fa-mobile-screen-button"></i></div>
+                    <h3>6-Week Programme + Check-ins</h3>
                     <div class="pricing-amount">
                         <span class="price-currency">&pound;</span>
                         <span class="price-value">180</span>
                     </div>
-                    <p class="pricing-period">per month (4 sessions)</p>
-                    <ul class="pricing-list">
-                        <li><i class="fa-solid fa-check"></i> 4 sessions per month</li>
-                        <li><i class="fa-solid fa-check"></i> Programme updated each month</li>
-                        <li><i class="fa-solid fa-check"></i> Progress tracking</li>
-                        <li><i class="fa-solid fa-check"></i> WhatsApp support</li>
-                    </ul>
+                    <p class="pricing-period">&pound;30 per week</p>
+                    <p class="pricing-desc">Ideal if you're confident training on your own but still want the structure, accountability and guidance of a coach behind you.</p>
+                    <details class="pricing-details">
+                        <summary>What's included <i class="fa-solid fa-chevron-down"></i></summary>
+                        <ul class="pricing-list">
+                            <li><i class="fa-solid fa-check"></i> Personalised 6-week programme in the app</li>
+                            <li><i class="fa-solid fa-check"></i> Exercise demonstration videos</li>
+                            <li><i class="fa-solid fa-check"></i> Workout tracking</li>
+                            <li><i class="fa-solid fa-check"></i> Weekly check-ins to review progress</li>
+                            <li><i class="fa-solid fa-check"></i> Programme adjustments where needed</li>
+                            <li><i class="fa-solid fa-check"></i> Ongoing support via the app</li>
+                        </ul>
+                    </details>
                     <a href="#contact" class="btn-ghost">Enquire</a>
                 </div>
 
@@ -862,7 +1274,7 @@
                         <i class="fa-solid fa-chevron-down faq-chevron"></i>
                     </button>
                     <div class="faq-answer">
-                        <p>All sessions are at Bannatyne Fairfield, Kingsley Ave, Fairfield Park, Hitchin SG5 4JJ. The gym has a full range of equipment for weight training, cardio and mobility work.</p>
+                        <p>Dom coaches from two venues. <strong>Bannatyne Fairfield</strong>, Kingsley Ave, Fairfield Park, Hitchin SG5 4JJ, a full health club with a complete range of equipment for weight training, cardio and mobility work. And <strong>Studio 180</strong>, Unit 8 Business Centre East, Fifth Ave, Letchworth SG6 2TS, a private personal training studio, which suits you if you'd rather train away from a busy gym floor. Let Dom know which is easier for you.</p>
                     </div>
                 </div>
 
@@ -944,17 +1356,17 @@
                             </div>
                         </div>
                         <div class="contact-detail-item">
+                            <div class="contact-detail-icon"><i class="fa-solid fa-envelope"></i></div>
+                            <div>
+                                <span class="detail-label">Email</span>
+                                <a href="mailto:sharp.strength1@gmail.com">sharp.strength1@gmail.com</a>
+                            </div>
+                        </div>
+                        <div class="contact-detail-item">
                             <div class="contact-detail-icon"><i class="fa-brands fa-instagram"></i></div>
                             <div>
                                 <span class="detail-label">Instagram</span>
                                 <a href="https://www.instagram.com/sharpe.strength/" target="_blank" rel="noopener noreferrer">@sharpe.strength</a>
-                            </div>
-                        </div>
-                        <div class="contact-detail-item">
-                            <div class="contact-detail-icon"><i class="fa-solid fa-location-dot"></i></div>
-                            <div>
-                                <span class="detail-label">Location</span>
-                                <span>Bannatyne Fairfield, Hitchin SG5 4JJ</span>
                             </div>
                         </div>
                         <div class="contact-detail-item">
@@ -966,8 +1378,27 @@
                         </div>
                     </div>
 
+                    <div class="contact-locations">
+                        <p class="contact-locations-title"><i class="fa-solid fa-location-dot"></i> Two locations</p>
+                        <div class="location-tabs" id="location-tabs" role="tablist" aria-label="Training locations">
+                            <button type="button" class="location-tab active" role="tab" aria-selected="true"
+                                    data-map="https://maps.google.com/maps?q=Bannatyne+Health+Club+Hitchin+Fairfield&output=embed"
+                                    data-title="Bannatyne Fairfield, Hitchin">
+                                <strong>Bannatyne Fairfield</strong>
+                                <span>Kingsley Ave, Hitchin SG5 4JJ</span>
+                            </button>
+                            <button type="button" class="location-tab" role="tab" aria-selected="false"
+                                    data-map="https://maps.google.com/maps?q=Studio+180+Fifth+Avenue+Letchworth+SG6+2TS&output=embed"
+                                    data-title="Studio 180, Letchworth">
+                                <strong>Studio 180</strong>
+                                <span>Fifth Ave, Letchworth SG6 2TS</span>
+                            </button>
+                        </div>
+                    </div>
+
                     <div class="contact-map">
                         <iframe
+                            id="location-map"
                             title="Bannatyne Fairfield, Hitchin"
                             src="https://maps.google.com/maps?q=Bannatyne+Health+Club+Hitchin+Fairfield&output=embed"
                             width="100%"
@@ -982,9 +1413,20 @@
                 </div>
 
                 <div class="contact-form-wrap reveal">
-                    <form class="consultation-form" id="consultation-form" name="consultation" netlify novalidate>
+                    <p class="form-prefill-note" id="form-prefill-note" hidden>
+                        <i class="fa-solid fa-wand-magic-sparkles"></i>
+                        We've filled in what you told us in the quiz. Just add your name and send.
+                    </p>
+
+                    <form class="consultation-form" id="consultation-form" name="consultation"
+                          data-netlify="true" netlify-honeypot="company" novalidate>
                         <input type="hidden" name="form-name" value="consultation">
                         <input type="hidden" id="availability" name="availability">
+
+                        <!-- Honeypot: hidden from people, tempting to bots. -->
+                        <p class="form-hp" aria-hidden="true">
+                            <label>Company <input name="company" tabindex="-1" autocomplete="off"></label>
+                        </p>
 
                         <div class="form-row two-col">
                             <div class="form-group">
@@ -1044,12 +1486,24 @@
                             <textarea id="message" name="message" rows="4" placeholder="What are you looking to achieve? Any injuries or limitations? Anything else Dom should know..."></textarea>
                         </div>
 
+                        <div class="form-group form-consent">
+                            <label class="consent-label">
+                                <input type="checkbox" id="consent" name="consent" required>
+                                <span>I'm happy for Dom to contact me about my consultation. <span class="required">*</span></span>
+                            </label>
+                        </div>
+
                         <button type="submit" class="btn-submit">
                             <span>Send Consultation Request</span>
                             <i class="fa-solid fa-paper-plane"></i>
                         </button>
 
-                        <p class="form-note">Your details will only be used to contact you about your consultation. No spam, ever.</p>
+                        <p class="form-error" id="form-error" role="alert" hidden></p>
+
+                        <p class="form-note">
+                            Your details are only used to contact you about your consultation and are never shared.
+                            Read the <a href="privacy.html">privacy policy</a>.
+                        </p>
                     </form>
 
                     <div class="form-success" id="form-success">
@@ -1071,60 +1525,42 @@
             <h2 class="section-title text-center">FOLLOW <span class="accent-text">@SHARPE.STRENGTH</span></h2>
             <p class="section-sub text-center">Training content, client progress and behind-the-scenes from the gym floor.</p>
 
-            <!-- ================================================
-                 INSTAGRAM LIVE FEED (Behold.so)
-                 1. Go to behold.so and sign up free
-                 2. Connect @sharpe.strength
-                 3. Copy your embed snippet and replace the
-                    placeholder grid below with it
-                 ================================================ -->
+            <!-- ================================================================
+                 OPTIONAL: live Instagram feed
+                 The placeholder tile grid that used to sit here was removed:
+                 it showed generic icons rather than real posts, which read as a
+                 broken feed. To show real posts:
+                   1. Sign up free at behold.so
+                   2. Connect @sharpe.strength
+                   3. Paste the embed snippet directly below this comment
+                 ================================================================ -->
             <div class="insta-feed-wrap">
-
-                <!-- REPLACE THIS BLOCK with your Behold embed snippet -->
-                <div class="insta-grid-preview">
-                    <a class="insta-tile" href="https://www.instagram.com/sharpe.strength/" target="_blank" rel="noopener noreferrer" aria-label="View on Instagram">
-                        <div class="insta-tile-inner">
-                            <i class="fa-brands fa-instagram"></i>
+                <div class="insta-panel">
+                    <div class="insta-panel-icon"><i class="fa-brands fa-instagram"></i></div>
+                    <div class="insta-panel-body">
+                        <h3>Training content, straight from the gym floor</h3>
+                        <p>
+                            Session clips, client progress, form breakdowns and the honest
+                            bits in between. It's the quickest way to see how Dom actually
+                            coaches before you book.
+                        </p>
+                        <div class="insta-panel-actions">
+                            <a href="https://www.instagram.com/sharpe.strength/" target="_blank" rel="noopener noreferrer" class="insta-follow-btn">
+                                <i class="fa-brands fa-instagram"></i>
+                                Follow @sharpe.strength
+                            </a>
+                            <a href="https://wa.me/447375219353?text=Hi%20Dom%2C%20I%27d%20like%20to%20find%20out%20more%20about%20personal%20training."
+                               target="_blank" rel="noopener noreferrer" class="btn-ghost">
+                                <i class="fa-brands fa-whatsapp"></i> Message Dom
+                            </a>
                         </div>
-                    </a>
-                    <a class="insta-tile" href="https://www.instagram.com/sharpe.strength/" target="_blank" rel="noopener noreferrer" aria-label="View on Instagram">
-                        <div class="insta-tile-inner">
-                            <i class="fa-solid fa-dumbbell"></i>
-                        </div>
-                    </a>
-                    <a class="insta-tile" href="https://www.instagram.com/sharpe.strength/" target="_blank" rel="noopener noreferrer" aria-label="View on Instagram">
-                        <div class="insta-tile-inner">
-                            <i class="fa-solid fa-fire-flame-curved"></i>
-                        </div>
-                    </a>
-                    <a class="insta-tile" href="https://www.instagram.com/sharpe.strength/" target="_blank" rel="noopener noreferrer" aria-label="View on Instagram">
-                        <div class="insta-tile-inner">
-                            <i class="fa-solid fa-person-running"></i>
-                        </div>
-                    </a>
-                    <a class="insta-tile" href="https://www.instagram.com/sharpe.strength/" target="_blank" rel="noopener noreferrer" aria-label="View on Instagram">
-                        <div class="insta-tile-inner">
-                            <i class="fa-solid fa-chart-line"></i>
-                        </div>
-                    </a>
-                    <a class="insta-tile" href="https://www.instagram.com/sharpe.strength/" target="_blank" rel="noopener noreferrer" aria-label="View on Instagram">
-                        <div class="insta-tile-inner">
-                            <i class="fa-solid fa-trophy"></i>
-                        </div>
-                    </a>
+                    </div>
                 </div>
-                <!-- END REPLACE BLOCK -->
-
-                <div class="insta-feed-cta">
-                    <a href="https://www.instagram.com/sharpe.strength/" target="_blank" rel="noopener noreferrer" class="insta-follow-btn">
-                        <i class="fa-brands fa-instagram"></i>
-                        Follow @sharpe.strength
-                    </a>
-                </div>
-
             </div>
         </div>
     </section>
+
+    </main>
 
     <!-- ===================== FOOTER ===================== -->
     <footer class="footer">
@@ -1132,7 +1568,8 @@
             <div class="footer-brand">
                 <div class="footer-logo">SHARPE<span class="accent">.</span>STRENGTH</div>
                 <p>Personal Trainer &amp; Strength Coach</p>
-                <p>Bannatyne Fairfield, Hitchin &nbsp;&bull;&nbsp; Weight Training &nbsp;&bull;&nbsp; Mobility &nbsp;&bull;&nbsp; Weight Loss</p>
+                <p>Bannatyne Fairfield, Hitchin &nbsp;&bull;&nbsp; Studio 180, Letchworth</p>
+                <p>Weight Training &nbsp;&bull;&nbsp; Mobility &nbsp;&bull;&nbsp; Weight Loss &nbsp;&bull;&nbsp; Accountability</p>
             </div>
 
             <div class="footer-nav">
@@ -1158,12 +1595,19 @@
                     <i class="fa-brands fa-whatsapp"></i>
                     07375 219353
                 </a>
-                <p class="footer-dm">DM or WhatsApp for a free consultation</p>
+                <a href="mailto:sharp.strength1@gmail.com" class="footer-social-link footer-email-link">
+                    <i class="fa-solid fa-envelope"></i>
+                    sharp.strength1@gmail.com
+                </a>
+                <p class="footer-dm">Email, DM or WhatsApp for a free consultation</p>
             </div>
         </div>
 
         <div class="footer-bottom">
             <p>&copy; 2026 Dom Sharpe Fitness. All rights reserved.</p>
+            <p class="footer-legal">
+                <a href="privacy.html">Privacy Policy</a>
+            </p>
         </div>
     </footer>
 

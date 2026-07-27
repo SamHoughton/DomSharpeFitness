@@ -2,11 +2,11 @@ const express = require('express');
 const bcrypt  = require('bcrypt');
 const jwt     = require('jsonwebtoken');
 const db      = require('../db');
-const { authMiddleware, domOnly } = require('../middleware/auth');
+const { authMiddleware } = require('../middleware/auth');
 
 const router = express.Router();
 
-// POST /api/auth/login — any user (Dom or client)
+// POST /api/auth/login - admin only (the client portal was removed)
 router.post('/login', async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -19,6 +19,10 @@ router.post('/login', async (req, res) => {
 
     const valid = await bcrypt.compare(password, user.password_hash);
     if (!valid) return res.status(401).json({ error: 'Invalid credentials' });
+
+    // Only Dom's account can sign in. Any legacy client rows left over from the
+    // old portal are refused here rather than relying on a client-side check.
+    if (!user.is_dom) return res.status(403).json({ error: 'Admin access only' });
 
     const token = jwt.sign(
       { id: user.id, email: user.email, name: user.name, is_dom: user.is_dom },
@@ -36,28 +40,7 @@ router.post('/login', async (req, res) => {
   }
 });
 
-// POST /api/auth/register — Dom only, creates a client account
-router.post('/register', authMiddleware, domOnly, async (req, res) => {
-  try {
-    const { email, name, password, goal, experience } = req.body;
-    if (!email || !name || !password) return res.status(400).json({ error: 'email, name, and password are required' });
-
-    const hash = await bcrypt.hash(password, 10);
-    const { rows } = await db.query(
-      `INSERT INTO profiles (email, name, password_hash, goal, experience)
-       VALUES ($1, $2, $3, $4, $5)
-       RETURNING id, email, name, goal, experience, created_at`,
-      [email.toLowerCase().trim(), name.trim(), hash, goal || null, experience || null]
-    );
-    res.status(201).json(rows[0]);
-  } catch (err) {
-    if (err.code === '23505') return res.status(409).json({ error: 'Email already registered' });
-    console.error(err);
-    res.status(500).json({ error: 'Server error' });
-  }
-});
-
-// POST /api/auth/setup-dom — one-time: creates Dom's account (disabled once is_dom row exists)
+// POST /api/auth/setup-dom - one-time: creates Dom's account (disabled once is_dom row exists)
 router.post('/setup-dom', async (req, res) => {
   try {
     const { email, name, password, secret } = req.body;

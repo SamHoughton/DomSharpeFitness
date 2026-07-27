@@ -1,5 +1,5 @@
 /* ===================================================
-   DOM SHARPE FITNESS — Scripts
+   DOM SHARPE FITNESS - Scripts
 =================================================== */
 
 // === NAVBAR: scroll effect ===
@@ -112,25 +112,42 @@ const form        = document.getElementById('consultation-form');
 const formSuccess = document.getElementById('form-success');
 
 if (form) {
+    const formError = document.getElementById('form-error');
+
+    function showFormError(msg) {
+        if (!formError) return;
+        formError.textContent = msg;
+        formError.hidden = false;
+    }
+
+    function clearFormError() {
+        if (formError) formError.hidden = true;
+    }
+
     form.addEventListener('submit', (e) => {
         e.preventDefault();
+        clearFormError();
 
         const name       = document.getElementById('name').value.trim();
         const email      = document.getElementById('email').value.trim();
         const goal       = document.getElementById('goal').value;
         const experience = document.getElementById('experience').value;
+        const consent    = document.getElementById('consent');
 
-        if (!name || !email || !goal || !experience) {
+        if (!name || !email || !goal || !experience || (consent && !consent.checked)) {
             if (!name)       shakeBorder(document.getElementById('name'));
             if (!email)      shakeBorder(document.getElementById('email'));
             if (!goal)       shakeBorder(document.getElementById('goal'));
             if (!experience) shakeBorder(experienceGroup);
+            if (consent && !consent.checked) shakeBorder(consent.closest('.form-consent'));
+            showFormError('Please fill in the required fields marked with an asterisk.');
             return;
         }
 
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(email)) {
             shakeBorder(document.getElementById('email'));
+            showFormError('That email address does not look right, please check it.');
             return;
         }
 
@@ -149,6 +166,29 @@ if (form) {
         const availability = document.getElementById('availability')?.value || '';
         const message      = document.getElementById('message')?.value || '';
 
+        function succeed() {
+            form.style.display = 'none';
+            formSuccess.classList.add('show');
+        }
+
+        function resetBtn() {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = '<span>Send Consultation Request</span> <i class="fa-solid fa-paper-plane"></i>';
+        }
+
+        // Fallback: if the API is unreachable, post the form to Netlify Forms so
+        // the enquiry still reaches Dom instead of being silently lost.
+        function postToNetlify() {
+            const data = new FormData(form);
+            return fetch('/', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: new URLSearchParams(data).toString()
+            }).then(r => {
+                if (!r.ok) throw new Error('Netlify fallback failed');
+            });
+        }
+
         fetch(API_URL + '/api/consultations', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -156,17 +196,17 @@ if (form) {
         })
         .then(r => r.json())
         .then(data => {
-            if (data.success) {
-                form.style.display = 'none';
-                formSuccess.classList.add('show');
-            } else {
-                throw new Error(data.error || 'Failed');
-            }
+            if (!data.success) throw new Error(data.error || 'Failed');
+            succeed();
         })
+        .catch(() => postToNetlify().then(succeed))
         .catch(() => {
-            submitBtn.disabled = false;
-            submitBtn.innerHTML = '<span>Send Consultation Request</span> <i class="fa-solid fa-paper-plane"></i>';
+            resetBtn();
             shakeBorder(submitBtn);
+            showFormError(
+                'Something went wrong sending that. Please message Dom on WhatsApp on 07375 219353 ' +
+                'and he will get straight back to you.'
+            );
         });
     });
 }
@@ -179,25 +219,6 @@ function shakeBorder(el) {
         el.style.boxShadow = '';
     }, 2000);
 }
-
-
-// === READ MORE: testimonial quotes ===
-document.querySelectorAll('.read-more-btn').forEach(btn => {
-    const body = btn.previousElementSibling; // .testimonial-body
-
-    btn.addEventListener('click', () => {
-        const expanded = btn.getAttribute('aria-expanded') === 'true';
-        if (expanded) {
-            body.classList.remove('expanded');
-            btn.setAttribute('aria-expanded', 'false');
-            btn.innerHTML = 'Read more <i class="fa-solid fa-chevron-down"></i>';
-        } else {
-            body.classList.add('expanded');
-            btn.setAttribute('aria-expanded', 'true');
-            btn.innerHTML = 'Read less <i class="fa-solid fa-chevron-down"></i>';
-        }
-    });
-});
 
 
 // === INTERACTIVE BARBELL: mouse parallax ===
@@ -421,6 +442,43 @@ document.querySelectorAll('.faq-question').forEach(btn => {
 });
 
 
+// === LOCATION SWITCHER (contact map) ===
+(function () {
+    const tabs = document.getElementById('location-tabs');
+    const map  = document.getElementById('location-map');
+    if (!tabs || !map) return;
+
+    tabs.querySelectorAll('.location-tab').forEach(tab => {
+        tab.addEventListener('click', () => {
+            tabs.querySelectorAll('.location-tab').forEach(t => {
+                t.classList.remove('active');
+                t.setAttribute('aria-selected', 'false');
+            });
+            tab.classList.add('active');
+            tab.setAttribute('aria-selected', 'true');
+            map.src   = tab.dataset.map;
+            map.title = tab.dataset.title;
+        });
+    });
+})();
+
+
+// === PRICING: open the "what's included" panels on wide screens ===
+(function () {
+    const panels = document.querySelectorAll('.pricing-details');
+    if (!panels.length) return;
+
+    const wide = window.matchMedia('(min-width: 1201px)');
+
+    function sync() {
+        panels.forEach(p => { p.open = wide.matches; });
+    }
+
+    sync();
+    wide.addEventListener('change', sync);
+})();
+
+
 function shake(el) {
     el.style.outline = '2px solid #ff4444';
     setTimeout(() => { el.style.outline = ''; }, 1500);
@@ -446,7 +504,7 @@ sections.forEach(s => sectionObserver.observe(s));
 
 
 // ============================================================
-//  INTERACTIVE FEATURES — Animations & Interactivity
+//  INTERACTIVE FEATURES - Animations & Interactivity
 // ============================================================
 
 // === REVEAL VARIANTS (left / right / scale) ===
@@ -555,33 +613,89 @@ if (heroBgPattern && heroSection) {
     const dots     = document.querySelectorAll('.tc-dot');
     const prevBtn  = document.getElementById('tc-prev');
     const nextBtn  = document.getElementById('tc-next');
+    const playBtn  = document.getElementById('tc-play');
     if (!track) return;
 
     const slides = track.querySelectorAll('.tc-slide');
+
+    // These testimonials run to ~190 words, which is 45-60 seconds of reading.
+    // The old 5.5s rotation meant nobody ever finished one.
+    const AUTO_MS = 12000;
+
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
     let current  = 0;
     let timer    = null;
+    // Autoplay is off for reduced-motion users; they drive it with the controls.
+    let userWantsAuto = !reduceMotion.matches;
 
     function goTo(idx) {
         current = ((idx % slides.length) + slides.length) % slides.length;
         track.style.transform = `translateX(-${current * 100}%)`;
-        dots.forEach((d, i) => d.classList.toggle('active', i === current));
+        dots.forEach((d, i) => {
+            d.classList.toggle('active', i === current);
+            d.setAttribute('aria-current', i === current ? 'true' : 'false');
+        });
+        slides.forEach((s, i) => s.setAttribute('aria-hidden', i === current ? 'false' : 'true'));
     }
 
     function next() { goTo(current + 1); }
     function prev() { goTo(current - 1); }
 
-    function startAuto() { timer = setInterval(next, 5500); }
-    function stopAuto()  { clearInterval(timer); }
+    function startAuto() {
+        stopAuto();
+        if (!userWantsAuto) return;
+        timer = setInterval(next, AUTO_MS);
+    }
 
-    nextBtn && nextBtn.addEventListener('click', () => { stopAuto(); next(); startAuto(); });
-    prevBtn && prevBtn.addEventListener('click', () => { stopAuto(); prev(); startAuto(); });
+    function stopAuto() {
+        clearInterval(timer);
+        timer = null;
+    }
+
+    function syncPlayBtn() {
+        if (!playBtn) return;
+        playBtn.setAttribute('aria-label', userWantsAuto ? 'Pause testimonials' : 'Play testimonials');
+        playBtn.setAttribute('aria-pressed', String(!userWantsAuto));
+        playBtn.innerHTML = userWantsAuto
+            ? '<i class="fa-solid fa-pause"></i>'
+            : '<i class="fa-solid fa-play"></i>';
+    }
+
+    // Any manual navigation restarts the timer so the new slide gets a full read.
+    function manual(fn) {
+        return () => { fn(); startAuto(); };
+    }
+
+    nextBtn && nextBtn.addEventListener('click', manual(next));
+    prevBtn && prevBtn.addEventListener('click', manual(prev));
 
     dots.forEach((dot, i) => {
-        dot.addEventListener('click', () => { stopAuto(); goTo(i); startAuto(); });
+        dot.addEventListener('click', manual(() => goTo(i)));
     });
 
+    playBtn && playBtn.addEventListener('click', () => {
+        userWantsAuto = !userWantsAuto;
+        syncPlayBtn();
+        startAuto();
+    });
+
+    reduceMotion.addEventListener('change', (e) => {
+        userWantsAuto = !e.matches;
+        syncPlayBtn();
+        startAuto();
+    });
+
+    // Pause while hovered or keyboard-focused, resume after.
     carousel.addEventListener('mouseenter', stopAuto);
     carousel.addEventListener('mouseleave', startAuto);
+    carousel.addEventListener('focusin',  stopAuto);
+    carousel.addEventListener('focusout', startAuto);
+
+    // Pause when the tab is hidden so it does not silently advance in the background.
+    document.addEventListener('visibilitychange', () => {
+        document.hidden ? stopAuto() : startAuto();
+    });
 
     // Touch swipe
     let touchStartX = null;
@@ -592,30 +706,35 @@ if (heroBgPattern && heroSection) {
         if (touchStartX === null) return;
         const diff = touchStartX - e.changedTouches[0].clientX;
         if (Math.abs(diff) > 48) {
-            stopAuto();
             diff > 0 ? next() : prev();
             startAuto();
         }
         touchStartX = null;
     }, { passive: true });
 
+    goTo(0);
+    syncPlayBtn();
     startAuto();
 })();
 
 
 // === CLIENT QUIZ ===
 (function () {
-    const quizWrap    = document.querySelector('.quiz-wrap');
-    const steps       = quizWrap ? quizWrap.querySelectorAll('.quiz-step') : [];
+    const quizWrap     = document.querySelector('.quiz-wrap');
+    const steps        = quizWrap ? quizWrap.querySelectorAll('.quiz-step') : [];
     const progressFill = document.getElementById('quiz-progress-fill');
-    const stepCount   = document.getElementById('quiz-step-count');
-    const restartBtn  = document.getElementById('quiz-restart');
+    const stepCount    = document.getElementById('quiz-step-count');
+    const restartBtn   = document.getElementById('quiz-restart');
+    const backBtn      = document.getElementById('quiz-back');
+    const continueBtn  = document.getElementById('quiz-continue');
+    const emailInput   = document.getElementById('quiz-email');
     if (!quizWrap || !steps.length) return;
 
     const answers = {};
     let currentStep = 1;
 
-    const results = {
+    // Question 1 picks the programme.
+    const programmes = {
         fat: {
             name: 'Weight Loss Programme',
             desc: 'Sustainable fat loss without crash diets. Practical nutrition guidance plus training that burns fat and keeps muscle.'
@@ -634,58 +753,143 @@ if (heroBgPattern && heroSection) {
         }
     };
 
-    function showStep(step) {
+    // Question 2 sets where the programme starts.
+    const experienceNote = {
+        beginner: 'You will start with the basics: technique first, nothing intimidating, no assumed knowledge.',
+        some:     'You have trained before, so Dom will rebuild from what you already know rather than starting from scratch.',
+        regular:  'You already train consistently, so the focus is on structure, progression and fixing whatever has stalled.'
+    };
+
+    // Question 3 sets the package.
+    const frequencyPlan = {
+        once:  { name: '6-Week Coaching',            price: '£252 (£42/week)', note: 'One focused session a week, with a progressive programme to follow on your own days.' },
+        few:   { name: '6-Week Coaching + App',      price: '£288 (£48/week)', note: 'Weekly coaching plus a programme in the app for the days you train alone, where most clients see the fastest change.' },
+        often: { name: '6-Week Coaching + App',      price: '£288 (£48/week)', note: 'Training four or more times a week, so your app programme will split the week so you recover properly between sessions.' }
+    };
+
+    function setStepUI(step) {
         steps.forEach(s => s.classList.remove('active'));
         const target = quizWrap.querySelector(`[data-step="${step}"]`);
         if (target) target.classList.add('active');
 
-        if (step === 'result') {
-            if (progressFill) progressFill.style.width = '100%';
-            if (stepCount) stepCount.style.display = 'none';
-            renderResult();
-        } else {
-            const n = parseInt(step, 10);
-            if (progressFill) progressFill.style.width = `${(n - 1) / 3 * 100}%`;
-            if (stepCount) {
-                stepCount.style.display = 'block';
-                stepCount.textContent   = `Question ${n} of 3`;
-            }
+        const isResult = step === 'result';
+        if (progressFill) progressFill.style.width = isResult ? '100%' : `${(parseInt(step, 10) - 1) / 3 * 100}%`;
+        if (stepCount) {
+            stepCount.style.display = isResult ? 'none' : 'block';
+            if (!isResult) stepCount.textContent = `Question ${step} of 3`;
         }
+        if (backBtn) backBtn.hidden = (step === 1);
+
         currentStep = step;
     }
 
+    function showStep(step) {
+        setStepUI(step);
+        if (step === 'result') renderResult();
+    }
+
     function renderResult() {
-        const r = results[answers.goal] || results.muscle;
-        const nameEl = document.getElementById('quiz-result-name');
-        const descEl = document.getElementById('quiz-result-desc');
-        if (nameEl) nameEl.textContent = r.name;
-        if (descEl) descEl.textContent = r.desc;
+        const p    = programmes[answers.goal] || programmes.muscle;
+        const plan = frequencyPlan[answers.frequency] || frequencyPlan.few;
+        const note = experienceNote[answers.experience] || '';
+
+        const nameEl  = document.getElementById('quiz-result-name');
+        const descEl  = document.getElementById('quiz-result-desc');
+        const planEl  = document.getElementById('quiz-plan-name');
+        const priceEl = document.getElementById('quiz-plan-price');
+
+        if (nameEl)  nameEl.textContent  = p.name;
+        // All three answers feed the result, not just the goal.
+        if (descEl)  descEl.textContent  = [p.desc, note, plan.note].filter(Boolean).join(' ');
+        if (planEl)  planEl.textContent  = plan.name;
+        if (priceEl) priceEl.textContent = plan.price;
     }
 
     quizWrap.querySelectorAll('.quiz-opt').forEach(opt => {
         opt.addEventListener('click', () => {
-            const key = opt.dataset.key;
-            const val = opt.dataset.val;
-            answers[key] = val;
+            answers[opt.dataset.key] = opt.dataset.val;
 
-            // highlight selection
             opt.closest('.quiz-options').querySelectorAll('.quiz-opt')
-               .forEach(o => o.classList.remove('selected'));
+               .forEach(o => {
+                   o.classList.remove('selected');
+                   o.setAttribute('aria-pressed', 'false');
+               });
             opt.classList.add('selected');
+            opt.setAttribute('aria-pressed', 'true');
 
             // advance after brief visual confirm
             setTimeout(() => {
-                const next = currentStep === 3 ? 'result' : currentStep + 1;
-                showStep(next);
+                showStep(currentStep === 3 ? 'result' : currentStep + 1);
             }, 320);
         });
     });
 
+    backBtn && backBtn.addEventListener('click', () => {
+        if (currentStep === 'result') return showStep(3);
+        if (currentStep > 1) showStep(currentStep - 1);
+    });
+
     restartBtn && restartBtn.addEventListener('click', () => {
         Object.keys(answers).forEach(k => delete answers[k]);
-        quizWrap.querySelectorAll('.quiz-opt').forEach(o => o.classList.remove('selected'));
+        quizWrap.querySelectorAll('.quiz-opt').forEach(o => {
+            o.classList.remove('selected');
+            o.setAttribute('aria-pressed', 'false');
+        });
+        if (emailInput) emailInput.value = '';
         showStep(1);
     });
+
+    // Carry the quiz answers into the consultation form instead of dead-ending.
+    continueBtn && continueBtn.addEventListener('click', () => {
+        const goalMap = {
+            fat: 'weight-loss',
+            muscle: 'strength',
+            mobility: 'mobility',
+            accountability: 'general'
+        };
+        const experienceMap = {
+            beginner: 'beginner',
+            some: 'intermediate',
+            regular: 'advanced'
+        };
+
+        const goalSelect = document.getElementById('goal');
+        if (goalSelect && goalMap[answers.goal]) goalSelect.value = goalMap[answers.goal];
+
+        const expValue = experienceMap[answers.experience];
+        const expGroup = document.getElementById('experience-group');
+        const expInput = document.getElementById('experience');
+        if (expGroup && expInput && expValue) {
+            expGroup.querySelectorAll('.toggle-btn').forEach(b => {
+                const match = b.dataset.value === expValue;
+                b.classList.toggle('active', match);
+                if (match) expInput.value = expValue;
+            });
+        }
+
+        const emailField = document.getElementById('email');
+        if (emailField && emailInput && emailInput.value.trim()) {
+            emailField.value = emailInput.value.trim();
+        }
+
+        const prefillNote = document.getElementById('form-prefill-note');
+        if (prefillNote) prefillNote.hidden = false;
+
+        const contact = document.getElementById('contact');
+        if (contact) {
+            const navHeight = navbar ? navbar.offsetHeight : 0;
+            window.scrollTo({
+                top: contact.getBoundingClientRect().top + window.scrollY - navHeight - 16,
+                behavior: 'smooth'
+            });
+        }
+
+        // Send them to the first field they still need to fill in.
+        const nameField = document.getElementById('name');
+        if (nameField) setTimeout(() => nameField.focus({ preventScroll: true }), 600);
+    });
+
+    setStepUI(1);
 })();
 
 

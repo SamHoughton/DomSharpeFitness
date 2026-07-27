@@ -63,23 +63,6 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 });
 
 
-// === REVEAL ON SCROLL ===
-const revealObserver = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-            const siblings = entry.target.parentElement.querySelectorAll('.reveal');
-            const index = Array.from(siblings).indexOf(entry.target);
-            setTimeout(() => {
-                entry.target.classList.add('visible');
-            }, index * 80);
-            revealObserver.unobserve(entry.target);
-        }
-    });
-}, { threshold: 0.12 });
-
-document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
-
-
 // === EXPERIENCE LEVEL TOGGLE (single select) ===
 const experienceGroup = document.getElementById('experience-group');
 const experienceInput = document.getElementById('experience');

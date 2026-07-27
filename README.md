@@ -120,6 +120,28 @@ Dom's admin account is created once via `POST /api/auth/setup-dom` using
   janked on mobile. Do not reintroduce looping animation.
 - Tap targets are 44px minimum below 1024px. Check any new control against it.
 
+### Deliberately avoided
+
+These are the generic-landing-page defaults this site was pulled off. Do not
+reintroduce them:
+
+- **No eyebrows.** Sections open with a numbered index line (`01 Results`) in
+  mono against a rule, not a floating uppercase label.
+- **No two-tone headlines.** Headings are one colour. The accent earns its keep
+  on the section numbers, the data and the CTAs. The h1 uses a rule underneath
+  instead of colouring half the words.
+- **Square-ish geometry.** `--radius` is 2px and `--shadow` is `none`. Racks,
+  plates and bars are square. Do not add glow shadows or large radii.
+- **Mono for every number.** Prices, kilos, body fat, dates and counts all use
+  IBM Plex Mono with tabular figures. The measuring is the whole selling point,
+  so it should look measured.
+- **No icon chips.** The rounded-square Font Awesome tiles that used to head
+  every card are gone. Use rules and numbers for structure.
+- **No scroll-reveal.** Content is present when you reach it.
+- **Vary sentence rhythm.** Every section subheading used to be
+  "Statement. Statement." Read new copy aloud; if three in a row share a shape,
+  rewrite one.
+
 
 ## To Do
 

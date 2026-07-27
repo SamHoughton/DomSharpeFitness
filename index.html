@@ -1340,13 +1340,19 @@
                     </p>
 
                     <form class="consultation-form" id="consultation-form" name="consultation"
-                          data-netlify="true" netlify-honeypot="company" novalidate>
+                          data-netlify="true" netlify-honeypot="bot-field" novalidate>
                         <input type="hidden" name="form-name" value="consultation">
                         <input type="hidden" id="availability" name="availability">
 
-                        <!-- Honeypot: hidden from people, tempting to bots. -->
+                        <!-- Honeypot: hidden from people, tempting to bots.
+                             Named "bot-field" (Netlify's own recommended name) rather than
+                             something like "company" or "phone" — Chrome's autofill ignores
+                             autocomplete="off" for well-known field types and will silently
+                             fill a hidden field named "company" from a saved address profile.
+                             Netlify then sees a non-empty honeypot and discards the submission
+                             as spam without telling the visitor, who still sees "Request Sent!" -->
                         <p class="form-hp" aria-hidden="true">
-                            <label>Company <input name="company" tabindex="-1" autocomplete="off"></label>
+                            <label>Leave this field blank <input name="bot-field" tabindex="-1" autocomplete="off"></label>
                         </p>
 
                         <div class="form-row two-col">

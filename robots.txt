@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /admin.html
 
-Sitemap: https://domsharpefitness.netlify.app/sitemap.xml
+Sitemap: https://sharpestrength.com/sitemap.xml

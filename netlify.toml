@@ -40,3 +40,42 @@
   for = "/admin.html"
   [headers.values]
     X-Robots-Tag = "noindex, nofollow"
+
+# The old Netlify subdomain must not compete with the real domain in search.
+[[redirects]]
+  from = "https://domsharpefitness.netlify.app/*"
+  to = "https://sharpestrength.com/:splat"
+  status = 301
+  force = true
+
+# Clean URLs. The .html versions 301 to the clean path, which then rewrites
+# to the file. Canonicals and the sitemap use the clean paths.
+[[redirects]]
+  from = "/privacy.html"
+  to = "/privacy"
+  status = 301
+
+[[redirects]]
+  from = "/privacy"
+  to = "/privacy.html"
+  status = 200
+
+[[redirects]]
+  from = "/personal-trainer-hitchin.html"
+  to = "/personal-trainer-hitchin"
+  status = 301
+
+[[redirects]]
+  from = "/personal-trainer-hitchin"
+  to = "/personal-trainer-hitchin.html"
+  status = 200
+
+[[redirects]]
+  from = "/personal-trainer-letchworth.html"
+  to = "/personal-trainer-letchworth"
+  status = 301
+
+[[redirects]]
+  from = "/personal-trainer-letchworth"
+  to = "/personal-trainer-letchworth.html"
+  status = 200

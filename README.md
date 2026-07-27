@@ -3,7 +3,7 @@
 Personal training website for Dom Sharpe, Personal Trainer at Bannatyne Fairfield
 in Hitchin and Studio 180 in Letchworth.
 
-Live site: https://domsharpefitness.netlify.app
+Live site: https://sharpestrength.com
 Instagram: @sharpe.strength
 
 
@@ -23,6 +23,8 @@ Plain HTML, CSS and JavaScript on the front end. No frameworks, no build step.
 DomSharpeFitness/
 ├── index.html                   # Single-page marketing site
 ├── privacy.html                 # Privacy policy (UK GDPR)
+├── personal-trainer-hitchin.html     # Location landing page
+├── personal-trainer-letchworth.html  # Location landing page
 ├── admin.html                   # Dom's consultation-leads dashboard
 ├── robots.txt
 ├── sitemap.xml
@@ -77,6 +79,14 @@ DomSharpeFitness/
   saves enquiries to the database but sends no email. See "API" below.
 - **Credentials.** Level 3 PT / First Aid / REPs badges in the About section
   need confirming before they stay up.
+- **Bannatyne access.** The Hitchin location page hedges on whether clients
+  need a Bannatyne membership ("ask Dom when you book"). Confirm the actual
+  arrangement and tighten that FAQ answer.
+- **Google Business Profile.** The single biggest local ranking factor and it
+  cannot be done from this repo. Create/claim the profile at
+  business.google.com with the exact name "Sharpe Strength", the Bannatyne
+  Fairfield address, category "Personal trainer", the sharpestrength.com URL
+  and weekly photo/review activity.
 - **Google Ads.** GA4 is live. Ads is still off until `ADS_ID` and the
   conversion labels are set in `js/analytics.js`. See "Analytics" below.
 - **Instagram feed.** The section is an honest "follow" panel. To show real

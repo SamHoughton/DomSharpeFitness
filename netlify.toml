@@ -23,7 +23,7 @@
       font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com;
       img-src 'self' data: https://www.googletagmanager.com https://*.google-analytics.com https://*.googleadservices.com https://googleads.g.doubleclick.net https://www.google.com https://www.google.co.uk https://maps.gstatic.com https://*.googleapis.com;
       frame-src https://maps.google.com https://www.google.com;
-      connect-src 'self' https://domsharpefitness-production.up.railway.app https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com https://*.g.doubleclick.net;
+      connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com https://*.g.doubleclick.net;
       form-action 'self';
       base-uri 'self';
       object-src 'none';
@@ -35,11 +35,6 @@
   for = "/img/*"
   [headers.values]
     Cache-Control = "public, max-age=604800"
-
-[[headers]]
-  for = "/admin.html"
-  [headers.values]
-    X-Robots-Tag = "noindex, nofollow"
 
 # The old Netlify subdomain must not compete with the real domain in search.
 [[redirects]]

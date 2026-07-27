@@ -1,4 +1,0 @@
-[deploy]
-startCommand = "node server.js"
-preDeployCommand = "node migrate.js"
-healthcheckPath = "/health"

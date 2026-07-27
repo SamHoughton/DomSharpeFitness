@@ -14,7 +14,7 @@ Plain HTML, CSS and JavaScript on the front end. No frameworks, no build step.
 - Fonts: Oswald (headings) and Montserrat (body) via Google Fonts
 - Icons: Font Awesome 6.5.1 via CDN
 - Hosting: Netlify, auto-deploys from the main branch
-- API: small Express + Postgres service in `server/`, deployed on Railway
+- Forms: Netlify Forms handles the consultation form; no backend of any kind
 
 
 ## File Structure
@@ -26,13 +26,12 @@ DomSharpeFitness/
 ├── personal-trainer-hitchin.html     # Location landing page
 ├── personal-trainer-letchworth.html  # Location landing page
 ├── gyms-in-hitchin.html              # Content guide targeting "gyms in hitchin" (1,600/mo)
-├── admin.html                   # Dom's consultation-leads dashboard
 ├── robots.txt
 ├── sitemap.xml
 ├── netlify.toml                 # Security headers + CSP
 ├── css/styles.css
 ├── js/
-│   ├── config.js                # API_URL for the Railway service
+│   ├── analytics.js             # GA4 + Google Ads + consent
 │   └── scripts.js
 ├── img/
 │   ├── dom-transformation.jpg   # 2x2 collage: left column 2022, right column 2025
@@ -42,10 +41,6 @@ DomSharpeFitness/
 │   ├── result-first-month.jpg
 │   ├── result-recomp.jpg
 │   └── favicon.ico
-└── server/                      # Express API (Railway)
-    ├── server.js
-    ├── db/schema.sql
-    └── routes/{auth,consultations}.js
 ```
 
 
@@ -75,9 +70,10 @@ DomSharpeFitness/
   proper training shot exists. To bring one back, add a `.hero-portrait` div
   after `.hero-content` and set `.hero-grid` to two columns. There is a comment
   marking the spot in `index.html`.
-- **Lead emails.** `DOM_EMAIL` must be set to `sharp.strength1@gmail.com` in the
-  Railway service variables, along with `RESEND_API_KEY`. Without them the form
-  saves enquiries to the database but sends no email. See "API" below.
+- **Form notification email (one dashboard step).** Netlify dashboard, the
+  site, Forms, "consultation", Form notifications, add "Email notification" to
+  sharp.strength1@gmail.com. Without this, submissions collect in the Netlify
+  Forms tab but no email is sent.
 - **Credentials.** Level 3 PT / First Aid / REPs badges in the About section
   need confirming before they stay up.
 - **Bannatyne access.** The Hitchin location page hedges on whether clients
@@ -133,18 +129,18 @@ Start the preview server from `.claude/launch.json` (Node.js, port 3000), or
 just open `index.html` in a browser.
 
 
-## API
+## Forms
 
-The consultation form posts to `POST /api/consultations` on the Railway
-service. If that request fails, the form falls back to Netlify Forms so an
-enquiry is never lost silently.
+The consultation form is handled entirely by Netlify Forms. The form in
+index.html carries `data-netlify="true"`, a hidden `form-name` field and a
+honeypot; scripts.js submits it by AJAX to the site's own origin so the inline
+success state still shows. Submissions appear in the Netlify dashboard under
+Forms, and email notifications are configured there (see above). Netlify's free
+tier includes 100 submissions a month, far above what this form will see.
 
-Environment variables are documented in `server/.env.example`. Without
-`RESEND_API_KEY` and `DOM_EMAIL`, enquiries are still saved to the database but
-no notification email is sent.
-
-Dom's admin account is created once via `POST /api/auth/setup-dom` using
-`SETUP_SECRET`. There are no client accounts, the client portal was removed.
+There is no backend. The old Railway API and the admin dashboard were removed
+when Railway was decommissioned; leads live in the Netlify Forms tab and in
+Dom's inbox.
 
 
 ## House style

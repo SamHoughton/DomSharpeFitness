@@ -146,9 +146,6 @@ if (form) {
         submitBtn.disabled = true;
         submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Sending...';
 
-        const availability = document.getElementById('availability')?.value || '';
-        const message      = document.getElementById('message')?.value || '';
-
         function succeed() {
             form.style.display = 'none';
             formSuccess.classList.add('show');
@@ -166,30 +163,21 @@ if (form) {
             submitBtn.innerHTML = '<span>Send Consultation Request</span> <i class="fa-solid fa-paper-plane"></i>';
         }
 
-        // Fallback: if the API is unreachable, post the form to Netlify Forms so
-        // the enquiry still reaches Dom instead of being silently lost.
-        function postToNetlify() {
-            const data = new FormData(form);
-            return fetch('/', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                body: new URLSearchParams(data).toString()
-            }).then(r => {
-                if (!r.ok) throw new Error('Netlify fallback failed');
-            });
-        }
-
-        fetch(API_URL + '/api/consultations', {
+        // Netlify Forms. The form is registered at deploy time from the static
+        // HTML (data-netlify on the form plus the hidden form-name field); an
+        // AJAX POST of the URL-encoded fields to our own origin files the
+        // submission. Email notifications are configured in the Netlify
+        // dashboard under Forms, form notifications.
+        const data = new FormData(form);
+        fetch('/', {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ name, email, goal, experience, availability, message })
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: new URLSearchParams(data).toString()
         })
-        .then(r => r.json())
-        .then(data => {
-            if (!data.success) throw new Error(data.error || 'Failed');
+        .then(r => {
+            if (!r.ok) throw new Error('Form submission failed: ' + r.status);
             succeed();
         })
-        .catch(() => postToNetlify().then(succeed))
         .catch(() => {
             resetBtn();
             shakeBorder(submitBtn);

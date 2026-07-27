@@ -221,47 +221,6 @@ function shakeBorder(el) {
 }
 
 
-// === INTERACTIVE BARBELL: mouse parallax ===
-const barbell = document.getElementById('hero-barbell');
-const hero    = document.getElementById('home');
-
-if (barbell && hero) {
-    let targetX = 0, targetY = 0, currentX = 0, currentY = 0;
-    let rafId = null;
-
-    hero.addEventListener('mousemove', (e) => {
-        const rect = hero.getBoundingClientRect();
-        const cx = rect.width / 2;
-        const cy = rect.height / 2;
-        targetX = ((e.clientX - rect.left) - cx) / cx * 18;
-        targetY = ((e.clientY - rect.top)  - cy) / cy * 10;
-        if (!rafId) rafId = requestAnimationFrame(animateBarbell);
-    });
-
-    hero.addEventListener('mouseleave', () => {
-        targetX = 0; targetY = 0;
-        if (!rafId) rafId = requestAnimationFrame(animateBarbell);
-    });
-
-    function animateBarbell() {
-        currentX += (targetX - currentX) * 0.06;
-        currentY += (targetY - currentY) * 0.06;
-        barbell.style.transform = `translate(calc(-50% + ${currentX}px), calc(-50% + ${currentY}px))`;
-        if (Math.abs(targetX - currentX) > 0.05 || Math.abs(targetY - currentY) > 0.05) {
-            rafId = requestAnimationFrame(animateBarbell);
-        } else {
-            rafId = null;
-        }
-    }
-
-    // Fade barbell out on scroll
-    window.addEventListener('scroll', () => {
-        const scrolled = window.scrollY / (hero.offsetHeight * 0.5);
-        barbell.style.opacity = Math.max(0, 1 - scrolled);
-    }, { passive: true });
-}
-
-
 // === ANIMATED STAT COUNTERS ===
 const statCounters = document.querySelectorAll('.stat-value[data-count]');
 
@@ -301,25 +260,6 @@ window.addEventListener('scroll', () => {
     const pct       = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
     scrollProgress.style.width = pct + '%';
 }, { passive: true });
-
-
-// === 3D CARD TILT (desktop only) ===
-if (!window.matchMedia('(hover: none)').matches) {
-    document.querySelectorAll('.service-card').forEach(card => {
-        card.addEventListener('mousemove', (e) => {
-            const rect = card.getBoundingClientRect();
-            const x    = (e.clientX - rect.left) / rect.width  - 0.5;
-            const y    = (e.clientY - rect.top)  / rect.height - 0.5;
-            card.style.transition = 'border-color 0.3s ease, box-shadow 0.3s ease';
-            card.style.transform  = `perspective(600px) rotateY(${x * 10}deg) rotateX(${-y * 10}deg) translateY(-6px)`;
-        });
-
-        card.addEventListener('mouseleave', () => {
-            card.style.transition = '';
-            card.style.transform  = '';
-        });
-    });
-}
 
 
 // === BMI CALCULATOR ===
@@ -506,105 +446,6 @@ sections.forEach(s => sectionObserver.observe(s));
 // ============================================================
 //  INTERACTIVE FEATURES - Animations & Interactivity
 // ============================================================
-
-// === REVEAL VARIANTS (left / right / scale) ===
-const variantRevealObserver = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-            const el = entry.target;
-            const siblings = el.parentElement.querySelectorAll('.reveal-left, .reveal-right, .reveal-scale');
-            const idx = Array.from(siblings).indexOf(el);
-            setTimeout(() => el.classList.add('visible'), idx * 100);
-            variantRevealObserver.unobserve(el);
-        }
-    });
-}, { threshold: 0.12 });
-
-document.querySelectorAll('.reveal-left, .reveal-right, .reveal-scale').forEach(el => {
-    variantRevealObserver.observe(el);
-});
-
-
-// === PARALLAX HERO BACKGROUND ===
-const heroBgPattern = document.querySelector('.hero-bg-pattern');
-const heroSection   = document.getElementById('home');
-
-if (heroBgPattern && heroSection) {
-    heroBgPattern.classList.add('hero-bg-parallax');
-    window.addEventListener('scroll', () => {
-        const scrolled = window.scrollY;
-        if (scrolled < heroSection.offsetHeight * 1.2) {
-            heroBgPattern.style.transform = `translateY(${scrolled * 0.35}px)`;
-        }
-    }, { passive: true });
-}
-
-
-// === BEFORE / AFTER TRANSFORMATION SLIDER ===
-(function () {
-    const slider  = document.getElementById('ba-slider');
-    const baAfter = document.getElementById('ba-after');
-    const baHandle = document.getElementById('ba-handle');
-    const baHint  = document.getElementById('ba-drag-hint');
-    if (!slider || !baAfter || !baHandle) return;
-
-    let isDragging = false;
-    let hintHidden = false;
-
-    function getPct(clientX) {
-        const rect = slider.getBoundingClientRect();
-        return Math.max(5, Math.min(95, ((clientX - rect.left) / rect.width) * 100));
-    }
-
-    function setPosition(pct) {
-        baAfter.style.clipPath  = `inset(0 0 0 ${pct}%)`;
-        baHandle.style.left     = `${pct}%`;
-        if (!hintHidden) {
-            hintHidden = true;
-            baHint && baHint.classList.add('hidden');
-        }
-    }
-
-    // Mouse
-    slider.addEventListener('mousedown', (e) => {
-        isDragging = true;
-        setPosition(getPct(e.clientX));
-        e.preventDefault();
-    });
-    document.addEventListener('mousemove', (e) => {
-        if (isDragging) setPosition(getPct(e.clientX));
-    });
-    document.addEventListener('mouseup', () => { isDragging = false; });
-
-    // Touch
-    slider.addEventListener('touchstart', (e) => {
-        setPosition(getPct(e.touches[0].clientX));
-    }, { passive: true });
-    slider.addEventListener('touchmove', (e) => {
-        setPosition(getPct(e.touches[0].clientX));
-    }, { passive: true });
-
-    // Intro sweep animation on scroll into view (100 → 50)
-    const baObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (!entry.isIntersecting) return;
-            let startTs = null;
-            function animateIntro(ts) {
-                if (!startTs) startTs = ts;
-                const t     = Math.min((ts - startTs) / 900, 1);
-                const eased = 1 - Math.pow(1 - t, 3);
-                const pct   = 100 - eased * 50; // sweeps from 100 to 50
-                baAfter.style.clipPath = `inset(0 0 0 ${pct}%)`;
-                baHandle.style.left    = `${pct}%`;
-                if (t < 1) requestAnimationFrame(animateIntro);
-            }
-            setTimeout(() => requestAnimationFrame(animateIntro), 500);
-            baObserver.unobserve(entry.target);
-        });
-    }, { threshold: 0.3 });
-    baObserver.observe(slider);
-})();
-
 
 // === TESTIMONIAL CAROUSEL ===
 (function () {
@@ -943,43 +784,4 @@ if (heroBgPattern && heroSection) {
     }, { threshold: 0.3 });
 
     ringObserver.observe(ringsContainer);
-})();
-
-
-
-// === PAGE INTRO STING ===
-(function () {
-    const intro  = document.getElementById('page-intro');
-    if (!intro) return;
-
-    // Skip if reduced motion
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-        intro.remove();
-        return;
-    }
-
-    // Only run once per browser session
-    if (sessionStorage.getItem('intro-seen')) {
-        intro.remove();
-        return;
-    }
-    sessionStorage.setItem('intro-seen', '1');
-
-    // Lock scroll while intro plays
-    document.body.style.overflow = 'hidden';
-
-    // Timing:
-    //   0.08s  → ch-1 starts drawing (0.38s duration → done at 0.46s)
-    //   0.26s  → ch-2 starts drawing (0.38s duration → done at 0.64s)
-    //   + 0.22s hold after last chevron finishes
-    //   = trigger exit at ~0.86s
-    const exitDelay = 860;
-
-    setTimeout(() => {
-        intro.classList.add('intro-exit');
-        document.body.style.overflow = '';
-
-        // Remove from DOM after transition completes
-        intro.addEventListener('transitionend', () => intro.remove(), { once: true });
-    }, exitDelay);
 })();

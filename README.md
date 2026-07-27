@@ -49,14 +49,14 @@ DomSharpeFitness/
 ## Sections
 
 - Navbar: fixed, goes solid on scroll, collapses to a hamburger below 1024px
-- Hero: two columns: copy and CTAs on the left, portrait on the right, stats bar beneath
-- About: Dom's 2022 to 2025 transformation with a drag-to-compare slider
+- Hero: single column, centred, with a compact stats bar beneath
+- Results: featured InBody scan plus the client results gallery. Sits directly
+  after the hero so proof is the first thing a visitor reads
+- About: Dom's 2022 to 2025 collage shown whole, with a year caption
 - Services: 1:1 Training, Weight Loss, Mobility and Strength, Accountability
 - Why Dom: key differentiators
 - Quiz: three questions, recommends a programme and hands the answers to the form
 - Testimonials: four real client reviews in a carousel with a pause control
-- Results: featured InBody scan with animated rings, plus a client results
-  gallery where the scan figures are typeset rather than left inside the photos
 - Calculators: BMI and 1 Rep Max
 - Pricing: 1-2-1 session, 6-Week Coaching, 6-Week Coaching + App (recommended),
   6-Week Programme + Check-ins. Each has a collapsible "what's included" panel,
@@ -68,10 +68,10 @@ DomSharpeFitness/
 
 ## Things that need Dom's input
 
-- **Hero photo.** The hero portrait currently crops the 2025 half of the
-  transformation collage as a placeholder. Drop a proper training shot into
-  `/img` and change the `background-image` on `.hero-portrait` in
-  `css/styles.css` (there is a comment marking the spot).
+- **Hero photo.** The hero is deliberately single column with no photo until a
+  proper training shot exists. To bring one back, add a `.hero-portrait` div
+  after `.hero-content` and set `.hero-grid` to two columns. There is a comment
+  marking the spot in `index.html`.
 - **Results gallery screenshots.** The four cards in the results gallery read
   their figures from typeset HTML, so they work already. The InBody photos are
   optional evidence and each card hides its own image slot if the file is
@@ -114,6 +114,11 @@ Dom's admin account is created once via `POST /api/auth/setup-dom` using
 ## House style
 
 - No em dashes anywhere in site copy. Use a comma, colon or full stop instead.
+- Animations are deliberately minimal: a short fade-up on scroll and nothing
+  that loops. The floating barbell, glow pulse, 3D card tilt, mouse parallax,
+  logo draw-on and intro sting were all removed as they read as dated and
+  janked on mobile. Do not reintroduce looping animation.
+- Tap targets are 44px minimum below 1024px. Check any new control against it.
 
 
 ## To Do

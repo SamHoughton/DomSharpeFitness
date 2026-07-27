@@ -261,35 +261,9 @@
     <section class="hero" id="home">
         <div class="hero-bg-pattern"></div>
 
-        <!-- Animated SVG barbell, replaces old PNG dumbbells -->
-        <div class="hero-barbell-wrap" id="hero-barbell" aria-hidden="true">
-            <svg class="hero-barbell-svg" viewBox="0 0 900 160" xmlns="http://www.w3.org/2000/svg" fill="none">
-                <!-- Left outer plate -->
-                <rect x="28" y="20" width="44" height="120" rx="8" fill="currentColor" opacity="0.9"/>
-                <!-- Left inner plate -->
-                <rect x="78" y="34" width="28" height="92" rx="6" fill="currentColor" opacity="0.75"/>
-                <!-- Left collar -->
-                <rect x="112" y="62" width="16" height="36" rx="5" fill="currentColor"/>
-                <!-- Bar -->
-                <rect x="128" y="74" width="644" height="12" rx="6" fill="currentColor"/>
-                <!-- Right collar -->
-                <rect x="772" y="62" width="16" height="36" rx="5" fill="currentColor"/>
-                <!-- Right inner plate -->
-                <rect x="794" y="34" width="28" height="92" rx="6" fill="currentColor" opacity="0.75"/>
-                <!-- Right outer plate -->
-                <rect x="828" y="20" width="44" height="120" rx="8" fill="currentColor" opacity="0.9"/>
-                <!-- Bar knurling lines -->
-                <line x1="300" y1="74" x2="300" y2="86" stroke="rgba(200,146,58,0.4)" stroke-width="2"/>
-                <line x1="320" y1="74" x2="320" y2="86" stroke="rgba(200,146,58,0.4)" stroke-width="2"/>
-                <line x1="340" y1="74" x2="340" y2="86" stroke="rgba(200,146,58,0.4)" stroke-width="2"/>
-                <line x1="360" y1="74" x2="360" y2="86" stroke="rgba(200,146,58,0.4)" stroke-width="2"/>
-                <line x1="540" y1="74" x2="540" y2="86" stroke="rgba(200,146,58,0.4)" stroke-width="2"/>
-                <line x1="560" y1="74" x2="560" y2="86" stroke="rgba(200,146,58,0.4)" stroke-width="2"/>
-                <line x1="580" y1="74" x2="580" y2="86" stroke="rgba(200,146,58,0.4)" stroke-width="2"/>
-                <line x1="600" y1="74" x2="600" y2="86" stroke="rgba(200,146,58,0.4)" stroke-width="2"/>
-            </svg>
-        </div>
-
+        <!-- Single-column hero. To bring a portrait back, add
+             <div class="hero-portrait"></div> after .hero-content and set
+             .hero-grid to two columns in css/styles.css. -->
         <div class="hero-grid">
             <div class="hero-content">
                 <div class="hero-eyebrow">
@@ -303,8 +277,8 @@
                 </h1>
 
                 <p class="hero-subtitle">
-                    1:1 coaching in Hitchin for people who want to lose fat, get strong and
-                    actually keep it up. Built around your life, not a template.
+                    1:1 coaching in Hitchin and Letchworth for people who want to lose fat,
+                    get strong and actually keep it up. Built around your life, not a template.
                 </p>
 
                 <ul class="hero-pills">
@@ -328,15 +302,6 @@
                 </p>
             </div>
 
-            <!-- Hero portrait.
-                 Placeholder: crops the 2025 half of the transformation collage.
-                 To swap in a proper training shot, drop the file into /img and
-                 change the --hero-portrait background-image in css/styles.css. -->
-            <div class="hero-portrait" role="img" aria-label="Dom Sharpe, personal trainer in Hitchin and Letchworth">
-                <span class="hero-portrait-tag">
-                    <i class="fa-solid fa-location-dot"></i> Hitchin &amp; Letchworth
-                </span>
-            </div>
         </div>
 
         <div class="hero-stats">
@@ -356,6 +321,236 @@
             </div>
         </div>
 
+    </section>
+
+    <!-- ===================== TRANSFORMATIONS ===================== -->
+    <section class="transformations" id="transformations">
+        <div class="section-container">
+            <div class="section-eyebrow">Results</div>
+            <h2 class="section-title text-center">THE PROOF IS <span class="accent-text">IN THE NUMBERS.</span></h2>
+            <p class="section-sub text-center">Real data from real clients. Tracked with InBody body composition analysis.</p>
+
+            <!-- InBody featured result -->
+            <div class="inbody-feature reveal">
+                <div class="inbody-image-col">
+                    <img src="img/inbody-progress.jpg" alt="InBody body composition scan showing an 8 week client progress: body fat down from 23.1% to 18.9%, skeletal muscle up from 34.7kg to 36.2kg" class="inbody-img" width="640" height="1138" loading="lazy" decoding="async">
+                    <div class="inbody-caption">
+                        <i class="fa-solid fa-circle-check"></i>
+                        Tracked via InBody Body Composition Analysis
+                    </div>
+                </div>
+                <div class="inbody-stats-col">
+                    <div class="inbody-header">
+                        <div class="section-eyebrow">Client Progress Scan</div>
+                        <h3>Body Recomposition <span class="accent-text">Done Right</span></h3>
+                        <p>This is what consistency and accountability actually looks like, measured over 8 weeks with InBody scanning.</p>
+                    </div>
+                    <!-- Animated ring charts for InBody metrics -->
+                    <div class="inbody-rings" id="inbody-rings">
+                        <div class="ring-metric">
+                            <svg class="ring-svg" viewBox="0 0 100 100" aria-hidden="true">
+                                <circle class="ring-bg" cx="50" cy="50" r="40"/>
+                                <circle class="ring-track" cx="50" cy="50" r="40"/>
+                                <circle class="ring-fill ring-fat"
+                                        cx="50" cy="50" r="40"
+                                        stroke-dasharray="251.3"
+                                        stroke-dashoffset="251.3"
+                                        data-target="133"
+                                        stroke="#C8923A"/>
+                            </svg>
+                            <div class="ring-center">
+                                <span class="ring-value" data-from="23.1" data-to="18.9" data-suffix="%">23.1%</span>
+                            </div>
+                            <div class="ring-label">Body Fat</div>
+                            <div class="ring-change negative"><i class="fa-solid fa-arrow-down"></i> &minus;4.2%</div>
+                        </div>
+                        <div class="ring-metric">
+                            <svg class="ring-svg" viewBox="0 0 100 100" aria-hidden="true">
+                                <circle class="ring-bg" cx="50" cy="50" r="40"/>
+                                <circle class="ring-track" cx="50" cy="50" r="40"/>
+                                <circle class="ring-fill ring-muscle"
+                                        cx="50" cy="50" r="40"
+                                        stroke-dasharray="251.3"
+                                        stroke-dashoffset="251.3"
+                                        data-target="69"
+                                        stroke="#19c878"/>
+                            </svg>
+                            <div class="ring-center">
+                                <span class="ring-value" data-from="34.7" data-to="36.2" data-suffix="kg">34.7kg</span>
+                            </div>
+                            <div class="ring-label">Skeletal Muscle</div>
+                            <div class="ring-change positive"><i class="fa-solid fa-arrow-up"></i> +1.5kg</div>
+                        </div>
+                        <div class="ring-metric">
+                            <svg class="ring-svg" viewBox="0 0 100 100" aria-hidden="true">
+                                <circle class="ring-bg" cx="50" cy="50" r="40"/>
+                                <circle class="ring-track" cx="50" cy="50" r="40"/>
+                                <circle class="ring-fill ring-weight"
+                                        cx="50" cy="50" r="40"
+                                        stroke-dasharray="251.3"
+                                        stroke-dashoffset="251.3"
+                                        data-target="197"
+                                        stroke="rgba(255,255,255,0.4)"/>
+                            </svg>
+                            <div class="ring-center">
+                                <span class="ring-value" data-from="79.8" data-to="78.6" data-suffix="kg">79.8kg</span>
+                            </div>
+                            <div class="ring-label">Total Weight</div>
+                            <div class="ring-change neutral"><i class="fa-solid fa-minus"></i> &minus;1.2kg</div>
+                        </div>
+                    </div>
+                    <div class="inbody-insight">
+                        <i class="fa-solid fa-lightbulb"></i>
+                        <p>The scale only dropped 1.2kg, but the body composition shift is dramatic. Less fat, more muscle, better health. This is why Dom tracks beyond the scales.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== CLIENT RESULTS GALLERY =====
+                 Numbers are typeset rather than left inside the screenshots, so
+                 they're readable, searchable and on-brand. The scan photo sits
+                 alongside as evidence and hides itself if the file is missing. -->
+            <h3 class="results-gallery-title">More <span class="accent-text">client results</span></h3>
+            <p class="results-gallery-sub">Every number below is a real InBody scan. No estimates, no guesswork.</p>
+
+            <div class="results-gallery">
+
+                <article class="result-card result-card-featured reveal">
+                    <div class="result-card-media">
+                        <img src="img/result-21kg-cut.jpg"
+                             alt="InBody scan: weight down from 96.5kg to 74.6kg and body fat down from 28.2% to 8.7% over four years"
+                             decoding="async" fetchpriority="low"
+                             onerror="this.closest('.result-card-media').classList.add('no-image')">
+                        <span class="result-card-verify"><i class="fa-solid fa-circle-check"></i> InBody verified</span>
+                    </div>
+                    <div class="result-card-body">
+                        <span class="result-card-flag"><i class="fa-solid fa-trophy"></i> Standout result</span>
+                        <span class="result-card-period">Jan 2022 &rarr; Nov 2025 &nbsp;&bull;&nbsp; Nearly 4 years</span>
+                        <h4>21.9kg down. 28.2% to 8.7% body fat.</h4>
+                        <p class="result-card-note">This is what consistency actually looks like over the long run. Almost 22kg off the scale, body fat down by more than two thirds, and skeletal muscle within a kilo of where it started. Not a transformation challenge, just years of turning up and doing the work.</p>
+                        <dl class="result-metrics">
+                            <div class="result-metric">
+                                <dt>Body Fat</dt>
+                                <dd>28.2% <i class="fa-solid fa-arrow-right"></i> <strong>8.7%</strong></dd>
+                                <span class="metric-delta down"><i class="fa-solid fa-arrow-down"></i> 19.5%</span>
+                            </div>
+                            <div class="result-metric">
+                                <dt>Weight</dt>
+                                <dd>96.5kg <i class="fa-solid fa-arrow-right"></i> <strong>74.6kg</strong></dd>
+                                <span class="metric-delta down"><i class="fa-solid fa-arrow-down"></i> 21.9kg</span>
+                            </div>
+                            <div class="result-metric">
+                                <dt>Muscle</dt>
+                                <dd>40.2kg <i class="fa-solid fa-arrow-right"></i> <strong>39.3kg</strong></dd>
+                                <span class="metric-delta hold">Held</span>
+                            </div>
+                        </dl>
+                    </div>
+                </article>
+
+                <article class="result-card reveal">
+                    <div class="result-card-media">
+                        <img src="img/result-10kg-cut.jpg"
+                             alt="InBody scan: weight down from 91.5kg to 81.8kg, body fat down from 24.2% to 15.4%"
+                             decoding="async" fetchpriority="low"
+                             onerror="this.closest('.result-card-media').classList.add('no-image')">
+                        <span class="result-card-verify"><i class="fa-solid fa-circle-check"></i> InBody verified</span>
+                    </div>
+                    <div class="result-card-body">
+                        <span class="result-card-period">Nov 2024 &rarr; Jun 2025 &nbsp;&bull;&nbsp; 7 months</span>
+                        <h4>9.7kg down, muscle held</h4>
+                        <p class="result-card-note">A proper cut. Nearly 10kg off the scale and body fat almost halved, while skeletal muscle stayed essentially untouched. That's the difference between losing fat and just losing weight.</p>
+                        <dl class="result-metrics">
+                            <div class="result-metric">
+                                <dt>Body Fat</dt>
+                                <dd>24.2% <i class="fa-solid fa-arrow-right"></i> <strong>15.4%</strong></dd>
+                                <span class="metric-delta down"><i class="fa-solid fa-arrow-down"></i> 8.8%</span>
+                            </div>
+                            <div class="result-metric">
+                                <dt>Weight</dt>
+                                <dd>91.5kg <i class="fa-solid fa-arrow-right"></i> <strong>81.8kg</strong></dd>
+                                <span class="metric-delta down"><i class="fa-solid fa-arrow-down"></i> 9.7kg</span>
+                            </div>
+                            <div class="result-metric">
+                                <dt>Muscle</dt>
+                                <dd>40.2kg <i class="fa-solid fa-arrow-right"></i> <strong>39.9kg</strong></dd>
+                                <span class="metric-delta hold">Held</span>
+                            </div>
+                        </dl>
+                    </div>
+                </article>
+
+                <article class="result-card reveal">
+                    <div class="result-card-media">
+                        <img src="img/result-first-month.jpg"
+                             alt="InBody scan: body fat down from 32.8% to 30.6% and muscle up 0.7kg in one month"
+                             decoding="async" fetchpriority="low"
+                             onerror="this.closest('.result-card-media').classList.add('no-image')">
+                        <span class="result-card-verify"><i class="fa-solid fa-circle-check"></i> InBody verified</span>
+                    </div>
+                    <div class="result-card-body">
+                        <span class="result-card-period">Jul &rarr; Aug 2025 &nbsp;&bull;&nbsp; 1 month</span>
+                        <h4>Fat down and muscle up, in four weeks</h4>
+                        <p class="result-card-note">The scale barely moved, and that's the point. Body fat down 2.2% with muscle actually going up, one month into training. This is why Dom doesn't judge progress on bodyweight alone.</p>
+                        <dl class="result-metrics">
+                            <div class="result-metric">
+                                <dt>Body Fat</dt>
+                                <dd>32.8% <i class="fa-solid fa-arrow-right"></i> <strong>30.6%</strong></dd>
+                                <span class="metric-delta down"><i class="fa-solid fa-arrow-down"></i> 2.2%</span>
+                            </div>
+                            <div class="result-metric">
+                                <dt>Muscle</dt>
+                                <dd>38.6kg <i class="fa-solid fa-arrow-right"></i> <strong>39.3kg</strong></dd>
+                                <span class="metric-delta up"><i class="fa-solid fa-arrow-up"></i> 0.7kg</span>
+                            </div>
+                            <div class="result-metric">
+                                <dt>Weight</dt>
+                                <dd>99.7kg <i class="fa-solid fa-arrow-right"></i> <strong>98.0kg</strong></dd>
+                                <span class="metric-delta down"><i class="fa-solid fa-arrow-down"></i> 1.7kg</span>
+                            </div>
+                        </dl>
+                    </div>
+                </article>
+
+                <article class="result-card reveal">
+                    <div class="result-card-media">
+                        <img src="img/result-recomp.jpg"
+                             alt="InBody scan: muscle up 1.8kg and body fat down 4.2% with bodyweight almost unchanged"
+                             decoding="async" fetchpriority="low"
+                             onerror="this.closest('.result-card-media').classList.add('no-image')">
+                        <span class="result-card-verify"><i class="fa-solid fa-circle-check"></i> InBody verified</span>
+                    </div>
+                    <div class="result-card-body">
+                        <span class="result-card-period">Jan &rarr; Feb 2026 &nbsp;&bull;&nbsp; 7 weeks</span>
+                        <h4>Textbook body recomposition</h4>
+                        <p class="result-card-note">Bodyweight up 0.3kg. If you only owned bathroom scales you'd think nothing happened. In reality: 1.8kg of muscle gained and 4.2% body fat lost in seven weeks.</p>
+                        <dl class="result-metrics">
+                            <div class="result-metric">
+                                <dt>Muscle</dt>
+                                <dd>25.1kg <i class="fa-solid fa-arrow-right"></i> <strong>26.9kg</strong></dd>
+                                <span class="metric-delta up"><i class="fa-solid fa-arrow-up"></i> 1.8kg</span>
+                            </div>
+                            <div class="result-metric">
+                                <dt>Body Fat</dt>
+                                <dd>30.8% <i class="fa-solid fa-arrow-right"></i> <strong>26.6%</strong></dd>
+                                <span class="metric-delta down"><i class="fa-solid fa-arrow-down"></i> 4.2%</span>
+                            </div>
+                            <div class="result-metric">
+                                <dt>Weight</dt>
+                                <dd>66.1kg <i class="fa-solid fa-arrow-right"></i> <strong>66.4kg</strong></dd>
+                                <span class="metric-delta hold">+0.3kg</span>
+                            </div>
+                        </dl>
+                    </div>
+                </article>
+
+            </div>
+
+            <div class="transformations-cta text-center">
+                <p>Want results like this?</p>
+                <a href="#contact" class="btn-primary">Get Your Free Consultation <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+        </div>
     </section>
 
     <!-- ===================== ABOUT ===================== -->
@@ -400,26 +595,20 @@
                     </a>
                 </div>
 
-                <div class="about-card-wrap reveal reveal-right">
-                    <!-- Dom's transformation: drag-to-reveal before/after slider -->
-                    <div class="ba-slider" id="ba-slider" role="img" aria-label="Dom Sharpe transformation, drag to compare 2022 and 2025">
-                        <div class="ba-before">
-                            <img src="img/dom-transformation.jpg" class="ba-img" alt="Dom Sharpe 2022">
-                            <span class="ba-label ba-label-before">2022</span>
-                        </div>
-                        <div class="ba-after" id="ba-after">
-                            <img src="img/dom-transformation.jpg" class="ba-img" alt="Dom Sharpe 2025">
-                            <span class="ba-label ba-label-after">2025</span>
-                        </div>
-                        <div class="ba-handle" id="ba-handle" aria-hidden="true">
-                            <div class="ba-handle-line"></div>
-                            <div class="ba-handle-btn">
-                                <i class="fa-solid fa-chevron-left"></i>
-                                <i class="fa-solid fa-chevron-right"></i>
-                            </div>
-                        </div>
-                        <span class="ba-drag-hint" id="ba-drag-hint"><i class="fa-solid fa-left-right"></i> Drag to compare</span>
-                    </div>
+                <div class="about-card-wrap reveal">
+                    <!-- Dom's own 2022 to 2025 change. Shown whole rather than as a
+                         drag-to-compare slider: the source is a single 2x2 collage, so
+                         any slider had to crop it and cut heads off on narrow screens. -->
+                    <figure class="about-collage">
+                        <img src="img/dom-transformation.jpg"
+                             alt="Dom Sharpe in 2022 on the left and 2025 on the right"
+                             width="933" height="929" loading="lazy" decoding="async">
+                        <figcaption class="about-collage-caption">
+                            <span class="collage-year">2022</span>
+                            <span class="collage-arrow"><i class="fa-solid fa-arrow-right"></i></span>
+                            <span class="collage-year collage-year-now">2025</span>
+                        </figcaption>
+                    </figure>
 
                     <div class="about-quote-card">
                         <blockquote class="about-quote">
@@ -771,236 +960,6 @@
                         <i class="fa-solid fa-pause"></i>
                     </button>
                 </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ===================== TRANSFORMATIONS ===================== -->
-    <section class="transformations" id="transformations">
-        <div class="section-container">
-            <div class="section-eyebrow">Results</div>
-            <h2 class="section-title text-center">THE PROOF IS <span class="accent-text">IN THE NUMBERS.</span></h2>
-            <p class="section-sub text-center">Real data from real clients. Tracked with InBody body composition analysis.</p>
-
-            <!-- InBody featured result -->
-            <div class="inbody-feature reveal">
-                <div class="inbody-image-col">
-                    <img src="img/inbody-progress.jpg" alt="InBody body composition scan showing an 8 week client progress: body fat down from 23.1% to 18.9%, skeletal muscle up from 34.7kg to 36.2kg" class="inbody-img" width="640" height="1138" loading="lazy" decoding="async">
-                    <div class="inbody-caption">
-                        <i class="fa-solid fa-circle-check"></i>
-                        Tracked via InBody Body Composition Analysis
-                    </div>
-                </div>
-                <div class="inbody-stats-col">
-                    <div class="inbody-header">
-                        <div class="section-eyebrow">Client Progress Scan</div>
-                        <h3>Body Recomposition <span class="accent-text">Done Right</span></h3>
-                        <p>This is what consistency and accountability actually looks like, measured over 8 weeks with InBody scanning.</p>
-                    </div>
-                    <!-- Animated ring charts for InBody metrics -->
-                    <div class="inbody-rings" id="inbody-rings">
-                        <div class="ring-metric">
-                            <svg class="ring-svg" viewBox="0 0 100 100" aria-hidden="true">
-                                <circle class="ring-bg" cx="50" cy="50" r="40"/>
-                                <circle class="ring-track" cx="50" cy="50" r="40"/>
-                                <circle class="ring-fill ring-fat"
-                                        cx="50" cy="50" r="40"
-                                        stroke-dasharray="251.3"
-                                        stroke-dashoffset="251.3"
-                                        data-target="133"
-                                        stroke="#C8923A"/>
-                            </svg>
-                            <div class="ring-center">
-                                <span class="ring-value" data-from="23.1" data-to="18.9" data-suffix="%">23.1%</span>
-                            </div>
-                            <div class="ring-label">Body Fat</div>
-                            <div class="ring-change negative"><i class="fa-solid fa-arrow-down"></i> &minus;4.2%</div>
-                        </div>
-                        <div class="ring-metric">
-                            <svg class="ring-svg" viewBox="0 0 100 100" aria-hidden="true">
-                                <circle class="ring-bg" cx="50" cy="50" r="40"/>
-                                <circle class="ring-track" cx="50" cy="50" r="40"/>
-                                <circle class="ring-fill ring-muscle"
-                                        cx="50" cy="50" r="40"
-                                        stroke-dasharray="251.3"
-                                        stroke-dashoffset="251.3"
-                                        data-target="69"
-                                        stroke="#19c878"/>
-                            </svg>
-                            <div class="ring-center">
-                                <span class="ring-value" data-from="34.7" data-to="36.2" data-suffix="kg">34.7kg</span>
-                            </div>
-                            <div class="ring-label">Skeletal Muscle</div>
-                            <div class="ring-change positive"><i class="fa-solid fa-arrow-up"></i> +1.5kg</div>
-                        </div>
-                        <div class="ring-metric">
-                            <svg class="ring-svg" viewBox="0 0 100 100" aria-hidden="true">
-                                <circle class="ring-bg" cx="50" cy="50" r="40"/>
-                                <circle class="ring-track" cx="50" cy="50" r="40"/>
-                                <circle class="ring-fill ring-weight"
-                                        cx="50" cy="50" r="40"
-                                        stroke-dasharray="251.3"
-                                        stroke-dashoffset="251.3"
-                                        data-target="197"
-                                        stroke="rgba(255,255,255,0.4)"/>
-                            </svg>
-                            <div class="ring-center">
-                                <span class="ring-value" data-from="79.8" data-to="78.6" data-suffix="kg">79.8kg</span>
-                            </div>
-                            <div class="ring-label">Total Weight</div>
-                            <div class="ring-change neutral"><i class="fa-solid fa-minus"></i> &minus;1.2kg</div>
-                        </div>
-                    </div>
-                    <div class="inbody-insight">
-                        <i class="fa-solid fa-lightbulb"></i>
-                        <p>The scale only dropped 1.2kg, but the body composition shift is dramatic. Less fat, more muscle, better health. This is why Dom tracks beyond the scales.</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- ===== CLIENT RESULTS GALLERY =====
-                 Numbers are typeset rather than left inside the screenshots, so
-                 they're readable, searchable and on-brand. The scan photo sits
-                 alongside as evidence and hides itself if the file is missing. -->
-            <h3 class="results-gallery-title">More <span class="accent-text">client results</span></h3>
-            <p class="results-gallery-sub">Every number below is a real InBody scan. No estimates, no guesswork.</p>
-
-            <div class="results-gallery">
-
-                <article class="result-card result-card-featured reveal">
-                    <div class="result-card-media">
-                        <img src="img/result-21kg-cut.jpg"
-                             alt="InBody scan: weight down from 96.5kg to 74.6kg and body fat down from 28.2% to 8.7% over four years"
-                             decoding="async" fetchpriority="low"
-                             onerror="this.closest('.result-card-media').classList.add('no-image')">
-                        <span class="result-card-verify"><i class="fa-solid fa-circle-check"></i> InBody verified</span>
-                    </div>
-                    <div class="result-card-body">
-                        <span class="result-card-flag"><i class="fa-solid fa-trophy"></i> Standout result</span>
-                        <span class="result-card-period">Jan 2022 &rarr; Nov 2025 &nbsp;&bull;&nbsp; Nearly 4 years</span>
-                        <h4>21.9kg down. 28.2% to 8.7% body fat.</h4>
-                        <p class="result-card-note">This is what consistency actually looks like over the long run. Almost 22kg off the scale, body fat down by more than two thirds, and skeletal muscle within a kilo of where it started. Not a transformation challenge, just years of turning up and doing the work.</p>
-                        <dl class="result-metrics">
-                            <div class="result-metric">
-                                <dt>Body Fat</dt>
-                                <dd>28.2% <i class="fa-solid fa-arrow-right"></i> <strong>8.7%</strong></dd>
-                                <span class="metric-delta down"><i class="fa-solid fa-arrow-down"></i> 19.5%</span>
-                            </div>
-                            <div class="result-metric">
-                                <dt>Weight</dt>
-                                <dd>96.5kg <i class="fa-solid fa-arrow-right"></i> <strong>74.6kg</strong></dd>
-                                <span class="metric-delta down"><i class="fa-solid fa-arrow-down"></i> 21.9kg</span>
-                            </div>
-                            <div class="result-metric">
-                                <dt>Muscle</dt>
-                                <dd>40.2kg <i class="fa-solid fa-arrow-right"></i> <strong>39.3kg</strong></dd>
-                                <span class="metric-delta hold">Held</span>
-                            </div>
-                        </dl>
-                    </div>
-                </article>
-
-                <article class="result-card reveal">
-                    <div class="result-card-media">
-                        <img src="img/result-10kg-cut.jpg"
-                             alt="InBody scan: weight down from 91.5kg to 81.8kg, body fat down from 24.2% to 15.4%"
-                             decoding="async" fetchpriority="low"
-                             onerror="this.closest('.result-card-media').classList.add('no-image')">
-                        <span class="result-card-verify"><i class="fa-solid fa-circle-check"></i> InBody verified</span>
-                    </div>
-                    <div class="result-card-body">
-                        <span class="result-card-period">Nov 2024 &rarr; Jun 2025 &nbsp;&bull;&nbsp; 7 months</span>
-                        <h4>9.7kg down, muscle held</h4>
-                        <p class="result-card-note">A proper cut. Nearly 10kg off the scale and body fat almost halved, while skeletal muscle stayed essentially untouched. That's the difference between losing fat and just losing weight.</p>
-                        <dl class="result-metrics">
-                            <div class="result-metric">
-                                <dt>Body Fat</dt>
-                                <dd>24.2% <i class="fa-solid fa-arrow-right"></i> <strong>15.4%</strong></dd>
-                                <span class="metric-delta down"><i class="fa-solid fa-arrow-down"></i> 8.8%</span>
-                            </div>
-                            <div class="result-metric">
-                                <dt>Weight</dt>
-                                <dd>91.5kg <i class="fa-solid fa-arrow-right"></i> <strong>81.8kg</strong></dd>
-                                <span class="metric-delta down"><i class="fa-solid fa-arrow-down"></i> 9.7kg</span>
-                            </div>
-                            <div class="result-metric">
-                                <dt>Muscle</dt>
-                                <dd>40.2kg <i class="fa-solid fa-arrow-right"></i> <strong>39.9kg</strong></dd>
-                                <span class="metric-delta hold">Held</span>
-                            </div>
-                        </dl>
-                    </div>
-                </article>
-
-                <article class="result-card reveal">
-                    <div class="result-card-media">
-                        <img src="img/result-first-month.jpg"
-                             alt="InBody scan: body fat down from 32.8% to 30.6% and muscle up 0.7kg in one month"
-                             decoding="async" fetchpriority="low"
-                             onerror="this.closest('.result-card-media').classList.add('no-image')">
-                        <span class="result-card-verify"><i class="fa-solid fa-circle-check"></i> InBody verified</span>
-                    </div>
-                    <div class="result-card-body">
-                        <span class="result-card-period">Jul &rarr; Aug 2025 &nbsp;&bull;&nbsp; 1 month</span>
-                        <h4>Fat down and muscle up, in four weeks</h4>
-                        <p class="result-card-note">The scale barely moved, and that's the point. Body fat down 2.2% with muscle actually going up, one month into training. This is why Dom doesn't judge progress on bodyweight alone.</p>
-                        <dl class="result-metrics">
-                            <div class="result-metric">
-                                <dt>Body Fat</dt>
-                                <dd>32.8% <i class="fa-solid fa-arrow-right"></i> <strong>30.6%</strong></dd>
-                                <span class="metric-delta down"><i class="fa-solid fa-arrow-down"></i> 2.2%</span>
-                            </div>
-                            <div class="result-metric">
-                                <dt>Muscle</dt>
-                                <dd>38.6kg <i class="fa-solid fa-arrow-right"></i> <strong>39.3kg</strong></dd>
-                                <span class="metric-delta up"><i class="fa-solid fa-arrow-up"></i> 0.7kg</span>
-                            </div>
-                            <div class="result-metric">
-                                <dt>Weight</dt>
-                                <dd>99.7kg <i class="fa-solid fa-arrow-right"></i> <strong>98.0kg</strong></dd>
-                                <span class="metric-delta down"><i class="fa-solid fa-arrow-down"></i> 1.7kg</span>
-                            </div>
-                        </dl>
-                    </div>
-                </article>
-
-                <article class="result-card reveal">
-                    <div class="result-card-media">
-                        <img src="img/result-recomp.jpg"
-                             alt="InBody scan: muscle up 1.8kg and body fat down 4.2% with bodyweight almost unchanged"
-                             decoding="async" fetchpriority="low"
-                             onerror="this.closest('.result-card-media').classList.add('no-image')">
-                        <span class="result-card-verify"><i class="fa-solid fa-circle-check"></i> InBody verified</span>
-                    </div>
-                    <div class="result-card-body">
-                        <span class="result-card-period">Jan &rarr; Feb 2026 &nbsp;&bull;&nbsp; 7 weeks</span>
-                        <h4>Textbook body recomposition</h4>
-                        <p class="result-card-note">Bodyweight up 0.3kg. If you only owned bathroom scales you'd think nothing happened. In reality: 1.8kg of muscle gained and 4.2% body fat lost in seven weeks.</p>
-                        <dl class="result-metrics">
-                            <div class="result-metric">
-                                <dt>Muscle</dt>
-                                <dd>25.1kg <i class="fa-solid fa-arrow-right"></i> <strong>26.9kg</strong></dd>
-                                <span class="metric-delta up"><i class="fa-solid fa-arrow-up"></i> 1.8kg</span>
-                            </div>
-                            <div class="result-metric">
-                                <dt>Body Fat</dt>
-                                <dd>30.8% <i class="fa-solid fa-arrow-right"></i> <strong>26.6%</strong></dd>
-                                <span class="metric-delta down"><i class="fa-solid fa-arrow-down"></i> 4.2%</span>
-                            </div>
-                            <div class="result-metric">
-                                <dt>Weight</dt>
-                                <dd>66.1kg <i class="fa-solid fa-arrow-right"></i> <strong>66.4kg</strong></dd>
-                                <span class="metric-delta hold">+0.3kg</span>
-                            </div>
-                        </dl>
-                    </div>
-                </article>
-
-            </div>
-
-            <div class="transformations-cta text-center">
-                <p>Want results like this?</p>
-                <a href="#contact" class="btn-primary">Get Your Free Consultation <i class="fa-solid fa-arrow-right"></i></a>
             </div>
         </div>
     </section>
@@ -1620,14 +1579,6 @@
         <i class="fa-brands fa-whatsapp"></i>
         <span class="whatsapp-tooltip">Chat on WhatsApp</span>
     </a>
-
-    <!-- ===================== PAGE INTRO STING ===================== -->
-    <div id="page-intro" aria-hidden="true">
-        <svg class="intro-svg" viewBox="0 0 66 100" xmlns="http://www.w3.org/2000/svg" fill="none" aria-hidden="true">
-            <polyline class="intro-ch intro-ch-1" points="8,8 36,50 8,92"  stroke="#ffffff" stroke-width="8" stroke-linecap="square" stroke-linejoin="miter"/>
-            <polyline class="intro-ch intro-ch-2" points="30,8 58,50 30,92" stroke="#C8923A" stroke-width="8" stroke-linecap="square" stroke-linejoin="miter"/>
-        </svg>
-    </div>
 
     <script src="js/config.js"></script>
     <script src="js/scripts.js"></script>

@@ -72,7 +72,7 @@ DomSharpeFitness/
   marking the spot in `index.html`.
 - **Form notification email (one dashboard step).** Netlify dashboard, the
   site, Forms, "consultation", Form notifications, add "Email notification" to
-  sharp.strength1@gmail.com. Without this, submissions collect in the Netlify
+  sharpe.strength1@gmail.com. Without this, submissions collect in the Netlify
   Forms tab but no email is sent.
 - **Credentials.** Level 3 PT / First Aid / REPs badges in the About section
   need confirming before they stay up.

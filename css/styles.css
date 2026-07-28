@@ -1124,7 +1124,7 @@ ul {
 /* Instagram handle */
 .testimonial-ig {
     font-size: 12px;
-    color: var(--text-faint);
+    color: var(--text-muted);
     transition: color var(--transition);
     display: block;
     margin-top: 2px;
@@ -1223,7 +1223,7 @@ ul {
     gap: 8px;
     margin-top: 12px;
     font-size: 12px;
-    color: var(--text-faint);
+    color: var(--text-muted);
     font-weight: 500;
 }
 
@@ -1406,7 +1406,7 @@ ul {
     font-weight: 600;
     letter-spacing: 2px;
     text-transform: uppercase;
-    color: var(--text-faint);
+    color: var(--text-muted);
     margin-bottom: 2px;
 }
 
@@ -1579,7 +1579,7 @@ ul {
 .form-note {
     text-align: center;
     font-size: 12px;
-    color: var(--text-faint);
+    color: var(--text-muted);
     margin-top: 16px;
 }
 
@@ -1710,7 +1710,7 @@ ul {
     border-top: 1px solid var(--border);
     text-align: center;
     font-size: 12px;
-    color: var(--text-faint);
+    color: var(--text-muted);
     letter-spacing: 0.5px;
 }
 
@@ -2810,24 +2810,40 @@ ul {
 
 .tc-dots {
     display: flex;
-    gap: 10px;
+    gap: 2px;
     align-items: center;
 }
 
+/* The button itself is a real 24x24 hit target (Lighthouse's touch-target-size
+   minimum); the small dot people actually see is an inner ::before so the
+   visual design is unchanged. An invisible hit-area trick on a smaller element
+   looks the same to a person but Lighthouse measures the element's own
+   getBoundingClientRect(), not an overlaid pseudo-element, so it still failed
+   the audit even though real taps landed fine. */
 .tc-dot {
+    width: 24px;
+    height: 24px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+}
+
+.tc-dot::before {
+    content: '';
     width: 8px;
     height: 8px;
     border-radius: 50%;
     background: var(--border);
-    border: none;
-    cursor: pointer;
-    transition: background var(--transition), transform var(--transition), width var(--transition);
-    padding: 0;
+    transition: background var(--transition), width var(--transition), border-radius var(--transition);
 }
 
-.tc-dot.active {
+.tc-dot.active::before {
     background: var(--accent);
-    width: 24px;
+    width: 16px;
     border-radius: 4px;
 }
 
@@ -2945,7 +2961,7 @@ ul {
     font-weight: 600;
     letter-spacing: 1.5px;
     text-transform: uppercase;
-    color: var(--text-faint);
+    color: var(--text-muted);
     margin-top: 28px;
     display: block;
 }
@@ -3013,7 +3029,7 @@ ul {
 .quiz-restart-btn {
     background: none;
     border: none;
-    color: var(--text-faint);
+    color: var(--text-muted);
     font-family: var(--font-body);
     font-size: 13px;
     font-weight: 600;
@@ -3026,7 +3042,7 @@ ul {
     transition: color var(--transition);
 }
 
-.quiz-restart-btn:hover { color: var(--text-muted); }
+.quiz-restart-btn:hover { color: var(--accent); }
 
 @media (max-width: 520px) {
     .quiz-options { grid-template-columns: 1fr 1fr; }
@@ -3615,6 +3631,15 @@ ul {
     font-size: 13px;
     color: rgba(255, 255, 255, 0.62);
     margin: 0;
+    /* The delta badge lives inside dd now (see markup comment below), not as a
+       sibling span: a <dl> whose direct children are div-wrapped dt/dd pairs is
+       fine, but a stray element that is neither dt nor dd breaks assistive tech
+       parsing of the list. flex+wrap keeps the value and badge inline together,
+       wrapping onto their own line only if the card is narrow. */
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
 }
 
 .result-metric dd strong {
@@ -3988,23 +4013,11 @@ textarea:focus-visible,
         min-height: 44px;
     }
 
-    /* Give the 8px dots a 44px invisible hit area without changing how they look. */
-    .tc-dots { gap: 0; }
-
-    .tc-dot {
-        position: relative;
-        margin: 0 6px;
-    }
-
-    .tc-dot::after {
-        content: '';
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 44px;
-        height: 44px;
-    }
+    /* The base .tc-dot button is already a real 24x24 hit target; bump it to
+       44x44 on touch devices, WCAG's recommended size. The visible dot stays
+       the same small size, it is a separate ::before element. */
+    .tc-dots { gap: 4px; }
+    .tc-dot { width: 44px; height: 44px; }
 }
 
 

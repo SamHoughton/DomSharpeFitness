@@ -3275,7 +3275,7 @@ ul {
 /* --- Quiz: email capture --- */
 .quiz-capture {
     max-width: 420px;
-    margin: 24px auto 0;
+    margin: 24px auto 28px;
     text-align: left;
 }
 

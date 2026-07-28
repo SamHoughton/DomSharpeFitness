@@ -44,11 +44,16 @@
   force = true
 
 # Clean URLs. The .html versions 301 to the clean path, which then rewrites
-# to the file. Canonicals and the sitemap use the clean paths.
+# to the file. Canonicals, the sitemap and every internal link use the clean
+# paths. force = true is required on the 301s: Netlify serves an existing
+# static file at its literal path before it ever evaluates a redirect rule,
+# so without force these .html paths were quietly returning 200 instead of
+# redirecting, leaving a live duplicate-content URL for each page.
 [[redirects]]
   from = "/privacy.html"
   to = "/privacy"
   status = 301
+  force = true
 
 [[redirects]]
   from = "/privacy"
@@ -59,6 +64,7 @@
   from = "/personal-trainer-hitchin.html"
   to = "/personal-trainer-hitchin"
   status = 301
+  force = true
 
 [[redirects]]
   from = "/personal-trainer-hitchin"
@@ -69,6 +75,7 @@
   from = "/personal-trainer-letchworth.html"
   to = "/personal-trainer-letchworth"
   status = 301
+  force = true
 
 [[redirects]]
   from = "/personal-trainer-letchworth"
@@ -79,6 +86,7 @@
   from = "/gyms-in-hitchin.html"
   to = "/gyms-in-hitchin"
   status = 301
+  force = true
 
 [[redirects]]
   from = "/gyms-in-hitchin"

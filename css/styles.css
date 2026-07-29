@@ -81,6 +81,21 @@ a, button, summary, label, [role="button"], input, select, textarea {
     -webkit-tap-highlight-color: rgba(200, 146, 58, 0.22);
 }
 
+/* Fine paper grain over the whole page: a tiled turbulence tile, blended in at
+   low opacity. One data-URI, no extra request, no JS, fixed so it never
+   re-tiles or smears as the page scrolls. */
+body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: 999;
+    pointer-events: none;
+    opacity: 0.05;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='g'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23g)'/></svg>");
+    background-repeat: repeat;
+}
+
 img {
     max-width: 100%;
     height: auto;
@@ -354,23 +369,36 @@ ul {
     pointer-events: none;
 }
 
-/* Single-column, centred hero. Add a second column here if a portrait comes back. */
+/* Two-column above 900px: copy on the left, illustration on the right.
+   Collapses to a single centred column at the 900px breakpoint below. */
 .hero-grid {
     position: relative;
     z-index: 1;
     flex: 1;                 /* absorb the free space so the stats bar sits flush at the bottom */
     width: 100%;
-    max-width: 820px;
+    max-width: 1180px;
     margin: 0 auto;
     padding: 0 24px 56px;
     display: grid;
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr) minmax(280px, 420px);
     align-items: center;
     align-content: center;
     gap: 56px;
 }
 
-.hero-content { text-align: center; }
+.hero-content { text-align: left; }
+
+.hero-illustration {
+    width: 100%;
+    max-width: 360px;
+    justify-self: center;
+}
+
+.hero-illustration svg {
+    width: 100%;
+    height: auto;
+    display: block;
+}
 
 .hero-eyebrow {
     display: inline-flex;
@@ -382,6 +410,10 @@ ul {
     text-transform: uppercase;
     color: var(--accent);
     margin-bottom: 24px;
+    padding: 8px 16px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--border-light);
+    border-radius: 100px;
 }
 
 
@@ -404,7 +436,7 @@ ul {
     width: 64px;
     height: 3px;
     background: var(--accent);
-    margin: 0 auto 26px;
+    margin: 0 0 26px;
 }
 
 .hero-subtitle {
@@ -414,15 +446,14 @@ ul {
     letter-spacing: 0;
     color: rgba(255, 255, 255, 0.72);
     max-width: 46ch;
-    /* auto margins, or the max-width pins it to the left of a centred block */
-    margin: 0 auto 26px;
+    margin: 0 0 26px;
     text-transform: none;
 }
 
 .hero-pills {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: flex-start;
     gap: 8px;
     margin-bottom: 32px;
     list-style: none;
@@ -448,7 +479,7 @@ ul {
 .hero-actions {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     gap: 16px;
     flex-wrap: wrap;
 }
@@ -456,7 +487,7 @@ ul {
 .hero-reassure {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     gap: 9px;
     flex-wrap: wrap;
     margin-top: 22px;
@@ -469,10 +500,24 @@ ul {
 
 @media (max-width: 900px) {
     .hero-grid {
+        grid-template-columns: 1fr;
         gap: 36px;
         max-width: 560px;
         padding-bottom: 40px;
     }
+
+    .hero-content { text-align: center; }
+
+    .hero-illustration {
+        max-width: 260px;
+        margin: 0 auto;
+    }
+
+    .hero-rule { margin: 0 auto 26px; }
+    .hero-subtitle { margin: 0 auto 26px; }
+    .hero-pills { justify-content: center; }
+    .hero-actions { justify-content: center; }
+    .hero-reassure { justify-content: center; }
 }
 
 /* Buttons */
@@ -556,6 +601,7 @@ ul {
     gap: 0;
     background: var(--bg-alt);
     border-top: 1px solid var(--border);
+    box-shadow: 0 -1px 0 var(--accent-glow);
     z-index: 1;
     animation: fadeUp 1s 0.3s ease both;
 }
@@ -565,7 +611,7 @@ ul {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 24px 16px;
+    padding: 28px 20px;
     max-width: 260px;
 }
 
@@ -1891,6 +1937,8 @@ ul {
 @media (max-width: 480px) {
     .hero-title { font-size: 2.8rem; }
     .section-title { font-size: 1.8rem; }
+
+    .hero-illustration { max-width: 190px; }
 
     .hero-eyebrow {
         font-size: 10px;
@@ -4265,6 +4313,7 @@ textarea:focus-visible,
     .hero { min-height: auto; padding-top: 96px; }
     .hero-grid { padding-bottom: 28px; }
     .hero-stats { display: none; }
+    .hero-illustration { display: none; }
 }
 
 @media (max-width: 768px) {

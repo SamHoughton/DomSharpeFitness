@@ -605,7 +605,9 @@ ul {
     width: 100%;
     flex-shrink: 0;
     display: flex;
-    align-items: center;
+    /* flex-start, not center: a longer label (more wrapped lines) must not
+       push its number out of line with the other stats' numbers. */
+    align-items: flex-start;
     justify-content: center;
     gap: 0;
     background: var(--bg-alt);
@@ -642,6 +644,7 @@ ul {
 }
 
 .stat-sep {
+    align-self: center;
     width: 1px;
     height: 50px;
     background: var(--border);

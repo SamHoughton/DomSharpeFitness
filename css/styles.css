@@ -370,34 +370,43 @@ ul {
 }
 
 /* Two-column above 900px: copy on the left, illustration on the right.
-   Collapses to a single centred column at the 900px breakpoint below. */
+   Collapses to a single centred column at the 900px breakpoint below.
+   No right padding here on purpose: it lets the illustration run closer to
+   the edge of the container instead of sitting hemmed in on both sides. */
 .hero-grid {
     position: relative;
     z-index: 1;
     flex: 1;                 /* absorb the free space so the stats bar sits flush at the bottom */
     width: 100%;
-    max-width: 1180px;
+    max-width: 1320px;
     margin: 0 auto;
-    padding: 0 24px 56px;
+    padding: 0 0 56px 24px;
     display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(280px, 420px);
+    grid-template-columns: minmax(0, 1fr) minmax(320px, 560px);
     align-items: center;
     align-content: center;
-    gap: 56px;
+    gap: 40px;
 }
 
 .hero-content { text-align: left; }
 
+@keyframes heroFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+}
+
 .hero-illustration {
     width: 100%;
-    max-width: 360px;
+    max-width: 520px;
     justify-self: center;
+    animation: heroFloat 6s ease-in-out infinite;
 }
 
 .hero-illustration svg {
     width: 100%;
     height: auto;
     display: block;
+    filter: drop-shadow(0 24px 30px rgba(0, 0, 0, 0.5));
 }
 
 .hero-eyebrow {
@@ -503,7 +512,7 @@ ul {
         grid-template-columns: 1fr;
         gap: 36px;
         max-width: 560px;
-        padding-bottom: 40px;
+        padding: 0 24px 40px;
     }
 
     .hero-content { text-align: center; }

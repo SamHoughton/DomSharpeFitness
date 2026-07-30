@@ -243,6 +243,7 @@
     <!-- ===================== HERO ===================== -->
     <section class="hero" id="home">
         <div class="hero-bg-pattern"></div>
+        <div class="hero-spotlight" aria-hidden="true"></div>
 
         <div class="hero-grid">
             <div class="hero-content">
@@ -298,7 +299,7 @@
                     </defs>
 
                     <!-- Rack (faint background motif) -->
-                    <g style="opacity:0.08">
+                    <g class="hero-illo-rack" style="opacity:0.08">
                         <rect x="60" y="40" width="18" height="390" style="fill:none; stroke:var(--accent); stroke-width:4"/>
                         <rect x="472" y="40" width="18" height="390" style="fill:none; stroke:var(--accent); stroke-width:4"/>
                         <rect x="78" y="176" width="26" height="8" style="fill:var(--accent)"/>
@@ -311,7 +312,7 @@
                     <path d="M40,430 L500,430 L530,470 L10,470 Z" style="fill:var(--bg-card); stroke:var(--border); stroke-width:1"/>
                     <line x1="40" y1="430" x2="500" y2="430" style="stroke:var(--accent); stroke-width:3"/>
 
-                    <g filter="url(#heroGrainFilter)">
+                    <g class="hero-illo-figure" filter="url(#heroGrainFilter)">
                         <!-- Legs -->
                         <path d="M228,268 L258,268 L250,430 L210,430 Z" style="fill:var(--accent); stroke:var(--bg); stroke-width:3"/>
                         <path d="M312,268 L282,268 L290,430 L330,430 Z" style="fill:var(--accent-dark); stroke:var(--bg); stroke-width:3"/>
@@ -400,8 +401,7 @@
                                         cx="50" cy="50" r="40"
                                         stroke-dasharray="251.3"
                                         stroke-dashoffset="251.3"
-                                        data-target="133"
-                                        stroke="#C8923A"/>
+                                        data-ref="10"/>
                             </svg>
                             <div class="ring-center">
                                 <span class="ring-value" data-from="23.1" data-to="18.9" data-suffix="%">23.1%</span>
@@ -417,8 +417,7 @@
                                         cx="50" cy="50" r="40"
                                         stroke-dasharray="251.3"
                                         stroke-dashoffset="251.3"
-                                        data-target="69"
-                                        stroke="#19c878"/>
+                                        data-ref="4"/>
                             </svg>
                             <div class="ring-center">
                                 <span class="ring-value" data-from="34.7" data-to="36.2" data-suffix="kg">34.7kg</span>
@@ -434,8 +433,7 @@
                                         cx="50" cy="50" r="40"
                                         stroke-dasharray="251.3"
                                         stroke-dashoffset="251.3"
-                                        data-target="197"
-                                        stroke="rgba(255,255,255,0.4)"/>
+                                        data-ref="6"/>
                             </svg>
                             <div class="ring-center">
                                 <span class="ring-value" data-from="79.8" data-to="78.6" data-suffix="kg">79.8kg</span>

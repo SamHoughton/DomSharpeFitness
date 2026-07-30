@@ -370,6 +370,21 @@ ul {
     pointer-events: none;
 }
 
+/* Cursor-following glow. JS sets --spot-x/--spot-y and toggles is-active on
+   pointer enter/leave; desktop-with-a-mouse only (see js/scripts.js), so it
+   defaults inert and never shows on touch devices. */
+.hero-spotlight {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: radial-gradient(360px circle at var(--spot-x, 50%) var(--spot-y, 15%),
+                var(--accent-glow), transparent 70%);
+    opacity: 0;
+    transition: opacity 0.4s var(--ease-smooth);
+}
+
+.hero-spotlight.is-active { opacity: 1; }
+
 /* Two-column above 900px: copy on the left, illustration on the right.
    Collapses to a single centred column at the 900px breakpoint below.
    No right padding here on purpose: it lets the illustration run closer to
@@ -401,6 +416,11 @@ ul {
     max-width: 520px;
     justify-self: center;
     animation: heroFloat 6s ease-in-out infinite;
+}
+
+.hero-illo-rack,
+.hero-illo-figure {
+    transition: transform 0.3s var(--ease-smooth);
 }
 
 .hero-illustration svg {
@@ -1101,6 +1121,25 @@ ul {
 
 @media (max-width: 480px) {
     .tagline-reveal { padding: 60px 0; }
+}
+
+/* Scroll-reveal utility. JS opts elements into this at runtime (adds
+   .reveal, then .is-visible once scrolled into view) rather than this rule
+   applying unconditionally — so content stays visible by default if JS
+   never runs, instead of getting stuck at opacity:0. */
+.reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    filter: blur(6px);
+    transition: opacity 0.8s var(--ease-smooth),
+                transform 0.8s var(--ease-smooth),
+                filter 0.8s var(--ease-smooth);
+}
+
+.reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
 }
 
 
@@ -3227,6 +3266,12 @@ ul {
     transition: stroke-dashoffset 1.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+/* One source of truth for ring color: matches .ring-change's badge colors
+   exactly, so a ring and its badge can never visually disagree. */
+.ring-fill.ring-fat    { stroke: var(--accent); }
+.ring-fill.ring-muscle { stroke: #19c878; }
+.ring-fill.ring-weight { stroke: var(--text-muted); }
+
 .ring-center {
     position: absolute;
     top: 24px;
@@ -4412,7 +4457,11 @@ textarea:focus-visible,
         grid-template-rows: none;
         gap: 12px;
         overflow-x: auto;
-        overflow-y: hidden;
+        /* visible, not hidden: the "Most Popular"/"Recommended" badges on
+           .service-card/.pricing-card straddle their card's top border on
+           purpose, and overflow-y:hidden here clipped them. The rail only
+           needs horizontal scroll containment. */
+        overflow-y: visible;
         scroll-snap-type: x mandatory;
         scroll-padding-left: var(--container-pad);
         /* Bleed to the screen edges so cards can sit flush */
@@ -4444,7 +4493,9 @@ textarea:focus-visible,
     .result-card-featured .result-card-media { width: 100%; max-width: none; }
     .result-card-featured .result-card-media img { height: 180px; min-height: 0; }
 
-    /* Badges sit on the top border, so the rail needs headroom */
+    /* Breathing room under .swipe-hint for the badges sitting on the top
+       border of the featured card in each rail. */
+    .services-grid,
     .pricing-grid { padding-top: 14px; }
 
     /* Scroll affordance */

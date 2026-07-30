@@ -229,6 +229,20 @@ if (statCounters.length) {
 }
 
 
+// === TAGLINE REVEAL ===
+const taglineText = document.querySelector('.tagline-reveal-text');
+
+if (taglineText) {
+    const taglineObserver = new IntersectionObserver((entries) => {
+        if (!entries[0].isIntersecting) return;
+        taglineText.classList.add('in-view');
+        taglineObserver.disconnect();
+    }, { threshold: 0.5 });
+
+    taglineObserver.observe(taglineText);
+}
+
+
 // === MOBILE ACTION BAR ===
 // Appears once the hero CTA has scrolled away, hides again over the contact
 // form so it never covers the thing it is pointing at.

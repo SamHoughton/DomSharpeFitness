@@ -38,7 +38,8 @@
     /* Racks, plates and bars are square. So is this. */
     --radius:    2px;
     --radius-lg: 3px;
-    --transition: 0.18s ease;
+    --ease-smooth: cubic-bezier(0.32, 0.72, 0, 1);
+    --transition: 0.22s var(--ease-smooth);
     --shadow:    none;
     --shadow-accent: none;
 
@@ -1033,11 +1034,19 @@ ul {
 }
 
 .why-point {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
     padding-left: 20px;
     border-left: 2px solid rgba(200, 146, 58, 0.35);
 }
 
-
+.why-point-icon {
+    flex-shrink: 0;
+    margin-top: 3px;
+    color: var(--accent);
+    font-size: 15px;
+}
 
 .why-point h3 {
     font-family: var(--font-heading);
@@ -1053,6 +1062,45 @@ ul {
     font-size: 14px;
     color: var(--text-muted);
     line-height: 1.7;
+}
+
+/* Tagline moment: a deliberate pause between "why Dom" and the quiz CTA.
+   Intentionally skips the .section-index/.section-title pattern used
+   everywhere else — this is a beat, not another content section. */
+.tagline-reveal {
+    padding: 90px 0;
+    background: var(--bg-alt);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+}
+
+.tagline-reveal-text {
+    font-family: var(--font-heading);
+    font-size: clamp(1.8rem, 4.2vw, 3rem);
+    font-weight: 600;
+    line-height: 1.35;
+    letter-spacing: 0.3px;
+    max-width: 680px;
+    margin: 0 auto;
+    text-align: center;
+    color: var(--text);
+}
+
+.tr-word {
+    display: inline-block;
+    opacity: 0.3;
+    filter: blur(2px);
+    transition: opacity 0.6s var(--ease-smooth), filter 0.6s var(--ease-smooth);
+    transition-delay: calc(var(--d, 0) * 70ms);
+}
+
+.tagline-reveal-text.in-view .tr-word {
+    opacity: 1;
+    filter: blur(0);
+}
+
+@media (max-width: 480px) {
+    .tagline-reveal { padding: 60px 0; }
 }
 
 
@@ -2005,11 +2053,20 @@ ul {
 }
 
 .calc-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
     padding-bottom: 18px;
     margin-bottom: 4px;
     border-bottom: var(--rule);
 }
 
+.calc-header-icon {
+    flex-shrink: 0;
+    margin-top: 4px;
+    color: var(--accent);
+    font-size: 18px;
+}
 
 .calc-header h3 {
     font-family: var(--font-heading);
@@ -2402,6 +2459,18 @@ ul {
 .faq {
     background: var(--bg);
     padding: 100px 0;
+}
+
+.faq-title-row {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+.faq-title-icon {
+    color: var(--accent);
+    opacity: 0.35;
+    font-size: 2rem;
 }
 
 .faq-list {
@@ -4253,6 +4322,7 @@ textarea:focus-visible,
     :root { --container-pad: 18px; }
     .section-title { font-size: clamp(1.75rem, 8vw, 2.2rem); max-width: none; }
     .section-index { margin-bottom: 16px; }
+    .faq-title-icon { font-size: 1.4rem; }
 }
 
 @media (max-width: 768px) {

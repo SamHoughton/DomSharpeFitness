@@ -950,9 +950,9 @@ ul {
 .services-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    /* heading, blurb, tick list, price, CTA. Cards adopt these rows with
-       subgrid so every card's heading, list and link sit at the same height. */
-    grid-template-rows: auto auto auto auto auto;
+    /* heading, blurb, tick list, CTA. Cards adopt these rows with subgrid so
+       every card's heading, list and link sit at the same height. */
+    grid-template-rows: auto auto auto auto;
     gap: 20px;
     margin-top: 16px;
 }
@@ -965,7 +965,7 @@ ul {
     position: relative;
     display: grid;
     grid-template-rows: subgrid;
-    grid-row: span 5;
+    grid-row: span 4;
     gap: 0;
     transition: border-color var(--transition), background var(--transition);
 }
@@ -3431,20 +3431,6 @@ ul {
    NEW COMPONENTS
 =================================================== */
 
-/* --- Service card price anchor --- */
-.service-price {
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    color: var(--accent);
-    /* align-self, not margin-top:auto: in the subgrid the auto margin bottom-
-       aligned each price inside its row, so cards whose price wrapped to two
-       lines started higher than the rest. */
-    align-self: start;
-    padding-top: 18px;
-}
-
 /* --- Pricing: outline badge variant (see .featured-badge for the solid one) --- */
 .pricing-badge-alt {
     position: absolute;
@@ -4307,7 +4293,6 @@ textarea:focus-visible,
 .quiz-plan-value,
 .quiz-step-count,
 .testimonial-result-badge,
-.service-price,
 .calc-field label,
 .tc-dots,
 .section-index {

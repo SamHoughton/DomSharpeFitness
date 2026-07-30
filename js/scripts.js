@@ -20,7 +20,9 @@ window.addEventListener('scroll', () => {
 // transition-duration override, since this is continuous pointer-driven
 // motion rather than a one-off transition.
 (function () {
-    const hero = document.querySelector('.hero');
+    // Track relative to the inset card, not the outer amber frame, since
+    // that's the visible surface the spotlight/parallax actually draw on.
+    const hero = document.querySelector('.hero-inset');
     if (!hero) return;
     if (!window.matchMedia('(pointer: fine)').matches) return;
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;

@@ -347,14 +347,30 @@ ul {
 /* ===================================================
    HERO
 =================================================== */
+/* Framed "mounted print" hero: .hero is the full-bleed amber frame, and
+   .hero-inset is the actual dark content card sitting inside it with a
+   visible margin. .hero-inset carries the nav-clearance padding (not
+   .hero), so the dark card's own background already extends up behind most
+   of the fixed nav's height at page-load, before the nav's scrolled/solid
+   state kicks in — only a thin amber sliver sits behind the very top edge. */
 .hero {
     position: relative;
     min-height: 100svh;
     display: flex;
     flex-direction: column;
+    background: var(--accent);
+}
+
+.hero-inset {
+    position: relative;
+    flex: 1;                 /* absorb the free space so the stats bar sits flush at the bottom */
+    display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: flex-start;
+    margin: 18px;
     padding: 130px 0 0;
+    border-radius: var(--radius-lg);
     overflow: hidden;
     background: radial-gradient(ellipse at 50% 0%, rgba(200,146,58,0.08) 0%, transparent 60%),
                 var(--bg);
@@ -384,6 +400,51 @@ ul {
 }
 
 .hero-spotlight.is-active { opacity: 1; }
+
+/* Fine concentric-ring background motif: thin amber rings via a repeating
+   radial gradient, faded from center to edge with a mask. Reused as a
+   subtle atmosphere layer in a few dark sections rather than one-off
+   per-section artwork. Place as the first child of a `position:relative;
+   overflow:hidden` section so it paints behind the section's own content
+   and clips cleanly at the section edge. */
+.ring-motif {
+    position: absolute;
+    width: 640px;
+    height: 640px;
+    border-radius: 50%;
+    pointer-events: none;
+    background-image: repeating-radial-gradient(
+        circle at center,
+        transparent 0px,
+        transparent 9px,
+        rgba(200, 146, 58, 0.14) 10px
+    );
+    -webkit-mask-image: radial-gradient(circle, #000 40%, transparent 72%);
+            mask-image: radial-gradient(circle, #000 40%, transparent 72%);
+}
+
+.ring-motif--hero {
+    top: -140px;
+    right: -100px;
+}
+
+.ring-motif--testimonials {
+    width: 420px;
+    height: 420px;
+    top: -80px;
+    right: -120px;
+}
+
+.ring-motif--pricing {
+    width: 420px;
+    height: 420px;
+    bottom: -100px;
+    left: -120px;
+}
+
+@media (max-width: 700px) {
+    .ring-motif { display: none; }
+}
 
 /* Two-column above 900px: copy on the left, illustration on the right.
    Collapses to a single centred column at the 900px breakpoint below.
@@ -529,6 +590,8 @@ ul {
 .hero-reassure i { color: #5fd98c; }
 
 @media (max-width: 900px) {
+    .hero-inset { margin: 10px; }
+
     .hero-grid {
         grid-template-columns: 1fr;
         gap: 36px;
@@ -1147,6 +1210,8 @@ ul {
    TESTIMONIALS
 =================================================== */
 .testimonials {
+    position: relative;
+    overflow: hidden;
     padding: 100px 0;
     background: var(--bg-alt);
     border-top: 1px solid var(--border);
@@ -2365,6 +2430,8 @@ ul {
    PRICING
 =================================================== */
 .pricing {
+    position: relative;
+    overflow: hidden;
     background: var(--bg-alt);
     padding: 100px 0;
 }
@@ -4437,7 +4504,8 @@ textarea:focus-visible,
 
 /* Landscape phones: the hero should not demand a full portrait screen */
 @media (max-width: 900px) and (orientation: landscape) and (max-height: 500px) {
-    .hero { min-height: auto; padding-top: 96px; }
+    .hero { min-height: auto; }
+    .hero-inset { padding-top: 96px; margin: 10px; }
     .hero-grid { padding-bottom: 28px; }
     .hero-stats { display: none; }
     .hero-illustration { display: none; }

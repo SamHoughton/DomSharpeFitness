@@ -358,7 +358,7 @@ ul {
     min-height: 100svh;
     display: flex;
     flex-direction: column;
-    background: var(--accent);
+    background: var(--accent-dark);
 }
 
 .hero-inset {
@@ -368,7 +368,7 @@ ul {
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    margin: 18px;
+    margin: 10px;
     padding: 130px 0 0;
     border-radius: var(--radius-lg);
     overflow: hidden;
@@ -590,7 +590,7 @@ ul {
 .hero-reassure i { color: #5fd98c; }
 
 @media (max-width: 900px) {
-    .hero-inset { margin: 10px; }
+    .hero-inset { margin: 6px; }
 
     .hero-grid {
         grid-template-columns: 1fr;
@@ -4505,7 +4505,7 @@ textarea:focus-visible,
 /* Landscape phones: the hero should not demand a full portrait screen */
 @media (max-width: 900px) and (orientation: landscape) and (max-height: 500px) {
     .hero { min-height: auto; }
-    .hero-inset { padding-top: 96px; margin: 10px; }
+    .hero-inset { padding-top: 96px; margin: 6px; }
     .hero-grid { padding-bottom: 28px; }
     .hero-stats { display: none; }
     .hero-illustration { display: none; }
@@ -4591,6 +4591,23 @@ textarea:focus-visible,
 /* ===================================================
    COOKIE CONSENT
 =================================================== */
+/* A neutral dark scrim behind the banner, independent of whatever section
+   happens to be scrolled underneath it — the hero's amber frame in
+   particular is tall enough to still be in view at page-load, and without
+   this the banner reads as if it got pulled into the frame treatment. */
+body.has-consent-banner::after {
+    content: '';
+    position: fixed;
+    inset: auto 0 0 0;
+    height: 260px;
+    background: linear-gradient(to top,
+                rgba(10, 10, 10, 0.95) 0%,
+                rgba(10, 10, 10, 0.95) 60%,
+                transparent 100%);
+    pointer-events: none;
+    z-index: 1150;
+}
+
 .consent {
     position: fixed;
     left: 16px;

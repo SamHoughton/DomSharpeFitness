@@ -2107,10 +2107,14 @@ ul {
     .hero-eyebrow {
         font-size: 10px;
         letter-spacing: 2px;
-        flex-wrap: wrap;
         justify-content: center;
         text-align: center;
     }
+
+    /* Stays put at the start of the row as the text wraps beside it,
+       instead of flex-wrap breaking between icon and text first and
+       stranding the icon alone on its own line. */
+    .hero-eyebrow i { flex-shrink: 0; }
 
     .hero-actions {
         flex-direction: column;
@@ -4436,6 +4440,11 @@ textarea:focus-visible,
 
     .inbody-rings { gap: 10px; }
     .ring-svg { max-width: 84px; }
+    /* Match the ring-svg shrink above: the text box was still sized for
+       the full 110px ring, so values like "78.6kg" crowded or overflowed
+       the visually smaller ring. */
+    .ring-center { width: 84px; height: 84px; }
+    .ring-value { font-size: 14px; }
     .inbody-insight { padding: 14px; font-size: 14px; }
 
     .results-gallery-title { margin-top: 44px; }

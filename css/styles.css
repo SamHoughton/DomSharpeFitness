@@ -507,6 +507,11 @@ ul {
     border-radius: 100px;
 }
 
+/* Forced break point, active only on the mobile breakpoint below where the
+   badge wraps — keeps "Personal Trainer" as its own line instead of the
+   default wrap leaving a heavy first line ("...Trainer • Hitchin •") over
+   a near-empty second ("Letchworth"). */
+.hero-eyebrow-break { display: none; }
 
 .hero-title {
     font-family: var(--font-heading);
@@ -2116,6 +2121,11 @@ ul {
        the pill. Dropping the icon here is the reliable fix: plain
        wrapped text centers correctly with nothing to unbalance it. */
     .hero-eyebrow i { display: none; }
+
+    /* Force the break after "Personal Trainer" instead of wherever the
+       text naturally runs out of room. */
+    .hero-eyebrow-sep { display: none; }
+    .hero-eyebrow-break { display: block; }
 
     .hero-actions {
         flex-direction: column;

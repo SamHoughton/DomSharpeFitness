@@ -4450,7 +4450,13 @@ textarea:focus-visible,
     }
 
     .inbody-rings { gap: 10px; }
-    .ring-svg { max-width: 84px; }
+    /* max-width alone left height at the base rule's 110px, so the SVG box
+       became a non-square 84x110 rectangle — its square viewBox then got
+       letterboxed and vertically centered within that taller box, pushing
+       the visible ring (and the text sitting on top of it) out of true
+       vertical alignment with each other. Setting height too keeps it a
+       square that shrinks uniformly. */
+    .ring-svg { width: 84px; height: 84px; }
     /* Match the ring-svg shrink above: the text box was still sized for
        the full 110px ring, so values like "78.6kg" crowded or overflowed
        the visually smaller ring. */

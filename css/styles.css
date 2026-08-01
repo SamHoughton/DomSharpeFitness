@@ -2111,10 +2111,11 @@ ul {
         text-align: center;
     }
 
-    /* Stays put at the start of the row as the text wraps beside it,
-       instead of flex-wrap breaking between icon and text first and
-       stranding the icon alone on its own line. */
-    .hero-eyebrow i { flex-shrink: 0; }
+    /* The icon only added width on the left, so centering the icon+text
+       group as a whole left the wrapped text visually off-centre within
+       the pill. Dropping the icon here is the reliable fix: plain
+       wrapped text centers correctly with nothing to unbalance it. */
+    .hero-eyebrow i { display: none; }
 
     .hero-actions {
         flex-direction: column;

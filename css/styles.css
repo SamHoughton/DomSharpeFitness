@@ -3412,7 +3412,12 @@ ul {
 
 @media (max-width: 480px) {
     .inbody-rings { grid-template-columns: 1fr; }
-    .inbody-rings .ring-metric:last-child { grid-column: auto; max-width: none; }
+    /* Single column now, so the last card should fill it like its siblings.
+       Must also clear the 700px rule's auto margins here: grid items with
+       auto margins skip stretch sizing and shrink to fit-content instead,
+       even with max-width reset to none, which is what made this card
+       render narrower and centered instead of full width. */
+    .inbody-rings .ring-metric:last-child { grid-column: auto; max-width: none; margin: 0; }
 }
 
 

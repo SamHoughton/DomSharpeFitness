@@ -730,6 +730,7 @@ ul {
     text-transform: uppercase;
     color: var(--text-muted);
     margin-top: 4px;
+    text-align: center;
 }
 
 .stat-sep {
@@ -2582,18 +2583,6 @@ ul {
     padding: 100px 0;
 }
 
-.faq-title-row {
-    display: flex;
-    align-items: center;
-    gap: 18px;
-}
-
-.faq-title-icon {
-    color: var(--accent);
-    opacity: 0.35;
-    font-size: 2rem;
-}
-
 .faq-list {
     max-width: 800px;
     margin: 60px auto 0;
@@ -4434,7 +4423,6 @@ textarea:focus-visible,
     :root { --container-pad: 18px; }
     .section-title { font-size: clamp(1.75rem, 8vw, 2.2rem); max-width: none; }
     .section-index { margin-bottom: 16px; }
-    .faq-title-icon { font-size: 1.4rem; }
 }
 
 @media (max-width: 768px) {

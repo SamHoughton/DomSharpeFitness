@@ -507,6 +507,11 @@ ul {
     border-radius: 100px;
 }
 
+/* Forced break point, active only on the mobile breakpoint below where the
+   badge wraps — keeps "Personal Trainer" as its own line instead of the
+   default wrap leaving a heavy first line ("...Trainer • Hitchin •") over
+   a near-empty second ("Letchworth"). */
+.hero-eyebrow-break { display: none; }
 
 .hero-title {
     font-family: var(--font-heading);
@@ -2107,10 +2112,20 @@ ul {
     .hero-eyebrow {
         font-size: 10px;
         letter-spacing: 2px;
-        flex-wrap: wrap;
         justify-content: center;
         text-align: center;
     }
+
+    /* The icon only added width on the left, so centering the icon+text
+       group as a whole left the wrapped text visually off-centre within
+       the pill. Dropping the icon here is the reliable fix: plain
+       wrapped text centers correctly with nothing to unbalance it. */
+    .hero-eyebrow i { display: none; }
+
+    /* Force the break after "Personal Trainer" instead of wherever the
+       text naturally runs out of room. */
+    .hero-eyebrow-sep { display: none; }
+    .hero-eyebrow-break { display: block; }
 
     .hero-actions {
         flex-direction: column;
@@ -4435,7 +4450,18 @@ textarea:focus-visible,
     }
 
     .inbody-rings { gap: 10px; }
-    .ring-svg { max-width: 84px; }
+    /* max-width alone left height at the base rule's 110px, so the SVG box
+       became a non-square 84x110 rectangle — its square viewBox then got
+       letterboxed and vertically centered within that taller box, pushing
+       the visible ring (and the text sitting on top of it) out of true
+       vertical alignment with each other. Setting height too keeps it a
+       square that shrinks uniformly. */
+    .ring-svg { width: 84px; height: 84px; }
+    /* Match the ring-svg shrink above: the text box was still sized for
+       the full 110px ring, so values like "78.6kg" crowded or overflowed
+       the visually smaller ring. */
+    .ring-center { width: 84px; height: 84px; }
+    .ring-value { font-size: 14px; }
     .inbody-insight { padding: 14px; font-size: 14px; }
 
     .results-gallery-title { margin-top: 44px; }

@@ -730,6 +730,7 @@ ul {
     text-transform: uppercase;
     color: var(--text-muted);
     margin-top: 4px;
+    text-align: center;
 }
 
 .stat-sep {
@@ -2582,18 +2583,6 @@ ul {
     padding: 100px 0;
 }
 
-.faq-title-row {
-    display: flex;
-    align-items: center;
-    gap: 18px;
-}
-
-.faq-title-icon {
-    color: var(--accent);
-    opacity: 0.35;
-    font-size: 2rem;
-}
-
 .faq-list {
     max-width: 800px;
     margin: 60px auto 0;
@@ -3423,7 +3412,12 @@ ul {
 
 @media (max-width: 480px) {
     .inbody-rings { grid-template-columns: 1fr; }
-    .inbody-rings .ring-metric:last-child { grid-column: auto; max-width: none; }
+    /* Single column now, so the last card should fill it like its siblings.
+       Must also clear the 700px rule's auto margins here: grid items with
+       auto margins skip stretch sizing and shrink to fit-content instead,
+       even with max-width reset to none, which is what made this card
+       render narrower and centered instead of full width. */
+    .inbody-rings .ring-metric:last-child { grid-column: auto; max-width: none; margin: 0; }
 }
 
 
@@ -4434,7 +4428,6 @@ textarea:focus-visible,
     :root { --container-pad: 18px; }
     .section-title { font-size: clamp(1.75rem, 8vw, 2.2rem); max-width: none; }
     .section-index { margin-bottom: 16px; }
-    .faq-title-icon { font-size: 1.4rem; }
 }
 
 @media (max-width: 768px) {

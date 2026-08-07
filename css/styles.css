@@ -112,6 +112,17 @@ ul {
     list-style: none;
 }
 
+/* Visible to screen readers only; same clip technique as .form-hp. */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    white-space: nowrap;
+}
+
 /* === SKIP LINK === */
 .skip-link {
     position: fixed;
@@ -499,7 +510,7 @@ ul {
     padding: 8px 16px;
     background: rgba(255, 255, 255, 0.04);
     border: 1px solid var(--border-light);
-    border-radius: 100px;
+    border-radius: var(--radius);
 }
 
 /* Forced break point, active only on the mobile breakpoint below where the
@@ -1163,18 +1174,32 @@ ul {
     background: var(--bg-alt);
     border-top: 1px solid var(--border);
     border-bottom: 1px solid var(--border);
+    overflow: hidden;
+}
+
+/* The one section on the page that isn't a centred 1200px column: left-set
+   and run wide instead, so the line breaks command the full viewport
+   rather than sitting politely inside the standard content width. */
+.tagline-reveal .section-container {
+    max-width: none;
 }
 
 .tagline-reveal-text {
     font-family: var(--font-heading);
-    font-size: clamp(1.8rem, 4.2vw, 3rem);
+    font-size: clamp(2.2rem, 6vw, 5.2rem);
     font-weight: 600;
-    line-height: 1.35;
+    line-height: 1.15;
     letter-spacing: 0.3px;
-    max-width: 680px;
-    margin: 0 auto;
-    text-align: center;
+    max-width: 1400px;
+    text-align: left;
     color: var(--text);
+}
+
+@media (max-width: 700px) {
+    .tagline-reveal-text {
+        font-size: clamp(1.8rem, 8vw, 2.4rem);
+        line-height: 1.3;
+    }
 }
 
 .tr-word {
@@ -1375,6 +1400,83 @@ ul {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 24px;
+}
+
+/* Kat's testimonial pulled out of the carousel: it's the strongest single
+   result on the site (first marathon, zero pain) and was getting the same
+   visual weight as every other slide. This gets its own full-width feature
+   instead, no collapse, since there's only one and it's meant to be read. */
+.testimonial-feature {
+    position: relative;
+    max-width: 860px;
+    margin: 0 auto 40px;
+    padding: 40px;
+    background: var(--bg-card);
+    border: 1px solid var(--accent);
+    border-radius: var(--radius-lg);
+}
+
+.testimonial-feature-stat {
+    display: flex;
+    align-items: baseline;
+    gap: 20px;
+    margin-bottom: 24px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--border);
+}
+
+.testimonial-feature-stat-value {
+    font-family: var(--font-mono);
+    font-size: clamp(2.6rem, 5vw, 3.4rem);
+    font-weight: 700;
+    color: var(--accent);
+    line-height: 1;
+    flex-shrink: 0;
+}
+
+.testimonial-feature-stat-label {
+    font-size: 13.5px;
+    color: var(--text-muted);
+    line-height: 1.6;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    max-width: 32ch;
+}
+
+.testimonial-feature-pull {
+    font-family: var(--font-heading);
+    font-size: clamp(1.4rem, 1.1rem + 1.6vw, 2rem);
+    font-weight: 500;
+    line-height: 1.3;
+    margin-bottom: 20px;
+}
+
+.testimonial-feature blockquote {
+    color: var(--text-muted);
+    font-size: 14.5px;
+    line-height: 1.8;
+    font-style: italic;
+    quotes: "\201C" "\201D";
+    margin-bottom: 24px;
+}
+
+.testimonial-feature blockquote::before { content: open-quote; color: var(--accent); margin-right: 2px; }
+.testimonial-feature blockquote::after  { content: close-quote; color: var(--accent); margin-left: 2px; }
+
+/* Big pulled sentence shown above the collapsed full quote in each carousel
+   slide, so the strongest line reads at display size instead of being
+   buried in the third sentence of a paragraph. */
+.testimonial-pull {
+    font-family: var(--font-heading);
+    font-size: 1.15rem;
+    font-weight: 500;
+    line-height: 1.35;
+    margin-bottom: 14px;
+}
+
+@media (max-width: 640px) {
+    .testimonial-feature { padding: 28px; }
+    .testimonial-feature-stat { gap: 14px; }
 }
 
 .testimonial-card {
@@ -2610,6 +2712,7 @@ ul {
 }
 
 .calc-cta-note i { color: var(--accent); flex-shrink: 0; margin-top: 2px; }
+.calc-cta-note a { color: var(--accent); text-decoration: underline; }
 
 .calc-bottom-cta {
     margin-top: 52px;
@@ -2682,9 +2785,6 @@ ul {
     text-align: center;
 }
 
-.pricing-list { flex: 1; }
-
-
 .pricing-card h3 {
     font-family: var(--font-heading);
     font-size: 1.2rem;
@@ -2720,26 +2820,73 @@ ul {
     margin-top: -12px;
 }
 
-.pricing-list {
-    list-style: none;
-    padding-left: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+/* Comparison strip: shared rows instead of four separately-worded tick
+   lists, which made it hard to tell what actually differs between tiers. */
+.pricing-compare-wrap {
+    margin-top: 56px;
+    overflow-x: auto;
 }
 
-.pricing-list li {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 14px;
+.pricing-compare {
+    width: 100%;
+    min-width: 640px;
+    border-collapse: collapse;
+    font-size: 13.5px;
+}
+
+.pricing-compare thead th {
+    font-family: var(--font-heading);
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    text-align: center;
     color: var(--text-muted);
+    padding: 12px 14px;
+    border-bottom: 1px solid var(--border-light);
+    line-height: 1.3;
 }
 
-.pricing-list i {
+.pricing-compare-row-label { width: 22%; }
+
+.pricing-compare tbody th {
+    text-align: left;
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 13.5px;
+    color: var(--text);
+    padding: 12px 14px 12px 0;
+    border-bottom: 1px solid var(--border);
+    white-space: nowrap;
+}
+
+.pricing-compare tbody td {
+    text-align: center;
+    color: var(--text-muted);
+    padding: 12px 14px;
+    border-bottom: 1px solid var(--border);
+    font-family: var(--font-mono);
+}
+
+.pricing-compare tbody td i {
     color: var(--accent);
-    font-size: 11px;
-    flex-shrink: 0;
+}
+
+.pricing-compare-featured {
+    background: rgba(200, 146, 58, 0.06);
+    color: var(--text) !important;
+}
+
+.pricing-compare thead .pricing-compare-featured {
+    color: var(--accent) !important;
+}
+
+@media (max-width: 700px) {
+    .pricing-compare-wrap {
+        margin-left: calc(var(--container-pad) * -1);
+        margin-right: calc(var(--container-pad) * -1);
+        padding: 0 var(--container-pad);
+    }
 }
 
 .pricing-note {
@@ -2974,105 +3121,6 @@ ul {
 }
 
 /* ============================================================
-   INSTAGRAM FEED SECTION
-   ============================================================ */
-.instagram-feed-section {
-    padding: 100px 0;
-    background: var(--bg);
-}
-
-.insta-feed-wrap {
-    margin-top: 48px;
-}
-
-/* Follow panel. Replaced the old 6-tile icon grid, which looked like a broken
-   feed because it never showed real posts. */
-.insta-panel {
-    display: grid;
-    grid-template-columns: auto 1fr;
-    align-items: center;
-    gap: 28px;
-    max-width: 860px;
-    margin: 0 auto;
-    padding: 36px;
-    background: var(--bg-card);
-    border: 1px solid var(--border-light);
-    border-radius: var(--radius-lg);
-}
-
-.insta-panel-icon {
-    width: 68px;
-    height: 68px;
-    flex-shrink: 0;
-    border-radius: var(--radius-lg);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 30px;
-    color: var(--accent);
-    background: rgba(200,146,58,0.1);
-    border: 1px solid rgba(200,146,58,0.35);
-}
-
-.insta-panel-body h3 {
-    font-family: var(--font-heading);
-    font-size: 1.35rem;
-    font-weight: 600;
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
-    margin-bottom: 10px;
-}
-
-.insta-panel-body p {
-    color: var(--text-muted);
-    font-size: 14.5px;
-    margin-bottom: 22px;
-}
-
-.insta-panel-actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
-    align-items: center;
-}
-
-@media (max-width: 640px) {
-    .insta-panel {
-        grid-template-columns: 1fr;
-        text-align: center;
-        justify-items: center;
-        padding: 28px 22px;
-    }
-
-    .insta-panel-actions { justify-content: center; }
-}
-
-.insta-follow-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    padding: 14px 28px;
-    border-radius: var(--radius);
-    background: var(--accent);
-    color: var(--bg);
-    font-family: var(--font-body);
-    font-size: 14px;
-    font-weight: 700;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    text-decoration: none;
-    transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
-}
-
-.insta-follow-btn:hover {
-    background: var(--accent-dark);
-    transform: translateY(-2px);
-    box-shadow: 0 8px 30px rgba(200,146,58,0.4);
-}
-
-.insta-follow-btn i { font-size: 16px; }
-
-/* ============================================================
    WHATSAPP FLOATING BUTTON
    ============================================================ */
 .whatsapp-float {
@@ -3135,8 +3183,6 @@ ul {
 
     .about-credentials { gap: 8px; }
     .credential-badge  { font-size: 12px; padding: 7px 12px; }
-
-    .instagram-feed-section { padding: 60px 0; }
 }
 
 
@@ -3175,6 +3221,7 @@ ul {
 
 .tc-track {
     display: flex;
+    align-items: flex-start;
     transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     will-change: transform;
 }
@@ -3187,15 +3234,6 @@ ul {
 .tc-slide .testimonial-card {
     margin: 0;
     transform: none !important;
-}
-
-.tc-slide .testimonial-body {
-    max-height: none;
-    overflow: visible;
-}
-
-.tc-slide .testimonial-body::after {
-    display: none;
 }
 
 .tc-controls {
@@ -3674,6 +3712,25 @@ ul {
 
 .quiz-back-btn:hover { color: var(--accent); }
 .quiz-back-btn[hidden] { display: none; }
+
+.quiz-skip-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    font-family: var(--font-body);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: color var(--transition);
+}
+
+.quiz-skip-btn:hover { color: var(--accent); }
+.quiz-skip-btn[hidden] { display: none; }
 
 /* --- Quiz: recommended plan summary --- */
 .quiz-result-plan {
@@ -4255,39 +4312,6 @@ ul {
     margin-top: -6px;
 }
 
-.pricing-details {
-    border-top: 1px solid var(--border-light);
-    padding-top: 14px;
-}
-
-.pricing-details summary {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 10px;
-    cursor: pointer;
-    list-style: none;
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    color: var(--accent);
-    transition: color var(--transition);
-}
-
-.pricing-details summary::-webkit-details-marker { display: none; }
-.pricing-details summary:hover { color: #e0ae56; }
-
-.pricing-details summary i {
-    font-size: 11px;
-    transition: transform var(--transition);
-}
-
-.pricing-details[open] summary { margin-bottom: 14px; }
-.pricing-details[open] summary i { transform: rotate(180deg); }
-
-.pricing-details .pricing-list { margin: 0; }
-
 /* --- Contact: location switcher --- */
 .contact-locations { margin-top: 28px; }
 
@@ -4509,7 +4533,6 @@ textarea:focus-visible,
     .quiz-opt,
     .btn-calc,
     .location-tab,
-    .pricing-details summary,
     .quiz-back-btn,
     .quiz-restart-btn { min-height: 44px; }
 
@@ -4687,7 +4710,7 @@ textarea:focus-visible,
     .about-lead { font-size: 17px; }
     .about-text p, .faq-answer p { font-size: 15.5px; }
     .service-card p, .pricing-desc, .result-card-note { font-size: 15px; line-height: 1.6; }
-    .service-list li, .pricing-list li { font-size: 15px; }
+    .service-list li { font-size: 15px; }
     .testimonial-card blockquote { font-size: 15.5px; line-height: 1.7; }
     .form-group label { font-size: 12px; }
     .consent-label { font-size: 14.5px; }
@@ -4699,7 +4722,7 @@ textarea:focus-visible,
     /* Each section sets its own 100px padding via a class, which outranks a
        bare `section` selector, so target the classes directly. */
     .about, .services, .why, .quiz-section, .testimonials, .transformations,
-    .calculators, .pricing, .faq, .contact, .instagram-feed-section {
+    .calculators, .pricing, .faq, .contact, .session-timeline, .locations {
         padding: 54px 0;
     }
     :root { --container-pad: 18px; }

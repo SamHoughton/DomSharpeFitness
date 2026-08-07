@@ -661,6 +661,24 @@ sections.forEach(s => sectionObserver.observe(s));
 })();
 
 
+// === TESTIMONIAL READ MORE ===
+// Each carousel slide leads with its strongest sentence and collapses the
+// full quote behind this, instead of showing 150+ words at equal weight.
+(function () {
+    document.querySelectorAll('.read-more-btn').forEach(btn => {
+        const body = btn.previousElementSibling;
+        if (!body || !body.classList.contains('testimonial-body')) return;
+
+        btn.addEventListener('click', () => {
+            const expanded = btn.getAttribute('aria-expanded') === 'true';
+            body.classList.toggle('expanded', !expanded);
+            btn.setAttribute('aria-expanded', String(!expanded));
+            btn.firstChild.textContent = expanded ? 'Read the whole thing ' : 'Show less ';
+        });
+    });
+})();
+
+
 // === CLIENT QUIZ ===
 (function () {
     const quizWrap     = document.querySelector('.quiz-wrap');
@@ -669,6 +687,7 @@ sections.forEach(s => sectionObserver.observe(s));
     const stepCount    = document.getElementById('quiz-step-count');
     const restartBtn   = document.getElementById('quiz-restart');
     const backBtn      = document.getElementById('quiz-back');
+    const skipBtn      = document.getElementById('quiz-skip');
     const continueBtn  = document.getElementById('quiz-continue');
     const emailInput   = document.getElementById('quiz-email');
     if (!quizWrap || !steps.length) return;
@@ -705,9 +724,9 @@ sections.forEach(s => sectionObserver.observe(s));
 
     // Question 3 sets the package.
     const frequencyPlan = {
-        once:  { name: '6-Week Coaching',            price: '£252 (£42/week)', note: 'One focused session a week, with a progressive programme to follow on your own days.' },
-        few:   { name: '6-Week Coaching + App',      price: '£288 (£48/week)', note: 'Weekly coaching plus a programme in the app for the days you train alone, where most clients see the fastest change.' },
-        often: { name: '6-Week Coaching + App',      price: '£288 (£48/week)', note: 'Training four or more times a week, so your app programme will split the week so you recover properly between sessions.' }
+        once:  { name: '6-Week Coaching',       price: '£252 (£42/week)', sessions: '1 coached session/week', note: 'One focused session a week, with a progressive programme to follow on your own days.' },
+        few:   { name: '6-Week Coaching + App', price: '£288 (£48/week)', sessions: '1 coached + app, 2–3x/week', note: 'Weekly coaching plus a programme in the app for the days you train alone, where most clients see the fastest change.' },
+        often: { name: '6-Week Coaching + App', price: '£288 (£48/week)', sessions: '1 coached + app, 4+x/week', note: 'Training four or more times a week, so your app programme will split the week so you recover properly between sessions.' }
     };
 
     function setStepUI(step) {
@@ -722,6 +741,7 @@ sections.forEach(s => sectionObserver.observe(s));
             if (!isResult) stepCount.textContent = `Question ${step} of 3`;
         }
         if (backBtn) backBtn.hidden = (step === 1);
+        if (skipBtn) skipBtn.hidden = isResult;
 
         currentStep = step;
     }
@@ -745,16 +765,18 @@ sections.forEach(s => sectionObserver.observe(s));
         const plan = frequencyPlan[answers.frequency] || frequencyPlan.few;
         const note = experienceNote[answers.experience] || '';
 
-        const nameEl  = document.getElementById('quiz-result-name');
-        const descEl  = document.getElementById('quiz-result-desc');
-        const planEl  = document.getElementById('quiz-plan-name');
-        const priceEl = document.getElementById('quiz-plan-price');
+        const nameEl     = document.getElementById('quiz-result-name');
+        const descEl     = document.getElementById('quiz-result-desc');
+        const planEl     = document.getElementById('quiz-plan-name');
+        const priceEl    = document.getElementById('quiz-plan-price');
+        const sessionsEl = document.getElementById('quiz-plan-sessions');
 
         if (nameEl)  nameEl.textContent  = p.name;
         // All three answers feed the result, not just the goal.
         if (descEl)  descEl.textContent  = [p.desc, note, plan.note].filter(Boolean).join(' ');
         if (planEl)  planEl.textContent  = plan.name;
         if (priceEl) priceEl.textContent = plan.price;
+        if (sessionsEl) sessionsEl.textContent = plan.sessions;
     }
 
     quizWrap.querySelectorAll('.quiz-opt').forEach(opt => {
@@ -780,6 +802,11 @@ sections.forEach(s => sectionObserver.observe(s));
         if (currentStep === 'result') return showStep(3);
         if (currentStep > 1) showStep(currentStep - 1);
     });
+
+    // Shows the general recommendation straight away for anyone who just
+    // wants pricing rather than answering three questions. The result
+    // functions already fall back sensibly when an answer is missing.
+    skipBtn && skipBtn.addEventListener('click', () => showStep('result'));
 
     restartBtn && restartBtn.addEventListener('click', () => {
         Object.keys(answers).forEach(k => delete answers[k]);

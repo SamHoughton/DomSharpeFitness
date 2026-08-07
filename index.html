@@ -254,8 +254,12 @@
                     Personal Trainer<span class="hero-eyebrow-sep">&nbsp;&bull;&nbsp;</span><br class="hero-eyebrow-break">Hitchin &nbsp;&bull;&nbsp; Letchworth
                 </div>
 
+                <!-- Draft headline from the design brief: not the safe
+                     generic-PT-site line, it's making a specific claim
+                     (that bodyweight is the wrong measure), so it deserves
+                     Dom's confirmation before it's treated as final. -->
                 <h1 class="hero-title">
-                    Train hard.<br>Live stronger.
+                    The scale isn't<br>what matters.
                 </h1>
                 <span class="hero-rule" aria-hidden="true"></span>
 
@@ -983,6 +987,10 @@
                             <span class="quiz-plan-label">Typical investment</span>
                             <span class="quiz-plan-value" id="quiz-plan-price">-</span>
                         </div>
+                        <div class="quiz-plan-row">
+                            <span class="quiz-plan-label">Sessions per week</span>
+                            <span class="quiz-plan-value" id="quiz-plan-sessions">-</span>
+                        </div>
                     </div>
 
                     <div class="quiz-capture">
@@ -1005,6 +1013,9 @@
                         <i class="fa-solid fa-arrow-left"></i> Back
                     </button>
                     <p class="quiz-step-count" id="quiz-step-count">Question 1 of 3</p>
+                    <button type="button" class="quiz-skip-btn" id="quiz-skip">
+                        Skip to pricing <i class="fa-solid fa-arrow-right"></i>
+                    </button>
                 </div>
             </div>
         </div>
@@ -1018,6 +1029,26 @@
             <h2 class="section-title">REAL PEOPLE. REAL RESULTS.</h2>
             <p class="section-sub">Four clients, in their own words. Nothing trimmed to make it read better.</p>
 
+            <!-- Kat's result is the strongest single proof point on the site
+                 (first marathon, zero pain after years of back and hip
+                 trouble), so it gets its own feature instead of equal
+                 billing with three other slides in a carousel. -->
+            <div class="testimonial-feature">
+                <div class="testimonial-feature-stat">
+                    <span class="testimonial-feature-stat-value">0</span>
+                    <span class="testimonial-feature-stat-label">Pain running her first marathon, after years of back and hip trouble</span>
+                </div>
+                <p class="testimonial-feature-pull">&ldquo;I ran that marathon with zero pain, beating my goal time.&rdquo;</p>
+                <blockquote>I started training with Dom early this year after having struggled with lower back and hip pain/discomfort for months (if not actually years). Having strength trained for many years I was confident I knew what I was doing, but I was also training to run my first Marathon and the constant limitations of the pain was getting to me. Let me just say, what an absolute game changer. Working with Dom once a week not only gave me the results I was looking for but it has taught me so much and enabled me to improve all aspects of my strength and fitness in ways I truly didn't expect. Dom is beyond knowledgeable, committed, attentive, listens to your needs and tailors everything to suit you as an individual. In a relatively short space of time my overall strength and fitness has improved, my weight training has come on leaps and bounds, I ran that marathon with zero pain beating my goal time, and I'm enjoying every aspect of my training again. I'd recommend him to anyone at any level no matter what the goal. I can't rate him highly enough.</blockquote>
+                <div class="testimonial-author">
+                    <div class="author-avatar">K</div>
+                    <div>
+                        <strong>Kat</strong>
+                        <a href="https://www.instagram.com/katjay82/" target="_blank" rel="noopener noreferrer" class="testimonial-ig">@katjay82</a>
+                    </div>
+                </div>
+            </div>
+
             <!-- Testimonial carousel -->
             <div class="tc-carousel" id="tc-carousel" role="group" aria-roledescription="carousel" aria-label="Client testimonials">
                 <div class="tc-track-wrap">
@@ -1030,34 +1061,16 @@
                                     <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
                                 </div>
                                 <div class="testimonial-result-badge">96kg &rarr; 79kg &bull; &minus;11% body fat</div>
-                                <div class="testimonial-body expanded">
+                                <p class="testimonial-pull">&ldquo;Having had several trainers over the years, Dom is by far the most personable, knowledgeable and motivating.&rdquo;</p>
+                                <div class="testimonial-body">
                                     <blockquote>When I first started working with Dom I was 96kg, overweight and with bad nutrition after a year or two of letting myself go! I wanted to get back on track but needed motivation and experience in how to do it. Dom has transformed me completely by working with me to lose body fat and retain muscle mass. I've gone from 96kg down to 79kg and lost 11% body fat. His workouts are never dull and we mix it up a fair bit to keep it fresh. He has also been key in my nutrition plan. Having had several trainers over the years Dom is by far the most personable, knowledgeable and motivating. And... we are still going, there's more work to do!</blockquote>
                                 </div>
+                                <button type="button" class="read-more-btn" aria-expanded="false">Read the whole thing <i class="fa-solid fa-chevron-down"></i></button>
                                 <div class="testimonial-author">
                                     <div class="author-avatar">A</div>
                                     <div>
                                         <strong>Alex</strong>
                                         <a href="https://www.instagram.com/al.tilli/" target="_blank" rel="noopener noreferrer" class="testimonial-ig">@al.tilli</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Slide: Kat -->
-                        <div class="tc-slide">
-                            <div class="testimonial-card">
-                                <div class="testimonial-stars">
-                                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-                                </div>
-                                <div class="testimonial-result-badge">First marathon &bull; Zero pain</div>
-                                <div class="testimonial-body expanded">
-                                    <blockquote>I started training with Dom early this year after having struggled with lower back and hip pain/discomfort for months (if not actually years). Having strength trained for many years I was confident I knew what I was doing, but I was also training to run my first Marathon and the constant limitations of the pain was getting to me. Let me just say, what an absolute game changer. Working with Dom once a week not only gave me the results I was looking for but it has taught me so much and enabled me to improve all aspects of my strength and fitness in ways I truly didn't expect. Dom is beyond knowledgeable, committed, attentive, listens to your needs and tailors everything to suit you as an individual. In a relatively short space of time my overall strength and fitness has improved, my weight training has come on leaps and bounds, I ran that marathon with zero pain beating my goal time, and I'm enjoying every aspect of my training again. I'd recommend him to anyone at any level no matter what the goal. I can't rate him highly enough.</blockquote>
-                                </div>
-                                <div class="testimonial-author">
-                                    <div class="author-avatar">K</div>
-                                    <div>
-                                        <strong>Kat</strong>
-                                        <a href="https://www.instagram.com/katjay82/" target="_blank" rel="noopener noreferrer" class="testimonial-ig">@katjay82</a>
                                     </div>
                                 </div>
                             </div>
@@ -1070,9 +1083,11 @@
                                     <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
                                 </div>
                                 <div class="testimonial-result-badge">2+ years &bull; Best PT ever had</div>
-                                <div class="testimonial-body expanded">
+                                <p class="testimonial-pull">&ldquo;I can honestly say he's the best PT I've ever had.&rdquo;</p>
+                                <div class="testimonial-body">
                                     <blockquote>I've been training with Dom at Sharpe Strength for over two years now, and I can honestly say he's the best PT I've ever had. His knowledge is incredible. He knows exactly how to tailor every session to my goals, pushing me to achieve more than I ever thought possible, while always keeping things safe, effective and fun! He's happy to answer my questions thoroughly so I'm always learning. But what really sets him apart is his kindness and approachable nature. I've never felt intimidated or out of my depth, just supported and encouraged every step of the way. If you want expert guidance, motivation, and real results, Sharpe Strength is the BEST decision you can make!</blockquote>
                                 </div>
+                                <button type="button" class="read-more-btn" aria-expanded="false">Read the whole thing <i class="fa-solid fa-chevron-down"></i></button>
                                 <div class="testimonial-author">
                                     <div class="author-avatar">AM</div>
                                     <div>
@@ -1090,9 +1105,11 @@
                                     <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
                                 </div>
                                 <div class="testimonial-result-badge">Fat loss &bull; Strength &bull; Mobility</div>
-                                <div class="testimonial-body expanded">
+                                <p class="testimonial-pull">&ldquo;He met me exactly where I was: no ego, no judgement, just patience, encouragement and genuine expertise.&rdquo;</p>
+                                <div class="testimonial-body">
                                     <blockquote>Honestly, the best PT I've ever worked with. From day one, he met me exactly where I was, no ego, no judgement, just patience, encouragement, and genuine expertise. I came in feeling nervous, unsure and in the worst shape of my life, but his deep experience and constant support have not only kept me injury-free, but helped me build real confidence and learn skills I never thought I'd master. He's got a real knack for knowing what you need, not just generic fat loss plans or gym routines off the shelf. Thanks to his tailored programming, I've seen steady fat loss alongside real gains in strength and mobility. Movements that once felt impossible are now part of my weekly sessions. My body just works better now! If you want someone who genuinely cares, knows his stuff inside out, and has the patience of a saint, this is your guy. Can't recommend him enough.</blockquote>
                                 </div>
+                                <button type="button" class="read-more-btn" aria-expanded="false">Read the whole thing <i class="fa-solid fa-chevron-down"></i></button>
                                 <div class="testimonial-author">
                                     <div class="author-avatar">SA</div>
                                     <div>
@@ -1111,10 +1128,9 @@
                         <i class="fa-solid fa-chevron-left"></i>
                     </button>
                     <div class="tc-dots" id="tc-dots">
-                        <button type="button" class="tc-dot active" aria-label="Testimonial 1 of 4" aria-current="true"></button>
-                        <button type="button" class="tc-dot" aria-label="Testimonial 2 of 4" aria-current="false"></button>
-                        <button type="button" class="tc-dot" aria-label="Testimonial 3 of 4" aria-current="false"></button>
-                        <button type="button" class="tc-dot" aria-label="Testimonial 4 of 4" aria-current="false"></button>
+                        <button type="button" class="tc-dot active" aria-label="Testimonial 1 of 3" aria-current="true"></button>
+                        <button type="button" class="tc-dot" aria-label="Testimonial 2 of 3" aria-current="false"></button>
+                        <button type="button" class="tc-dot" aria-label="Testimonial 3 of 3" aria-current="false"></button>
                     </div>
                     <button type="button" class="tc-btn" id="tc-next" aria-label="Next testimonial">
                         <i class="fa-solid fa-chevron-right"></i>
@@ -1196,7 +1212,7 @@
                             </div>
                             <div class="calc-cta-note">
                                 <i class="fa-solid fa-circle-info"></i>
-                                BMI doesn't measure body composition. Dom uses InBody scanning for a full picture.
+                                This is the number your GP uses: weight against height, nothing else. It can't tell muscle from fat, which is why Dom scans with InBody instead.
                             </div>
                         </div>
                     </div>
@@ -1250,7 +1266,7 @@
                             </div>
                             <div class="calc-cta-note">
                                 <i class="fa-solid fa-circle-info"></i>
-                                Dom programmes around your actual numbers. No guessing.
+                                Dom programmes off these percentages week to week. <a href="#contact">Get in touch</a> and he'll build the actual week around this number.
                             </div>
                         </div>
                     </div>
@@ -1283,16 +1299,6 @@
                     </div>
                     <p class="pricing-period">per session</p>
                     <p class="pricing-desc">A personalised coaching session designed around your goals, experience and ability. Whether you want to build strength, lose weight, improve mobility or just feel more confident in the gym, every session is tailored to help you progress safely and effectively.</p>
-                    <details class="pricing-details">
-                        <summary>What's included <i class="fa-solid fa-chevron-down"></i></summary>
-                        <ul class="pricing-list">
-                            <li><i class="fa-solid fa-check"></i> 60-minute 1-2-1 coaching session</li>
-                            <li><i class="fa-solid fa-check"></i> Personalised exercise selection</li>
-                            <li><i class="fa-solid fa-check"></i> Technique coaching and movement correction</li>
-                            <li><i class="fa-solid fa-check"></i> Progress tracking</li>
-                            <li><i class="fa-solid fa-check"></i> Expert guidance throughout your session</li>
-                        </ul>
-                    </details>
                     <a href="#contact" class="btn-ghost">Book a Session</a>
                 </div>
 
@@ -1304,16 +1310,6 @@
                     </div>
                     <p class="pricing-period">&pound;42 per week</p>
                     <p class="pricing-desc">Six weeks, one session a week, same time each week. Enough to build a habit.</p>
-                    <details class="pricing-details">
-                        <summary>What's included <i class="fa-solid fa-chevron-down"></i></summary>
-                        <ul class="pricing-list">
-                            <li><i class="fa-solid fa-check"></i> 1 x 60-minute session each week (6 sessions)</li>
-                            <li><i class="fa-solid fa-check"></i> Progressive 6-week training programme</li>
-                            <li><i class="fa-solid fa-check"></i> Weekly coaching and progression</li>
-                            <li><i class="fa-solid fa-check"></i> Goal setting and progress tracking</li>
-                            <li><i class="fa-solid fa-check"></i> Ongoing accountability</li>
-                        </ul>
-                    </details>
                     <a href="#contact" class="btn-ghost">Enquire</a>
                 </div>
 
@@ -1326,17 +1322,6 @@
                     </div>
                     <p class="pricing-period">&pound;48 per week</p>
                     <p class="pricing-desc">Weekly sessions plus a programme in the app for the days you train on your own. This is what most clients end up on.</p>
-                    <details class="pricing-details">
-                        <summary>What's included <i class="fa-solid fa-chevron-down"></i></summary>
-                        <ul class="pricing-list">
-                            <li><i class="fa-solid fa-check"></i> Everything in 6-Week Coaching</li>
-                            <li><i class="fa-solid fa-check"></i> Personalised programme through the app</li>
-                            <li><i class="fa-solid fa-check"></i> Exercise demonstration videos</li>
-                            <li><i class="fa-solid fa-check"></i> Workout and progress tracking</li>
-                            <li><i class="fa-solid fa-check"></i> Direct messaging support</li>
-                            <li><i class="fa-solid fa-check"></i> Extra accountability between sessions</li>
-                        </ul>
-                    </details>
                     <a href="#contact" class="btn-primary">Get Started <i class="fa-solid fa-arrow-right"></i></a>
                 </div>
 
@@ -1348,20 +1333,65 @@
                     </div>
                     <p class="pricing-period">&pound;30 per week</p>
                     <p class="pricing-desc">For people who already train and just want the programming handled.</p>
-                    <details class="pricing-details">
-                        <summary>What's included <i class="fa-solid fa-chevron-down"></i></summary>
-                        <ul class="pricing-list">
-                            <li><i class="fa-solid fa-check"></i> Personalised 6-week programme in the app</li>
-                            <li><i class="fa-solid fa-check"></i> Exercise demonstration videos</li>
-                            <li><i class="fa-solid fa-check"></i> Workout tracking</li>
-                            <li><i class="fa-solid fa-check"></i> Weekly check-ins to review progress</li>
-                            <li><i class="fa-solid fa-check"></i> Programme adjustments where needed</li>
-                            <li><i class="fa-solid fa-check"></i> Ongoing support via the app</li>
-                        </ul>
-                    </details>
                     <a href="#contact" class="btn-ghost">Enquire</a>
                 </div>
 
+            </div>
+
+            <!-- Comparison strip: replaces four repeating tick-lists, which
+                 were nearly impossible to compare against each other since
+                 each card's list used different wording for similar things.
+                 This normalises them into shared rows instead. -->
+            <div class="pricing-compare-wrap">
+                <table class="pricing-compare">
+                    <caption class="sr-only">Feature comparison across all four pricing tiers</caption>
+                    <thead>
+                        <tr>
+                            <th scope="col" class="pricing-compare-row-label"><span class="sr-only">Feature</span></th>
+                            <th scope="col">1-2-1<br>Session</th>
+                            <th scope="col">6-Week<br>Coaching</th>
+                            <th scope="col" class="pricing-compare-featured">6-Week<br>+ App</th>
+                            <th scope="col">6-Week<br>+ Check-ins</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">In-person coaching</th>
+                            <td>Per session</td>
+                            <td>Weekly</td>
+                            <td class="pricing-compare-featured">Weekly</td>
+                            <td>&mdash;</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Programme in the app</th>
+                            <td>&mdash;</td>
+                            <td>&mdash;</td>
+                            <td class="pricing-compare-featured"><i class="fa-solid fa-check"></i></td>
+                            <td><i class="fa-solid fa-check"></i></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Exercise demo videos</th>
+                            <td>&mdash;</td>
+                            <td>&mdash;</td>
+                            <td class="pricing-compare-featured"><i class="fa-solid fa-check"></i></td>
+                            <td><i class="fa-solid fa-check"></i></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Direct message support</th>
+                            <td>&mdash;</td>
+                            <td>&mdash;</td>
+                            <td class="pricing-compare-featured"><i class="fa-solid fa-check"></i></td>
+                            <td>Weekly check-in only</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Best for</th>
+                            <td>Trying it out</td>
+                            <td>Building a habit</td>
+                            <td class="pricing-compare-featured">Most clients</td>
+                            <td>Confident, independent trainers</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
 
             <p class="pricing-note text-center">First consultation is always free. <a href="#contact">Get in touch</a> to find out which option suits you best.</p>
@@ -1643,47 +1673,6 @@
     </section>
 
     <!-- ===================== INSTAGRAM FEED ===================== -->
-    <section class="instagram-feed-section" id="instagram">
-        <div class="section-container">
-            <p class="section-index"><span class="section-num" aria-hidden="true"></span>Instagram</p>
-            <h2 class="section-title">FOLLOW @SHARPE.STRENGTH</h2>
-            <p class="section-sub">Session clips and client progress, posted as it happens.</p>
-
-            <!-- ================================================================
-                 OPTIONAL: live Instagram feed
-                 The placeholder tile grid that used to sit here was removed:
-                 it showed generic icons rather than real posts, which read as a
-                 broken feed. To show real posts:
-                   1. Sign up free at behold.so
-                   2. Connect @sharpe.strength
-                   3. Paste the embed snippet directly below this comment
-                 ================================================================ -->
-            <div class="insta-feed-wrap">
-                <div class="insta-panel">
-                    <div class="insta-panel-icon"><i class="fa-brands fa-instagram"></i></div>
-                    <div class="insta-panel-body">
-                        <h3>See how Dom coaches before you book</h3>
-                        <p>
-                            Session clips, client progress and form breakdowns, posted between
-                            sessions. Worth a scroll if you want to know what you are
-                            walking into.
-                        </p>
-                        <div class="insta-panel-actions">
-                            <a href="https://www.instagram.com/sharpe.strength/" target="_blank" rel="noopener noreferrer" class="insta-follow-btn">
-                                <i class="fa-brands fa-instagram"></i>
-                                Follow @sharpe.strength
-                            </a>
-                            <a href="https://wa.me/447375219353?text=Hi%20Dom%2C%20I%27d%20like%20to%20find%20out%20more%20about%20personal%20training."
-                               target="_blank" rel="noopener noreferrer" class="btn-ghost">
-                                <i class="fa-brands fa-whatsapp"></i> Message Dom
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
     </main>
 
     <!-- ===================== FOOTER ===================== -->
@@ -1702,6 +1691,8 @@
                     <li><a href="#home">Home</a></li>
                     <li><a href="#about">About</a></li>
                     <li><a href="#services">Services</a></li>
+                    <li><a href="#first-session">First Session</a></li>
+                    <li><a href="#locations">Locations</a></li>
                     <li class="nav-tools-link"><a href="#calculators">Tools</a></li>
                     <li><a href="#pricing">Pricing</a></li>
                     <li><a href="#faq">FAQ</a></li>

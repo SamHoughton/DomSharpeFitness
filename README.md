@@ -11,7 +11,7 @@ Instagram: @sharpe.strength
 
 Plain HTML, CSS and JavaScript on the front end. No frameworks, no build step.
 
-- Fonts: Oswald (headings) and Montserrat (body) via Google Fonts
+- Fonts: Oswald (headings), IBM Plex Sans (body) and IBM Plex Mono (numbers) via Google Fonts
 - Icons: Font Awesome 6.5.1 via CDN
 - Hosting: Netlify, auto-deploys from the main branch
 - Forms: Netlify Forms handles the consultation form; no backend of any kind

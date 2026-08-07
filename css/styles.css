@@ -29,7 +29,7 @@
     --text-placeholder: rgba(255, 255, 255, 0.46);
 
     --font-heading: 'Oswald', sans-serif;
-    --font-body:    'Montserrat', sans-serif;
+    --font-body:    'IBM Plex Sans', sans-serif;
     /* Every number on this site is a real measurement: prices, body fat, kilos,
        dates, session counts. Setting them in mono makes that the visual idea
        rather than decoration. */

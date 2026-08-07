@@ -552,31 +552,23 @@ ul {
     text-transform: none;
 }
 
-.hero-pills {
+.hero-proof {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-    gap: 8px;
+    align-items: flex-start;
+    gap: 9px;
     margin-bottom: 32px;
-    list-style: none;
-}
-
-.hero-pills li {
-    display: inline-flex;
-    align-items: center;
-    gap: 7px;
-    font-size: 12px;
-    font-weight: 600;
-    letter-spacing: 0.5px;
+    font-size: 14px;
+    line-height: 1.6;
     color: rgba(255, 255, 255, 0.75);
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px solid var(--border-light);
-    border-radius: var(--radius);
-    padding: 7px 14px;
-    white-space: nowrap;
+    max-width: 42ch;
 }
 
-.hero-pills i { color: var(--accent); font-size: 11px; }
+.hero-proof i {
+    color: var(--accent);
+    font-size: 13px;
+    margin-top: 3px;
+    flex-shrink: 0;
+}
 
 .hero-actions {
     display: flex;
@@ -619,7 +611,7 @@ ul {
 
     .hero-rule { margin: 0 auto 26px; }
     .hero-subtitle { margin: 0 auto 26px; }
-    .hero-pills { justify-content: center; }
+    .hero-proof { justify-content: center; text-align: left; margin-inline: auto; }
     .hero-actions { justify-content: center; }
     .hero-reassure { justify-content: center; }
 }
@@ -946,84 +938,46 @@ ul {
 
 
 /* ===================================================
-   SERVICES
+   WHAT DOM COACHES
+   Four flat rows rather than four cards: the quiz directly below answers
+   "which of these is me", so this only has to state what's on offer.
 =================================================== */
-.services {
-    padding: 100px 0;
-    background: var(--bg-alt);
-    position: relative;
-}
-
-.services::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 1px;
-    background: var(--border);
-}
-
-.services-grid {
+.coaches-list {
+    list-style: none;
+    margin-top: 40px;
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    /* heading, blurb, tick list, CTA. Cards adopt these rows with subgrid so
-       every card's heading, list and link sit at the same height. */
-    grid-template-rows: auto auto auto auto;
-    gap: 20px;
-    margin-top: 16px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0 48px;
 }
 
-.service-card {
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-lg);
-    padding: 32px 28px;
-    position: relative;
-    display: grid;
-    grid-template-rows: subgrid;
-    grid-row: span 4;
-    gap: 0;
-    transition: border-color var(--transition), background var(--transition);
+.coaches-item {
+    padding: 22px 0;
+    border-top: 1px solid var(--border);
 }
 
-@supports not (grid-template-rows: subgrid) {
-    .service-card {
-        display: flex;
-        flex-direction: column;
-    }
+.coaches-item h3 {
+    font-family: var(--font-heading);
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    margin-bottom: 6px;
 }
 
-.service-card:hover {
-    border-color: var(--border-light);
-    box-shadow: var(--shadow);
+.coaches-item p {
+    font-size: 14px;
+    color: var(--text-muted);
+    line-height: 1.7;
 }
 
-.service-card.featured {
-    border-color: var(--accent);
-    box-shadow: var(--shadow-accent);
-    /* Lifted out of the row line so four identical rectangles don't read as
-       one mechanical grid; the accent border and badge already mark it as
-       the one to look at, this makes the layout say so too. */
-    transform: translateY(-20px);
+@media (max-width: 700px) {
+    .coaches-list { grid-template-columns: 1fr; gap: 0; }
+    .coaches-item { padding: 18px 0; }
 }
 
-.service-card.featured:hover {
-    box-shadow: 0 0 60px rgba(200,146,58,0.35);
-    animation: none;
-}
-
-.service-card.featured::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(135deg, rgba(200,146,58,0.06) 0%, transparent 50%);
-    pointer-events: none;
-}
-
-/* Sits on the card's top border, out of normal flow. As an inline block it
-   pushed its own card's icon, heading and body down, so the featured card never
-   lined up with the others in the row. */
+/* Sits on the pricing card's top border, out of normal flow. As an inline
+   block it pushed its own card's heading and body down, so the featured card
+   never lined up with the others in the row. */
 .featured-badge {
     position: absolute;
     top: 0;
@@ -1046,66 +1000,6 @@ ul {
     z-index: 2;
 }
 
-
-
-.service-card h3 {
-    font-family: var(--font-heading);
-    font-size: 20px;
-    font-weight: 600;
-    letter-spacing: 0.5px;
-    color: var(--text);
-    margin-bottom: 12px;
-    text-transform: uppercase;
-}
-
-.service-card p {
-    font-size: 14px;
-    color: var(--text-muted);
-    line-height: 1.7;
-    margin-bottom: 20px;
-}
-
-.service-list {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    margin-bottom: 24px;
-    padding-bottom: 24px;
-    border-bottom: 1px solid var(--border);
-    list-style: none;
-    padding-left: 0;
-}
-
-.service-list li {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 13px;
-    color: var(--text-muted);
-    font-weight: 500;
-}
-
-.service-list i {
-    color: var(--accent);
-    font-size: 11px;
-    flex-shrink: 0;
-}
-
-.service-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 13px;
-    font-weight: 700;
-    letter-spacing: 0.5px;
-    color: var(--accent);
-    transition: gap var(--transition), color var(--transition);
-}
-
-.service-link:hover {
-    gap: 12px;
-    color: var(--text);
-}
 
 
 /* ===================================================
@@ -1427,11 +1321,12 @@ ul {
 
 .testimonial-feature-stat-value {
     font-family: var(--font-mono);
-    font-size: clamp(2.6rem, 5vw, 3.4rem);
+    font-size: clamp(1.8rem, 1.4rem + 1.6vw, 2.6rem);
     font-weight: 700;
     color: var(--accent);
-    line-height: 1;
+    line-height: 1.1;
     flex-shrink: 0;
+    white-space: nowrap;
 }
 
 .testimonial-feature-stat-label {
@@ -2239,10 +2134,6 @@ ul {
    RESPONSIVE
 =================================================== */
 @media (max-width: 1100px) {
-    .services-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
     .inbody-feature {
         grid-template-columns: 1fr;
         gap: 32px;
@@ -2356,11 +2247,6 @@ ul {
 
     .stat-sep { height: 36px; }
 
-
-    /* Services */
-    .services-grid {
-        grid-template-columns: 1fr;
-    }
 
     .testimonials-grid {
         grid-template-columns: 1fr;
@@ -2822,6 +2708,18 @@ ul {
 
 /* Comparison strip: shared rows instead of four separately-worded tick
    lists, which made it hard to tell what actually differs between tiers. */
+/* Only shown where the table actually overflows (see the narrow-screen
+   block below), so it isn't a hint about something that isn't happening. */
+.pricing-compare-hint {
+    display: none;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text-faint);
+    margin: 56px 0 -40px;
+}
+
 .pricing-compare-wrap {
     margin-top: 56px;
     overflow-x: auto;
@@ -2881,7 +2779,11 @@ ul {
     color: var(--accent) !important;
 }
 
-@media (max-width: 700px) {
+/* The table has a 640px min-width, so this is where it starts to overflow
+   its container and the scroll hint becomes true. */
+@media (max-width: 760px) {
+    .pricing-compare-hint { display: block; }
+
     .pricing-compare-wrap {
         margin-left: calc(var(--container-pad) * -1);
         margin-right: calc(var(--container-pad) * -1);
@@ -2989,7 +2891,7 @@ ul {
 
 /* Reduce all section vertical padding on tablet/mobile */
 @media (max-width: 900px) {
-    .about, .services, .why, .testimonials,
+    .about, .why, .quiz-section, .testimonials,
     .transformations, .calculators, .pricing, .faq, .contact {
         padding: 72px 0;
     }
@@ -3023,7 +2925,7 @@ ul {
     .faq-answer   { padding: 0 20px 18px; }
 
     /* Tighten section spacing */
-    .about, .services, .why, .testimonials,
+    .about, .why, .quiz-section, .testimonials,
     .transformations, .calculators, .pricing, .faq, .contact {
         padding: 60px 0;
     }
@@ -3039,7 +2941,7 @@ ul {
 
 @media (max-width: 480px) {
     /* Further tighten on small phones */
-    .about, .services, .why, .testimonials,
+    .about, .why, .quiz-section, .testimonials,
     .transformations, .calculators, .pricing, .faq, .contact {
         padding: 48px 0;
     }
@@ -3094,31 +2996,60 @@ ul {
 }
 
 /* ============================================================
-   CONTACT MAP
+   MAP FACADE
+   Stands in for a Google Maps embed until the visitor asks for it, so no
+   third-party frame loads on first paint. JS swaps this for the real
+   iframe on click.
    ============================================================ */
-.contact-map {
-    margin-top: 24px;
-    border-radius: var(--radius-lg);
-    overflow: hidden;
-    border: 1px solid var(--border);
-    line-height: 0;
-}
-
-/* Google's embed has no dark theme, so a bright white map was the loudest
-   visual clash on the page. Invert + re-rotate hue to sit in the dark palette,
-   then lift it back to full colour on interaction. */
-.contact-map iframe {
+.map-facade {
     width: 100%;
-    height: 220px;
-    display: block;
-    filter: invert(0.92) hue-rotate(180deg) saturate(0.75) contrast(0.9);
-    transition: filter var(--transition);
+    height: 180px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    border: none;
+    cursor: pointer;
+    background-color: var(--bg-alt);
+    background-image:
+        linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+    background-size: 28px 28px;
+    transition: background-color var(--transition);
 }
 
-.contact-map:hover iframe,
-.contact-map:focus-within iframe {
-    filter: none;
+.map-facade:hover { background-color: var(--bg-card-hover, rgba(255,255,255,0.04)); }
+
+.map-facade-pin {
+    font-size: 22px;
+    color: var(--accent);
 }
+
+.map-facade-label {
+    font-family: var(--font-body);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+}
+
+.map-facade:hover .map-facade-label { color: var(--text); }
+
+/* Note under the contact details pointing at the Locations section, since
+   the addresses themselves now live there and only there. */
+.contact-locations-note {
+    margin-top: 28px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+    font-size: 14px;
+    color: var(--text-muted);
+    line-height: 1.7;
+}
+
+.contact-locations-note i { color: var(--accent); margin-right: 6px; }
+.contact-locations-note a { color: var(--accent); text-decoration: underline; }
 
 /* ============================================================
    WHATSAPP FLOATING BUTTON
@@ -3312,6 +3243,27 @@ ul {
     padding: 100px 0;
     background: var(--bg-alt);
     border-top: 1px solid var(--border);
+}
+
+/* Hands off from the coaching list above to the quiz below. */
+.quiz-intro {
+    text-align: center;
+    max-width: 680px;
+    margin: 64px auto 28px;
+}
+
+.quiz-intro h3 {
+    font-family: var(--font-heading);
+    font-size: clamp(1.4rem, 1.2rem + 1vw, 1.9rem);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 8px;
+}
+
+.quiz-intro p {
+    color: var(--text-muted);
+    font-size: 15px;
 }
 
 .quiz-wrap {
@@ -3989,8 +3941,10 @@ ul {
 
 .results-gallery {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: 22px;
+    max-width: 900px;
+    margin: 0 auto;
 }
 
 .result-card {
@@ -4006,15 +3960,6 @@ ul {
 .result-card:hover {
     border-color: rgba(200, 146, 58, 0.45);
     box-shadow: var(--shadow);
-}
-
-/* The standout result spans the full row and runs side by side. */
-.result-card-featured {
-    grid-column: 1 / -1;
-    flex-direction: row;
-    align-items: stretch;
-    border-color: var(--accent);
-    box-shadow: var(--shadow-accent);
 }
 
 .result-card-media {
@@ -4066,22 +4011,6 @@ ul {
    taking its natural 1600px portrait aspect, forcing the card to ~700px and
    stranding the copy at the top with a huge void underneath. Now the card is
    sized by its text and the photo fills whatever that comes to. */
-.result-card-featured .result-card-media {
-    position: relative;
-    width: 34%;
-    max-width: 300px;
-    align-self: stretch;
-}
-
-.result-card-featured .result-card-media img {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    aspect-ratio: auto;
-    min-height: 0;
-    object-fit: cover;
-}
 
 /* If the screenshot has not been added yet, collapse the slot cleanly instead
    of showing a broken image. */
@@ -4149,10 +4078,6 @@ ul {
     margin: 8px 0 12px;
 }
 
-.result-card-featured .result-card-body { padding: 28px; gap: 0; }
-.result-card-featured .result-card-body h4 { font-size: clamp(1.4rem, 2.2vw, 1.85rem); }
-.result-card-featured .result-card-note { margin-bottom: 24px; max-width: 62ch; }
-
 .result-card-note {
     font-size: 13.5px;
     line-height: 1.65;
@@ -4170,8 +4095,6 @@ ul {
     overflow: hidden;
 }
 
-.result-card-featured .result-metrics { grid-template-columns: repeat(3, 1fr); }
-
 .result-metric {
     background: var(--bg-alt);
     padding: 12px 14px;
@@ -4180,13 +4103,6 @@ ul {
     justify-content: space-between;
     gap: 12px;
     flex-wrap: wrap;
-}
-
-.result-card-featured .result-metric {
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: flex-start;
-    gap: 6px;
 }
 
 .result-metric dt {
@@ -4243,25 +4159,8 @@ ul {
 .metric-delta.up   { color: #5fd98c; background: rgba(95, 217, 140, 0.12); }
 .metric-delta.hold { color: var(--text-muted); background: rgba(255, 255, 255, 0.05); }
 
-@media (max-width: 1000px) {
-    .results-gallery { grid-template-columns: repeat(2, 1fr); }
-    .result-card-featured { flex-direction: column; }
-    .result-card-featured .result-card-media {
-        position: relative;
-        width: 100%;
-        max-width: none;
-        aspect-ratio: 5 / 4;
-    }
-}
-
 @media (max-width: 700px) {
     .results-gallery { grid-template-columns: 1fr; }
-    .result-card-featured .result-metrics { grid-template-columns: 1fr; }
-    .result-card-featured .result-metric {
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
-    }
     .result-card-media img { height: 220px; }
 }
 
@@ -4310,65 +4209,6 @@ ul {
     line-height: 1.6;
     color: var(--text-muted);
     margin-top: -6px;
-}
-
-/* --- Contact: location switcher --- */
-.contact-locations { margin-top: 28px; }
-
-.contact-locations-title {
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--text-muted);
-    margin-bottom: 12px;
-}
-
-.contact-locations-title i { color: var(--accent); margin-right: 6px; }
-
-.location-tabs {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-}
-
-.location-tab {
-    display: flex;
-    flex-direction: column;
-    gap: 3px;
-    text-align: left;
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 14px 16px;
-    color: var(--text-muted);
-    font-family: var(--font-body);
-    cursor: pointer;
-    transition: border-color var(--transition), background var(--transition), color var(--transition);
-}
-
-.location-tab strong {
-    font-family: var(--font-heading);
-    font-size: 15px;
-    font-weight: 600;
-    letter-spacing: 0.5px;
-    color: var(--text);
-}
-
-.location-tab span { font-size: 12px; line-height: 1.4; }
-
-.location-tab:hover { border-color: rgba(200, 146, 58, 0.5); }
-
-.location-tab.active {
-    border-color: var(--accent);
-    background: rgba(200, 146, 58, 0.08);
-    color: rgba(255, 255, 255, 0.7);
-}
-
-.location-tab.active strong { color: var(--accent); }
-
-@media (max-width: 520px) {
-    .location-tabs { grid-template-columns: 1fr; }
 }
 
 /* --- Legal pages (privacy policy) --- */
@@ -4532,11 +4372,10 @@ textarea:focus-visible,
     .unit-btn,
     .quiz-opt,
     .btn-calc,
-    .location-tab,
+    .map-facade,
     .quiz-back-btn,
     .quiz-restart-btn { min-height: 44px; }
 
-    .service-link,
     .testimonial-ig,
     .footer-nav a,
     .footer-legal a,
@@ -4709,8 +4548,7 @@ textarea:focus-visible,
     .section-sub { font-size: 16px; margin-bottom: 34px; }
     .about-lead { font-size: 17px; }
     .about-text p, .faq-answer p { font-size: 15.5px; }
-    .service-card p, .pricing-desc, .result-card-note { font-size: 15px; line-height: 1.6; }
-    .service-list li { font-size: 15px; }
+    .coaches-item p, .pricing-desc, .result-card-note { font-size: 15px; line-height: 1.6; }
     .testimonial-card blockquote { font-size: 15.5px; line-height: 1.7; }
     .form-group label { font-size: 12px; }
     .consent-label { font-size: 14.5px; }
@@ -4721,7 +4559,7 @@ textarea:focus-visible,
        rather than deleting content. */
     /* Each section sets its own 100px padding via a class, which outranks a
        bare `section` selector, so target the classes directly. */
-    .about, .services, .why, .quiz-section, .testimonials, .transformations,
+    .about, .why, .quiz-section, .testimonials, .transformations,
     .calculators, .pricing, .faq, .contact, .session-timeline, .locations {
         padding: 54px 0;
     }
@@ -4763,7 +4601,6 @@ textarea:focus-visible,
     .result-card-media img { height: 180px; }
 
     /* Metrics as a compact 3-up strip rather than three stacked rows. */
-    .result-card-featured .result-metrics,
     .result-metrics { grid-template-columns: repeat(3, 1fr); }
 
     .result-metric {
@@ -4779,13 +4616,10 @@ textarea:focus-visible,
     .metric-delta { font-size: 11px; padding: 2px 7px; }
 
     /* --- Contact: 2400px, mostly chrome around the form --- */
-    .contact-map iframe { height: 170px; }
     .contact-details { gap: 12px; }
     .contact-detail-item { padding: 10px 0; }
-    .contact-locations { margin-top: 20px; }
 
-    /* --- Services and pricing --- */
-    .service-card { padding: 22px 20px; }
+    /* --- Pricing --- */
     .pricing-card { padding: 28px 20px; gap: 12px; }
     .pricing-amount .price-value { font-size: 2.6rem; }
 
@@ -4801,7 +4635,6 @@ textarea:focus-visible,
 /* Small phones (iPhone SE, older Androids at 360px) */
 @media (max-width: 380px) {
     :root { --container-pad: 15px; }
-    .hero-pills li { font-size: 11px; padding: 6px 11px; }
     .result-metric dd strong { font-size: 13px; }
     .action-bar-primary { font-size: 14px; letter-spacing: 0.02em; }
 }
@@ -4822,17 +4655,15 @@ textarea:focus-visible,
        which is the expected gesture on a phone. Nothing is hidden: the rail is
        a normal scroll container, so keyboard and screen readers reach every
        card in order. */
-    .services-grid,
     .pricing-grid,
     .results-gallery {
         display: flex;
         grid-template-rows: none;
         gap: 12px;
         overflow-x: auto;
-        /* visible, not hidden: the "Most Popular"/"Recommended" badges on
-           .service-card/.pricing-card straddle their card's top border on
-           purpose, and overflow-y:hidden here clipped them. The rail only
-           needs horizontal scroll containment. */
+        /* visible, not hidden: the "Recommended" badge on .pricing-card
+           straddles its card's top border on purpose, and overflow-y:hidden
+           here clipped it. The rail only needs horizontal containment. */
         overflow-y: visible;
         scroll-snap-type: x mandatory;
         scroll-padding-left: var(--container-pad);
@@ -4844,11 +4675,9 @@ textarea:focus-visible,
         scrollbar-width: none;
     }
 
-    .services-grid::-webkit-scrollbar,
     .pricing-grid::-webkit-scrollbar,
     .results-gallery::-webkit-scrollbar { display: none; }
 
-    .service-card,
     .pricing-card,
     .result-card {
         display: flex;
@@ -4859,15 +4688,6 @@ textarea:focus-visible,
         max-width: 340px;
         scroll-snap-align: start;
     }
-
-    /* The lift on .service-card.featured is a grid-only accent; in the
-       swipe rail every card must sit flush so the row doesn't jump. */
-    .service-card.featured { transform: none; }
-
-    /* The featured result no longer spans a row in a flex rail */
-    .result-card-featured { flex: 0 0 88vw; max-width: 360px; }
-    .result-card-featured .result-card-media { width: 100%; max-width: none; }
-    .result-card-featured .result-card-media img { height: 180px; min-height: 0; }
 
     /* Breathing room for the Recommended badge sitting on the top border of
        the featured card in the pricing rail. */

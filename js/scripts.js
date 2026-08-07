@@ -484,22 +484,21 @@ document.querySelectorAll('.faq-question').forEach(btn => {
 });
 
 
-// === LOCATION SWITCHER (contact map) ===
+// === MAP FACADES ===
+// Google Maps embeds are heavy third-party frames. Nothing loads until the
+// visitor asks for a map, which keeps them off the critical path entirely.
 (function () {
-    const tabs = document.getElementById('location-tabs');
-    const map  = document.getElementById('location-map');
-    if (!tabs || !map) return;
-
-    tabs.querySelectorAll('.location-tab').forEach(tab => {
-        tab.addEventListener('click', () => {
-            tabs.querySelectorAll('.location-tab').forEach(t => {
-                t.classList.remove('active');
-                t.setAttribute('aria-selected', 'false');
-            });
-            tab.classList.add('active');
-            tab.setAttribute('aria-selected', 'true');
-            map.src   = tab.dataset.map;
-            map.title = tab.dataset.title;
+    document.querySelectorAll('.map-facade').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const frame = document.createElement('iframe');
+            frame.src = btn.dataset.mapSrc;
+            frame.title = btn.dataset.mapTitle;
+            frame.width = '100%';
+            frame.height = '180';
+            frame.style.border = '0';
+            frame.loading = 'lazy';
+            frame.referrerPolicy = 'no-referrer-when-downgrade';
+            btn.replaceWith(frame);
         });
     });
 })();

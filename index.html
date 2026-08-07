@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta name="theme-color" content="#0f0f0f">
     <meta name="description" content="1:1 personal training at Bannatyne Fairfield, Hitchin and Studio 180, Letchworth. Fat loss, strength and mobility coaching. First consultation free.">
-    <meta name="keywords" content="personal trainer Hitchin, personal trainer Letchworth, Dom Sharpe, Bannatyne Fairfield, Studio 180 Letchworth, personal trainer Hertfordshire, weight loss Hitchin, strength training Letchworth, 1:1 coaching, personal trainer Stotfold">
     <title>Personal Trainer Hitchin &amp; Letchworth | Sharpe Strength</title>
 
     <!-- Open Graph -->
@@ -268,12 +267,14 @@
                     get stronger and are tired of starting again every January.
                 </p>
 
-                <ul class="hero-pills">
-                    <li><i class="fa-solid fa-dumbbell"></i> Weight Training</li>
-                    <li><i class="fa-solid fa-fire-flame-curved"></i> Weight Loss</li>
-                    <li><i class="fa-solid fa-person-running"></i> Mobility</li>
-                    <li><i class="fa-solid fa-handshake"></i> Accountability</li>
-                </ul>
+                <!-- The keyword chips that were here (Weight Training, Weight
+                     Loss, Mobility, Accountability) undercut a headline that
+                     takes a position. This states how the position is backed
+                     up instead. -->
+                <p class="hero-proof">
+                    <i class="fa-solid fa-circle-check"></i>
+                    Every client tracked on an InBody scanner, not a bathroom scale.
+                </p>
 
                 <div class="hero-actions">
                     <a href="#contact" class="btn-primary">
@@ -407,20 +408,21 @@
                         <p>This is what consistency and accountability actually looks like, measured over 8 weeks with InBody scanning.</p>
                     </div>
 
-                    <!-- Same eight weeks, two ways of measuring it. The scale
-                         view is the naive default so switching to InBody feels
-                         like the reveal it's meant to be. -->
-                    <div class="scale-toggle toggle-group" role="group" aria-label="Compare the bathroom scale to the InBody scan">
-                        <button type="button" class="toggle-btn scale-toggle-btn active" data-view="scale" aria-pressed="true">What the scale saw</button>
-                        <button type="button" class="toggle-btn scale-toggle-btn" data-view="inbody" aria-pressed="false">What the InBody saw</button>
+                    <!-- Same eight weeks, two ways of measuring it. InBody is
+                         the default: it's the payoff, and hiding it behind a
+                         click meant most visitors would never see it. The
+                         scale view is the comparison you can call up. -->
+                    <div class="scale-toggle toggle-group" role="group" aria-label="Compare the InBody scan to the bathroom scale">
+                        <button type="button" class="toggle-btn scale-toggle-btn active" data-view="inbody" aria-pressed="true">What the InBody saw</button>
+                        <button type="button" class="toggle-btn scale-toggle-btn" data-view="scale" aria-pressed="false">What the scale saw</button>
                     </div>
 
-                    <div class="scale-panel" data-panel="scale">
+                    <div class="scale-panel" data-panel="scale" hidden>
                         <div class="scale-number">&minus;1.2<span class="scale-unit">kg</span></div>
                         <p class="scale-caption">Eight weeks of consistent training, showing up, doing the work. That's everything the bathroom floor had to say about it.</p>
                     </div>
 
-                    <div class="scale-panel" data-panel="inbody" hidden>
+                    <div class="scale-panel" data-panel="inbody">
                         <!-- Animated ring charts for InBody metrics -->
                         <div class="inbody-rings" id="inbody-rings">
                             <div class="ring-metric">
@@ -493,7 +495,27 @@
                     <p>From 96.5kg and 28.2% body fat to 74.6kg and 8.7%, skeletal muscle held within a kilo the entire way. Two real InBody scans, not a guess at what happened in between.</p>
                 </div>
                 <div class="progress-chart-wrap">
-                    <svg class="progress-chart" viewBox="0 0 600 260" role="img" aria-label="Line chart from January 2022 to November 2025: weight down from 96.5kg to 74.6kg, body fat down from 28.2% to 8.7%, skeletal muscle held from 40.2kg to 39.3kg">
+                    <!-- The chart itself is decorative for assistive tech; the
+                         table below carries the same figures in a form a screen
+                         reader can navigate cell by cell, rather than as one
+                         run-on aria-label string. -->
+                    <table class="sr-only">
+                        <caption>Four-year InBody progress, January 2022 to November 2025</caption>
+                        <thead>
+                            <tr>
+                                <th scope="col">Measure</th>
+                                <th scope="col">Jan 2022</th>
+                                <th scope="col">Nov 2025</th>
+                                <th scope="col">Change</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><th scope="row">Weight</th><td>96.5kg</td><td>74.6kg</td><td>down 21.9kg</td></tr>
+                            <tr><th scope="row">Body fat</th><td>28.2%</td><td>8.7%</td><td>down 19.5 percentage points</td></tr>
+                            <tr><th scope="row">Skeletal muscle</th><td>40.2kg</td><td>39.3kg</td><td>held, down 0.9kg</td></tr>
+                        </tbody>
+                    </table>
+                    <svg class="progress-chart" viewBox="0 0 600 260" role="presentation" aria-hidden="true">
                         <path class="chart-line chart-line-muscle" d="M40,30 C180,30 340,34.25 440,34.25"/>
                         <path class="chart-line chart-line-weight" d="M40,30 C180,30 340,73.12 440,73.12"/>
                         <path class="chart-line chart-line-fat"    d="M40,30 C180,30 340,161.38 440,161.38"/>
@@ -516,71 +538,15 @@
             </div>
 
             <!-- ===== CLIENT RESULTS GALLERY =====
-                 Numbers are typeset rather than left inside the screenshots, so
-                 they're readable, searchable and on-brand. The scan photo sits
-                 alongside as evidence and hides itself if the file is missing. -->
-            <h3 class="results-gallery-title">More client results</h3>
-            <p class="results-gallery-sub">Every number below is a real InBody scan. No estimates, no guesswork.</p>
+                 Two cards, not four. The 4-year client is already plotted as
+                 the chart above, and a second long-run cut told the same
+                 story twice. These two are kept because they make a point the
+                 chart can't: that the scale barely moving, or going up, can
+                 still be the right result. -->
+            <h3 class="results-gallery-title">When the scale is the wrong metric</h3>
+            <p class="results-gallery-sub">Two clients whose bodyweight hardly shifted. Both were working.</p>
 
             <div class="results-gallery">
-
-                <article class="result-card result-card-featured">
-                    <div class="result-card-media">
-                        <img src="img/inbody-progress5.jpeg" width="738" height="1600"
-                             alt="InBody scan: weight down from 96.5kg to 74.6kg and body fat down from 28.2% to 8.7% over four years"
-                             decoding="async" fetchpriority="low"
-                             onerror="this.closest('.result-card-media').classList.add('no-image')">
-                        <a class="result-scan-link" href="img/inbody-progress5.jpeg" target="_blank" rel="noopener noreferrer" aria-label="Full scan: 21.9kg down. 28.2% to 8.7% body fat.">Full scan</a>
-                    </div>
-                    <div class="result-card-body">
-                        <span class="result-card-period">InBody &middot; Jan 2022 &rarr; Nov 2025 &nbsp;&bull;&nbsp; Nearly 4 years</span>
-                        <h4>21.9kg down. 28.2% to 8.7% body fat.</h4>
-                        <p class="result-card-note">This is what consistency actually looks like over the long run. Almost 22kg off the scale, body fat down by more than two thirds, and skeletal muscle within a kilo of where it started. Not a transformation challenge, just years of turning up and doing the work.</p>
-                        <dl class="result-metrics">
-                            <div class="result-metric">
-                                <dt>Body Fat</dt>
-                                <dd>28.2% <i class="fa-solid fa-arrow-right"></i> <strong>8.7%</strong> <span class="metric-delta down"><i class="fa-solid fa-arrow-down"></i> 19.5%</span></dd>
-                            </div>
-                            <div class="result-metric">
-                                <dt>Weight</dt>
-                                <dd>96.5kg <i class="fa-solid fa-arrow-right"></i> <strong>74.6kg</strong> <span class="metric-delta down"><i class="fa-solid fa-arrow-down"></i> 21.9kg</span></dd>
-                            </div>
-                            <div class="result-metric">
-                                <dt>Muscle</dt>
-                                <dd>40.2kg <i class="fa-solid fa-arrow-right"></i> <strong>39.3kg</strong> <span class="metric-delta hold">Held</span></dd>
-                            </div>
-                        </dl>
-                    </div>
-                </article>
-
-                <article class="result-card">
-                    <div class="result-card-media">
-                        <img src="img/inbody-progress2.jpeg" width="1000" height="1481"
-                             alt="InBody scan: weight down from 91.5kg to 81.8kg, body fat down from 24.2% to 15.4%"
-                             decoding="async" fetchpriority="low"
-                             onerror="this.closest('.result-card-media').classList.add('no-image')">
-                        <a class="result-scan-link" href="img/inbody-progress2.jpeg" target="_blank" rel="noopener noreferrer" aria-label="Full scan: 9.7kg down, muscle held">Full scan</a>
-                    </div>
-                    <div class="result-card-body">
-                        <span class="result-card-period">InBody &middot; Nov 2024 &rarr; Jun 2025 &nbsp;&bull;&nbsp; 7 months</span>
-                        <h4>9.7kg down, muscle held</h4>
-                        <p class="result-card-note">A proper cut. Nearly 10kg off the scale and body fat almost halved, while skeletal muscle stayed essentially untouched. That's the difference between losing fat and just losing weight.</p>
-                        <dl class="result-metrics">
-                            <div class="result-metric">
-                                <dt>Body Fat</dt>
-                                <dd>24.2% <i class="fa-solid fa-arrow-right"></i> <strong>15.4%</strong> <span class="metric-delta down"><i class="fa-solid fa-arrow-down"></i> 8.8%</span></dd>
-                            </div>
-                            <div class="result-metric">
-                                <dt>Weight</dt>
-                                <dd>91.5kg <i class="fa-solid fa-arrow-right"></i> <strong>81.8kg</strong> <span class="metric-delta down"><i class="fa-solid fa-arrow-down"></i> 9.7kg</span></dd>
-                            </div>
-                            <div class="result-metric">
-                                <dt>Muscle</dt>
-                                <dd>40.2kg <i class="fa-solid fa-arrow-right"></i> <strong>39.9kg</strong> <span class="metric-delta hold">Held</span></dd>
-                            </div>
-                        </dl>
-                    </div>
-                </article>
 
                 <article class="result-card">
                     <div class="result-card-media">
@@ -721,63 +687,6 @@
         </div>
     </section>
 
-    <!-- ===================== SERVICES ===================== -->
-    <section class="services" id="services">
-        <div class="section-container">
-            <p class="section-index"><span class="section-num" aria-hidden="true"></span>Services</p>
-            <h2 class="section-title">TRAINING THAT ACTUALLY WORKS</h2>
-            <p class="section-sub">Four things Dom coaches. Most clients end up doing some mix of all four.</p>
-
-            <div class="services-grid">
-
-                <div class="service-card">
-                    <h3>1:1 Personal Training</h3>
-                    <p>Proper one-to-one training, written entirely around you. No generic plans, no wasted time. Every session has a purpose.</p>
-                    <ul class="service-list">
-                        <li><i class="fa-solid fa-check"></i> Programme written for you</li>
-                        <li><i class="fa-solid fa-check"></i> Technique coaching every session</li>
-                        <li><i class="fa-solid fa-check"></i> Progressive overload built in</li>
-                    </ul>
-                    <a href="#contact" class="service-link">Book a session <i class="fa-solid fa-arrow-right"></i></a>
-                </div>
-
-                <div class="service-card featured">
-                    <h3>Weight Loss Programme</h3>
-                    <p>Fat loss that actually lasts. No crash diets, no cutting out everything you enjoy. Just a plan you can stick to.</p>
-                    <ul class="service-list">
-                        <li><i class="fa-solid fa-check"></i> Practical nutrition guidance</li>
-                        <li><i class="fa-solid fa-check"></i> Training that burns fat, not muscle</li>
-                        <li><i class="fa-solid fa-check"></i> Weekly check-ins</li>
-                    </ul>
-                    <a href="#contact" class="service-link">Get started <i class="fa-solid fa-arrow-right"></i></a>
-                </div>
-
-                <div class="service-card">
-                    <h3>Mobility &amp; Strength</h3>
-                    <p>If you're stiff, picking up niggles or just want to move better, this is the place to start. Lift better, feel better.</p>
-                    <ul class="service-list">
-                        <li><i class="fa-solid fa-check"></i> Movement screening</li>
-                        <li><i class="fa-solid fa-check"></i> Corrective exercise</li>
-                        <li><i class="fa-solid fa-check"></i> Flexibility work built in</li>
-                    </ul>
-                    <a href="#contact" class="service-link">Start moving better <i class="fa-solid fa-arrow-right"></i></a>
-                </div>
-
-                <div class="service-card">
-                    <h3>Accountability Coaching</h3>
-                    <p>Training only works if you show up. Regular check-ins, honest reviews and someone in your corner when motivation drops. Included as part of every coaching package.</p>
-                    <ul class="service-list">
-                        <li><i class="fa-solid fa-check"></i> Regular progress reviews</li>
-                        <li><i class="fa-solid fa-check"></i> Goal setting and tracking</li>
-                        <li><i class="fa-solid fa-check"></i> Direct message support</li>
-                    </ul>
-                    <a href="#contact" class="service-link">Stay on track <i class="fa-solid fa-arrow-right"></i></a>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
     <!-- ===================== WHY DOM ===================== -->
     <section class="why">
         <div class="section-container">
@@ -793,11 +702,9 @@
                  "Things that need Dom's input". -->
             <ul class="wont-list">
                 <li class="wont-item"><span class="wont-index">01</span>I won't put you on a crash diet.</li>
-                <li class="wont-item"><span class="wont-index">02</span>I won't hand you a meal plan that cuts out everything you like.</li>
-                <li class="wont-item"><span class="wont-index">03</span>I won't book you in at 6am if you're not a morning person.</li>
-                <li class="wont-item"><span class="wont-index">04</span>I won't tie you into a contract.</li>
-                <li class="wont-item"><span class="wont-index">05</span>I won't tell you the scale is the number that matters.</li>
-                <li class="wont-item"><span class="wont-index">06</span>If your problem is outside what I do, I'll say so and point you elsewhere.</li>
+                <li class="wont-item"><span class="wont-index">02</span>I won't tie you into a contract.</li>
+                <li class="wont-item"><span class="wont-index">03</span>I won't tell you the scale is the number that matters.</li>
+                <li class="wont-item"><span class="wont-index">04</span>If your problem is outside what I do, I'll say so and point you elsewhere.</li>
             </ul>
         </div>
     </section>
@@ -879,11 +786,12 @@
             <div class="location-chooser">
                 <div class="location-panel">
                     <div class="location-panel-map">
-                        <iframe
-                            title="Bannatyne Fairfield, Hitchin"
-                            src="https://maps.google.com/maps?q=Bannatyne+Health+Club+Hitchin+Fairfield&output=embed"
-                            width="100%" height="180" style="border:0;"
-                            loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        <button type="button" class="map-facade"
+                                data-map-src="https://maps.google.com/maps?q=Bannatyne+Health+Club+Hitchin+Fairfield&output=embed"
+                                data-map-title="Bannatyne Fairfield, Hitchin">
+                            <span class="map-facade-pin"><i class="fa-solid fa-location-dot"></i></span>
+                            <span class="map-facade-label">Show map</span>
+                        </button>
                     </div>
                     <h3>Bannatyne Fairfield, Hitchin</h3>
                     <p class="location-panel-address">Kingsley Ave, Fairfield Park, Hitchin SG5 4JJ</p>
@@ -892,11 +800,12 @@
 
                 <div class="location-panel">
                     <div class="location-panel-map">
-                        <iframe
-                            title="Studio 180, Letchworth"
-                            src="https://maps.google.com/maps?q=Studio+180+Fifth+Avenue+Letchworth+SG6+2TS&output=embed"
-                            width="100%" height="180" style="border:0;"
-                            loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        <button type="button" class="map-facade"
+                                data-map-src="https://maps.google.com/maps?q=Studio+180+Fifth+Avenue+Letchworth+SG6+2TS&output=embed"
+                                data-map-title="Studio 180, Letchworth">
+                            <span class="map-facade-pin"><i class="fa-solid fa-location-dot"></i></span>
+                            <span class="map-facade-label">Show map</span>
+                        </button>
                     </div>
                     <h3>Studio 180, Letchworth</h3>
                     <p class="location-panel-address">Unit 8 Business Centre East, Fifth Ave, Letchworth SG6 2TS</p>
@@ -908,12 +817,39 @@
         </div>
     </section>
 
-    <!-- ===================== CLIENT QUIZ ===================== -->
-    <section class="quiz-section" id="quiz">
+    <!-- ===================== WHAT DOM COACHES + QUIZ =====================
+         The four service cards that used to sit in their own section were
+         answering the same question this quiz answers interactively, two
+         sections earlier. Folded together: the list states what's on offer,
+         the quiz works out which one applies to you. -->
+    <section class="quiz-section" id="services">
         <div class="section-container">
-            <p class="section-index"><span class="section-num" aria-hidden="true"></span>Find your fit</p>
-            <h2 class="section-title">WHAT KIND OF CLIENT ARE YOU?</h2>
-            <p class="section-sub">Three questions, about thirty seconds.</p>
+            <p class="section-index"><span class="section-num" aria-hidden="true"></span>What Dom coaches</p>
+            <h2 class="section-title">FOUR THINGS, USUALLY SOME MIX OF ALL FOUR</h2>
+
+            <ul class="coaches-list">
+                <li class="coaches-item">
+                    <h3>1:1 Personal Training</h3>
+                    <p>Written entirely around you. Programme built for your goals, technique coached every session, progressive overload built in.</p>
+                </li>
+                <li class="coaches-item">
+                    <h3>Weight Loss</h3>
+                    <p>Fat loss that lasts. Practical nutrition guidance, training that burns fat rather than muscle, weekly check-ins.</p>
+                </li>
+                <li class="coaches-item">
+                    <h3>Mobility &amp; Strength</h3>
+                    <p>For stiffness and niggles. Movement screening, corrective exercise and flexibility work built into the programme.</p>
+                </li>
+                <li class="coaches-item">
+                    <h3>Accountability</h3>
+                    <p>Progress reviews, goal tracking and direct message support. Included with every coaching package.</p>
+                </li>
+            </ul>
+
+            <div class="quiz-intro">
+                <h3>Not sure which one you need?</h3>
+                <p>Three questions, about thirty seconds.</p>
+            </div>
 
             <div class="quiz-wrap">
                 <div class="quiz-progress-bar-wrap">
@@ -1035,8 +971,8 @@
                  billing with three other slides in a carousel. -->
             <div class="testimonial-feature">
                 <div class="testimonial-feature-stat">
-                    <span class="testimonial-feature-stat-value">0</span>
-                    <span class="testimonial-feature-stat-label">Pain running her first marathon, after years of back and hip trouble</span>
+                    <span class="testimonial-feature-stat-value">Zero pain</span>
+                    <span class="testimonial-feature-stat-label">Running her first marathon, after years of back and hip trouble</span>
                 </div>
                 <p class="testimonial-feature-pull">&ldquo;I ran that marathon with zero pain, beating my goal time.&rdquo;</p>
                 <blockquote>I started training with Dom early this year after having struggled with lower back and hip pain/discomfort for months (if not actually years). Having strength trained for many years I was confident I knew what I was doing, but I was also training to run my first Marathon and the constant limitations of the pain was getting to me. Let me just say, what an absolute game changer. Working with Dom once a week not only gave me the results I was looking for but it has taught me so much and enabled me to improve all aspects of my strength and fitness in ways I truly didn't expect. Dom is beyond knowledgeable, committed, attentive, listens to your needs and tailors everything to suit you as an individual. In a relatively short space of time my overall strength and fitness has improved, my weight training has come on leaps and bounds, I ran that marathon with zero pain beating my goal time, and I'm enjoying every aspect of my training again. I'd recommend him to anyone at any level no matter what the goal. I can't rate him highly enough.</blockquote>
@@ -1342,6 +1278,7 @@
                  were nearly impossible to compare against each other since
                  each card's list used different wording for similar things.
                  This normalises them into shared rows instead. -->
+            <p class="pricing-compare-hint" aria-hidden="true">Scroll the table sideways to compare &rarr;</p>
             <div class="pricing-compare-wrap">
                 <table class="pricing-compare">
                     <caption class="sr-only">Feature comparison across all four pricing tiers</caption>
@@ -1357,10 +1294,38 @@
                     <tbody>
                         <tr>
                             <th scope="row">In-person coaching</th>
-                            <td>Per session</td>
-                            <td>Weekly</td>
-                            <td class="pricing-compare-featured">Weekly</td>
+                            <td>1 &times; 60 min</td>
+                            <td>6 &times; 60 min</td>
+                            <td class="pricing-compare-featured">6 &times; 60 min</td>
                             <td>&mdash;</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Programme written for you</th>
+                            <td>&mdash;</td>
+                            <td><i class="fa-solid fa-check"></i></td>
+                            <td class="pricing-compare-featured"><i class="fa-solid fa-check"></i></td>
+                            <td><i class="fa-solid fa-check"></i></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Technique coaching</th>
+                            <td><i class="fa-solid fa-check"></i></td>
+                            <td><i class="fa-solid fa-check"></i></td>
+                            <td class="pricing-compare-featured"><i class="fa-solid fa-check"></i></td>
+                            <td>&mdash;</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Progress tracking</th>
+                            <td><i class="fa-solid fa-check"></i></td>
+                            <td><i class="fa-solid fa-check"></i></td>
+                            <td class="pricing-compare-featured"><i class="fa-solid fa-check"></i></td>
+                            <td><i class="fa-solid fa-check"></i></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Goal setting</th>
+                            <td>&mdash;</td>
+                            <td><i class="fa-solid fa-check"></i></td>
+                            <td class="pricing-compare-featured"><i class="fa-solid fa-check"></i></td>
+                            <td><i class="fa-solid fa-check"></i></td>
                         </tr>
                         <tr>
                             <th scope="row">Programme in the app</th>
@@ -1377,6 +1342,13 @@
                             <td><i class="fa-solid fa-check"></i></td>
                         </tr>
                         <tr>
+                            <th scope="row">Programme adjustments</th>
+                            <td>&mdash;</td>
+                            <td>Each session</td>
+                            <td class="pricing-compare-featured">Each session</td>
+                            <td>Weekly</td>
+                        </tr>
+                        <tr>
                             <th scope="row">Direct message support</th>
                             <td>&mdash;</td>
                             <td>&mdash;</td>
@@ -1388,7 +1360,7 @@
                             <td>Trying it out</td>
                             <td>Building a habit</td>
                             <td class="pricing-compare-featured">Most clients</td>
-                            <td>Confident, independent trainers</td>
+                            <td>Training independently</td>
                         </tr>
                     </tbody>
                 </table>
@@ -1422,7 +1394,7 @@
                         <i class="fa-solid fa-chevron-down faq-chevron"></i>
                     </button>
                     <div class="faq-answer">
-                        <p>Dom coaches from two venues. <strong>Bannatyne Fairfield</strong>, Kingsley Ave, Fairfield Park, Hitchin SG5 4JJ, a full health club with a complete range of equipment for weight training, cardio and mobility work. And <strong>Studio 180</strong>, Unit 8 Business Centre East, Fifth Ave, Letchworth SG6 2TS, a private personal training studio, which suits you if you'd rather train away from a busy gym floor. Let Dom know which is easier for you.</p>
+                        <p>Two venues: a full health club in Hitchin, and a private studio in Letchworth. <a href="#locations">Compare them here</a>, then let Dom know which is easier for you.</p>
                     </div>
                 </div>
 
@@ -1526,37 +1498,13 @@
                         </div>
                     </div>
 
-                    <div class="contact-locations">
-                        <p class="contact-locations-title"><i class="fa-solid fa-location-dot"></i> Two locations</p>
-                        <div class="location-tabs" id="location-tabs" role="tablist" aria-label="Training locations">
-                            <button type="button" class="location-tab active" role="tab" aria-selected="true"
-                                    data-map="https://maps.google.com/maps?q=Bannatyne+Health+Club+Hitchin+Fairfield&output=embed"
-                                    data-title="Bannatyne Fairfield, Hitchin">
-                                <strong>Bannatyne Fairfield</strong>
-                                <span>Kingsley Ave, Hitchin SG5 4JJ</span>
-                            </button>
-                            <button type="button" class="location-tab" role="tab" aria-selected="false"
-                                    data-map="https://maps.google.com/maps?q=Studio+180+Fifth+Avenue+Letchworth+SG6+2TS&output=embed"
-                                    data-title="Studio 180, Letchworth">
-                                <strong>Studio 180</strong>
-                                <span>Fifth Ave, Letchworth SG6 2TS</span>
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="contact-map">
-                        <iframe
-                            id="location-map"
-                            title="Bannatyne Fairfield, Hitchin"
-                            src="https://maps.google.com/maps?q=Bannatyne+Health+Club+Hitchin+Fairfield&output=embed"
-                            width="100%"
-                            height="220"
-                            style="border:0;"
-                            allowfullscreen=""
-                            loading="lazy"
-                            referrerpolicy="no-referrer-when-downgrade">
-                        </iframe>
-                    </div>
+                    <!-- Addresses and maps live in the Locations section, once.
+                         Repeating them here was the third copy on the page. -->
+                    <p class="contact-locations-note">
+                        <i class="fa-solid fa-location-dot"></i>
+                        Dom coaches from two venues in Hitchin and Letchworth.
+                        <a href="#locations">Compare them</a> if you're not sure which suits you.
+                    </p>
 
                 </div>
 

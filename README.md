@@ -49,27 +49,31 @@ DomSharpeFitness/
 - Navbar: fixed, goes solid on scroll, collapses to a hamburger below 1024px
 - Hero: two-column above 900px (copy plus an illustration), with a compact
   stats bar beneath (1:1 coaching, clients transformed, coaching locations)
-- Results: featured InBody scan (toggle between "what the scale saw" and "what
-  the InBody saw"), a hand-built line chart plotting the 4-year client's real
-  numbers, plus the client results gallery. Sits directly after the hero so
-  proof is the first thing a visitor reads
+- Results: featured InBody scan (defaults to the InBody view, toggle to see
+  what a bathroom scale would have shown for the same 8 weeks), a hand-built
+  line chart plotting the 4-year client's real numbers, then two gallery
+  cards. Sits directly after the hero so proof is the first thing a visitor
+  reads
 - About: Dom's 2022 to 2025 collage shown whole, with a year caption
-- Services: 1:1 Training, Weight Loss, Mobility and Strength, Accountability
-- Why Dom: "What I Won't Do", six flat statements, no icons or cards
+- Why Dom: "What I Won't Do", four flat statements, no icons or cards
 - First Session: minute-by-minute timeline of what an hour with Dom looks like
 - Two Locations: Bannatyne Fairfield vs Studio 180, side by side with honest
-  framing and a map pin each
-- Quiz: three questions, recommends a programme, price and sessions/week,
-  and hands the answers to the form. "Skip to pricing" bypasses the
-  questions and shows the general recommendation straight away
+  framing and a click-to-load map each
+- What Dom coaches + Quiz (`#services`): four flat rows stating what's on
+  offer, then the quiz that works out which one applies. These were two
+  separate sections until they were folded together, since the quiz was
+  already answering what the service cards described. Quiz names a
+  programme, price and sessions/week, hands answers to the form, and
+  "Skip to pricing" bypasses the questions
 - Testimonials: Kat's result (first marathon, zero pain) gets its own
   full-width feature; the other three run in a carousel, each leading with
   a pulled sentence and collapsing the full quote behind "Read the whole
   thing"
 - Calculators: BMI and 1 Rep Max. Desktop only, hidden below 768px
 - Pricing: 1-2-1 session, 6-Week Coaching, 6-Week Coaching + App (the one
-  Recommended badge on the site), 6-Week Programme + Check-ins, plus a
-  comparison table below the cards instead of four repeating tick lists
+  Recommended badge on the site), 6-Week Programme + Check-ins. Cards carry
+  the price and pitch; a ten-row comparison table below carries the detail,
+  instead of four separately-worded tick lists that were hard to compare
 - FAQ: seven questions, also emitted as FAQPage structured data
 - Consultation form: goal, experience, availability, consent, success state
 - Footer: quick links (including First Session and Locations), Instagram,
@@ -211,11 +215,29 @@ reintroduce them:
 - **Vary sentence rhythm.** Every section subheading used to be
   "Statement. Statement." Read new copy aloud; if three in a row share a shape,
   rewrite one.
+- **Don't add sections to fix sections.** The page has been through two rounds
+  of "this feels samey" and the answer both times was fewer blocks, not more.
+  Before adding one, check whether an existing section already makes the point:
+  the results gallery lost two cards to the chart above it, and the services
+  grid was folded into the quiz for exactly this reason.
+- **No third-party embeds on first paint.** Google Maps loads behind a
+  click-to-load facade (`.map-facade`). If another embed goes in, do the same.
 
 
 ## To Do
 
 - Add a Calendly (or similar) booking link so the free consultation can be
   booked directly rather than via the form
-- Swap the hero placeholder for a real training photo
-- Record video content for the hero and services sections
+- Photography, which is the biggest outstanding item: the First Session
+  timeline wants a full-bleed gym shot behind it, and the two location panels
+  want photographs of the two rooms rather than maps. See "Things that need
+  Dom's input"
+- Google Ads conversion labels: `ADS_ID` is set, but each conversion action's
+  `send_to` label still needs pasting into `ADS_CONVERSIONS` in
+  `js/analytics.js` before phone/WhatsApp/form conversions register
+- `img/inbody-progress2.jpeg` and `img/inbody-progress5.jpeg` are no longer
+  referenced (their gallery cards were cut as duplicates of the chart). Left
+  in place rather than deleted in case they're wanted elsewhere
+- Motion pass: scroll-linked counters and grain over the dark areas were
+  proposed and not done. Keep it restrained, and mind the no-scroll-reveal
+  rule above

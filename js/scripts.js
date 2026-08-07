@@ -912,6 +912,63 @@ sections.forEach(s => sectionObserver.observe(s));
     }, { threshold: 0.3 });
 
     ringObserver.observe(ringsContainer);
+
+    // The scale/InBody toggle below reveals this container from `hidden`,
+    // which the observer above may or may not re-fire on depending on the
+    // browser. Exposing the trigger here lets that toggle call it directly
+    // and guarantees the rings animate the first time they're actually shown.
+    ringsContainer.__animateRings = animateRings;
+})();
+
+
+// === "THE SCALE LIED" TOGGLE ===
+// Same eight weeks of data already rendered above, just switched between the
+// number a bathroom scale would show and the InBody breakdown. No new data,
+// just the naive view shown first so the InBody view lands as a reveal.
+(function () {
+    const toggle = document.querySelector('.scale-toggle');
+    if (!toggle) return;
+
+    const buttons = toggle.querySelectorAll('.scale-toggle-btn');
+    const panels  = document.querySelectorAll('.scale-panel');
+    const rings   = document.getElementById('inbody-rings');
+
+    buttons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const view = btn.dataset.view;
+
+            buttons.forEach(b => {
+                const active = b === btn;
+                b.classList.toggle('active', active);
+                b.setAttribute('aria-pressed', String(active));
+            });
+
+            panels.forEach(panel => {
+                panel.hidden = panel.dataset.panel !== view;
+            });
+
+            if (view === 'inbody' && rings && rings.__animateRings) {
+                rings.__animateRings();
+            }
+        });
+    });
+})();
+
+
+// === FOUR-YEAR PROGRESS CHART: draw-on-scroll ===
+// Fires once, like the ring charts above. Not a loop.
+(function () {
+    const chart = document.querySelector('.progress-chart');
+    if (!chart) return;
+
+    const chartObserver = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting) {
+            chart.classList.add('is-drawn');
+            chartObserver.disconnect();
+        }
+    }, { threshold: 0.3 });
+
+    chartObserver.observe(chart);
 })();
 
 

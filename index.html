@@ -373,8 +373,8 @@
             </div>
             <div class="stat-sep"></div>
             <div class="hero-stat">
-                <span class="stat-value" data-count="100" data-suffix="%">100%</span>
-                <span class="stat-label">Commitment to You</span>
+                <span class="stat-value" data-count="2" data-suffix="">2</span>
+                <span class="stat-label">Coaching Locations</span>
             </div>
         </div>
 
@@ -402,61 +402,112 @@
                         <h3>Body Recomposition Done Right</h3>
                         <p>This is what consistency and accountability actually looks like, measured over 8 weeks with InBody scanning.</p>
                     </div>
-                    <!-- Animated ring charts for InBody metrics -->
-                    <div class="inbody-rings" id="inbody-rings">
-                        <div class="ring-metric">
-                            <svg class="ring-svg" viewBox="0 0 100 100" aria-hidden="true">
-                                <circle class="ring-bg" cx="50" cy="50" r="40"/>
-                                <circle class="ring-track" cx="50" cy="50" r="40"/>
-                                <circle class="ring-fill ring-fat"
-                                        cx="50" cy="50" r="40"
-                                        stroke-dasharray="251.3"
-                                        stroke-dashoffset="251.3"
-                                        data-ref="10"/>
-                            </svg>
-                            <div class="ring-center">
-                                <span class="ring-value" data-from="23.1" data-to="18.9" data-suffix="%">23.1%</span>
+
+                    <!-- Same eight weeks, two ways of measuring it. The scale
+                         view is the naive default so switching to InBody feels
+                         like the reveal it's meant to be. -->
+                    <div class="scale-toggle toggle-group" role="group" aria-label="Compare the bathroom scale to the InBody scan">
+                        <button type="button" class="toggle-btn scale-toggle-btn active" data-view="scale" aria-pressed="true">What the scale saw</button>
+                        <button type="button" class="toggle-btn scale-toggle-btn" data-view="inbody" aria-pressed="false">What the InBody saw</button>
+                    </div>
+
+                    <div class="scale-panel" data-panel="scale">
+                        <div class="scale-number">&minus;1.2<span class="scale-unit">kg</span></div>
+                        <p class="scale-caption">Eight weeks of consistent training, showing up, doing the work. That's everything the bathroom floor had to say about it.</p>
+                    </div>
+
+                    <div class="scale-panel" data-panel="inbody" hidden>
+                        <!-- Animated ring charts for InBody metrics -->
+                        <div class="inbody-rings" id="inbody-rings">
+                            <div class="ring-metric">
+                                <svg class="ring-svg" viewBox="0 0 100 100" aria-hidden="true">
+                                    <circle class="ring-bg" cx="50" cy="50" r="40"/>
+                                    <circle class="ring-track" cx="50" cy="50" r="40"/>
+                                    <circle class="ring-fill ring-fat"
+                                            cx="50" cy="50" r="40"
+                                            stroke-dasharray="251.3"
+                                            stroke-dashoffset="251.3"
+                                            data-ref="10"/>
+                                </svg>
+                                <div class="ring-center">
+                                    <span class="ring-value" data-from="23.1" data-to="18.9" data-suffix="%">23.1%</span>
+                                </div>
+                                <div class="ring-label">Body Fat</div>
+                                <div class="ring-change negative"><i class="fa-solid fa-arrow-down"></i> &minus;4.2%</div>
                             </div>
-                            <div class="ring-label">Body Fat</div>
-                            <div class="ring-change negative"><i class="fa-solid fa-arrow-down"></i> &minus;4.2%</div>
+                            <div class="ring-metric">
+                                <svg class="ring-svg" viewBox="0 0 100 100" aria-hidden="true">
+                                    <circle class="ring-bg" cx="50" cy="50" r="40"/>
+                                    <circle class="ring-track" cx="50" cy="50" r="40"/>
+                                    <circle class="ring-fill ring-muscle"
+                                            cx="50" cy="50" r="40"
+                                            stroke-dasharray="251.3"
+                                            stroke-dashoffset="251.3"
+                                            data-ref="4"/>
+                                </svg>
+                                <div class="ring-center">
+                                    <span class="ring-value" data-from="34.7" data-to="36.2" data-suffix="kg">34.7kg</span>
+                                </div>
+                                <div class="ring-label">Skeletal Muscle</div>
+                                <div class="ring-change positive"><i class="fa-solid fa-arrow-up"></i> +1.5kg</div>
+                            </div>
+                            <div class="ring-metric">
+                                <svg class="ring-svg" viewBox="0 0 100 100" aria-hidden="true">
+                                    <circle class="ring-bg" cx="50" cy="50" r="40"/>
+                                    <circle class="ring-track" cx="50" cy="50" r="40"/>
+                                    <circle class="ring-fill ring-weight"
+                                            cx="50" cy="50" r="40"
+                                            stroke-dasharray="251.3"
+                                            stroke-dashoffset="251.3"
+                                            data-ref="6"/>
+                                </svg>
+                                <div class="ring-center">
+                                    <span class="ring-value" data-from="79.8" data-to="78.6" data-suffix="kg">79.8kg</span>
+                                </div>
+                                <div class="ring-label">Total Weight</div>
+                                <div class="ring-change neutral">&minus;1.2kg</div>
+                            </div>
                         </div>
-                        <div class="ring-metric">
-                            <svg class="ring-svg" viewBox="0 0 100 100" aria-hidden="true">
-                                <circle class="ring-bg" cx="50" cy="50" r="40"/>
-                                <circle class="ring-track" cx="50" cy="50" r="40"/>
-                                <circle class="ring-fill ring-muscle"
-                                        cx="50" cy="50" r="40"
-                                        stroke-dasharray="251.3"
-                                        stroke-dashoffset="251.3"
-                                        data-ref="4"/>
-                            </svg>
-                            <div class="ring-center">
-                                <span class="ring-value" data-from="34.7" data-to="36.2" data-suffix="kg">34.7kg</span>
-                            </div>
-                            <div class="ring-label">Skeletal Muscle</div>
-                            <div class="ring-change positive"><i class="fa-solid fa-arrow-up"></i> +1.5kg</div>
-                        </div>
-                        <div class="ring-metric">
-                            <svg class="ring-svg" viewBox="0 0 100 100" aria-hidden="true">
-                                <circle class="ring-bg" cx="50" cy="50" r="40"/>
-                                <circle class="ring-track" cx="50" cy="50" r="40"/>
-                                <circle class="ring-fill ring-weight"
-                                        cx="50" cy="50" r="40"
-                                        stroke-dasharray="251.3"
-                                        stroke-dashoffset="251.3"
-                                        data-ref="6"/>
-                            </svg>
-                            <div class="ring-center">
-                                <span class="ring-value" data-from="79.8" data-to="78.6" data-suffix="kg">79.8kg</span>
-                            </div>
-                            <div class="ring-label">Total Weight</div>
-                            <div class="ring-change neutral">&minus;1.2kg</div>
+                        <div class="inbody-insight">
+                            <i class="fa-solid fa-lightbulb"></i>
+                            <p>The scale only dropped 1.2kg, but the body composition shift is dramatic. Less fat, more muscle, better health. This is why Dom tracks beyond the scales.</p>
                         </div>
                     </div>
-                    <div class="inbody-insight">
-                        <i class="fa-solid fa-lightbulb"></i>
-                        <p>The scale only dropped 1.2kg, but the body composition shift is dramatic. Less fat, more muscle, better health. This is why Dom tracks beyond the scales.</p>
-                    </div>
+                </div>
+            </div>
+
+            <!-- ===== FOUR-YEAR PROGRESS CHART =====
+                 Same client as the featured card in the gallery below, plotted
+                 rather than left as before/after numbers. Only two real InBody
+                 scans anchor this (Jan 2022, Nov 2025), so the line between them
+                 is an eased curve showing direction, not a claim about weekly
+                 readings that don't exist. -->
+            <div class="progress-chart-block">
+                <div class="inbody-header">
+                    <p class="data-label">Four years, plotted</p>
+                    <h3>What Consistency Actually Looks Like</h3>
+                    <p>From 96.5kg and 28.2% body fat to 74.6kg and 8.7%, skeletal muscle held within a kilo the entire way. Two real InBody scans, not a guess at what happened in between.</p>
+                </div>
+                <div class="progress-chart-wrap">
+                    <svg class="progress-chart" viewBox="0 0 600 260" role="img" aria-label="Line chart from January 2022 to November 2025: weight down from 96.5kg to 74.6kg, body fat down from 28.2% to 8.7%, skeletal muscle held from 40.2kg to 39.3kg">
+                        <path class="chart-line chart-line-muscle" d="M40,30 C180,30 340,34.25 440,34.25"/>
+                        <path class="chart-line chart-line-weight" d="M40,30 C180,30 340,73.12 440,73.12"/>
+                        <path class="chart-line chart-line-fat"    d="M40,30 C180,30 340,161.38 440,161.38"/>
+
+                        <circle class="chart-dot-start" cx="40" cy="30" r="3.5"/>
+
+                        <text class="chart-end-label" x="452" y="24" text-anchor="start">SKELETAL MUSCLE</text>
+                        <text class="chart-end-value chart-end-value-muscle" x="452" y="42" text-anchor="start">39.3kg <tspan class="chart-end-note">held</tspan></text>
+
+                        <text class="chart-end-label" x="452" y="63" text-anchor="start">WEIGHT</text>
+                        <text class="chart-end-value chart-end-value-weight" x="452" y="81" text-anchor="start">74.6kg</text>
+
+                        <text class="chart-end-label" x="452" y="151" text-anchor="start">BODY FAT</text>
+                        <text class="chart-end-value chart-end-value-fat" x="452" y="169" text-anchor="start">8.7%</text>
+
+                        <text class="chart-axis-label" x="40" y="245" text-anchor="start">JAN 2022</text>
+                        <text class="chart-axis-label" x="440" y="245" text-anchor="middle">NOV 2025</text>
+                    </svg>
                 </div>
             </div>
 
@@ -467,7 +518,6 @@
             <h3 class="results-gallery-title">More client results</h3>
             <p class="results-gallery-sub">Every number below is a real InBody scan. No estimates, no guesswork.</p>
 
-            <p class="swipe-hint"><i class="fa-solid fa-arrow-right-long"></i> Swipe</p>
             <div class="results-gallery">
 
                 <article class="result-card result-card-featured">
@@ -674,7 +724,6 @@
             <h2 class="section-title">TRAINING THAT ACTUALLY WORKS</h2>
             <p class="section-sub">Four things Dom coaches. Most clients end up doing some mix of all four.</p>
 
-            <p class="swipe-hint"><i class="fa-solid fa-arrow-right-long"></i> Swipe</p>
             <div class="services-grid">
 
                 <div class="service-card">
@@ -689,7 +738,6 @@
                 </div>
 
                 <div class="service-card featured">
-                    <div class="featured-badge">Most Popular</div>
                     <h3>Weight Loss Programme</h3>
                     <p>Fat loss that actually lasts. No crash diets, no cutting out everything you enjoy. Just a plan you can stick to.</p>
                     <ul class="service-list">
@@ -729,43 +777,24 @@
     <!-- ===================== WHY DOM ===================== -->
     <section class="why">
         <div class="section-container">
-            <div class="why-grid">
-                <div class="why-text">
-                    <p class="section-index"><span class="section-num" aria-hidden="true"></span>Why Dom</p>
-                    <h2 class="section-title">THE SHARPE DIFFERENCE</h2>
-                    <p>Plenty of trainers will take your money and hand you a plan. Dom will take the time to actually understand you. That changes everything.</p>
-                </div>
-                <div class="why-points">
-                    <div class="why-point">
-                        <i class="fa-solid fa-bullseye why-point-icon"></i>
-                        <div>
-                            <h3>Goal-Focused</h3>
-                            <p>Every session is structured around what you're trying to achieve, not a generic template.</p>
-                        </div>
-                    </div>
-                    <div class="why-point">
-                        <i class="fa-solid fa-shield-halved why-point-icon"></i>
-                        <div>
-                            <h3>Safe &amp; Effective</h3>
-                            <p>Training hard doesn't mean training recklessly. Technique and safety always come first.</p>
-                        </div>
-                    </div>
-                    <div class="why-point">
-                        <i class="fa-solid fa-calendar-days why-point-icon"></i>
-                        <div>
-                            <h3>Flexible Scheduling</h3>
-                            <p>Sessions available mornings, afternoons and evenings, fitting around your life, not the other way around.</p>
-                        </div>
-                    </div>
-                    <div class="why-point">
-                        <i class="fa-solid fa-comment-dots why-point-icon"></i>
-                        <div>
-                            <h3>Always Available</h3>
-                            <p>Got a question between sessions? Message Dom directly and you'll get a proper response.</p>
-                        </div>
-                    </div>
-                </div>
+            <div class="why-text">
+                <p class="section-index"><span class="section-num" aria-hidden="true"></span>Why Dom</p>
+                <h2 class="section-title">WHAT I WON'T DO</h2>
+                <p>Plenty of trainers will tell you what they do. This is what you won't get from Dom.</p>
             </div>
+
+            <!-- Draft copy from the design brief, written in Dom's voice. The
+                 six claims here (contract policy, morning sessions, etc.) need
+                 Dom's sign-off before this counts as final: see README,
+                 "Things that need Dom's input". -->
+            <ul class="wont-list">
+                <li class="wont-item"><span class="wont-index">01</span>I won't put you on a crash diet.</li>
+                <li class="wont-item"><span class="wont-index">02</span>I won't hand you a meal plan that cuts out everything you like.</li>
+                <li class="wont-item"><span class="wont-index">03</span>I won't book you in at 6am if you're not a morning person.</li>
+                <li class="wont-item"><span class="wont-index">04</span>I won't tie you into a contract.</li>
+                <li class="wont-item"><span class="wont-index">05</span>I won't tell you the scale is the number that matters.</li>
+                <li class="wont-item"><span class="wont-index">06</span>If your problem is outside what I do, I'll say so and point you elsewhere.</li>
+            </ul>
         </div>
     </section>
 
@@ -776,6 +805,102 @@
                 <span class="tr-word" style="--d:0">You</span> <span class="tr-word" style="--d:1">don&rsquo;t</span> <span class="tr-word" style="--d:2">need</span> <span class="tr-word" style="--d:3">another</span> <span class="tr-word" style="--d:4">generic</span> <span class="tr-word" style="--d:5">plan.</span><br>
                 <span class="tr-word" style="--d:6">You</span> <span class="tr-word" style="--d:7">need</span> <span class="tr-word" style="--d:8">someone</span> <span class="tr-word" style="--d:9">who</span> <span class="tr-word" style="--d:10">actually</span> <span class="tr-word" style="--d:11">pays</span> <span class="tr-word" style="--d:12">attention.</span>
             </p>
+        </div>
+    </section>
+
+    <!-- ===================== FIRST SESSION TIMELINE =====================
+         The brief calls for a full-bleed gym photo behind this. No location
+         photography exists yet (see README "Things that need Dom's input"),
+         so this runs on the site's own graphic language for now and gets
+         the photo backdrop once Dom's shoot happens. -->
+    <section class="session-timeline" id="first-session">
+        <div class="section-container">
+            <p class="section-index"><span class="section-num" aria-hidden="true"></span>First Session</p>
+            <h2 class="section-title">WHAT AN HOUR WITH DOM ACTUALLY LOOKS LIKE</h2>
+            <p class="section-sub">Nobody tells you what happens when you walk in. Here it is, minute by minute.</p>
+
+            <ol class="timeline-list">
+                <li class="timeline-item">
+                    <span class="timeline-time">0&ndash;10</span>
+                    <div class="timeline-body">
+                        <h3>Talk</h3>
+                        <p>Goals, injuries, what you've tried before and what hasn't worked.</p>
+                    </div>
+                </li>
+                <li class="timeline-item">
+                    <span class="timeline-time">10&ndash;20</span>
+                    <div class="timeline-body">
+                        <h3>Movement screen</h3>
+                        <p>Dom watches you squat, hinge and press before loading anything up.</p>
+                    </div>
+                </li>
+                <li class="timeline-item">
+                    <span class="timeline-time">20&ndash;25</span>
+                    <div class="timeline-body">
+                        <h3>InBody scan</h3>
+                        <p>Your actual starting numbers, not a guess from the bathroom scale.</p>
+                    </div>
+                </li>
+                <li class="timeline-item">
+                    <span class="timeline-time">25&ndash;55</span>
+                    <div class="timeline-body">
+                        <h3>Train</h3>
+                        <p>Real lifting, coached rep by rep, at a level built around what you just showed him.</p>
+                    </div>
+                </li>
+                <li class="timeline-item">
+                    <span class="timeline-time">55&ndash;60</span>
+                    <div class="timeline-body">
+                        <h3>What's next</h3>
+                        <p>What you do on your own before the next session, and why.</p>
+                    </div>
+                </li>
+            </ol>
+        </div>
+    </section>
+
+    <!-- ===================== TWO LOCATIONS =====================
+         Promoted out of the FAQ accordion per the brief. No venue
+         photography exists yet, so each panel leans on its real map pin
+         instead of a photo for now; swap in real shots once Dom's shoot
+         happens (see README "Things that need Dom's input"). Drive times
+         and parking notes are deliberately left out rather than guessed at,
+         Dom should supply anything specific enough to publish as fact. -->
+    <section class="locations" id="locations">
+        <div class="section-container">
+            <p class="section-index"><span class="section-num" aria-hidden="true"></span>Where</p>
+            <h2 class="section-title">TWO PLACES TO TRAIN</h2>
+            <p class="section-sub">Same coaching, two different rooms. Pick whichever one actually gets you there.</p>
+
+            <div class="location-chooser">
+                <div class="location-panel">
+                    <div class="location-panel-map">
+                        <iframe
+                            title="Bannatyne Fairfield, Hitchin"
+                            src="https://maps.google.com/maps?q=Bannatyne+Health+Club+Hitchin+Fairfield&output=embed"
+                            width="100%" height="180" style="border:0;"
+                            loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                    <h3>Bannatyne Fairfield, Hitchin</h3>
+                    <p class="location-panel-address">Kingsley Ave, Fairfield Park, Hitchin SG5 4JJ</p>
+                    <p>A full health club: complete weights floor, cardio and equipment range. Usually busy. Good if you want the buzz and never want for kit.</p>
+                </div>
+
+                <div class="location-panel">
+                    <div class="location-panel-map">
+                        <iframe
+                            title="Studio 180, Letchworth"
+                            src="https://maps.google.com/maps?q=Studio+180+Fifth+Avenue+Letchworth+SG6+2TS&output=embed"
+                            width="100%" height="180" style="border:0;"
+                            loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                    <h3>Studio 180, Letchworth</h3>
+                    <p class="location-panel-address">Unit 8 Business Centre East, Fifth Ave, Letchworth SG6 2TS</p>
+                    <p>A private PT studio. No gym floor, no audience. Good if being watched while you train is the thing that's been putting you off.</p>
+                </div>
+            </div>
+
+            <p class="location-chooser-note">Still not sure? If a busy gym floor is what's been putting you off, train at Studio 180.</p>
         </div>
     </section>
 
@@ -1148,7 +1273,6 @@
             <h2 class="section-title">SIMPLE, HONEST PRICING</h2>
             <p class="section-sub">Everything Dom charges, in one place. No joining fee, nothing tying you in.</p>
 
-            <p class="swipe-hint"><i class="fa-solid fa-arrow-right-long"></i> Swipe</p>
             <div class="pricing-grid">
 
                 <div class="pricing-card">
@@ -1217,7 +1341,6 @@
                 </div>
 
                 <div class="pricing-card">
-                    <div class="pricing-badge-alt">Best Value</div>
                     <h3>6-Week Programme + Check-ins</h3>
                     <div class="pricing-amount">
                         <span class="price-currency">&pound;</span>

@@ -48,17 +48,22 @@ DomSharpeFitness/
 
 - Navbar: fixed, goes solid on scroll, collapses to a hamburger below 1024px
 - Hero: single column, centred, with a compact stats bar beneath
-- Results: featured InBody scan plus the client results gallery. Sits directly
-  after the hero so proof is the first thing a visitor reads
+- Results: featured InBody scan (toggle between "what the scale saw" and "what
+  the InBody saw"), a hand-built line chart plotting the 4-year client's real
+  numbers, plus the client results gallery. Sits directly after the hero so
+  proof is the first thing a visitor reads
 - About: Dom's 2022 to 2025 collage shown whole, with a year caption
 - Services: 1:1 Training, Weight Loss, Mobility and Strength, Accountability
-- Why Dom: key differentiators
+- Why Dom: "What I Won't Do", six flat statements, no icons or cards
+- First Session: minute-by-minute timeline of what an hour with Dom looks like
+- Two Locations: Bannatyne Fairfield vs Studio 180, side by side with honest
+  framing and a map pin each
 - Quiz: three questions, recommends a programme and hands the answers to the form
 - Testimonials: four real client reviews in a carousel with a pause control
 - Calculators: BMI and 1 Rep Max. Desktop only, hidden below 768px
-- Pricing: 1-2-1 session, 6-Week Coaching, 6-Week Coaching + App (recommended),
-  6-Week Programme + Check-ins. Each has a collapsible "what's included" panel,
-  open by default above 1200px
+- Pricing: 1-2-1 session, 6-Week Coaching, 6-Week Coaching + App (the one
+  Recommended badge on the site), 6-Week Programme + Check-ins. Each has a
+  collapsible "what's included" panel, open by default above 1200px
 - FAQ: seven questions, also emitted as FAQPage structured data
 - Consultation form: goal, experience, availability, consent, success state
 - Footer: quick links, Instagram, WhatsApp, privacy policy
@@ -89,6 +94,18 @@ DomSharpeFitness/
 - **Instagram feed.** The section is an honest "follow" panel. To show real
   posts, connect @sharpe.strength at behold.so and paste the embed where the
   comment marks it in `index.html`.
+- **"What I won't do" copy.** The six statements in the Why Dom section
+  (no crash diets, no contracts, no 6am bookings, etc.) are draft copy written
+  in Dom's voice from a design brief, not confirmed claims. Check each one is
+  actually true to how he runs things before treating it as final.
+- **First Session and Two Locations photography.** Both new sections
+  (`#first-session`, `#locations`) are built on the site's graphic/mono
+  language rather than real photos, because none exist yet. Once Dom shoots
+  at both venues, give `.session-timeline` a full-bleed backdrop photo and
+  swap the map embeds in `.location-panel-map` for real venue shots.
+- **Drive time / parking notes.** Deliberately left out of the Two Locations
+  section rather than guessed at. Add them once Dom confirms specifics for
+  each venue.
 
 
 ## Analytics

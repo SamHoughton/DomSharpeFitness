@@ -341,17 +341,47 @@ ul {
     padding: 130px 0 0;
     overflow: hidden;
     background: radial-gradient(ellipse at 50% 0%, rgba(200,146,58,0.08) 0%, transparent 60%),
+                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E"),
                 var(--bg);
 }
 
+/* Oversized progress-ring arcs bleeding off the top-right corner. They echo
+   the InBody ring charts in the Results section that follows immediately
+   after the hero, so the motif is set up here and paid off one scroll
+   later. Static: no loop, no pulse, per house style. */
 .hero-bg-pattern {
     position: absolute;
     inset: 0;
-    background-image:
-        linear-gradient(rgba(200,146,58,0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(200,146,58,0.03) 1px, transparent 1px);
-    background-size: 60px 60px;
+    overflow: hidden;
     pointer-events: none;
+}
+
+.hero-bg-pattern::before,
+.hero-bg-pattern::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+}
+
+.hero-bg-pattern::before {
+    top: -180px;
+    right: -200px;
+    width: 560px;
+    height: 560px;
+    border: 1.5px solid rgba(200,146,58,0.22);
+}
+
+.hero-bg-pattern::after {
+    top: 40px;
+    right: -60px;
+    width: 300px;
+    height: 300px;
+    border: 1.5px solid rgba(200,146,58,0.14);
+}
+
+@media (max-width: 640px) {
+    .hero-bg-pattern::before { width: 360px; height: 360px; top: -110px; right: -140px; }
+    .hero-bg-pattern::after  { width: 190px; height: 190px; top: 30px; right: -50px; }
 }
 
 /* Single-column, centred hero. Add a second column here if a portrait comes back. */
@@ -438,7 +468,7 @@ ul {
     color: rgba(255, 255, 255, 0.75);
     background: rgba(255, 255, 255, 0.04);
     border: 1px solid var(--border-light);
-    border-radius: 100px;
+    border-radius: var(--radius);
     padding: 7px 14px;
     white-space: nowrap;
 }
@@ -644,7 +674,7 @@ ul {
     background: var(--bg-card);
     border: 1px solid var(--border-light);
     padding: 8px 14px;
-    border-radius: 100px;
+    border-radius: var(--radius);
     letter-spacing: 0.5px;
     transition: border-color var(--transition), color var(--transition);
 }
@@ -660,18 +690,23 @@ ul {
     display: inline-flex;
     align-items: center;
     gap: 10px;
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 700;
     letter-spacing: 1px;
-    color: var(--text);
-    background: linear-gradient(135deg, #833ab4, #fd1d1d, #fcb045);
-    padding: 14px 28px;
+    text-transform: uppercase;
+    color: var(--accent);
+    background: rgba(200,146,58,0.08);
+    border: 1px solid var(--accent);
+    padding: 13px 28px;
     border-radius: var(--radius);
-    transition: opacity var(--transition), transform var(--transition);
+    transition: background var(--transition), color var(--transition), transform var(--transition);
 }
 
+.instagram-btn i { font-size: 16px; }
+
 .instagram-btn:hover {
-    opacity: 0.9;
+    background: var(--accent);
+    color: var(--bg);
     transform: translateY(-2px);
 }
 
@@ -701,7 +736,7 @@ ul {
     background: rgba(0,0,0,0.75);
     backdrop-filter: blur(8px);
     padding: 8px 20px;
-    border-radius: 100px;
+    border-radius: var(--radius);
     font-size: 13px;
     font-weight: 700;
     letter-spacing: 1px;
@@ -843,6 +878,10 @@ ul {
 .service-card.featured {
     border-color: var(--accent);
     box-shadow: var(--shadow-accent);
+    /* Lifted out of the row line so four identical rectangles don't read as
+       one mechanical grid; the accent border and badge already mark it as
+       the one to look at, this makes the layout say so too. */
+    transform: translateY(-20px);
 }
 
 .service-card.featured:hover {
@@ -878,7 +917,7 @@ ul {
     background: var(--accent);
     border: 1px solid var(--accent);
     padding: 5px 16px;
-    border-radius: 100px;
+    border-radius: var(--radius);
     margin: 0;
     z-index: 2;
 }
@@ -1048,7 +1087,7 @@ ul {
     background: rgba(200,146,58,0.1);
     border: 1px solid rgba(200,146,58,0.25);
     padding: 4px 12px;
-    border-radius: 100px;
+    border-radius: var(--radius);
     margin-bottom: 4px;
 }
 
@@ -1151,7 +1190,7 @@ ul {
 .author-avatar {
     width: 44px;
     height: 44px;
-    border-radius: 50%;
+    border-radius: var(--radius);
     background: rgba(200,146,58,0.15);
     border: 2px solid var(--accent);
     display: flex;
@@ -2516,7 +2555,7 @@ ul {
     gap: 8px;
     padding: 8px 14px;
     border: 1px solid var(--accent);
-    border-radius: 100px;
+    border-radius: var(--radius);
     font-size: 13px;
     font-weight: 600;
     color: var(--accent);
@@ -2586,13 +2625,14 @@ ul {
     width: 68px;
     height: 68px;
     flex-shrink: 0;
-    border-radius: 18px;
+    border-radius: var(--radius-lg);
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 30px;
-    color: #fff;
-    background: linear-gradient(135deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+    color: var(--accent);
+    background: rgba(200,146,58,0.1);
+    border: 1px solid rgba(200,146,58,0.35);
 }
 
 .insta-panel-body h3 {
@@ -2633,23 +2673,25 @@ ul {
     align-items: center;
     gap: 10px;
     padding: 14px 28px;
-    border-radius: 50px;
-    background: linear-gradient(135deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
-    color: #fff;
-    font-family: var(--font-heading);
-    font-size: 15px;
-    font-weight: 600;
-    letter-spacing: 0.04em;
+    border-radius: var(--radius);
+    background: var(--accent);
+    color: var(--bg);
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
     text-decoration: none;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
 }
 
 .insta-follow-btn:hover {
+    background: var(--accent-dark);
     transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(220, 39, 67, 0.35);
+    box-shadow: 0 8px 30px rgba(200,146,58,0.4);
 }
 
-.insta-follow-btn i { font-size: 18px; }
+.insta-follow-btn i { font-size: 16px; }
 
 /* ============================================================
    WHATSAPP FLOATING BUTTON
@@ -2788,7 +2830,7 @@ ul {
 .tc-btn {
     width: 44px;
     height: 44px;
-    border-radius: 50%;
+    border-radius: var(--radius);
     background: var(--bg-card);
     border: 1px solid var(--border);
     color: var(--text-muted);
@@ -3219,7 +3261,7 @@ ul {
     letter-spacing: 2px;
     text-transform: uppercase;
     padding: 5px 16px;
-    border-radius: 100px;
+    border-radius: var(--radius);
     white-space: nowrap;
     margin: 0;
     z-index: 2;
@@ -4307,6 +4349,10 @@ textarea:focus-visible,
         max-width: 340px;
         scroll-snap-align: start;
     }
+
+    /* The lift on .service-card.featured is a grid-only accent; in the
+       swipe rail every card must sit flush so the row doesn't jump. */
+    .service-card.featured { transform: none; }
 
     /* The featured result no longer spans a row in a flex rail */
     .result-card-featured { flex: 0 0 88vw; max-width: 360px; }

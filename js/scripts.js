@@ -14,6 +14,63 @@ window.addEventListener('scroll', () => {
 }, { passive: true });
 
 
+// === HERO PARALLAX + CURSOR SPOTLIGHT ===
+// Desktop-with-a-mouse only: pointer:fine rules out touch, and it's skipped
+// entirely under prefers-reduced-motion rather than relying on the global
+// transition-duration override, since this is continuous pointer-driven
+// motion rather than a one-off transition.
+(function () {
+    // Track relative to the inset card, not the outer amber frame, since
+    // that's the visible surface the spotlight/parallax actually draw on.
+    const hero = document.querySelector('.hero-inset');
+    if (!hero) return;
+    if (!window.matchMedia('(pointer: fine)').matches) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    const rack   = hero.querySelector('.hero-illo-rack');
+    const figure = hero.querySelector('.hero-illo-figure');
+    const spot   = hero.querySelector('.hero-spotlight');
+
+    let raf = null;
+    let pending = null;
+
+    function apply() {
+        raf = null;
+        if (!pending) return;
+        const { xPct, yPct, px, py } = pending;
+
+        if (rack)   rack.style.transform   = `translate(${xPct * 4}px, ${yPct * 4}px)`;
+        if (figure) figure.style.transform = `translate(${xPct * 10}px, ${yPct * 10}px)`;
+        if (spot) {
+            spot.style.setProperty('--spot-x', px + 'px');
+            spot.style.setProperty('--spot-y', py + 'px');
+        }
+    }
+
+    hero.addEventListener('pointermove', (e) => {
+        const rect = hero.getBoundingClientRect();
+        const px = e.clientX - rect.left;
+        const py = e.clientY - rect.top;
+        pending = {
+            px, py,
+            xPct: (px / rect.width - 0.5) * 2,
+            yPct: (py / rect.height - 0.5) * 2,
+        };
+        if (!raf) raf = requestAnimationFrame(apply);
+    });
+
+    hero.addEventListener('pointerenter', () => {
+        if (spot) spot.classList.add('is-active');
+    });
+
+    hero.addEventListener('pointerleave', () => {
+        if (rack)   rack.style.transform = '';
+        if (figure) figure.style.transform = '';
+        if (spot)   spot.classList.remove('is-active');
+    });
+})();
+
+
 // === MOBILE MENU ===
 const hamburger = document.getElementById('hamburger');
 const navLinks  = document.getElementById('nav-links');
@@ -226,6 +283,44 @@ if (statCounters.length) {
     }, { threshold: 0.5 });
 
     statCounters.forEach(el => counterObserver.observe(el));
+}
+
+
+// === TAGLINE REVEAL ===
+const taglineText = document.querySelector('.tagline-reveal-text');
+
+if (taglineText) {
+    const taglineObserver = new IntersectionObserver((entries) => {
+        if (!entries[0].isIntersecting) return;
+        taglineText.classList.add('in-view');
+        taglineObserver.disconnect();
+    }, { threshold: 0.5 });
+
+    taglineObserver.observe(taglineText);
+}
+
+
+// === SECTION SCROLL REVEAL ===
+// Section headers fade/slide/blur in as they're scrolled into view, the same
+// technique proven above on the tagline. Elements only get the hidden
+// .reveal state added here at runtime, so if JS never runs the headings stay
+// visible by default instead of getting stuck invisible.
+const revealTargets = document.querySelectorAll(
+    '.section-index, .section-title, .section-sub'
+);
+
+if (revealTargets.length) {
+    revealTargets.forEach(el => el.classList.add('reveal'));
+
+    const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (!entry.isIntersecting) return;
+            entry.target.classList.add('is-visible');
+            revealObserver.unobserve(entry.target);
+        });
+    }, { threshold: 0.2 });
+
+    revealTargets.forEach(el => revealObserver.observe(el));
 }
 
 
@@ -761,11 +856,28 @@ sections.forEach(s => sectionObserver.observe(s));
         if (animated) return;
         animated = true;
 
-        const fills = ringsContainer.querySelectorAll('.ring-fill');
-        fills.forEach((circle, i) => {
-            const target = parseFloat(circle.dataset.target);
+        // Ring fill is derived from the metric's own from/to values, not a
+        // hand-typed guess: every ring gets a real minimum arc (15%) plus a
+        // share proportional to how much of its data-ref reference range
+        // (the size of change worth calling out for that metric) the actual
+        // change covers. A bigger real change always fills more of the ring.
+        const metrics = ringsContainer.querySelectorAll('.ring-metric');
+        metrics.forEach((metric, i) => {
+            const circle  = metric.querySelector('.ring-fill');
+            const valueEl = metric.querySelector('.ring-value');
+            if (!circle || !valueEl) return;
+
+            const circumference = parseFloat(circle.getAttribute('stroke-dasharray'));
+            const from = parseFloat(valueEl.dataset.from);
+            const to   = parseFloat(valueEl.dataset.to);
+            const ref  = parseFloat(circle.dataset.ref);
+
+            const raw      = Math.min(Math.abs(to - from) / ref, 1);
+            const fraction = 0.15 + raw * 0.85;
+            const offset   = circumference * (1 - fraction);
+
             setTimeout(() => {
-                circle.style.strokeDashoffset = target;
+                circle.style.strokeDashoffset = offset;
             }, i * 180);
         });
 

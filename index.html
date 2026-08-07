@@ -242,15 +242,16 @@
 
     <!-- ===================== HERO ===================== -->
     <section class="hero" id="home">
+        <div class="hero-inset">
         <div class="hero-bg-pattern"></div>
+        <div class="hero-spotlight" aria-hidden="true"></div>
+        <div class="ring-motif ring-motif--hero" aria-hidden="true"></div>
 
-        <!-- Single-column hero. To bring a portrait back, add
-             <div class="hero-portrait"></div> after .hero-content and set
-             .hero-grid to two columns in css/styles.css. -->
         <div class="hero-grid">
             <div class="hero-content">
                 <div class="hero-eyebrow">
-                    Personal Trainer &nbsp;&bull;&nbsp; Hitchin &nbsp;&bull;&nbsp; Letchworth
+                    <i class="fa-solid fa-dumbbell"></i>
+                    Personal Trainer<span class="hero-eyebrow-sep">&nbsp;&bull;&nbsp;</span><br class="hero-eyebrow-break">Hitchin &nbsp;&bull;&nbsp; Letchworth
                 </div>
 
                 <h1 class="hero-title">
@@ -284,6 +285,80 @@
                 </p>
             </div>
 
+            <div class="hero-illustration" aria-hidden="true">
+                <svg viewBox="0 0 550 480" xmlns="http://www.w3.org/2000/svg" focusable="false">
+                    <defs>
+                        <pattern id="heroHatch" width="7" height="7" patternTransform="rotate(45)" patternUnits="userSpaceOnUse">
+                            <line x1="0" y1="0" x2="0" y2="7" style="stroke:var(--bg); stroke-width:1.3"/>
+                            <line x1="0" y1="0" x2="7" y2="0" style="stroke:var(--bg); stroke-width:1.3"/>
+                        </pattern>
+                        <filter id="heroGrainFilter" x="-10%" y="-10%" width="120%" height="120%">
+                            <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" stitchTiles="stitch" result="noise"/>
+                            <feColorMatrix in="noise" type="matrix"
+                                values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.32 0" result="grain"/>
+                            <feComposite in="grain" in2="SourceGraphic" operator="in" result="grainMasked"/>
+                            <feBlend in="grainMasked" in2="SourceGraphic" mode="normal"/>
+                        </filter>
+                    </defs>
+
+                    <!-- Rack (faint background motif) -->
+                    <g class="hero-illo-rack" style="opacity:0.08">
+                        <rect x="60" y="40" width="18" height="390" style="fill:none; stroke:var(--accent); stroke-width:4"/>
+                        <rect x="472" y="40" width="18" height="390" style="fill:none; stroke:var(--accent); stroke-width:4"/>
+                        <rect x="78" y="176" width="26" height="8" style="fill:var(--accent)"/>
+                        <rect x="446" y="176" width="26" height="8" style="fill:var(--accent)"/>
+                        <rect x="78" y="256" width="26" height="8" style="fill:var(--accent)"/>
+                        <rect x="446" y="256" width="26" height="8" style="fill:var(--accent)"/>
+                    </g>
+
+                    <!-- Platform -->
+                    <path d="M40,430 L500,430 L530,470 L10,470 Z" style="fill:var(--bg-card); stroke:var(--border); stroke-width:1"/>
+                    <path d="M40,430 L500,430 L530,470 L10,470 Z" style="fill:url(#heroHatch); opacity:0.5"/>
+                    <line x1="40" y1="430" x2="500" y2="430" style="stroke:var(--accent); stroke-width:3"/>
+
+                    <g class="hero-illo-figure" filter="url(#heroGrainFilter)">
+                        <!-- Legs -->
+                        <path d="M228,268 L258,268 L250,430 L210,430 Z" style="fill:var(--accent); stroke:var(--bg); stroke-width:3"/>
+                        <path d="M312,268 L282,268 L290,430 L330,430 Z" style="fill:var(--accent-dark); stroke:var(--bg); stroke-width:3"/>
+                        <path d="M312,268 L282,268 L290,430 L330,430 Z" style="fill:url(#heroHatch)"/>
+
+                        <!-- Torso -->
+                        <path d="M210,132 L330,132 L312,268 L228,268 Z" style="fill:var(--accent); stroke:var(--bg); stroke-width:3"/>
+                        <path d="M270,132 L330,132 L312,268 L270,268 Z" style="fill:url(#heroHatch); stroke:var(--bg); stroke-width:3"/>
+
+                        <!-- Arms -->
+                        <path d="M210,132 L228,140 L218,300 L200,300 Z" style="fill:var(--accent); stroke:var(--bg); stroke-width:3"/>
+                        <path d="M330,132 L312,140 L322,300 L340,300 Z" style="fill:var(--accent-dark); stroke:var(--bg); stroke-width:3"/>
+                        <path d="M330,132 L312,140 L322,300 L340,300 Z" style="fill:url(#heroHatch)"/>
+
+                        <!-- Neck -->
+                        <rect x="260" y="118" width="20" height="16" style="fill:var(--accent); stroke:var(--bg); stroke-width:2"/>
+
+                        <!-- Head -->
+                        <circle cx="270" cy="95" r="28" style="fill:var(--accent); stroke:var(--bg); stroke-width:3"/>
+                        <path d="M270,67 A28,28 0 0 1 270,123 Z" style="fill:url(#heroHatch); stroke:var(--bg); stroke-width:2"/>
+                    </g>
+
+                    <!-- Bar -->
+                    <rect x="150" y="296" width="240" height="14" rx="2" style="fill:var(--bg-alt); stroke:var(--accent); stroke-width:2"/>
+
+                    <!-- Loaded plates, back-to-front so each peeks out from behind the next -->
+                    <circle cx="68" cy="303" r="22" style="fill:var(--bg-card); stroke:var(--accent-dark); stroke-width:3"/>
+                    <circle cx="100" cy="303" r="30" style="fill:var(--bg-card); stroke:var(--accent-dark); stroke-width:3"/>
+                    <circle cx="150" cy="303" r="40" style="fill:var(--bg-card); stroke:var(--accent); stroke-width:4"/>
+                    <circle cx="150" cy="303" r="31" style="fill:none; stroke:var(--accent-dark); stroke-width:1"/>
+                    <circle cx="150" cy="303" r="22" style="fill:none; stroke:var(--accent-dark); stroke-width:1"/>
+                    <circle cx="150" cy="303" r="9" style="fill:var(--bg-alt)"/>
+
+                    <circle cx="472" cy="303" r="22" style="fill:var(--bg-card); stroke:var(--accent-dark); stroke-width:3"/>
+                    <circle cx="440" cy="303" r="30" style="fill:var(--bg-card); stroke:var(--accent-dark); stroke-width:3"/>
+                    <circle cx="390" cy="303" r="40" style="fill:var(--bg-card); stroke:var(--accent); stroke-width:4"/>
+                    <circle cx="390" cy="303" r="31" style="fill:none; stroke:var(--accent-dark); stroke-width:1"/>
+                    <circle cx="390" cy="303" r="22" style="fill:none; stroke:var(--accent-dark); stroke-width:1"/>
+                    <circle cx="390" cy="303" r="9" style="fill:var(--bg-alt)"/>
+                </svg>
+            </div>
+        </div>
         </div>
 
         <div class="hero-stats">
@@ -337,8 +412,7 @@
                                         cx="50" cy="50" r="40"
                                         stroke-dasharray="251.3"
                                         stroke-dashoffset="251.3"
-                                        data-target="133"
-                                        stroke="#C8923A"/>
+                                        data-ref="10"/>
                             </svg>
                             <div class="ring-center">
                                 <span class="ring-value" data-from="23.1" data-to="18.9" data-suffix="%">23.1%</span>
@@ -354,8 +428,7 @@
                                         cx="50" cy="50" r="40"
                                         stroke-dasharray="251.3"
                                         stroke-dashoffset="251.3"
-                                        data-target="69"
-                                        stroke="#19c878"/>
+                                        data-ref="4"/>
                             </svg>
                             <div class="ring-center">
                                 <span class="ring-value" data-from="34.7" data-to="36.2" data-suffix="kg">34.7kg</span>
@@ -371,14 +444,13 @@
                                         cx="50" cy="50" r="40"
                                         stroke-dasharray="251.3"
                                         stroke-dashoffset="251.3"
-                                        data-target="197"
-                                        stroke="rgba(255,255,255,0.4)"/>
+                                        data-ref="6"/>
                             </svg>
                             <div class="ring-center">
                                 <span class="ring-value" data-from="79.8" data-to="78.6" data-suffix="kg">79.8kg</span>
                             </div>
                             <div class="ring-label">Total Weight</div>
-                            <div class="ring-change neutral"><i class="fa-solid fa-minus"></i> &minus;1.2kg</div>
+                            <div class="ring-change neutral">&minus;1.2kg</div>
                         </div>
                     </div>
                     <div class="inbody-insight">
@@ -613,7 +685,6 @@
                         <li><i class="fa-solid fa-check"></i> Technique coaching every session</li>
                         <li><i class="fa-solid fa-check"></i> Progressive overload built in</li>
                     </ul>
-                    <p class="service-price">From &pound;42 per session</p>
                     <a href="#contact" class="service-link">Book a session <i class="fa-solid fa-arrow-right"></i></a>
                 </div>
 
@@ -626,7 +697,6 @@
                         <li><i class="fa-solid fa-check"></i> Training that burns fat, not muscle</li>
                         <li><i class="fa-solid fa-check"></i> Weekly check-ins</li>
                     </ul>
-                    <p class="service-price">From &pound;42 per session</p>
                     <a href="#contact" class="service-link">Get started <i class="fa-solid fa-arrow-right"></i></a>
                 </div>
 
@@ -638,19 +708,17 @@
                         <li><i class="fa-solid fa-check"></i> Corrective exercise</li>
                         <li><i class="fa-solid fa-check"></i> Flexibility work built in</li>
                     </ul>
-                    <p class="service-price">From &pound;42 per session</p>
                     <a href="#contact" class="service-link">Start moving better <i class="fa-solid fa-arrow-right"></i></a>
                 </div>
 
                 <div class="service-card">
                     <h3>Accountability Coaching</h3>
-                    <p>Training only works if you show up. Regular check-ins, honest reviews and someone in your corner when motivation drops.</p>
+                    <p>Training only works if you show up. Regular check-ins, honest reviews and someone in your corner when motivation drops. Included as part of every coaching package.</p>
                     <ul class="service-list">
                         <li><i class="fa-solid fa-check"></i> Regular progress reviews</li>
                         <li><i class="fa-solid fa-check"></i> Goal setting and tracking</li>
                         <li><i class="fa-solid fa-check"></i> Direct message support</li>
                     </ul>
-                    <p class="service-price">Included with coaching</p>
                     <a href="#contact" class="service-link">Stay on track <i class="fa-solid fa-arrow-right"></i></a>
                 </div>
 
@@ -669,24 +737,28 @@
                 </div>
                 <div class="why-points">
                     <div class="why-point">
+                        <i class="fa-solid fa-bullseye why-point-icon"></i>
                         <div>
                             <h3>Goal-Focused</h3>
                             <p>Every session is structured around what you're trying to achieve, not a generic template.</p>
                         </div>
                     </div>
                     <div class="why-point">
+                        <i class="fa-solid fa-shield-halved why-point-icon"></i>
                         <div>
                             <h3>Safe &amp; Effective</h3>
                             <p>Training hard doesn't mean training recklessly. Technique and safety always come first.</p>
                         </div>
                     </div>
                     <div class="why-point">
+                        <i class="fa-solid fa-calendar-days why-point-icon"></i>
                         <div>
                             <h3>Flexible Scheduling</h3>
                             <p>Sessions available mornings, afternoons and evenings, fitting around your life, not the other way around.</p>
                         </div>
                     </div>
                     <div class="why-point">
+                        <i class="fa-solid fa-comment-dots why-point-icon"></i>
                         <div>
                             <h3>Always Available</h3>
                             <p>Got a question between sessions? Message Dom directly and you'll get a proper response.</p>
@@ -694,6 +766,16 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </section>
+
+    <!-- ===================== TAGLINE MOMENT ===================== -->
+    <section class="tagline-reveal">
+        <div class="section-container">
+            <p class="tagline-reveal-text">
+                <span class="tr-word" style="--d:0">You</span> <span class="tr-word" style="--d:1">don&rsquo;t</span> <span class="tr-word" style="--d:2">need</span> <span class="tr-word" style="--d:3">another</span> <span class="tr-word" style="--d:4">generic</span> <span class="tr-word" style="--d:5">plan.</span><br>
+                <span class="tr-word" style="--d:6">You</span> <span class="tr-word" style="--d:7">need</span> <span class="tr-word" style="--d:8">someone</span> <span class="tr-word" style="--d:9">who</span> <span class="tr-word" style="--d:10">actually</span> <span class="tr-word" style="--d:11">pays</span> <span class="tr-word" style="--d:12">attention.</span>
+            </p>
         </div>
     </section>
 
@@ -805,6 +887,7 @@
 
     <!-- ===================== TESTIMONIALS ===================== -->
     <section class="testimonials" id="testimonials">
+        <div class="ring-motif ring-motif--testimonials" aria-hidden="true"></div>
         <div class="section-container">
             <p class="section-index"><span class="section-num" aria-hidden="true"></span>Client stories</p>
             <h2 class="section-title">REAL PEOPLE. REAL RESULTS.</h2>
@@ -931,6 +1014,7 @@
                 <!-- BMI Calculator -->
                 <div class="calc-card">
                     <div class="calc-header">
+                        <i class="fa-solid fa-calculator calc-header-icon"></i>
                         <div>
                             <h3>BMI Calculator</h3>
                             <p class="calc-desc">Body Mass Index: a rough measure of whether your weight is in a healthy range for your height.</p>
@@ -996,6 +1080,7 @@
                 <!-- 1RM Calculator -->
                 <div class="calc-card">
                     <div class="calc-header">
+                        <i class="fa-solid fa-dumbbell calc-header-icon"></i>
                         <div>
                             <h3>1 Rep Max Calculator</h3>
                             <p class="calc-desc">Estimate your one-rep max and see what you should be lifting at different training percentages.</p>
@@ -1057,6 +1142,7 @@
 
     <!-- ===================== PRICING ===================== -->
     <section class="pricing" id="pricing">
+        <div class="ring-motif ring-motif--pricing" aria-hidden="true"></div>
         <div class="section-container">
             <p class="section-index"><span class="section-num" aria-hidden="true"></span>Pricing</p>
             <h2 class="section-title">SIMPLE, HONEST PRICING</h2>

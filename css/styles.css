@@ -2397,7 +2397,7 @@ ul {
 
 .unit-btn {
     padding: 7px 16px;
-    border-radius: 20px;
+    border-radius: var(--radius);
     border: 1px solid var(--border);
     background: transparent;
     color: var(--text-muted);
@@ -2412,7 +2412,7 @@ ul {
 .unit-btn.active {
     background: var(--accent);
     border-color: var(--accent);
-    color: #000;
+    color: var(--bg);
 }
 
 .calc-fields {

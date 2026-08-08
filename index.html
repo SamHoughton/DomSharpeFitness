@@ -216,9 +216,11 @@
             </a>
 
             <ul class="nav-links" id="nav-links">
-                <li><a href="#about" class="nav-link">About</a></li>
-                <li><a href="#services" class="nav-link">Services</a></li>
+                <!-- Order matches the scroll order of the page. -->
                 <li><a href="#transformations" class="nav-link">Results</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#first-session" class="nav-link">First Session</a></li>
+                <li><a href="#services" class="nav-link">Coaching</a></li>
                 <li><a href="#pricing" class="nav-link">Pricing</a></li>
                 <li><a href="#faq" class="nav-link">FAQ</a></li>
                 <li class="nav-cta-mobile"><a href="#contact" class="nav-link">Free Consultation</a></li>
@@ -368,8 +370,8 @@
 
         <div class="hero-stats">
             <div class="hero-stat">
-                <span class="stat-value">1:1</span>
-                <span class="stat-label">Personal Coaching</span>
+                <span class="stat-value" data-count="60" data-suffix=" min">60 min</span>
+                <span class="stat-label">One to One, Every Session</span>
             </div>
             <div class="stat-sep"></div>
             <div class="hero-stat">
@@ -390,7 +392,7 @@
         <div class="section-container">
             <p class="section-index"><span class="section-num" aria-hidden="true"></span>Results</p>
             <h2 class="section-title">THE PROOF IS IN THE NUMBERS.</h2>
-            <p class="section-sub">Every figure below came off an InBody scanner, not a bathroom scale.</p>
+            <p class="section-sub">Same client, same eight weeks, measured two ways.</p>
 
             <!-- InBody featured result -->
             <div class="inbody-feature">
@@ -481,6 +483,87 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </section>
+
+    <!-- ===================== ABOUT =====================
+         Deliberately sits between the first proof point and the rest of the
+         evidence. Three consecutive screens of body composition data before
+         a visitor learns Dom is a person read cold, and this section has the
+         most human writing on the site. -->
+    <section class="about" id="about">
+        <div class="section-container">
+            <p class="section-index"><span class="section-num" aria-hidden="true"></span>About</p>
+
+            <div class="about-grid">
+                <div class="about-text">
+                    <h2 class="section-title">I'VE BEEN WHERE YOU ARE.</h2>
+                    <p class="about-lead">I didn't always look or feel like this. My own transformation between 2022 and 2025 is the reason I'm so passionate about helping others.</p>
+                    <p>Honestly, I didn't notice the change myself until I looked back at old photos. What made the difference wasn't some extreme diet or punishing programme. It was learning to enjoy my training, staying mindful (not strict) with food, and showing up consistently. I still drink. I still eat junk food, just in moderation most of the time.</p>
+                    <p>I'm proud of what I've achieved, and even more passionate about helping others find that same balance and confidence. I coach 1:1 from Bannatyne Fairfield in Hitchin and Studio 180 in Letchworth, across weight training, mobility, weight loss and accountability. Programmes built around your life, not the other way round.</p>
+
+                    <div class="about-tags">
+                        <span class="tag"><i class="fa-solid fa-dumbbell"></i> Weight Training</span>
+                        <span class="tag"><i class="fa-solid fa-person-running"></i> Mobility</span>
+                        <span class="tag"><i class="fa-solid fa-fire-flame-curved"></i> Weight Loss</span>
+                        <span class="tag"><i class="fa-solid fa-trophy"></i> Strength</span>
+                        <span class="tag"><i class="fa-solid fa-handshake"></i> Accountability</span>
+                    </div>
+
+                    <!-- Credentials: update with Dom's actual qualifications -->
+                    <div class="about-credentials">
+                        <div class="credential-badge">
+                            <i class="fa-solid fa-certificate"></i>
+                            <span>Level 3 Personal Trainer</span>
+                        </div>
+                        <div class="credential-badge">
+                            <i class="fa-solid fa-heart-pulse"></i>
+                            <span>First Aid Certified</span>
+                        </div>
+                        <div class="credential-badge">
+                            <i class="fa-solid fa-shield-halved"></i>
+                            <span>REPs Registered</span>
+                        </div>
+                    </div>
+
+                    <a href="https://www.instagram.com/sharpe.strength/" target="_blank" rel="noopener noreferrer" class="instagram-btn">
+                        <i class="fa-brands fa-instagram"></i>
+                        Follow @sharpe.strength
+                    </a>
+                </div>
+
+                <div class="about-card-wrap">
+                    <!-- Dom's own 2022 to 2025 change. Shown whole rather than as a
+                         cropped before/after, since the point is that it happened
+                         gradually and without anything extreme. -->
+                    <div class="about-transform-image">
+                        <img src="img/dom-transformation.jpg" alt="Dom Sharpe in 2022 and in 2025, four photos showing his own transformation" width="1000" height="1000" loading="lazy" decoding="async">
+                        <div class="transform-years">
+                            <span class="year-badge before-year">2022</span>
+                            <i class="fa-solid fa-arrow-right"></i>
+                            <span class="year-badge after-year">2025</span>
+                        </div>
+                    </div>
+
+                    <div class="about-quote-card">
+                        <p class="about-quote">I'm proud of what I've achieved, and even more passionate about helping others find that same balance and confidence.</p>
+                        <p class="about-quote-name">Dom Sharpe</p>
+                        <div class="about-card-info">
+                            <span><i class="fa-solid fa-location-dot"></i> Hitchin &amp; Letchworth</span>
+                            <span><i class="fa-brands fa-instagram"></i> @sharpe.strength</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== THE REST OF THE EVIDENCE ===================== -->
+    <section class="transformations" id="results-detail">
+        <div class="section-container">
+            <p class="section-index"><span class="section-num" aria-hidden="true"></span>The receipts</p>
+            <h2 class="section-title">MORE THAN ONE CLIENT, MORE THAN ONE STORY.</h2>
+            <p class="section-sub">Four years of one client's scans, then two more who prove the scale is the wrong thing to watch.</p>
 
             <!-- ===== FOUR-YEAR PROGRESS CHART =====
                  Same client as the featured card in the gallery below, plotted
@@ -538,15 +621,45 @@
             </div>
 
             <!-- ===== CLIENT RESULTS GALLERY =====
-                 Two cards, not four. The 4-year client is already plotted as
-                 the chart above, and a second long-run cut told the same
-                 story twice. These two are kept because they make a point the
-                 chart can't: that the scale barely moving, or going up, can
-                 still be the right result. -->
-            <h3 class="results-gallery-title">When the scale is the wrong metric</h3>
-            <p class="results-gallery-sub">Two clients whose bodyweight hardly shifted. Both were working.</p>
+                 Three cards, not the original four: the 4-year client is
+                 already plotted as the chart above, so that card went. The
+                 7-month cut leads because it's the straightforward fat-loss
+                 story most visitors are actually looking for; the two behind
+                 it make the point the chart can't, that a scale barely
+                 moving (or going up) can still be the right result. -->
+            <h3 class="results-gallery-title">Three more, three different shapes</h3>
+            <p class="results-gallery-sub">A straight cut, a recomposition, and a month where the scale said nothing happened.</p>
 
             <div class="results-gallery">
+
+                <article class="result-card">
+                    <div class="result-card-media">
+                        <img src="img/inbody-progress2.jpeg" width="1000" height="1481"
+                             alt="InBody scan: weight down from 91.5kg to 81.8kg, body fat down from 24.2% to 15.4%"
+                             decoding="async" fetchpriority="low"
+                             onerror="this.closest('.result-card-media').classList.add('no-image')">
+                        <a class="result-scan-link" href="img/inbody-progress2.jpeg" target="_blank" rel="noopener noreferrer" aria-label="Full scan: 9.7kg down, muscle held">Full scan</a>
+                    </div>
+                    <div class="result-card-body">
+                        <span class="result-card-period">InBody &middot; Nov 2024 &rarr; Jun 2025 &nbsp;&bull;&nbsp; 7 months</span>
+                        <h4>9.7kg down, muscle held</h4>
+                        <p class="result-card-note">A proper cut. Nearly 10kg off the scale and body fat almost halved, while skeletal muscle stayed essentially untouched. That's the difference between losing fat and just losing weight.</p>
+                        <dl class="result-metrics">
+                            <div class="result-metric">
+                                <dt>Body Fat</dt>
+                                <dd>24.2% <i class="fa-solid fa-arrow-right"></i> <strong>15.4%</strong> <span class="metric-delta down"><i class="fa-solid fa-arrow-down"></i> 8.8%</span></dd>
+                            </div>
+                            <div class="result-metric">
+                                <dt>Weight</dt>
+                                <dd>91.5kg <i class="fa-solid fa-arrow-right"></i> <strong>81.8kg</strong> <span class="metric-delta down"><i class="fa-solid fa-arrow-down"></i> 9.7kg</span></dd>
+                            </div>
+                            <div class="result-metric">
+                                <dt>Muscle</dt>
+                                <dd>40.2kg <i class="fa-solid fa-arrow-right"></i> <strong>39.9kg</strong> <span class="metric-delta hold">Held</span></dd>
+                            </div>
+                        </dl>
+                    </div>
+                </article>
 
                 <article class="result-card">
                     <div class="result-card-media">
@@ -615,80 +728,9 @@
         </div>
     </section>
 
-    <!-- ===================== ABOUT ===================== -->
-    <section class="about" id="about">
-        <div class="section-container">
-            <p class="section-index"><span class="section-num" aria-hidden="true"></span>About</p>
-
-            <div class="about-grid">
-                <div class="about-text">
-                    <h2 class="section-title">I'VE BEEN WHERE YOU ARE.</h2>
-                    <p class="about-lead">I didn't always look or feel like this. My own transformation between 2022 and 2025 is the reason I'm so passionate about helping others.</p>
-                    <p>Honestly, I didn't notice the change myself until I looked back at old photos. What made the difference wasn't some extreme diet or punishing programme. It was learning to enjoy my training, staying mindful (not strict) with food, and showing up consistently. I still drink. I still eat junk food, just in moderation most of the time.</p>
-                    <p>I'm proud of what I've achieved, and even more passionate about helping others find that same balance and confidence. I coach 1:1 from Bannatyne Fairfield in Hitchin and Studio 180 in Letchworth, across weight training, mobility, weight loss and accountability. Programmes built around your life, not the other way round.</p>
-
-                    <div class="about-tags">
-                        <span class="tag"><i class="fa-solid fa-dumbbell"></i> Weight Training</span>
-                        <span class="tag"><i class="fa-solid fa-person-running"></i> Mobility</span>
-                        <span class="tag"><i class="fa-solid fa-fire-flame-curved"></i> Weight Loss</span>
-                        <span class="tag"><i class="fa-solid fa-trophy"></i> Strength</span>
-                        <span class="tag"><i class="fa-solid fa-handshake"></i> Accountability</span>
-                    </div>
-
-                    <!-- Credentials: update with Dom's actual qualifications -->
-                    <div class="about-credentials">
-                        <div class="credential-badge">
-                            <i class="fa-solid fa-certificate"></i>
-                            <span>Level 3 Personal Trainer</span>
-                        </div>
-                        <div class="credential-badge">
-                            <i class="fa-solid fa-heart-pulse"></i>
-                            <span>First Aid Certified</span>
-                        </div>
-                        <div class="credential-badge">
-                            <i class="fa-solid fa-shield-halved"></i>
-                            <span>REPs Registered</span>
-                        </div>
-                    </div>
-
-                    <a href="https://www.instagram.com/sharpe.strength/" target="_blank" rel="noopener noreferrer" class="instagram-btn">
-                        <i class="fa-brands fa-instagram"></i>
-                        Follow @sharpe.strength
-                    </a>
-                </div>
-
-                <div class="about-card-wrap">
-                    <!-- Dom's own 2022 to 2025 change. Shown whole rather than as a
-                         drag-to-compare slider: the source is a single 2x2 collage, so
-                         any slider had to crop it and cut heads off on narrow screens. -->
-                    <figure class="about-collage">
-                        <img src="img/dom-transformation.jpg" width="933" height="929"
-                             alt="Dom Sharpe in 2022 on the left and 2025 on the right"
-                             loading="lazy" decoding="async">
-                        <figcaption class="about-collage-caption">
-                            <span class="collage-year">2022</span>
-                            <span class="collage-arrow"><i class="fa-solid fa-arrow-right"></i></span>
-                            <span class="collage-year collage-year-now">2025</span>
-                        </figcaption>
-                    </figure>
-
-                    <div class="about-quote-card">
-                        <blockquote class="about-quote">
-                            I'm proud of what I've achieved, and even more passionate about helping others find that same balance and confidence.
-                        </blockquote>
-                        <cite class="about-cite">Dom Sharpe</cite>
-                        <div class="about-card-info">
-                            <span><i class="fa-solid fa-location-dot"></i> Hitchin &amp; Letchworth</span>
-                            <span><i class="fa-brands fa-instagram"></i> @sharpe.strength</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
 
     <!-- ===================== WHY DOM ===================== -->
-    <section class="why">
+    <section class="why has-grain">
         <div class="section-container">
             <div class="why-text">
                 <p class="section-index"><span class="section-num" aria-hidden="true"></span>Why Dom</p>
@@ -710,7 +752,7 @@
     </section>
 
     <!-- ===================== TAGLINE MOMENT ===================== -->
-    <section class="tagline-reveal">
+    <section class="tagline-reveal has-grain">
         <div class="section-container">
             <p class="tagline-reveal-text">
                 <span class="tr-word" style="--d:0">You</span> <span class="tr-word" style="--d:1">don&rsquo;t</span> <span class="tr-word" style="--d:2">need</span> <span class="tr-word" style="--d:3">another</span> <span class="tr-word" style="--d:4">generic</span> <span class="tr-word" style="--d:5">plan.</span><br>
@@ -724,11 +766,13 @@
          photography exists yet (see README "Things that need Dom's input"),
          so this runs on the site's own graphic language for now and gets
          the photo backdrop once Dom's shoot happens. -->
-    <section class="session-timeline" id="first-session">
-        <div class="section-container">
-            <p class="section-index"><span class="section-num" aria-hidden="true"></span>First Session</p>
-            <h2 class="section-title">WHAT AN HOUR WITH DOM ACTUALLY LOOKS LIKE</h2>
-            <p class="section-sub">Nobody tells you what happens when you walk in. Here it is, minute by minute.</p>
+    <section class="session-timeline has-grain" id="first-session">
+        <div class="section-container timeline-grid">
+            <div class="timeline-intro">
+                <p class="section-index"><span class="section-num" aria-hidden="true"></span>First Session</p>
+                <h2 class="section-title">WHAT AN HOUR WITH DOM ACTUALLY LOOKS LIKE</h2>
+                <p class="section-sub">Nobody tells you what happens when you walk in. Here it is, minute by minute.</p>
+            </div>
 
             <ol class="timeline-list">
                 <li class="timeline-item">
@@ -1637,10 +1681,11 @@
                 <h4>Quick Links</h4>
                 <ul>
                     <li><a href="#home">Home</a></li>
+                    <li><a href="#transformations">Results</a></li>
                     <li><a href="#about">About</a></li>
-                    <li><a href="#services">Services</a></li>
                     <li><a href="#first-session">First Session</a></li>
                     <li><a href="#locations">Locations</a></li>
+                    <li><a href="#services">Coaching</a></li>
                     <li class="nav-tools-link"><a href="#calculators">Tools</a></li>
                     <li><a href="#pricing">Pricing</a></li>
                     <li><a href="#faq">FAQ</a></li>

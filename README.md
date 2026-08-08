@@ -49,16 +49,20 @@ DomSharpeFitness/
 - Navbar: fixed, goes solid on scroll, collapses to a hamburger below 1024px
 - Hero: two-column above 900px (copy plus an illustration), with a compact
   stats bar beneath (1:1 coaching, clients transformed, coaching locations)
-- Results: featured InBody scan (defaults to the InBody view, toggle to see
-  what a bathroom scale would have shown for the same 8 weeks), a hand-built
-  line chart plotting the 4-year client's real numbers, then two gallery
-  cards. Sits directly after the hero so proof is the first thing a visitor
-  reads
-- About: Dom's 2022 to 2025 collage shown whole, with a year caption
+- Results (`#transformations`): the featured InBody scan. Defaults to the
+  InBody view; toggle to see what a bathroom scale would have shown for the
+  same 8 weeks. Sits directly after the hero so proof comes first
+- About: Dom's 2022 to 2025 collage shown whole, with a year caption.
+  Deliberately sits *between* the two results sections: three consecutive
+  screens of body composition data before any sign of a human read cold
+- The receipts (`#results-detail`): the four-year line chart, then three
+  gallery cards (a straight cut, a recomposition, and a month where the
+  scale said nothing happened)
 - Why Dom: "What I Won't Do", four flat statements, no icons or cards
-- First Session: minute-by-minute timeline of what an hour with Dom looks like
-- Two Locations: Bannatyne Fairfield vs Studio 180, side by side with honest
-  framing and a click-to-load map each
+- First Session: minute-by-minute timeline, asymmetric with a sticky heading
+  column above 900px
+- Two Locations: Bannatyne Fairfield vs Studio 180, full-bleed and split down
+  the middle of the viewport, honest framing and a click-to-load map each
 - What Dom coaches + Quiz (`#services`): four flat rows stating what's on
   offer, then the quiz that works out which one applies. These were two
   separate sections until they were folded together, since the quiz was
@@ -222,6 +226,18 @@ reintroduce them:
   grid was folded into the quiz for exactly this reason.
 - **No third-party embeds on first paint.** Google Maps loads behind a
   click-to-load facade (`.map-facade`). If another embed goes in, do the same.
+- **Nav order matches scroll order.** Both the navbar and the footer quick
+  links are in page order. If a section moves, move its link.
+- **Numbers in number slots.** The hero trust bar reads as three statistics,
+  so all three have to be countable facts. "1:1 Personal Coaching" and
+  "100% Commitment to You" were both cut for sitting in that slot without
+  being numbers.
+- **Motion is already built, extend it rather than rebuilding.** Stat
+  counters, InBody rings, the progress chart draw-on and the tagline reveal
+  all run off IntersectionObserver and fire once. A global
+  `prefers-reduced-motion` guard at the end of styles.css covers the lot.
+- **Grain, not flat fills.** Large flat dark blocks get `.has-grain`, which
+  layers the shared `--grain` data URI behind the content.
 
 
 ## To Do
@@ -235,9 +251,11 @@ reintroduce them:
 - Google Ads conversion labels: `ADS_ID` is set, but each conversion action's
   `send_to` label still needs pasting into `ADS_CONVERSIONS` in
   `js/analytics.js` before phone/WhatsApp/form conversions register
-- `img/inbody-progress2.jpeg` and `img/inbody-progress5.jpeg` are no longer
-  referenced (their gallery cards were cut as duplicates of the chart). Left
-  in place rather than deleted in case they're wanted elsewhere
-- Motion pass: scroll-linked counters and grain over the dark areas were
-  proposed and not done. Keep it restrained, and mind the no-scroll-reveal
-  rule above
+- `img/inbody-progress5.jpeg` is no longer referenced (its gallery card was
+  cut as a duplicate of the four-year chart). Left in place rather than
+  deleted in case it's wanted elsewhere
+- The `.reveal` utility in scripts.js fades in every section heading on
+  scroll, which contradicts the "no scroll-reveal" house rule above. It
+  arrived via a separate branch and has been left alone rather than
+  unilaterally reverted, but the two should be reconciled one way or the
+  other

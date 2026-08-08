@@ -45,10 +45,30 @@
 
     --rule: 1px solid rgba(255, 255, 255, 0.14);
 
+    /* Fine film grain, reused wherever a large flat dark block would
+       otherwise read as an empty CSS colour fill. Same data URI everywhere so
+       it only costs one decode. Apply with the .has-grain class. */
+    --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E");
+
     /* Single source of truth for the page gutter. The swipe rails bleed to the
        screen edge with a matching negative margin, so these must stay in sync. */
     --container-pad: 24px;
 }
+
+/* Grain sits in a pseudo-element rather than on the section background, so
+   it can't interfere with whatever background the section already sets. */
+.has-grain { position: relative; }
+
+.has-grain::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: var(--grain);
+    pointer-events: none;
+    z-index: 0;
+}
+
+.has-grain > * { position: relative; z-index: 1; }
 
 /* === RESET & BASE === */
 *, *::before, *::after {
@@ -1123,6 +1143,29 @@ ul {
     border-bottom: 1px solid var(--border);
 }
 
+/* Asymmetric: the heading holds one side while the clock runs down the
+   other, rather than another centred block stacked on the last one. The
+   intro sticks so it stays with the steps on a long scroll. */
+.timeline-grid {
+    display: grid;
+    grid-template-columns: 5fr 7fr;
+    gap: clamp(32px, 6vw, 96px);
+    align-items: start;
+}
+
+@media (min-width: 901px) {
+    .timeline-intro {
+        position: sticky;
+        top: 120px;
+    }
+
+    .timeline-intro .section-sub { margin-bottom: 0; }
+}
+
+@media (max-width: 900px) {
+    .timeline-grid { grid-template-columns: 1fr; }
+}
+
 /* A single left rail with the time stacked above each heading, rather than
    a separate right-aligned time column squeezed against the dot: that
    layout collided ("0" and "10" overlapping the marker) because the time
@@ -1131,10 +1174,13 @@ ul {
    instead of trying to tune the gap. */
 .timeline-list {
     list-style: none;
-    margin-top: 48px;
     max-width: 640px;
     position: relative;
     padding-left: 32px;
+}
+
+@media (max-width: 900px) {
+    .timeline-list { margin-top: 40px; }
 }
 
 .timeline-list::before {
@@ -1200,23 +1246,34 @@ ul {
     border-top: 1px solid var(--border);
 }
 
+/* Full-bleed, splitting the viewport down the middle. The section is about
+   two genuinely different rooms, so the layout says so: two halves, hard
+   divider, no card chrome. Body has overflow-x: clip, so breaking out of
+   .section-container this way can't cause a horizontal scrollbar. */
 .location-chooser {
+    --location-pad: clamp(24px, 4vw, 56px);
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 32px;
+    gap: 0;
     margin-top: 48px;
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
 }
 
 .location-panel {
     background: var(--bg);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-lg);
-    overflow: hidden;
-    padding: 32px;
+    padding: var(--location-pad);
+}
+
+.location-panel + .location-panel {
+    border-left: 1px solid var(--border);
 }
 
 .location-panel-map {
-    margin: -32px -32px 24px;
+    margin: calc(var(--location-pad) * -1) calc(var(--location-pad) * -1) 26px;
     border-bottom: 1px solid var(--border);
     /* Desaturated so a bright default Google Maps tile doesn't punch a hole
        in an otherwise dark, disciplined page. */
@@ -1256,7 +1313,11 @@ ul {
 
 @media (max-width: 760px) {
     .location-chooser { grid-template-columns: 1fr; }
-    .location-panel-map { margin: -32px -32px 20px; }
+    /* Stacked, so the divider moves to the top edge of the second panel. */
+    .location-panel + .location-panel {
+        border-left: none;
+        border-top: 1px solid var(--border);
+    }
 }
 
 /* Scroll-reveal utility. JS opts elements into this at runtime (adds
@@ -1310,10 +1371,14 @@ ul {
     border-radius: var(--radius-lg);
 }
 
+/* Stacked, not baseline-aligned side by side: the label runs to a couple of
+   lines, and baseline alignment only lined up its first one, leaving the
+   rest hanging below the stat. Value over label also matches how every
+   other figure on the site is set. */
 .testimonial-feature-stat {
     display: flex;
-    align-items: baseline;
-    gap: 20px;
+    flex-direction: column;
+    gap: 6px;
     margin-bottom: 24px;
     padding-bottom: 24px;
     border-bottom: 1px solid var(--border);
@@ -1321,21 +1386,20 @@ ul {
 
 .testimonial-feature-stat-value {
     font-family: var(--font-mono);
-    font-size: clamp(1.8rem, 1.4rem + 1.6vw, 2.6rem);
+    font-size: clamp(2rem, 1.5rem + 2vw, 3rem);
     font-weight: 700;
     color: var(--accent);
-    line-height: 1.1;
-    flex-shrink: 0;
-    white-space: nowrap;
+    line-height: 1;
+    letter-spacing: -0.01em;
 }
 
 .testimonial-feature-stat-label {
-    font-size: 13.5px;
+    font-size: 12px;
     color: var(--text-muted);
-    line-height: 1.6;
+    line-height: 1.5;
     text-transform: uppercase;
-    letter-spacing: 0.04em;
-    max-width: 32ch;
+    letter-spacing: 0.08em;
+    max-width: 46ch;
 }
 
 .testimonial-feature-pull {
@@ -3941,10 +4005,12 @@ ul {
 
 .results-gallery {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 22px;
-    max-width: 900px;
-    margin: 0 auto;
+}
+
+@media (max-width: 1000px) {
+    .results-gallery { grid-template-columns: repeat(2, 1fr); }
 }
 
 .result-card {

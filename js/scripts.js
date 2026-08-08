@@ -419,6 +419,16 @@ window.addEventListener('scroll', () => {
         bmiMarker.style.left  = markerPct + '%';
 
         resultBox.classList.remove('hidden');
+
+        // Replay the wipe on every calculation, not just the first. Removing
+        // the class, forcing a reflow and re-adding it restarts the animation
+        // synchronously; no rAF, so a throttled tab can't strand it.
+        const bar = resultBox.querySelector('.bmi-bar');
+        if (bar) {
+            bar.classList.remove('is-filled');
+            void bar.offsetWidth;
+            bar.classList.add('is-filled');
+        }
     });
 })();
 
@@ -970,7 +980,17 @@ sections.forEach(s => sectionObserver.observe(s));
             });
 
             panels.forEach(panel => {
-                panel.hidden = panel.dataset.panel !== view;
+                const show = panel.dataset.panel === view;
+                panel.hidden = !show;
+
+                // Fade and lift the incoming panel in rather than cutting to
+                // it. Restarting the animation only needs a reflow between
+                // removing and re-adding the class.
+                if (show) {
+                    panel.classList.remove('is-entering');
+                    void panel.offsetWidth;
+                    panel.classList.add('is-entering');
+                }
             });
 
             if (view === 'inbody' && rings && rings.__animateRings) {

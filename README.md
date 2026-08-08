@@ -238,6 +238,24 @@ reintroduce them:
   `prefers-reduced-motion` guard at the end of styles.css covers the lot.
 - **Grain, not flat fills.** Large flat dark blocks get `.has-grain`, which
   layers the shared `--grain` data URI behind the content.
+- **Section rhythm is deliberate, never uniform.** Every section used to be
+  `padding: 100px 0`, and that even beat is what read as machine-made before
+  any of the words did. Use `--section-tight` where a section continues the
+  one above it, `--section-loose` where the subject genuinely changes (About,
+  Pricing, Contact), `--section-normal` otherwise. The gap between two
+  sections is the sum of the first's bottom and the second's top, so set both
+  ends explicitly. Do not add a media query that resets them all to one value.
+- **Three widths, not one.** `--w-prose` for sentences, `--w-default`, and
+  `--w-wide` for data. Apply with `.section-container--prose` / `--wide`.
+- **One light section, and only one.** The four-year chart band is the single
+  inversion on the site, because an InBody printout is black ink on white
+  paper. Its ink colours are scoped to `.progress-chart-block` and all clear
+  WCAG AA against the paper. Do not add a second light section.
+- **Reveal animations must have a visible resting state.** The bar wipe and
+  panel swap are CSS animations with `fill-mode: none` over an
+  already-visible default, restarted by a reflow rather than by
+  `requestAnimationFrame`. Never reveal by removing an `opacity: 0` via rAF:
+  a throttled tab or a skipped frame strands the content invisible.
 
 
 ## To Do

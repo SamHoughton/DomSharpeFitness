@@ -13,12 +13,12 @@ window.addEventListener('scroll', () => {
         navbar.classList.remove('scrolled');
     }
 
-    // Invert the nav while the paper band sits underneath it. Checked
-    // geometrically against the nav's real height rather than a fixed
-    // scroll threshold, so it can't drift if the band's content reflows.
+    // Invert the nav any time the paper band is on screen, not only once it
+    // reaches the strip directly under the nav - checked geometrically
+    // against the viewport so it can't drift if the band's content reflows.
     if (paperBand) {
         const rect = paperBand.getBoundingClientRect();
-        navbar.classList.toggle('over-paper', rect.top <= navbar.offsetHeight && rect.bottom >= 0);
+        navbar.classList.toggle('over-paper', rect.top < window.innerHeight && rect.bottom > 0);
     }
 }, { passive: true });
 

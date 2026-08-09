@@ -228,7 +228,26 @@ ul {
 /* Let the container respond to what it holds. Sentences want a shorter
    measure than tables and charts do. */
 .section-container--prose { max-width: var(--w-prose); }
-.section-container--wide  { max-width: var(--w-wide); }
+.section-container--wide  { max-width: var(--w-wide); position: relative; }
+
+/* Registration marks at the corners of the wide containers - the two
+   sections that hold tabular/chart data rather than prose. */
+.corner-tick { position: absolute; width: 8px; height: 8px; pointer-events: none; }
+.corner-tick::before,
+.corner-tick::after { content: ''; position: absolute; background: rgba(255, 255, 255, 0.08); }
+.corner-tick::before { width: 8px; height: 1px; top: 0; left: 0; }
+.corner-tick::after  { width: 1px; height: 8px; top: 0; left: 0; }
+
+.corner-tick--tl { top: 0; left: 0; }
+.corner-tick--tr { top: 0; right: 0; }
+.corner-tick--tr::before,
+.corner-tick--tr::after { left: auto; right: 0; }
+.corner-tick--bl { bottom: 0; left: 0; }
+.corner-tick--bl::before,
+.corner-tick--bl::after { top: auto; bottom: 0; }
+.corner-tick--br { bottom: 0; right: 0; }
+.corner-tick--br::before,
+.corner-tick--br::after { top: auto; bottom: 0; left: auto; right: 0; }
 
 /* Section index.
    Replaces the floating uppercase "eyebrow" that used to sit above every
@@ -335,6 +354,27 @@ ul {
     padding: 14px 0;
     box-shadow: 0 1px 0 var(--border);
 }
+
+/* Inverted while the paper band sits behind the nav (js/scripts.js checks
+   the band's position on every scroll tick). Accent stays put - only the
+   ground and the ink swap. */
+.navbar.over-paper {
+    background: rgba(244, 242, 237, 0.97);
+    box-shadow: 0 1px 0 rgba(20, 20, 15, 0.14);
+}
+
+.navbar.over-paper .nav-link { color: rgba(20, 20, 15, 0.55); }
+.navbar.over-paper .nav-link:hover,
+.navbar.over-paper .nav-link.active { color: #0f0f0f; }
+.navbar.over-paper .hamburger span { background: #0f0f0f; }
+
+.logo-ch-1, .logo-txt-1, .logo-txt-2, .logo-div {
+    transition: fill var(--transition), stroke var(--transition);
+}
+.navbar.over-paper .logo-ch-1 { stroke: #0f0f0f; }
+.navbar.over-paper .logo-txt-1 { fill: #0f0f0f; }
+.navbar.over-paper .logo-txt-2 { fill: rgba(20, 20, 15, 0.55); }
+.navbar.over-paper .logo-div { stroke: rgba(20, 20, 15, 0.3); }
 
 .nav-container {
     max-width: 1200px;
@@ -5160,4 +5200,76 @@ main { counter-reset: section; }
 
 @media (max-width: 520px) {
     .gg-table th { white-space: normal; }
+}
+
+
+/* ===================================================
+   SECTION RAIL
+   A minimap of the page living in the left dead margin: a spine, tick marks
+   at each section's actual scroll position, and a marker that tracks scroll
+   fraction. Positions are computed at runtime (js/scripts.js) since they
+   depend on real layout height. Desktop only - the 56px it needs doesn't
+   exist once the layout drops to the hamburger nav at the same breakpoint.
+=================================================== */
+.rail { display: none; }
+
+@media (min-width: 1024px) {
+    .rail {
+        display: block;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 56px;
+        height: 100vh;
+        z-index: 900;
+        pointer-events: none;
+    }
+}
+
+.rail-spine {
+    position: absolute;
+    right: 1px;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: var(--text-faint);
+}
+
+.rail-tick {
+    position: absolute;
+    right: 1px;
+    height: 1px;
+    width: 24px;
+    background: var(--text-muted);
+    transform: translateY(-50%);
+}
+
+.rail-tick--minor {
+    width: 12px;
+    background: rgba(255, 255, 255, 0.10);
+}
+
+.rail-tick-label {
+    position: absolute;
+    top: 50%;
+    right: 30px;
+    transform: translateY(-50%) rotate(-90deg);
+    transform-origin: right center;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: var(--text-faint);
+    white-space: nowrap;
+}
+
+.rail-marker {
+    position: absolute;
+    top: 0;
+    right: 1px;
+    width: 32px;
+    height: 2px;
+    background: var(--accent);
+    transform: translateY(0);
+    transition: transform 0.12s linear;
+    will-change: transform;
 }

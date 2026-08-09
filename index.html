@@ -202,6 +202,13 @@
     <!-- Scroll progress indicator -->
     <div class="scroll-progress" id="scroll-progress"></div>
 
+    <!-- Section rail: a minimap of the page in the left dead margin, desktop only -->
+    <nav class="rail" id="rail" aria-hidden="true">
+        <div class="rail-spine"></div>
+        <div class="rail-ticks" id="rail-ticks"></div>
+        <div class="rail-marker" id="rail-marker"></div>
+    </nav>
+
     <!-- ===================== NAVBAR ===================== -->
     <nav class="navbar" id="navbar">
         <div class="nav-container">
@@ -563,6 +570,10 @@
     <!-- ===================== THE REST OF THE EVIDENCE ===================== -->
     <section class="transformations" id="results-detail">
         <div class="section-container section-container--wide">
+            <span class="corner-tick corner-tick--tl" aria-hidden="true"></span>
+            <span class="corner-tick corner-tick--tr" aria-hidden="true"></span>
+            <span class="corner-tick corner-tick--bl" aria-hidden="true"></span>
+            <span class="corner-tick corner-tick--br" aria-hidden="true"></span>
             <p class="section-index"><span class="section-num" aria-hidden="true"></span>The receipts</p>
             <span class="plate-rule plate-rule--3" aria-hidden="true"></span>
             <h2 class="section-title">MORE THAN ONE CLIENT, MORE THAN ONE STORY.</h2>
@@ -650,15 +661,15 @@
                         <dl class="result-metrics">
                             <div class="result-metric">
                                 <dt>Body Fat</dt>
-                                <dd>24.2% <i class="fa-solid fa-arrow-right"></i> <strong>15.4%</strong> <span class="metric-delta down"><i class="fa-solid fa-arrow-down"></i> 8.8%</span></dd>
+                                <dd>24.2% <i class="fa-solid fa-arrow-right"></i> <strong class="settle-value" data-from="24.2" data-to="15.4" data-suffix="%">24.2%</strong> <span class="metric-delta down"><i class="fa-solid fa-arrow-down"></i> 8.8%</span></dd>
                             </div>
                             <div class="result-metric">
                                 <dt>Weight</dt>
-                                <dd>91.5kg <i class="fa-solid fa-arrow-right"></i> <strong>81.8kg</strong> <span class="metric-delta down"><i class="fa-solid fa-arrow-down"></i> 9.7kg</span></dd>
+                                <dd>91.5kg <i class="fa-solid fa-arrow-right"></i> <strong class="settle-value" data-from="91.5" data-to="81.8" data-suffix="kg">91.5kg</strong> <span class="metric-delta down"><i class="fa-solid fa-arrow-down"></i> 9.7kg</span></dd>
                             </div>
                             <div class="result-metric">
                                 <dt>Muscle</dt>
-                                <dd>40.2kg <i class="fa-solid fa-arrow-right"></i> <strong>39.9kg</strong> <span class="metric-delta hold">Held</span></dd>
+                                <dd>40.2kg <i class="fa-solid fa-arrow-right"></i> <strong class="settle-value" data-from="40.2" data-to="39.9" data-suffix="kg">40.2kg</strong> <span class="metric-delta hold">Held</span></dd>
                             </div>
                         </dl>
                     </div>
@@ -679,15 +690,15 @@
                         <dl class="result-metrics">
                             <div class="result-metric">
                                 <dt>Body Fat</dt>
-                                <dd>32.8% <i class="fa-solid fa-arrow-right"></i> <strong>30.6%</strong> <span class="metric-delta down"><i class="fa-solid fa-arrow-down"></i> 2.2%</span></dd>
+                                <dd>32.8% <i class="fa-solid fa-arrow-right"></i> <strong class="settle-value" data-from="32.8" data-to="30.6" data-suffix="%">32.8%</strong> <span class="metric-delta down"><i class="fa-solid fa-arrow-down"></i> 2.2%</span></dd>
                             </div>
                             <div class="result-metric">
                                 <dt>Muscle</dt>
-                                <dd>38.6kg <i class="fa-solid fa-arrow-right"></i> <strong>39.3kg</strong> <span class="metric-delta up"><i class="fa-solid fa-arrow-up"></i> 0.7kg</span></dd>
+                                <dd>38.6kg <i class="fa-solid fa-arrow-right"></i> <strong class="settle-value" data-from="38.6" data-to="39.3" data-suffix="kg">38.6kg</strong> <span class="metric-delta up"><i class="fa-solid fa-arrow-up"></i> 0.7kg</span></dd>
                             </div>
                             <div class="result-metric">
                                 <dt>Weight</dt>
-                                <dd>99.7kg <i class="fa-solid fa-arrow-right"></i> <strong>98.0kg</strong> <span class="metric-delta down"><i class="fa-solid fa-arrow-down"></i> 1.7kg</span></dd>
+                                <dd>99.7kg <i class="fa-solid fa-arrow-right"></i> <strong class="settle-value" data-from="99.7" data-to="98.0" data-suffix="kg">99.7kg</strong> <span class="metric-delta down"><i class="fa-solid fa-arrow-down"></i> 1.7kg</span></dd>
                             </div>
                         </dl>
                     </div>
@@ -708,15 +719,15 @@
                         <dl class="result-metrics">
                             <div class="result-metric">
                                 <dt>Muscle</dt>
-                                <dd>25.1kg <i class="fa-solid fa-arrow-right"></i> <strong>26.9kg</strong> <span class="metric-delta up"><i class="fa-solid fa-arrow-up"></i> 1.8kg</span></dd>
+                                <dd>25.1kg <i class="fa-solid fa-arrow-right"></i> <strong class="settle-value" data-from="25.1" data-to="26.9" data-suffix="kg">25.1kg</strong> <span class="metric-delta up"><i class="fa-solid fa-arrow-up"></i> 1.8kg</span></dd>
                             </div>
                             <div class="result-metric">
                                 <dt>Body Fat</dt>
-                                <dd>30.8% <i class="fa-solid fa-arrow-right"></i> <strong>26.6%</strong> <span class="metric-delta down"><i class="fa-solid fa-arrow-down"></i> 4.2%</span></dd>
+                                <dd>30.8% <i class="fa-solid fa-arrow-right"></i> <strong class="settle-value" data-from="30.8" data-to="26.6" data-suffix="%">30.8%</strong> <span class="metric-delta down"><i class="fa-solid fa-arrow-down"></i> 4.2%</span></dd>
                             </div>
                             <div class="result-metric">
                                 <dt>Weight</dt>
-                                <dd>66.1kg <i class="fa-solid fa-arrow-right"></i> <strong>66.4kg</strong> <span class="metric-delta hold">+0.3kg</span></dd>
+                                <dd>66.1kg <i class="fa-solid fa-arrow-right"></i> <strong class="settle-value" data-from="66.1" data-to="66.4" data-suffix="kg">66.1kg</strong> <span class="metric-delta hold">+0.3kg</span></dd>
                             </div>
                         </dl>
                     </div>
@@ -733,7 +744,7 @@
 
 
     <!-- ===================== WHY DOM ===================== -->
-    <section class="why has-grain">
+    <section class="why has-grain" id="why">
         <div class="section-container section-container--prose">
             <div class="why-text">
                 <p class="section-index"><span class="section-num" aria-hidden="true"></span>Why Dom</p>
@@ -1274,6 +1285,10 @@
     <section class="pricing" id="pricing">
         <div class="ring-motif ring-motif--pricing" aria-hidden="true"></div>
         <div class="section-container section-container--wide">
+            <span class="corner-tick corner-tick--tl" aria-hidden="true"></span>
+            <span class="corner-tick corner-tick--tr" aria-hidden="true"></span>
+            <span class="corner-tick corner-tick--bl" aria-hidden="true"></span>
+            <span class="corner-tick corner-tick--br" aria-hidden="true"></span>
             <p class="section-index"><span class="section-num" aria-hidden="true"></span>Pricing</p>
             <span class="plate-rule plate-rule--5" aria-hidden="true"></span>
             <h2 class="section-title">SIMPLE, HONEST PRICING</h2>
@@ -1285,7 +1300,7 @@
                     <h3>1-2-1 Personal Training</h3>
                     <div class="pricing-amount">
                         <span class="price-currency">&pound;</span>
-                        <span class="price-value">42</span>
+                        <span class="price-value settle-value" data-from="0" data-to="42">42</span>
                     </div>
                     <p class="pricing-period">per session</p>
                     <p class="pricing-desc">A personalised coaching session designed around your goals, experience and ability. Whether you want to build strength, lose weight, improve mobility or just feel more confident in the gym, every session is tailored to help you progress safely and effectively.</p>
@@ -1296,7 +1311,7 @@
                     <h3>6-Week Coaching</h3>
                     <div class="pricing-amount">
                         <span class="price-currency">&pound;</span>
-                        <span class="price-value">252</span>
+                        <span class="price-value settle-value" data-from="0" data-to="252">252</span>
                     </div>
                     <p class="pricing-period">&pound;42 per week</p>
                     <p class="pricing-desc">Six weeks, one session a week, same time each week. Enough to build a habit.</p>
@@ -1308,7 +1323,7 @@
                     <h3>6-Week Coaching + App</h3>
                     <div class="pricing-amount">
                         <span class="price-currency">&pound;</span>
-                        <span class="price-value">288</span>
+                        <span class="price-value settle-value" data-from="0" data-to="288">288</span>
                     </div>
                     <p class="pricing-period">&pound;48 per week</p>
                     <p class="pricing-desc">Weekly sessions plus a programme in the app for the days you train on your own. This is what most clients end up on.</p>
@@ -1319,7 +1334,7 @@
                     <h3>6-Week Programme + Check-ins</h3>
                     <div class="pricing-amount">
                         <span class="price-currency">&pound;</span>
-                        <span class="price-value">180</span>
+                        <span class="price-value settle-value" data-from="0" data-to="180">180</span>
                     </div>
                     <p class="pricing-period">&pound;30 per week</p>
                     <p class="pricing-desc">For people who already train and just want the programming handled.</p>

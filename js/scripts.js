@@ -4,12 +4,21 @@
 
 // === NAVBAR: scroll effect ===
 const navbar = document.getElementById('navbar');
+const paperBand = document.querySelector('.progress-chart-block');
 
 window.addEventListener('scroll', () => {
     if (window.scrollY > 60) {
         navbar.classList.add('scrolled');
     } else {
         navbar.classList.remove('scrolled');
+    }
+
+    // Invert the nav while the paper band sits underneath it. Checked
+    // geometrically against the nav's real height rather than a fixed
+    // scroll threshold, so it can't drift if the band's content reflows.
+    if (paperBand) {
+        const rect = paperBand.getBoundingClientRect();
+        navbar.classList.toggle('over-paper', rect.top <= navbar.offsetHeight && rect.bottom >= 0);
     }
 }, { passive: true });
 
@@ -462,7 +471,11 @@ window.addEventListener('scroll', () => {
         const orm = w * (1 + r / 30);
         const fmt = (pct) => (Math.round(orm * pct / 2.5) * 2.5).toFixed(1) + ' ' + unit;
 
-        ormValue.textContent = (Math.round(orm * 10) / 10) + ' ' + unit;
+        // Settle from whatever's currently shown (0 on the first calculation,
+        // the previous result on a recalculation), same landing motion as
+        // the ring counters and pricing figures.
+        const prevNum = parseFloat(ormValue.textContent);
+        settleNumber(ormValue, isNaN(prevNum) ? 0 : prevNum, Math.round(orm * 10) / 10, { suffix: ' ' + unit });
         document.getElementById('orm-95').textContent = fmt(0.95);
         document.getElementById('orm-85').textContent = fmt(0.85);
         document.getElementById('orm-75').textContent = fmt(0.75);
@@ -536,10 +549,64 @@ function shake(el) {
 }
 
 
+// === DIGIT SETTLE ===
+// Shared landing motion for any number appearing on the page: ease-out count
+// from `from` to `to`, a small overshoot past the target, settle back, then
+// one quiet flicker. Precision and prefix/suffix come from the element's
+// data attributes unless overridden. Used by ring counters, scan-card
+// deltas, pricing figures and the 1RM calculator output.
+function settleNumber(el, from, to, opts) {
+    opts = opts || {};
+    const prefix = opts.prefix !== undefined ? opts.prefix : (el.dataset.prefix || '');
+    const suffix = opts.suffix !== undefined ? opts.suffix : (el.dataset.suffix || '');
+    const precision = (String(to).split('.')[1] || '').length;
+    const fmt = (v) => prefix + v.toFixed(precision) + suffix;
+
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        el.textContent = fmt(to);
+        return;
+    }
+
+    const delta     = to - from;
+    const overshoot = to + delta * 0.015;
+    const countEnd  = 550;
+    const settleEnd = 750;
+    const duration  = 900;
+    const start     = performance.now();
+    let flickered   = false;
+
+    function frame(now) {
+        const t = now - start;
+        let val;
+        if (t < countEnd) {
+            const p = t / countEnd;
+            val = from + delta * (1 - Math.pow(1 - p, 3));
+        } else if (t < settleEnd) {
+            const p = (t - countEnd) / (settleEnd - countEnd);
+            val = to + (overshoot - to) * Math.sin(p * Math.PI);
+        } else {
+            val = to;
+            if (!flickered && t >= 800) {
+                flickered = true;
+                el.style.color = 'var(--text-muted)';
+                setTimeout(() => { el.style.color = ''; }, 60);
+            }
+        }
+        el.textContent = fmt(val);
+        if (t < duration) requestAnimationFrame(frame);
+        else el.textContent = fmt(to);
+    }
+    requestAnimationFrame(frame);
+}
+
+
 // === ACTIVE NAV LINK on scroll ===
 const sections  = document.querySelectorAll('section[id]');
 const navAnchors = document.querySelectorAll('.nav-link');
 
+// Also used by the rail (marker snap under reduced motion) and the nav
+// inversion over the paper band, both via the 'sectionchange' event rather
+// than a second observer instance.
 const sectionObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -547,6 +614,7 @@ const sectionObserver = new IntersectionObserver((entries) => {
             navAnchors.forEach(a => {
                 a.classList.toggle('active', a.getAttribute('href') === `#${id}`);
             });
+            document.dispatchEvent(new CustomEvent('sectionchange', { detail: { id, target: entry.target } }));
         }
     });
 }, { rootMargin: '-40% 0px -55% 0px' });
@@ -917,26 +985,13 @@ sections.forEach(s => sectionObserver.observe(s));
             }, i * 180);
         });
 
-        // Animate ring-value counters from→to
+        // Animate ring-value counters from→to, with a settle rather than a
+        // flat landing.
         const values = ringsContainer.querySelectorAll('.ring-value');
         values.forEach((el, i) => {
-            const from     = parseFloat(el.dataset.from);
-            const to       = parseFloat(el.dataset.to);
-            const suffix   = el.dataset.suffix || '';
-            const duration = 1200;
-            const delay    = i * 180;
-
-            setTimeout(() => {
-                const start = performance.now();
-                function tick(now) {
-                    const progress = Math.min((now - start) / duration, 1);
-                    const eased    = 1 - Math.pow(1 - progress, 3);
-                    const val      = from + (to - from) * eased;
-                    el.textContent = val.toFixed(1) + suffix;
-                    if (progress < 1) requestAnimationFrame(tick);
-                }
-                requestAnimationFrame(tick);
-            }, delay + 300);
+            const from = parseFloat(el.dataset.from);
+            const to   = parseFloat(el.dataset.to);
+            setTimeout(() => settleNumber(el, from, to), i * 180 + 300);
         });
     }
 
@@ -954,6 +1009,26 @@ sections.forEach(s => sectionObserver.observe(s));
     // browser. Exposing the trigger here lets that toggle call it directly
     // and guarantees the rings animate the first time they're actually shown.
     ringsContainer.__animateRings = animateRings;
+})();
+
+
+// === DIGIT SETTLE: scan-card deltas, pricing figures ===
+// Ring counters trigger via animateRings above; these fire the same landing
+// motion individually as each figure scrolls into view.
+(function () {
+    const els = document.querySelectorAll('.settle-value');
+    if (!els.length) return;
+
+    const settleObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (!entry.isIntersecting) return;
+            const el = entry.target;
+            settleObserver.unobserve(el);
+            settleNumber(el, parseFloat(el.dataset.from), parseFloat(el.dataset.to));
+        });
+    }, { threshold: 0.6 });
+
+    els.forEach(el => settleObserver.observe(el));
 })();
 
 
@@ -1040,4 +1115,114 @@ sections.forEach(s => sectionObserver.observe(s));
 
     document.getElementById('consent-accept').addEventListener('click', () => { A.grant(); close(); });
     document.getElementById('consent-decline').addEventListener('click', () => { A.deny(); close(); });
+})();
+
+
+// === SECTION RAIL ===
+// A minimap of the page: major ticks at each numbered section's real scroll
+// offset, minor ticks subdividing the gaps, and a marker tracking scroll
+// position. Positions are computed from actual layout since section heights
+// vary - there's no way to hard-code them in CSS.
+(function () {
+    const rail   = document.getElementById('rail');
+    const ticksEl = document.getElementById('rail-ticks');
+    const marker  = document.getElementById('rail-marker');
+    if (!rail || !ticksEl || !marker) return;
+
+    const desktopMQ = window.matchMedia('(min-width: 1024px)');
+    const reduceMQ  = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+    let majors = []; // [{ id, frac, num }], sorted top to bottom
+    let built  = false;
+
+    function scrollableHeight() {
+        return Math.max(document.documentElement.scrollHeight - window.innerHeight, 0);
+    }
+
+    function layout() {
+        ticksEl.innerHTML = '';
+        majors = [];
+
+        const totalH = scrollableHeight();
+        if (totalH <= 0) return;
+
+        const indexEls = document.querySelectorAll('.section-index');
+        const frag = document.createDocumentFragment();
+
+        indexEls.forEach((el, i) => {
+            const section = el.closest('section');
+            if (!section) return;
+            const top  = section.getBoundingClientRect().top + window.scrollY;
+            const frac = Math.max(0, Math.min(1, top / totalH));
+            majors.push({ id: section.getAttribute('id'), frac, num: i + 1 });
+        });
+
+        majors.forEach((m, i) => {
+            const tick = document.createElement('div');
+            tick.className = 'rail-tick rail-tick--major';
+            tick.style.top = (m.frac * 100) + '%';
+
+            const label = document.createElement('span');
+            label.className = 'rail-tick-label';
+            label.textContent = String(m.num).padStart(2, '0');
+            tick.appendChild(label);
+            frag.appendChild(tick);
+
+            const nextFrac = majors[i + 1] ? majors[i + 1].frac : 1;
+            for (let k = 1; k <= 4; k++) {
+                const minor = document.createElement('div');
+                minor.className = 'rail-tick rail-tick--minor';
+                minor.style.top = (m.frac + (nextFrac - m.frac) * (k / 5)) * 100 + '%';
+                frag.appendChild(minor);
+            }
+        });
+
+        ticksEl.appendChild(frag);
+        built = true;
+    }
+
+    function setMarkerFrac(frac) {
+        marker.style.transform = `translateY(${frac * window.innerHeight}px)`;
+    }
+
+    let ticking = false;
+    function onScroll() {
+        if (reduceMQ.matches || !built) return;
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(() => {
+            const totalH = scrollableHeight();
+            setMarkerFrac(totalH > 0 ? Math.max(0, Math.min(1, window.scrollY / totalH)) : 0);
+            ticking = false;
+        });
+    }
+
+    function snapToSection(id) {
+        const m = majors.find(x => x.id === id);
+        if (m) setMarkerFrac(m.frac);
+    }
+
+    function init() {
+        if (!desktopMQ.matches) return;
+        layout();
+        if (reduceMQ.matches) {
+            const activeLink = document.querySelector('.nav-link.active');
+            const current = majors.find(m => m.id === (activeLink && activeLink.getAttribute('href') || '').slice(1));
+            setMarkerFrac(current ? current.frac : 0);
+        } else {
+            setMarkerFrac(0);
+        }
+    }
+
+    init();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    document.addEventListener('sectionchange', (e) => {
+        if (reduceMQ.matches) snapToSection(e.detail.id);
+    });
+
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => { built = false; init(); }, 150);
+    });
 })();

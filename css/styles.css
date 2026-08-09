@@ -22,6 +22,20 @@
     --accent-dark: #a87530;
     --accent-glow: rgba(200, 146, 58, 0.25);
 
+    /* Olympic plate colours, encoded not decorative: exactly one 32px rule
+       under each section's eyebrow, cycled in page order, nowhere else.
+       --accent stays the only interactive colour; these never touch text,
+       buttons, links or focus states. See .plate-rule below.
+       All five checked at 3:1+ against --bg as a non-text graphic (WCAG
+       1.4.11): 3.26 / 3.61 / 11.07 / 3.99 / 17.12. The true IWF blue,
+       #0057B8, measured 2.79 and is brightened here just enough to clear
+       the line without reading as a different colour. */
+    --plate-25: #C8102E;
+    --plate-20: #0068D6;
+    --plate-15: #FFB81C;
+    --plate-10: #00843D;
+    --plate-5:  #F2F2F2;
+
     --text:        #ffffff;
     --text-muted:  rgba(255, 255, 255, 0.45);
     /* Decorative only: 1.8:1 against the page background, so never use it for
@@ -226,11 +240,33 @@ ul {
     font-family: var(--font-mono);
     font-size: 12px;
     font-weight: 500;
-    letter-spacing: 0.06em;
+    /* Tightened from 0.06em toward the sitewide micro-label spec (2px flat)
+       without going all the way: at 12px, a full 2px reads over-spaced on a
+       label this frequently repeated, and unlike a table header this is
+       primary navigational text, not a decorative caption. */
+    letter-spacing: 0.1em;
     text-transform: uppercase;
     color: var(--text-muted);
-    margin-bottom: 22px;
+    /* 10px here + 12px on .plate-rule below = the original 22px total, so
+       inserting the plate rule doesn't silently change section rhythm. */
+    margin-bottom: 10px;
 }
+
+/* Plate colour rule: the one place besides the rail (not yet built) this
+   system is allowed to appear. One per section, cycling --plate-25 through
+   --plate-5 in page order. Never on text, never repeated within a viewport. */
+.plate-rule {
+    display: block;
+    width: 32px;
+    height: 2px;
+    margin: 0 0 12px;
+}
+
+.plate-rule--1 { background: var(--plate-25); }
+.plate-rule--2 { background: var(--plate-20); }
+.plate-rule--3 { background: var(--plate-15); }
+.plate-rule--4 { background: var(--plate-10); }
+.plate-rule--5 { background: var(--plate-5); }
 
 .section-num {
     color: var(--accent);
@@ -270,9 +306,9 @@ ul {
     font-family: var(--font-mono);
     font-size: 11px;
     font-weight: 500;
-    letter-spacing: 0.08em;
+    letter-spacing: 2px;
     text-transform: uppercase;
-    color: var(--text-muted);
+    color: var(--text-faint);
     margin-bottom: 10px;
 }
 
@@ -784,11 +820,12 @@ ul {
 }
 
 .stat-label {
-    font-size: 12px;
+    font-family: var(--font-mono);
+    font-size: 11px;
     font-weight: 500;
     letter-spacing: 2px;
     text-transform: uppercase;
-    color: var(--text-muted);
+    color: var(--text-faint);
     margin-top: 4px;
     text-align: center;
 }
@@ -1014,7 +1051,7 @@ ul {
 
 .coaches-item {
     padding: 22px 0;
-    border-top: 1px solid var(--border);
+    border-top: 0.5px solid var(--text-faint);
 }
 
 .coaches-item h3 {
@@ -1094,7 +1131,7 @@ ul {
     align-items: baseline;
     gap: 24px;
     padding: 24px 0;
-    border-top: 1px solid var(--border);
+    border-top: 0.5px solid var(--text-faint);
     font-family: var(--font-heading);
     font-size: clamp(1.1rem, 1.1rem + 1vw, 1.6rem);
     font-weight: 500;
@@ -1103,7 +1140,7 @@ ul {
     color: var(--text);
 }
 
-.wont-list li:last-child { border-bottom: 1px solid var(--border); }
+.wont-list li:last-child { border-bottom: 0.5px solid var(--text-faint); }
 
 .wont-index {
     font-family: var(--font-mono);
@@ -1432,11 +1469,12 @@ ul {
 }
 
 .testimonial-feature-stat-label {
-    font-size: 12px;
-    color: var(--text-muted);
-    line-height: 1.5;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--text-faint);
+    line-height: 1.6;
     text-transform: uppercase;
-    letter-spacing: 0.08em;
+    letter-spacing: 2px;
     max-width: 46ch;
 }
 
@@ -1608,7 +1646,7 @@ ul {
     align-items: center;
     gap: 14px;
     padding-top: 20px;
-    border-top: 1px solid var(--border);
+    border-top: 0.5px solid var(--text-faint);
 }
 
 .author-avatar {
@@ -2873,16 +2911,16 @@ ul {
 }
 
 .pricing-compare thead th {
-    font-family: var(--font-heading);
-    font-size: 13px;
-    font-weight: 600;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 500;
     text-transform: uppercase;
-    letter-spacing: 0.04em;
+    letter-spacing: 2px;
     text-align: center;
-    color: var(--text-muted);
+    color: var(--text-faint);
     padding: 12px 14px;
     border-bottom: 1px solid var(--border-light);
-    line-height: 1.3;
+    line-height: 1.4;
 }
 
 .pricing-compare-row-label { width: 22%; }

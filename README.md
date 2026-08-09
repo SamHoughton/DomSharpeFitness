@@ -238,6 +238,26 @@ reintroduce them:
   `prefers-reduced-motion` guard at the end of styles.css covers the lot.
 - **Grain, not flat fills.** Large flat dark blocks get `.has-grain`, which
   layers the shared `--grain` data URI behind the content.
+- **Plate colours are encoded, not decorative.** `--plate-25/20/15/10/5` are
+  Olympic plate colours, meant to be recognised by lifters and invisible to
+  everyone else. They appear in exactly one place: the `.plate-rule`
+  (32px &times; 2px) under each section's eyebrow, cycled in page order.
+  Never on text, buttons, links, focus states, section backgrounds or card
+  borders, and never more than one visible in a viewport at rest. `--accent`
+  stays the only interactive colour. All five must clear 3:1 against `--bg`
+  as a non-text graphic (checked; `--plate-20` is `#0068D6` rather than the
+  true IWF blue `#0057B8`, which measured 2.79).
+- **Micro-labels are IBM Plex Mono, 11px, 2px letter-spacing, `--text-faint`.**
+  Applies to small uppercase captions (`.data-label`, `.stat-label`, table
+  headers). `.section-index` is the one exception: it's primary navigational
+  text repeated on every section, not a decorative caption, so it keeps
+  `--text-muted` and a smaller 0.1em tracking rather than the full spec.
+- **Hairlines replace card borders only where they're a content separator**,
+  not a card's outer edge: `border-top: 0.5px solid var(--text-faint)` on
+  repeating list items (`.wont-item`, `.coaches-item`, `.testimonial-author`).
+  Boxed cards (`.result-card`, `.pricing-card`, `.testimonial-card`,
+  `.location-panel`) keep their existing 1px `--border` outline; a blanket
+  sweep would have restyled three major grid components sight-unseen.
 - **Section rhythm is deliberate, never uniform.** Every section used to be
   `padding: 100px 0`, and that even beat is what read as machine-made before
   any of the words did. Use `--section-tight` where a section continues the

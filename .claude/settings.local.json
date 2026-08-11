@@ -6,7 +6,10 @@
       "WebSearch",
       "WebFetch(domain:www.webcitz.com)",
       "WebFetch(domain:mypersonaltrainerwebsite.com)",
-      "Bash(sort -u -t: -k2)"
+      "Bash(sort -u -t: -k2)",
+      "Bash(cp \"/root/.claude/uploads/3c734c51-9ec8-5cef-bb54-47590fa72ab1/8e805cf5-IMG_3299.jpeg\" /home/user/DomSharpeFitness/img/dom-hyrox-hero.jpg)",
+      "Bash(cp \"/root/.claude/uploads/3c734c51-9ec8-5cef-bb54-47590fa72ab1/986a0ddf-IMG_3300.jpeg\" /home/user/DomSharpeFitness/img/dom-hyrox-sled.jpg)",
+      "Bash(cp \"/root/.claude/uploads/3c734c51-9ec8-5cef-bb54-47590fa72ab1/d1427838-IMG_3301.jpeg\" /home/user/DomSharpeFitness/img/dom-hyrox-finish.jpg)"
     ]
   }
 }

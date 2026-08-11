@@ -611,28 +611,23 @@ ul {
 
 .hero-content { text-align: left; }
 
-@keyframes heroFloat {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-8px); }
-}
-
-.hero-illustration {
+.hero-portrait {
     width: 100%;
-    max-width: 520px;
+    max-width: 460px;
+    aspect-ratio: 4 / 5;
     justify-self: center;
-    animation: heroFloat 6s ease-in-out infinite;
-}
-
-.hero-illo-rack,
-.hero-illo-figure {
-    transition: transform 0.3s var(--ease-smooth);
-}
-
-.hero-illustration svg {
-    width: 100%;
-    height: auto;
-    display: block;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    border: 1px solid var(--border-light);
     filter: drop-shadow(0 24px 30px rgba(0, 0, 0, 0.5));
+}
+
+.hero-portrait img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% 20%;
+    display: block;
 }
 
 .hero-eyebrow {
@@ -742,8 +737,8 @@ ul {
 
     .hero-content { text-align: center; }
 
-    .hero-illustration {
-        max-width: 260px;
+    .hero-portrait {
+        max-width: 300px;
         margin: 0 auto;
     }
 
@@ -1028,6 +1023,42 @@ ul {
     border-radius: var(--radius-lg) var(--radius-lg) 0 0;
 }
 
+/* Small proof card: Dom's own HYROX race result, sat under the quote card */
+.about-achievement {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-top: 16px;
+    padding: 16px 20px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-lg);
+}
+
+.about-achievement img {
+    width: 64px;
+    height: 64px;
+    object-fit: cover;
+    border-radius: var(--radius);
+    flex-shrink: 0;
+}
+
+.about-achievement-text {
+    font-size: 13.5px;
+    color: var(--text-muted);
+    line-height: 1.6;
+}
+
+.about-achievement-text strong {
+    display: block;
+    font-family: var(--font-heading);
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    color: var(--text);
+    margin-bottom: 2px;
+}
+
 /* About card */
 .about-card-wrap {
     position: relative;
@@ -1253,7 +1284,10 @@ ul {
 =================================================== */
 .session-timeline {
     padding: var(--section-normal) 0 var(--section-tight);
-    background: var(--bg-alt);
+    background:
+        linear-gradient(180deg, rgba(15, 15, 15, 0.90), rgba(15, 15, 15, 0.94)),
+        url("../img/dom-hyrox-sled.jpg") center 20% / cover no-repeat;
+    background-color: var(--bg-alt);
     border-top: 1px solid var(--border);
     border-bottom: 1px solid var(--border);
 }
@@ -2473,7 +2507,7 @@ ul {
     .hero-title { font-size: 2.8rem; }
     .section-title { font-size: 1.8rem; }
 
-    .hero-illustration { max-width: 190px; }
+    .hero-portrait { max-width: 220px; }
 
     .hero-eyebrow {
         font-size: 10px;
@@ -4866,6 +4900,8 @@ textarea:focus-visible,
     .about-grid { gap: 28px; }
     .about-tags { gap: 6px; }
     .about-quote-card { padding: 20px; }
+    .about-achievement { padding: 14px 16px; gap: 12px; }
+    .about-achievement img { width: 52px; height: 52px; }
 
     /* --- Testimonials --- */
     .testimonial-card { padding: 22px 20px; }
@@ -4884,7 +4920,7 @@ textarea:focus-visible,
     .hero-inset { padding-top: 96px; margin: 6px; }
     .hero-grid { padding-bottom: 28px; }
     .hero-stats { display: none; }
-    .hero-illustration { display: none; }
+    .hero-portrait { display: none; }
 }
 
 @media (max-width: 768px) {

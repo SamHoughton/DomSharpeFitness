@@ -1477,7 +1477,7 @@ ul {
     color: var(--text-muted);
 }
 
-@media (max-width: 760px) {
+@media (max-width: 768px) {
     .location-chooser { grid-template-columns: 1fr; }
     /* Stacked, so the divider moves to the top edge of the second panel. */
     .location-panel + .location-panel {
@@ -3054,7 +3054,7 @@ ul {
 
 /* The table has a 640px min-width, so this is where it starts to overflow
    its container and the scroll hint becomes true. */
-@media (max-width: 760px) {
+@media (max-width: 768px) {
     .pricing-compare-hint { display: block; }
 
     .pricing-compare-wrap {

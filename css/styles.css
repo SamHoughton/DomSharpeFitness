@@ -653,11 +653,7 @@ ul {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    /* Source frame includes a second athlete at top-left and event signage
-       bleeding off the right edge. Zooming in and re-centring on Dom keeps
-       both out of the crop without touching the source file. */
-    transform: scale(1.38);
-    transform-origin: 74% 46%;
+    object-position: 50% 15%;
     display: block;
 }
 

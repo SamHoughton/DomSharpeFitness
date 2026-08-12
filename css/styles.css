@@ -617,23 +617,73 @@ ul {
 .hero-content { text-align: left; }
 
 .hero-portrait {
+    position: relative;
     width: 100%;
     max-width: 460px;
     aspect-ratio: 4 / 5;
     justify-self: center;
     border-radius: var(--radius-lg);
     overflow: hidden;
-    border: 1px solid var(--border-light);
+    border: 1px solid rgba(200, 146, 58, 0.4);
     filter: drop-shadow(0 24px 30px rgba(0, 0, 0, 0.5));
+}
+
+/* A viewfinder-style corner mark, the same device the "Instrument" motif
+   uses elsewhere (rail ticks, plate rules) so the photo reads as measured
+   evidence rather than a stock image dropped into a card. */
+.hero-portrait::before,
+.hero-portrait::after {
+    content: '';
+    position: absolute;
+    top: 16px;
+    width: 22px;
+    height: 2px;
+    background: var(--accent);
+    z-index: 2;
+}
+
+.hero-portrait::before { left: 16px; }
+.hero-portrait::after {
+    left: 16px;
+    width: 2px;
+    height: 22px;
 }
 
 .hero-portrait img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: 50% 20%;
+    /* Source frame includes a second athlete at top-left and event signage
+       bleeding off the right edge. Zooming in and re-centring on Dom keeps
+       both out of the crop without touching the source file. */
+    transform: scale(1.35);
+    transform-origin: 62% 34%;
     display: block;
 }
+
+.hero-portrait-tag {
+    position: absolute;
+    left: 16px;
+    bottom: 16px;
+    z-index: 2;
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #fff;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: var(--radius);
+    padding: 7px 12px;
+}
+
+.hero-portrait-tag i { color: var(--accent); font-size: 9px; }
 
 .hero-eyebrow {
     display: inline-flex;

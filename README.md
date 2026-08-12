@@ -42,6 +42,11 @@ DomSharpeFitness/
 ├── img/
 │   ├── dom-transformation.jpg   # 2x2 collage: left column 2022, right column 2025
 │   ├── inbody-progress.jpg      # InBody scan used by the featured ring chart
+│   ├── dom-hyrox-hero.jpg       # Hero portrait: battle ropes, HYROX London
+│   ├── dom-hyrox-sled.jpg       # First Session full-bleed backdrop: sled push
+│   ├── dom-hyrox-finish-thumb.jpg  # About section proof card, cropped tight on Dom
+│   ├── dom-hyrox-finish.jpg     # Full-frame finish photo (finish-time screen visible);
+│   │                            # not referenced anywhere, kept in case it's wanted elsewhere
 │   ├── result-21kg-cut.jpg      # results gallery (see note below)
 │   ├── result-10kg-cut.jpg
 │   ├── result-first-month.jpg
@@ -53,8 +58,9 @@ DomSharpeFitness/
 ## Sections
 
 - Navbar: fixed, goes solid on scroll, collapses to a hamburger below 1024px
-- Hero: two-column above 900px (copy plus an illustration), with a compact
-  stats bar beneath (1:1 coaching, clients transformed, coaching locations)
+- Hero: two-column above 900px (copy plus a real HYROX race photo of Dom, in
+  `.hero-portrait`), with a compact stats bar beneath (1:1 coaching, clients
+  transformed, coaching locations)
 - Results (`#transformations`): the featured InBody scan. Defaults to the
   InBody view; toggle to see what a bathroom scale would have shown for the
   same 8 weeks. Sits directly after the hero so proof comes first
@@ -66,7 +72,9 @@ DomSharpeFitness/
   scale said nothing happened)
 - Why Dom: "What I Won't Do", four flat statements, no icons or cards
 - First Session: minute-by-minute timeline, asymmetric with a sticky heading
-  column above 900px
+  column above 900px, full-bleed backdrop of Dom mid-sled-push at a HYROX
+  race (competition footage rather than the actual coaching floor, see
+  "Things that need Dom's input")
 - Two Locations: Bannatyne Fairfield vs Studio 180, full-bleed and split down
   the middle of the viewport, honest framing and a click-to-load map each
 - What Dom coaches + Quiz (`#services`): four flat rows stating what's on
@@ -92,16 +100,17 @@ DomSharpeFitness/
 
 ## Things that need Dom's input
 
-- **Hero photo.** The hero is deliberately single column with no photo until a
-  proper training shot exists. To bring one back, add a `.hero-portrait` div
-  after `.hero-content` and set `.hero-grid` to two columns. There is a comment
-  marking the spot in `index.html`.
+- **Hero photo.** Now a real shot of Dom mid-race at HYROX London
+  (`img/dom-hyrox-hero.jpg`, `.hero-portrait` in `index.html`), replacing the
+  old SVG placeholder. It's competition action rather than a 1:1 coaching
+  shot, so confirm it's the image Dom wants leading the site; swap the `src`
+  for a training-floor photo later if he'd rather lead with that instead.
 - **Form notification email (one dashboard step).** Netlify dashboard, the
   site, Forms, "consultation", Form notifications, add "Email notification" to
   sharpe.strength1@gmail.com. Without this, submissions collect in the Netlify
   Forms tab but no email is sent.
-- **Credentials.** Level 3 PT / First Aid / REPs badges in the About section
-  need confirming before they stay up.
+- **Credentials.** Level 3 PT / First Aid / REPs / HYROX Athlete badges in the
+  About section need confirming before they stay up.
 - **Bannatyne access.** The Hitchin location page hedges on whether clients
   need a Bannatyne membership ("ask Dom when you book"). Confirm the actual
   arrangement and tighten that FAQ answer.
@@ -126,11 +135,16 @@ DomSharpeFitness/
   copy from the design brief, replacing "Train hard. Live stronger." It's a
   specific claim rather than a safe generic line, so it's worth Dom
   confirming it's the message he wants leading the site.
-- **First Session and Two Locations photography.** Both new sections
-  (`#first-session`, `#locations`) are built on the site's graphic/mono
-  language rather than real photos, because none exist yet. Once Dom shoots
-  at both venues, give `.session-timeline` a full-bleed backdrop photo and
-  swap the map embeds in `.location-panel-map` for real venue shots.
+- **First Session photography.** `.session-timeline` now has a full-bleed
+  backdrop (`img/dom-hyrox-sled.jpg`, a HYROX sled push) rather than the
+  site's graphic/mono language. It's competition footage, not a shot of Dom
+  actually coaching at Bannatyne or Studio 180, so treat it as a stand-in for
+  "this is the effort level" rather than the real thing. Swap for a genuine
+  coaching-floor photo once Dom's venue shoot happens.
+- **Two Locations photography.** `#locations` still leans on real map pins
+  in `.location-panel-map` rather than photos, because no venue photography
+  exists yet. Once Dom shoots at both venues, swap the map embeds for real
+  shots of the two rooms.
 - **Drive time / parking notes.** Deliberately left out of the Two Locations
   section rather than guessed at. Add them once Dom confirms specifics for
   each venue.
@@ -316,10 +330,10 @@ reintroduce them:
 
 - Add a Calendly (or similar) booking link so the free consultation can be
   booked directly rather than via the form
-- Photography, which is the biggest outstanding item: the First Session
-  timeline wants a full-bleed gym shot behind it, and the two location panels
-  want photographs of the two rooms rather than maps. See "Things that need
-  Dom's input"
+- Venue photography: the two location panels still want photographs of the
+  two rooms rather than maps, and the First Session backdrop is currently
+  competition footage rather than an actual coaching-floor shot. See "Things
+  that need Dom's input"
 - Google Ads conversion labels: `ADS_ID` is set, but each conversion action's
   `send_to` label still needs pasting into `ADS_CONVERSIONS` in
   `js/analytics.js` before phone/WhatsApp/form conversions register

@@ -37,9 +37,8 @@ window.addEventListener('scroll', () => {
     if (!window.matchMedia('(pointer: fine)').matches) return;
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-    const rack   = hero.querySelector('.hero-illo-rack');
-    const figure = hero.querySelector('.hero-illo-figure');
-    const spot   = hero.querySelector('.hero-spotlight');
+    const spot = hero.querySelector('.hero-spotlight');
+    if (!spot) return;
 
     let raf = null;
     let pending = null;
@@ -47,36 +46,26 @@ window.addEventListener('scroll', () => {
     function apply() {
         raf = null;
         if (!pending) return;
-        const { xPct, yPct, px, py } = pending;
+        const { px, py } = pending;
 
-        if (rack)   rack.style.transform   = `translate(${xPct * 4}px, ${yPct * 4}px)`;
-        if (figure) figure.style.transform = `translate(${xPct * 10}px, ${yPct * 10}px)`;
-        if (spot) {
-            spot.style.setProperty('--spot-x', px + 'px');
-            spot.style.setProperty('--spot-y', py + 'px');
-        }
+        spot.style.setProperty('--spot-x', px + 'px');
+        spot.style.setProperty('--spot-y', py + 'px');
     }
 
     hero.addEventListener('pointermove', (e) => {
         const rect = hero.getBoundingClientRect();
         const px = e.clientX - rect.left;
         const py = e.clientY - rect.top;
-        pending = {
-            px, py,
-            xPct: (px / rect.width - 0.5) * 2,
-            yPct: (py / rect.height - 0.5) * 2,
-        };
+        pending = { px, py };
         if (!raf) raf = requestAnimationFrame(apply);
     });
 
     hero.addEventListener('pointerenter', () => {
-        if (spot) spot.classList.add('is-active');
+        spot.classList.add('is-active');
     });
 
     hero.addEventListener('pointerleave', () => {
-        if (rack)   rack.style.transform = '';
-        if (figure) figure.style.transform = '';
-        if (spot)   spot.classList.remove('is-active');
+        spot.classList.remove('is-active');
     });
 })();
 

@@ -86,6 +86,11 @@
                 "addressRegion": "Hertfordshire",
                 "postalCode": "SG6 2TS",
                 "addressCountry": "GB"
+              },
+              "geo": {
+                "@type": "GeoCoordinates",
+                "latitude": 51.98005,
+                "longitude": -0.206545
               }
             }
           ],
@@ -406,6 +411,7 @@
             <div class="inbody-feature">
                 <div class="inbody-image-col">
                     <img src="img/inbody-progress.jpg" alt="InBody scan: body fat down from 23.1% to 18.9%, muscle up from 34.7kg to 36.2kg over 8 weeks" class="inbody-img" width="640" height="1138" loading="lazy" decoding="async">
+                    <a class="result-scan-link" href="img/inbody-progress.jpg" target="_blank" rel="noopener noreferrer" aria-label="Full scan: 8-week body recomposition">Full scan</a>
                     <div class="inbody-caption">
                         <i class="fa-solid fa-circle-check"></i>
                         Tracked via InBody Body Composition Analysis
@@ -446,7 +452,7 @@
                                             data-ref="10"/>
                                 </svg>
                                 <div class="ring-center">
-                                    <span class="ring-value" data-from="23.1" data-to="18.9" data-suffix="%">23.1%</span>
+                                    <span class="ring-value" data-from="23.1" data-to="18.9" data-suffix="%">18.9%</span>
                                 </div>
                                 <div class="ring-label">Body Fat</div>
                                 <div class="ring-change negative"><i class="fa-solid fa-arrow-down"></i> &minus;4.2%</div>
@@ -462,7 +468,7 @@
                                             data-ref="4"/>
                                 </svg>
                                 <div class="ring-center">
-                                    <span class="ring-value" data-from="34.7" data-to="36.2" data-suffix="kg">34.7kg</span>
+                                    <span class="ring-value" data-from="34.7" data-to="36.2" data-suffix="kg">36.2kg</span>
                                 </div>
                                 <div class="ring-label">Skeletal Muscle</div>
                                 <div class="ring-change positive"><i class="fa-solid fa-arrow-up"></i> +1.5kg</div>
@@ -478,7 +484,7 @@
                                             data-ref="6"/>
                                 </svg>
                                 <div class="ring-center">
-                                    <span class="ring-value" data-from="79.8" data-to="78.6" data-suffix="kg">79.8kg</span>
+                                    <span class="ring-value" data-from="79.8" data-to="78.6" data-suffix="kg">78.6kg</span>
                                 </div>
                                 <div class="ring-label">Total Weight</div>
                                 <div class="ring-change neutral">&minus;1.2kg</div>
@@ -607,8 +613,8 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr><th scope="row">Weight</th><td>96.5kg</td><td>74.6kg</td><td>down 21.9kg</td></tr>
-                            <tr><th scope="row">Body fat</th><td>28.2%</td><td>8.7%</td><td>down 19.5 percentage points</td></tr>
+                            <tr><th scope="row">Weight</th><td>96.5kg</td><td>74.6kg</td><td>down <span data-key="results.flagship.weight.delta">21.9kg</span></td></tr>
+                            <tr><th scope="row">Body fat</th><td><span data-key="results.flagship.fat.from">28.2%</span></td><td><span data-key="results.flagship.fat.to">8.7%</span></td><td>down 19.5 percentage points</td></tr>
                             <tr><th scope="row">Skeletal muscle</th><td>40.2kg</td><td>39.3kg</td><td>held, down 0.9kg</td></tr>
                         </tbody>
                     </table>
@@ -661,15 +667,15 @@
                         <dl class="result-metrics">
                             <div class="result-metric">
                                 <dt>Body Fat</dt>
-                                <dd>24.2% <i class="fa-solid fa-arrow-right"></i> <strong class="settle-value" data-from="24.2" data-to="15.4" data-suffix="%">24.2%</strong> <span class="metric-delta down"><i class="fa-solid fa-arrow-down"></i> 8.8%</span></dd>
+                                <dd><span data-key="results.card1.fat.from">24.2%</span> <i class="fa-solid fa-arrow-right"></i> <strong class="settle-value" data-key="results.card1.fat.to" data-from="24.2" data-to="15.4" data-suffix="%">15.4%</strong> <span class="metric-delta down"><i class="fa-solid fa-arrow-down"></i> 8.8%</span></dd>
                             </div>
                             <div class="result-metric">
                                 <dt>Weight</dt>
-                                <dd>91.5kg <i class="fa-solid fa-arrow-right"></i> <strong class="settle-value" data-from="91.5" data-to="81.8" data-suffix="kg">91.5kg</strong> <span class="metric-delta down"><i class="fa-solid fa-arrow-down"></i> 9.7kg</span></dd>
+                                <dd>91.5kg <i class="fa-solid fa-arrow-right"></i> <strong class="settle-value" data-from="91.5" data-to="81.8" data-suffix="kg">81.8kg</strong> <span class="metric-delta down"><i class="fa-solid fa-arrow-down"></i> 9.7kg</span></dd>
                             </div>
                             <div class="result-metric">
                                 <dt>Muscle</dt>
-                                <dd>40.2kg <i class="fa-solid fa-arrow-right"></i> <strong class="settle-value" data-from="40.2" data-to="39.9" data-suffix="kg">40.2kg</strong> <span class="metric-delta hold">Held</span></dd>
+                                <dd>40.2kg <i class="fa-solid fa-arrow-right"></i> <strong class="settle-value" data-from="40.2" data-to="39.9" data-suffix="kg">39.9kg</strong> <span class="metric-delta hold">Held</span></dd>
                             </div>
                         </dl>
                     </div>
@@ -690,15 +696,15 @@
                         <dl class="result-metrics">
                             <div class="result-metric">
                                 <dt>Body Fat</dt>
-                                <dd>32.8% <i class="fa-solid fa-arrow-right"></i> <strong class="settle-value" data-from="32.8" data-to="30.6" data-suffix="%">32.8%</strong> <span class="metric-delta down"><i class="fa-solid fa-arrow-down"></i> 2.2%</span></dd>
+                                <dd>32.8% <i class="fa-solid fa-arrow-right"></i> <strong class="settle-value" data-from="32.8" data-to="30.6" data-suffix="%">30.6%</strong> <span class="metric-delta down"><i class="fa-solid fa-arrow-down"></i> 2.2%</span></dd>
                             </div>
                             <div class="result-metric">
                                 <dt>Muscle</dt>
-                                <dd>38.6kg <i class="fa-solid fa-arrow-right"></i> <strong class="settle-value" data-from="38.6" data-to="39.3" data-suffix="kg">38.6kg</strong> <span class="metric-delta up"><i class="fa-solid fa-arrow-up"></i> 0.7kg</span></dd>
+                                <dd>38.6kg <i class="fa-solid fa-arrow-right"></i> <strong class="settle-value" data-from="38.6" data-to="39.3" data-suffix="kg">39.3kg</strong> <span class="metric-delta up"><i class="fa-solid fa-arrow-up"></i> 0.7kg</span></dd>
                             </div>
                             <div class="result-metric">
                                 <dt>Weight</dt>
-                                <dd>99.7kg <i class="fa-solid fa-arrow-right"></i> <strong class="settle-value" data-from="99.7" data-to="98.0" data-suffix="kg">99.7kg</strong> <span class="metric-delta down"><i class="fa-solid fa-arrow-down"></i> 1.7kg</span></dd>
+                                <dd>99.7kg <i class="fa-solid fa-arrow-right"></i> <strong class="settle-value" data-from="99.7" data-to="98.0" data-suffix="kg">98kg</strong> <span class="metric-delta down"><i class="fa-solid fa-arrow-down"></i> 1.7kg</span></dd>
                             </div>
                         </dl>
                     </div>
@@ -719,15 +725,15 @@
                         <dl class="result-metrics">
                             <div class="result-metric">
                                 <dt>Muscle</dt>
-                                <dd>25.1kg <i class="fa-solid fa-arrow-right"></i> <strong class="settle-value" data-from="25.1" data-to="26.9" data-suffix="kg">25.1kg</strong> <span class="metric-delta up"><i class="fa-solid fa-arrow-up"></i> 1.8kg</span></dd>
+                                <dd>25.1kg <i class="fa-solid fa-arrow-right"></i> <strong class="settle-value" data-from="25.1" data-to="26.9" data-suffix="kg">26.9kg</strong> <span class="metric-delta up"><i class="fa-solid fa-arrow-up"></i> 1.8kg</span></dd>
                             </div>
                             <div class="result-metric">
                                 <dt>Body Fat</dt>
-                                <dd>30.8% <i class="fa-solid fa-arrow-right"></i> <strong class="settle-value" data-from="30.8" data-to="26.6" data-suffix="%">30.8%</strong> <span class="metric-delta down"><i class="fa-solid fa-arrow-down"></i> 4.2%</span></dd>
+                                <dd>30.8% <i class="fa-solid fa-arrow-right"></i> <strong class="settle-value" data-from="30.8" data-to="26.6" data-suffix="%">26.6%</strong> <span class="metric-delta down"><i class="fa-solid fa-arrow-down"></i> 4.2%</span></dd>
                             </div>
                             <div class="result-metric">
                                 <dt>Weight</dt>
-                                <dd>66.1kg <i class="fa-solid fa-arrow-right"></i> <strong class="settle-value" data-from="66.1" data-to="66.4" data-suffix="kg">66.1kg</strong> <span class="metric-delta hold">+0.3kg</span></dd>
+                                <dd>66.1kg <i class="fa-solid fa-arrow-right"></i> <strong class="settle-value" data-from="66.1" data-to="66.4" data-suffix="kg">66.4kg</strong> <span class="metric-delta hold">+0.3kg</span></dd>
                             </div>
                         </dl>
                     </div>
@@ -856,7 +862,8 @@
                     </div>
                     <h3>Bannatyne Fairfield, Hitchin</h3>
                     <p class="location-panel-address">Kingsley Ave, Fairfield Park, Hitchin SG5 4JJ</p>
-                    <p>A full health club: complete weights floor, cardio and equipment range. Usually busy. Good if you want the buzz and never want for kit.</p>
+                    <p class="location-panel-desc">A full health club: complete weights floor, cardio and equipment range. Usually busy. Good if you want the buzz and never want for kit.</p>
+                    <a class="location-panel-link" href="/personal-trainer-hitchin">More on training in Hitchin <i class="fa-solid fa-arrow-right"></i></a>
                 </div>
 
                 <div class="location-panel">
@@ -870,11 +877,12 @@
                     </div>
                     <h3>Studio 180, Letchworth</h3>
                     <p class="location-panel-address">Unit 8 Business Centre East, Fifth Ave, Letchworth SG6 2TS</p>
-                    <p>A private PT studio. No gym floor, no audience. Good if being watched while you train is the thing that's been putting you off.</p>
+                    <p class="location-panel-desc">A private PT studio. No gym floor, no audience. Good if being watched while you train is the thing that's been putting you off.</p>
+                    <a class="location-panel-link" href="/personal-trainer-letchworth">More on training in Letchworth <i class="fa-solid fa-arrow-right"></i></a>
                 </div>
             </div>
 
-            <p class="location-chooser-note">Still not sure? If a busy gym floor is what's been putting you off, train at Studio 180.</p>
+            <p class="location-chooser-note">Still not sure? If a busy gym floor is what's been putting you off, train at Studio 180. Weighing up gyms in Hitchin generally? Dom wrote an <a href="/gyms-in-hitchin">honest guide to every one of them</a>.</p>
         </div>
     </section>
 
@@ -1059,7 +1067,7 @@
                                 <div class="testimonial-stars">
                                     <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
                                 </div>
-                                <div class="testimonial-result-badge">96kg &rarr; 79kg &bull; &minus;11% body fat</div>
+                                <div class="testimonial-result-badge"><span data-key="results.testimonialAlex.weight.from">96kg</span> &rarr; <span data-key="results.testimonialAlex.weight.to">79kg</span> &bull; &minus;<span data-key="results.testimonialAlex.fat.delta">11%</span> body fat</div>
                                 <p class="testimonial-pull">&ldquo;Having had several trainers over the years, Dom is by far the most personable, knowledgeable and motivating.&rdquo;</p>
                                 <div class="testimonial-body">
                                     <blockquote>When I first started working with Dom I was 96kg, overweight and with bad nutrition after a year or two of letting myself go! I wanted to get back on track but needed motivation and experience in how to do it. Dom has transformed me completely by working with me to lose body fat and retain muscle mass. I've gone from 96kg down to 79kg and lost 11% body fat. His workouts are never dull and we mix it up a fair bit to keep it fresh. He has also been key in my nutrition plan. Having had several trainers over the years Dom is by far the most personable, knowledgeable and motivating. And... we are still going, there's more work to do!</blockquote>
@@ -1300,7 +1308,7 @@
                     <h3>1-2-1 Personal Training</h3>
                     <div class="pricing-amount">
                         <span class="price-currency">&pound;</span>
-                        <span class="price-value settle-value" data-from="0" data-to="42">42</span>
+                        <span class="price-value settle-value" data-key="pricing.session.total" data-from="0" data-to="42">42</span>
                     </div>
                     <p class="pricing-period">per session</p>
                     <p class="pricing-desc">A personalised coaching session designed around your goals, experience and ability. Whether you want to build strength, lose weight, improve mobility or just feel more confident in the gym, every session is tailored to help you progress safely and effectively.</p>
@@ -1311,9 +1319,9 @@
                     <h3>6-Week Coaching</h3>
                     <div class="pricing-amount">
                         <span class="price-currency">&pound;</span>
-                        <span class="price-value settle-value" data-from="0" data-to="252">252</span>
+                        <span class="price-value settle-value" data-key="pricing.coaching6.total" data-from="0" data-to="252">252</span>
                     </div>
-                    <p class="pricing-period">&pound;42 per week</p>
+                    <p class="pricing-period" data-key="pricing.coaching6.perweek">&pound;42 per week</p>
                     <p class="pricing-desc">Six weeks, one session a week, same time each week. Enough to build a habit.</p>
                     <a href="#contact" class="btn-ghost">Enquire</a>
                 </div>
@@ -1323,9 +1331,9 @@
                     <h3>6-Week Coaching + App</h3>
                     <div class="pricing-amount">
                         <span class="price-currency">&pound;</span>
-                        <span class="price-value settle-value" data-from="0" data-to="288">288</span>
+                        <span class="price-value settle-value" data-key="pricing.app6.total" data-from="0" data-to="288">288</span>
                     </div>
-                    <p class="pricing-period">&pound;48 per week</p>
+                    <p class="pricing-period" data-key="pricing.app6.perweek">&pound;48 per week</p>
                     <p class="pricing-desc">Weekly sessions plus a programme in the app for the days you train on your own. This is what most clients end up on.</p>
                     <a href="#contact" class="btn-primary">Get Started <i class="fa-solid fa-arrow-right"></i></a>
                 </div>
@@ -1334,9 +1342,9 @@
                     <h3>6-Week Programme + Check-ins</h3>
                     <div class="pricing-amount">
                         <span class="price-currency">&pound;</span>
-                        <span class="price-value settle-value" data-from="0" data-to="180">180</span>
+                        <span class="price-value settle-value" data-key="pricing.checkins6.total" data-from="0" data-to="180">180</span>
                     </div>
-                    <p class="pricing-period">&pound;30 per week</p>
+                    <p class="pricing-period" data-key="pricing.checkins6.perweek">&pound;30 per week</p>
                     <p class="pricing-desc">For people who already train and just want the programming handled.</p>
                     <a href="#contact" class="btn-ghost">Enquire</a>
                 </div>
@@ -1720,6 +1728,7 @@
                     <li><a href="/personal-trainer-hitchin">Personal Trainer Hitchin</a></li>
                     <li><a href="/personal-trainer-letchworth">Personal Trainer Letchworth</a></li>
                     <li><a href="/gyms-in-hitchin">Gyms in Hitchin Guide</a></li>
+                    <li><a href="/gyms-in-letchworth">Gyms in Letchworth Guide</a></li>
                 </ul>
             </div>
 

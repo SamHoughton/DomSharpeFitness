@@ -54,6 +54,11 @@
             "postalCode": "SG5 4JJ",
             "addressCountry": "GB"
           },
+          "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": 51.9805,
+            "longitude": -0.2757
+          },
           "areaServed": [
             { "@type": "City", "name": "Hitchin" },
             { "@type": "City", "name": "Stotfold" },
@@ -66,23 +71,21 @@
           ]
         },
         {
+          "@type": "BreadcrumbList",
+          "@id": "https://sharpestrength.com/personal-trainer-hitchin#breadcrumb",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://sharpestrength.com/" },
+            { "@type": "ListItem", "position": 2, "name": "Personal Trainer Hitchin", "item": "https://sharpestrength.com/personal-trainer-hitchin" }
+          ]
+        },
+        {
           "@type": "FAQPage",
           "@id": "https://sharpestrength.com/personal-trainer-hitchin#faq",
           "mainEntity": [
             {
               "@type": "Question",
-              "name": "Do I need to already be fit to start?",
-              "acceptedAnswer": { "@type": "Answer", "text": "Not at all. Dom works with all levels, from complete beginners to experienced lifters. The programme is built around where you are right now, not where you think you should be." }
-            },
-            {
-              "@type": "Question",
               "name": "Do I need to be a Bannatyne member?",
               "acceptedAnswer": { "@type": "Answer", "text": "Ask Dom about access when you book. He will walk you through how sessions work at the club before your first visit, so there are no surprises on the day." }
-            },
-            {
-              "@type": "Question",
-              "name": "How quickly will I see results?",
-              "acceptedAnswer": { "@type": "Answer", "text": "Most clients notice a difference in how they feel within a few weeks. Visible physical changes typically follow after 6 to 8 weeks of consistent training and nutrition." }
             },
             {
               "@type": "Question",
@@ -99,7 +102,7 @@
 
     <a href="#main" class="skip-link">Skip to content</a>
 
-    <nav class="navbar scrolled">
+    <nav class="navbar scrolled" id="navbar">
         <div class="nav-container">
             <a href="/" class="nav-logo">
                 <svg class="nav-logo-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 100" aria-label="Sharpe Strength" role="img">
@@ -110,9 +113,28 @@
                     <text x="96" y="84" font-family="'Helvetica Neue', Arial, sans-serif" font-weight="300" font-size="14px" fill="rgba(255,255,255,0.4)" letter-spacing="13">STRENGTH</text>
                 </svg>
             </a>
+
+            <ul class="nav-links" id="nav-links">
+                <li><a href="/#transformations" class="nav-link">Results</a></li>
+                <li><a href="/#about" class="nav-link">About</a></li>
+                <li><a href="/#first-session" class="nav-link">First Session</a></li>
+                <li><a href="/#services" class="nav-link">Coaching</a></li>
+                <li><a href="/#pricing" class="nav-link">Pricing</a></li>
+                <li><a href="/#faq" class="nav-link">FAQ</a></li>
+                <li class="nav-cta-mobile"><a href="/#contact" class="nav-link">Free Consultation</a></li>
+            </ul>
+
             <a href="/#contact" class="nav-cta">Free Consultation</a>
+
+            <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-links">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
         </div>
     </nav>
+
+    <div class="mobile-overlay" id="mobile-overlay"></div>
 
     <main id="main" class="legal-main loc-main">
         <div class="legal-container">
@@ -129,6 +151,7 @@
 
             <section>
                 <h2 class="section-index"><span class="section-num" aria-hidden="true"></span>Training in Hitchin</h2>
+                <span class="plate-rule plate-rule--1" aria-hidden="true"></span>
                 <p>
                     Sessions run from Bannatyne Fairfield, a full health club with a
                     proper weights floor and cardio kit, up at Fairfield Park on
@@ -151,14 +174,68 @@
 
             <section>
                 <h2 class="section-index"><span class="section-num" aria-hidden="true"></span>Results from real clients</h2>
+                <span class="plate-rule plate-rule--2" aria-hidden="true"></span>
+
+                <div class="inbody-rings" id="inbody-rings">
+                    <div class="ring-metric">
+                        <svg class="ring-svg" viewBox="0 0 100 100" aria-hidden="true">
+                            <circle class="ring-bg" cx="50" cy="50" r="40"/>
+                            <circle class="ring-track" cx="50" cy="50" r="40"/>
+                            <circle class="ring-fill ring-fat"
+                                    cx="50" cy="50" r="40"
+                                    stroke-dasharray="251.3"
+                                    stroke-dashoffset="251.3"
+                                    data-ref="10"/>
+                        </svg>
+                        <div class="ring-center">
+                            <span class="ring-value" data-from="23.1" data-to="18.9" data-suffix="%">18.9%</span>
+                        </div>
+                        <div class="ring-label">Body Fat</div>
+                        <div class="ring-change negative"><i class="fa-solid fa-arrow-down"></i> &minus;4.2%</div>
+                    </div>
+                    <div class="ring-metric">
+                        <svg class="ring-svg" viewBox="0 0 100 100" aria-hidden="true">
+                            <circle class="ring-bg" cx="50" cy="50" r="40"/>
+                            <circle class="ring-track" cx="50" cy="50" r="40"/>
+                            <circle class="ring-fill ring-muscle"
+                                    cx="50" cy="50" r="40"
+                                    stroke-dasharray="251.3"
+                                    stroke-dashoffset="251.3"
+                                    data-ref="4"/>
+                        </svg>
+                        <div class="ring-center">
+                            <span class="ring-value" data-from="34.7" data-to="36.2" data-suffix="kg">36.2kg</span>
+                        </div>
+                        <div class="ring-label">Skeletal Muscle</div>
+                        <div class="ring-change positive"><i class="fa-solid fa-arrow-up"></i> +1.5kg</div>
+                    </div>
+                    <div class="ring-metric">
+                        <svg class="ring-svg" viewBox="0 0 100 100" aria-hidden="true">
+                            <circle class="ring-bg" cx="50" cy="50" r="40"/>
+                            <circle class="ring-track" cx="50" cy="50" r="40"/>
+                            <circle class="ring-fill ring-weight"
+                                    cx="50" cy="50" r="40"
+                                    stroke-dasharray="251.3"
+                                    stroke-dashoffset="251.3"
+                                    data-ref="6"/>
+                        </svg>
+                        <div class="ring-center">
+                            <span class="ring-value" data-from="79.8" data-to="78.6" data-suffix="kg">78.6kg</span>
+                        </div>
+                        <div class="ring-label">Total Weight</div>
+                        <div class="ring-change neutral">&minus;1.2kg</div>
+                    </div>
+                </div>
+                <p class="loc-note">One client's 8-week InBody scan, tracked the same way every client is: real numbers, not a bathroom scale.</p>
+
                 <p>
                     The numbers below are from InBody scans, not estimates. One client
-                    dropped 21.9kg with body fat going from 28.2% to 8.7%. Another
-                    went from 24.2% to 15.4% body fat in seven months while holding
+                    dropped <span data-key="results.flagship.weight.delta">21.9kg</span> with body fat going from <span data-key="results.flagship.fat.from">28.2%</span> to <span data-key="results.flagship.fat.to">8.7%</span>. Another
+                    went from <span data-key="results.card1.fat.from">24.2%</span> to <span data-key="results.card1.fat.to">15.4%</span> body fat in seven months while holding
                     muscle. A third added 1.8kg of muscle in seven weeks.
                 </p>
                 <blockquote class="loc-quote">
-                    "I've gone from 96kg down to 79kg and lost 11% body fat."
+                    "I've gone from <span data-key="results.testimonialAlex.weight.from">96kg</span> down to <span data-key="results.testimonialAlex.weight.to">79kg</span> and lost <span data-key="results.testimonialAlex.fat.delta">11%</span> body fat."
                     <cite>Alex, client</cite>
                 </blockquote>
                 <p><a class="loc-inline-link" href="/#transformations">See the full results, with the scans <i class="fa-solid fa-arrow-right"></i></a></p>
@@ -166,12 +243,13 @@
 
             <section>
                 <h2 class="section-index"><span class="section-num" aria-hidden="true"></span>Prices</h2>
+                <span class="plate-rule plate-rule--3" aria-hidden="true"></span>
                 <table class="loc-table">
                     <tbody>
-                        <tr><th>1-2-1 Personal Training</th><td>£42 per session</td></tr>
-                        <tr><th>6-Week Coaching</th><td>£252, £42 per week</td></tr>
-                        <tr><th>6-Week Coaching + App</th><td>£288, £48 per week</td></tr>
-                        <tr><th>6-Week Programme + Check-ins</th><td>£180, £30 per week</td></tr>
+                        <tr><th>1-2-1 Personal Training</th><td data-key="pricing.session.row">£42 per session</td></tr>
+                        <tr><th>6-Week Coaching</th><td data-key="pricing.coaching6.row">£252, £42 per week</td></tr>
+                        <tr><th>6-Week Coaching + App</th><td data-key="pricing.app6.row">£288, £48 per week</td></tr>
+                        <tr><th>6-Week Programme + Check-ins</th><td data-key="pricing.checkins6.row">£180, £30 per week</td></tr>
                     </tbody>
                 </table>
                 <p class="loc-note">No joining fee and nothing tying you in. <a class="loc-inline-link" href="/#pricing">Full pricing details</a>.</p>
@@ -179,23 +257,17 @@
 
             <section>
                 <h2 class="section-index"><span class="section-num" aria-hidden="true"></span>Questions</h2>
+                <span class="plate-rule plate-rule--4" aria-hidden="true"></span>
 
-                <details class="loc-faq">
-                    <summary>Do I need to already be fit to start? <i class="fa-solid fa-chevron-down"></i></summary>
-                    <p>Not at all. Dom works with all levels, from complete beginners to experienced lifters. The programme is built around where you are right now, not where you think you should be.</p>
-                </details>
                 <details class="loc-faq">
                     <summary>Do I need to be a Bannatyne member? <i class="fa-solid fa-chevron-down"></i></summary>
                     <p>Ask Dom about access when you book. He will walk you through how sessions work at the club before your first visit, so there are no surprises on the day.</p>
                 </details>
                 <details class="loc-faq">
-                    <summary>How quickly will I see results? <i class="fa-solid fa-chevron-down"></i></summary>
-                    <p>Most clients notice a difference in how they feel within a few weeks. Visible physical changes typically follow after 6 to 8 weeks of consistent training and nutrition.</p>
-                </details>
-                <details class="loc-faq">
                     <summary>How do I book? <i class="fa-solid fa-chevron-down"></i></summary>
                     <p>Send the consultation form, or message Dom on WhatsApp on <a href="https://wa.me/447375219353" class="loc-inline-link">07375 219353</a>. The first consultation is free and there is nothing to sign.</p>
                 </details>
+                <p class="loc-note"><a class="loc-inline-link" href="/#faq">More questions, answered on the main FAQ <i class="fa-solid fa-arrow-right"></i></a></p>
             </section>
 
             <div class="legal-cta">
@@ -212,11 +284,72 @@
     </main>
 
     <footer class="footer">
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <div class="footer-logo">SHARPE<span class="accent">.</span>STRENGTH</div>
+                <p>Personal Trainer &amp; Strength Coach</p>
+                <p>Bannatyne Fairfield, Hitchin &nbsp;&bull;&nbsp; Studio 180, Letchworth</p>
+                <p>Weight Training &nbsp;&bull;&nbsp; Mobility &nbsp;&bull;&nbsp; Weight Loss &nbsp;&bull;&nbsp; Accountability</p>
+            </div>
+
+            <div class="footer-nav">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/#transformations">Results</a></li>
+                    <li><a href="/#about">About</a></li>
+                    <li><a href="/#first-session">First Session</a></li>
+                    <li><a href="/#locations">Locations</a></li>
+                    <li><a href="/#services">Coaching</a></li>
+                    <li class="nav-tools-link"><a href="/#calculators">Tools</a></li>
+                    <li><a href="/#pricing">Pricing</a></li>
+                    <li><a href="/#faq">FAQ</a></li>
+                    <li><a href="/#contact">Free Consultation</a></li>
+                    <li><a href="/personal-trainer-letchworth">Personal Trainer Letchworth</a></li>
+                    <li><a href="/gyms-in-hitchin">Gyms in Hitchin Guide</a></li>
+                    <li><a href="/gyms-in-letchworth">Gyms in Letchworth Guide</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-social-col">
+                <h4>Follow Dom</h4>
+                <a href="https://www.instagram.com/sharpe.strength/" target="_blank" rel="noopener noreferrer" class="footer-social-link">
+                    <i class="fa-brands fa-instagram"></i>
+                    @sharpe.strength
+                </a>
+                <a href="https://wa.me/447375219353?text=Hi%20Dom%2C%20I%27d%20like%20to%20find%20out%20more%20about%20personal%20training." target="_blank" rel="noopener noreferrer" class="footer-social-link footer-whatsapp-link">
+                    <i class="fa-brands fa-whatsapp"></i>
+                    07375 219353
+                </a>
+                <a href="mailto:sharpe.strength1@gmail.com" class="footer-social-link footer-email-link">
+                    <i class="fa-solid fa-envelope"></i>
+                    sharpe.strength1@gmail.com
+                </a>
+                <p class="footer-dm">Email, DM or WhatsApp for a free consultation</p>
+            </div>
+        </div>
+
         <div class="footer-bottom">
             <p>&copy; 2026 Dom Sharpe Fitness. All rights reserved.</p>
-            <p class="footer-legal"><a href="/">Back to site</a> &nbsp;&bull;&nbsp; <a href="/privacy">Privacy Policy</a></p>
+            <p class="footer-legal"><a href="/privacy">Privacy Policy</a></p>
         </div>
     </footer>
 
+    <!-- Cookie consent. Required before analytics or ads cookies under UK
+         GDPR/PECR. Hidden until analytics.js decides it is needed. -->
+    <div class="consent" id="consent-banner" role="dialog" aria-live="polite"
+         aria-label="Cookie consent" hidden>
+        <p class="consent-copy">
+            We use cookies to measure how the site is doing and how people find it.
+            Nothing is set until you choose.
+            <a href="/privacy">Privacy policy</a>.
+        </p>
+        <div class="consent-actions">
+            <button type="button" class="consent-btn consent-decline" id="consent-decline">Decline</button>
+            <button type="button" class="consent-btn consent-accept" id="consent-accept">Accept</button>
+        </div>
+    </div>
+
+    <script src="js/scripts.js"></script>
 </body>
 </html>

@@ -349,8 +349,13 @@ ul {
 }
 
 .navbar.scrolled {
+    /* No backdrop-filter: it creates a new containing block for descendant
+       position:fixed elements (the CSS spec's "filter effects" rule), which
+       clipped the fixed off-canvas #nav-links mobile panel to the navbar's
+       own box instead of the viewport any time the nav had scrolled past the
+       point of picking up .scrolled. The background is already 97% opaque,
+       so the blur bought very little. */
     background: rgba(10, 10, 10, 0.97);
-    backdrop-filter: blur(12px);
     padding: 14px 0;
     box-shadow: 0 1px 0 var(--border);
 }
@@ -1414,11 +1419,23 @@ ul {
     margin-bottom: 16px;
 }
 
-.location-panel p:last-child {
+.location-panel-desc {
     color: var(--text-muted);
     font-size: 14.5px;
     line-height: 1.7;
 }
+
+.location-panel-link {
+    display: inline-block;
+    margin-top: 14px;
+    color: var(--accent);
+    font-size: 13.5px;
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+.location-panel-link i { font-size: 11px; margin-left: 4px; }
 
 .location-chooser-note {
     margin-top: 28px;
@@ -1758,6 +1775,10 @@ ul {
     top: 0; left: 0; right: 0;
     height: 3px;
     background: linear-gradient(90deg, var(--accent), transparent);
+}
+
+.inbody-image-col {
+    position: relative;
 }
 
 .inbody-img {

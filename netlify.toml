@@ -92,3 +92,14 @@
   from = "/gyms-in-hitchin"
   to = "/gyms-in-hitchin.html"
   status = 200
+
+[[redirects]]
+  from = "/gyms-in-letchworth.html"
+  to = "/gyms-in-letchworth"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/gyms-in-letchworth"
+  to = "/gyms-in-letchworth.html"
+  status = 200

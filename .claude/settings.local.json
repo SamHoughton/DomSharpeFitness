@@ -6,7 +6,8 @@
       "WebSearch",
       "WebFetch(domain:www.webcitz.com)",
       "WebFetch(domain:mypersonaltrainerwebsite.com)",
-      "Bash(sort -u -t: -k2)"
+      "Bash(sort -u -t: -k2)",
+      "Bash(git fetch *)"
     ]
   }
 }

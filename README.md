@@ -26,6 +26,7 @@ DomSharpeFitness/
 ├── personal-trainer-hitchin.html     # Location landing page
 ├── personal-trainer-letchworth.html  # Location landing page
 ├── gyms-in-hitchin.html              # Content guide targeting "gyms in hitchin" (1,600/mo)
+├── gyms-in-letchworth.html           # Same idea for Letchworth; facts only, no verdicts yet
 ├── robots.txt
 ├── sitemap.xml
 ├── netlify.toml                 # Security headers + CSP
@@ -33,6 +34,11 @@ DomSharpeFitness/
 ├── js/
 │   ├── analytics.js             # GA4 + Google Ads + consent
 │   └── scripts.js
+├── data/
+│   └── pricing.json             # Single source of truth for prices
+├── scripts/
+│   ├── sync-pricing.js          # Writes data/pricing.json into the HTML
+│   └── check-scan-data.js       # Flags scan/result figures that disagree
 ├── img/
 │   ├── dom-transformation.jpg   # 2x2 collage: left column 2022, right column 2025
 │   ├── inbody-progress.jpg      # InBody scan used by the featured ring chart
@@ -128,6 +134,13 @@ DomSharpeFitness/
 - **Drive time / parking notes.** Deliberately left out of the Two Locations
   section rather than guessed at. Add them once Dom confirms specifics for
   each venue.
+- **Gyms in Letchworth guide's verdicts.** `gyms-in-letchworth.html` mirrors
+  `gyms-in-hitchin.html`'s structure with real, sourced facts (addresses,
+  hours, prices, equipment), but deliberately has no opinion or "who should
+  train where" verdicts, unlike the Hitchin guide. Dom hasn't necessarily
+  trained at or vetted these venues himself. Once he has, add the same kind
+  of honest take the Hitchin guide has, and consider merging the two "How to
+  actually choose" style sections.
 
 
 ## Analytics
@@ -160,6 +173,27 @@ Events already tracked:
 
 To check wiring before the IDs exist, run `SS_DEBUG = true` in the console and
 click around: every event logs instead of sending.
+
+
+## Keeping prices and scan data in sync
+
+Prices used to be hand-edited in four places (the homepage cards and three
+comparison tables) and scan figures were free-text on both the homepage and
+the location pages, so a number could change in one spot and not the others.
+
+- **Prices**: edit `data/pricing.json`, then run `node scripts/sync-pricing.js`.
+  It writes the total, the derived per-week figure and the table-row text into
+  `index.html`, `personal-trainer-hitchin.html` and
+  `personal-trainer-letchworth.html`. Never hand-edit a price directly in the
+  HTML, the next sync will overwrite it.
+- **Scan/result figures**: these live as hand-written prose and an SVG chart,
+  which is too bespoke to safely template. Instead, any figure repeated across
+  files is tagged `data-key="results.<...>"` on both instances, and
+  `node scripts/check-scan-data.js` asserts every element sharing a key still
+  agrees. It exits non-zero on a mismatch and names the odd file out. Run it
+  after editing any client's numbers, and before every deploy if it's ever
+  wired into CI. Adding a new duplicated figure just means tagging both copies
+  with the same key.
 
 
 ## Running Locally

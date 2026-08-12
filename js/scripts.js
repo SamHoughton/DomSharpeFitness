@@ -7,6 +7,7 @@ const navbar = document.getElementById('navbar');
 const paperBand = document.querySelector('.progress-chart-block');
 
 window.addEventListener('scroll', () => {
+    if (!navbar) return;
     if (window.scrollY > 60) {
         navbar.classList.add('scrolled');
     } else {
@@ -81,39 +82,43 @@ window.addEventListener('scroll', () => {
 
 
 // === MOBILE MENU ===
+// Guarded as a whole: pages without a hamburger nav (legal/location pages)
+// simply skip this feature rather than crashing the rest of the script.
 const hamburger = document.getElementById('hamburger');
 const navLinks  = document.getElementById('nav-links');
 const overlay   = document.getElementById('mobile-overlay');
 
-function openMenu() {
-    navLinks.classList.add('open');
-    overlay.classList.add('show');
-    hamburger.classList.add('open');
-    hamburger.setAttribute('aria-expanded', 'true');
-    document.body.style.overflow = 'hidden';
+if (hamburger && navLinks && overlay) {
+    const openMenu = () => {
+        navLinks.classList.add('open');
+        overlay.classList.add('show');
+        hamburger.classList.add('open');
+        hamburger.setAttribute('aria-expanded', 'true');
+        document.body.style.overflow = 'hidden';
+    };
+
+    const closeMenu = () => {
+        navLinks.classList.remove('open');
+        overlay.classList.remove('show');
+        hamburger.classList.remove('open');
+        hamburger.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
+    };
+
+    hamburger.addEventListener('click', () => {
+        if (navLinks.classList.contains('open')) {
+            closeMenu();
+        } else {
+            openMenu();
+        }
+    });
+
+    overlay.addEventListener('click', closeMenu);
+
+    navLinks.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', closeMenu);
+    });
 }
-
-function closeMenu() {
-    navLinks.classList.remove('open');
-    overlay.classList.remove('show');
-    hamburger.classList.remove('open');
-    hamburger.setAttribute('aria-expanded', 'false');
-    document.body.style.overflow = '';
-}
-
-hamburger.addEventListener('click', () => {
-    if (navLinks.classList.contains('open')) {
-        closeMenu();
-    } else {
-        openMenu();
-    }
-});
-
-overlay.addEventListener('click', closeMenu);
-
-navLinks.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', closeMenu);
-});
 
 
 // === SMOOTH SCROLL for anchor links ===
@@ -122,7 +127,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         const target = document.querySelector(this.getAttribute('href'));
         if (!target) return;
         e.preventDefault();
-        const navHeight = navbar.offsetHeight;
+        const navHeight = navbar ? navbar.offsetHeight : 0;
         const targetY = target.getBoundingClientRect().top + window.scrollY - navHeight - 16;
         window.scrollTo({ top: targetY, behavior: 'smooth' });
     });
@@ -365,12 +370,14 @@ if (revealTargets.length) {
 // === SCROLL PROGRESS BAR ===
 const scrollProgress = document.getElementById('scroll-progress');
 
-window.addEventListener('scroll', () => {
-    const scrollTop = window.scrollY;
-    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-    const pct       = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
-    scrollProgress.style.width = pct + '%';
-}, { passive: true });
+if (scrollProgress) {
+    window.addEventListener('scroll', () => {
+        const scrollTop = window.scrollY;
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const pct       = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+        scrollProgress.style.width = pct + '%';
+    }, { passive: true });
+}
 
 
 // === BMI CALCULATOR ===
@@ -382,6 +389,7 @@ window.addEventListener('scroll', () => {
     const bmiMarker  = document.getElementById('bmi-marker');
     const metricEl   = document.getElementById('bmi-metric');
     const imperialEl = document.getElementById('bmi-imperial');
+    if (!btn || !resultBox || !bmiValue || !bmiCat || !bmiMarker || !metricEl || !imperialEl) return;
     let   currentUnit = 'metric';
 
     document.querySelectorAll('.unit-btn[data-calc="bmi"]').forEach(b => {
@@ -449,6 +457,7 @@ window.addEventListener('scroll', () => {
     const ormValue  = document.getElementById('orm-value');
     const ormUnit   = document.getElementById('orm-unit-label');
     const weightLbl = document.getElementById('orm-weight-label');
+    if (!btn || !resultBox || !ormValue || !ormUnit || !weightLbl) return;
     let   unit      = 'kg';
 
     document.querySelectorAll('.unit-btn[data-calc="orm"]').forEach(b => {

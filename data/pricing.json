@@ -1,0 +1,9 @@
+{
+  "_comment": "Single source of truth for Sharpe Strength pricing. Edit here, then run `node scripts/sync-pricing.js` to write the numbers into index.html, personal-trainer-hitchin.html and personal-trainer-letchworth.html. Do not hand-edit the numbers in those files, they get overwritten.",
+  "tiers": [
+    { "key": "session",  "name": "1-2-1 Personal Training",    "total": 42,  "sessions": 1, "unit": "per session" },
+    { "key": "coaching6","name": "6-Week Coaching",             "total": 252, "sessions": 6, "unit": "per week" },
+    { "key": "app6",     "name": "6-Week Coaching + App",       "total": 288, "sessions": 6, "unit": "per week" },
+    { "key": "checkins6","name": "6-Week Programme + Check-ins","total": 180, "sessions": 6, "unit": "per week" }
+  ]
+}

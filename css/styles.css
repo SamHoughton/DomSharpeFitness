@@ -656,8 +656,8 @@ ul {
     /* Source frame includes a second athlete at top-left and event signage
        bleeding off the right edge. Zooming in and re-centring on Dom keeps
        both out of the crop without touching the source file. */
-    transform: scale(1.6);
-    transform-origin: 70% 48%;
+    transform: scale(1.38);
+    transform-origin: 74% 46%;
     display: block;
 }
 

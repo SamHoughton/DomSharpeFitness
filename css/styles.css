@@ -2296,8 +2296,8 @@ ul {
     line-height: 1.6;
 }
 
-.footer-nav h4,
-.footer-social-col h4 {
+.footer-nav h3,
+.footer-social-col h3 {
     font-size: 12px;
     font-weight: 700;
     letter-spacing: 2px;

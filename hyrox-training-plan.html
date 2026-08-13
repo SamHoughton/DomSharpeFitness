@@ -131,8 +131,8 @@
             <p class="loc-lead">
                 Written by a coach who has actually raced HYROX, not repackaged
                 from someone else's programme. Base phase through race week, the
-                eight stations explained, and a printable version to take to the
-                gym.
+                eight stations explained, and a tool below that builds your
+                plan for anywhere from 6 to 16 weeks out, not just 12.
             </p>
 
             <div class="loc-disclosure">
@@ -187,13 +187,15 @@
             </section>
 
             <section>
-                <h2 class="section-index"><span class="section-num" aria-hidden="true"></span>How The 12 Weeks Break Down</h2>
+                <h2 class="section-index"><span class="section-num" aria-hidden="true"></span>How It Breaks Down</h2>
                 <span class="plate-rule plate-rule--2" aria-hidden="true"></span>
                 <p>
-                    Three phases and a taper. Each one has a different job, and
-                    skipping straight to race-pace work in week one is the
-                    single most common mistake self-coached HYROX athletes
-                    make.
+                    Three phases and a taper, whether you've got 6 weeks or
+                    16. Each one has a different job, and skipping straight to
+                    race-pace work in week one is the single most common
+                    mistake self-coached HYROX athletes make. Here's the shape
+                    of a 12-week build as an example, the tool below adjusts
+                    the split for your actual timeline.
                 </p>
 
                 <ol class="timeline-list">
@@ -232,73 +234,107 @@
                 <h2 class="section-index"><span class="section-num" aria-hidden="true"></span>A Typical Week</h2>
                 <span class="plate-rule plate-rule--3" aria-hidden="true"></span>
                 <p>
-                    This is what a Build-phase week (weeks 5&ndash;8) actually
-                    looks like. Base phase is lighter on the compromised
-                    running, race prep is heavier.
+                    An example Build-phase week, from that same 12-week
+                    illustration. Base phase is lighter on the compromised
+                    running, race prep is heavier, and your actual week will
+                    depend on the level and days you give the tool below.
                 </p>
                 <table class="loc-table gg-table">
                     <tbody>
-                        <tr><th>Monday</th><td>Strength &mdash; lower body + core</td></tr>
-                        <tr><th>Tuesday</th><td>Compromised running &mdash; 6 &times; 400m run / station</td></tr>
-                        <tr><th>Wednesday</th><td>Strength &mdash; upper pull + sled work</td></tr>
-                        <tr><th>Thursday</th><td>Steady state &mdash; 40&ndash;50 min easy pace</td></tr>
+                        <tr><th>Monday</th><td>Strength: lower body + core</td></tr>
+                        <tr><th>Tuesday</th><td>Compromised running: 6 &times; 400m run / station</td></tr>
+                        <tr><th>Wednesday</th><td>Strength: upper pull + sled work</td></tr>
+                        <tr><th>Thursday</th><td>Steady state: 40&ndash;50 min easy pace</td></tr>
                         <tr><th>Friday</th><td>Station technique + short intervals</td></tr>
-                        <tr><th>Saturday</th><td>Long compromised session &mdash; partial race simulation</td></tr>
+                        <tr><th>Saturday</th><td>Long compromised session: partial race simulation</td></tr>
                         <tr><th>Sunday</th><td>Rest / mobility</td></tr>
                     </tbody>
                 </table>
             </section>
 
-            <section id="get-the-plan">
-                <h2 class="section-index"><span class="section-num" aria-hidden="true"></span>Get The Full Plan</h2>
+            <section id="get-the-plan" class="no-print">
+                <h2 class="section-index"><span class="section-num" aria-hidden="true"></span>Build Your Plan</h2>
                 <span class="plate-rule plate-rule--4" aria-hidden="true"></span>
                 <p>
-                    That's the shape of it. The full plan, every week, every
-                    session, sets and reps, is free. Drop your email and it
-                    lands as a printable PDF you can take straight to the gym.
+                    Three questions and you get a plan scaled to your race
+                    date, your level and how many days you've actually got,
+                    not a generic average. On this page, printable, nothing
+                    to unlock.
                 </p>
 
-                <form class="consultation-form" id="hyrox-plan-form" name="hyrox-plan"
-                      data-netlify="true" netlify-honeypot="bot-field" novalidate>
-                    <input type="hidden" name="form-name" value="hyrox-plan">
+                <div class="hp-quiz-wrap" id="hp-quiz-wrap">
+                    <div class="hp-quiz-progress-bar-wrap">
+                        <div class="hp-quiz-progress-fill" id="hp-quiz-progress-fill"></div>
+                    </div>
 
-                    <p class="form-hp" aria-hidden="true">
-                        <label>Leave this field blank <input name="bot-field" tabindex="-1" autocomplete="off"></label>
-                    </p>
-
-                    <div class="form-row two-col">
-                        <div class="form-group">
-                            <label for="plan-name">Your Name <span class="required">*</span></label>
-                            <input type="text" id="plan-name" name="name" placeholder="John Smith" autocomplete="name" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="plan-email">Email Address <span class="required">*</span></label>
-                            <input type="email" id="plan-email" name="email" placeholder="john@example.com" autocomplete="email" required>
+                    <div class="hp-quiz-step active" data-hp-step="1">
+                        <p class="hp-quiz-q">How many weeks until your race?</p>
+                        <div class="hp-quiz-options">
+                            <button type="button" class="hp-quiz-opt" data-key="weeks" data-val="6" aria-pressed="false">6 weeks</button>
+                            <button type="button" class="hp-quiz-opt" data-key="weeks" data-val="8" aria-pressed="false">8 weeks</button>
+                            <button type="button" class="hp-quiz-opt" data-key="weeks" data-val="12" aria-pressed="false">12 weeks</button>
+                            <button type="button" class="hp-quiz-opt" data-key="weeks" data-val="16" aria-pressed="false">16+ weeks</button>
                         </div>
                     </div>
 
-                    <div class="form-group form-consent">
-                        <label class="consent-label">
-                            <input type="checkbox" id="plan-consent" name="consent" required>
-                            <span>Send me the plan, and the occasional HYROX training email from Dom. Unsubscribe any time. <span class="required">*</span></span>
-                        </label>
+                    <div class="hp-quiz-step" data-hp-step="2">
+                        <p class="hp-quiz-q">How would you describe your level?</p>
+                        <div class="hp-quiz-options">
+                            <button type="button" class="hp-quiz-opt" data-key="level" data-val="beginner" aria-pressed="false">Beginner<br><small>New to structured training or to HYROX</small></button>
+                            <button type="button" class="hp-quiz-opt" data-key="level" data-val="intermediate" aria-pressed="false">Intermediate<br><small>Train regularly, first or second HYROX</small></button>
+                            <button type="button" class="hp-quiz-opt" data-key="level" data-val="advanced" aria-pressed="false">Advanced<br><small>Raced before, chasing a time</small></button>
+                        </div>
                     </div>
 
-                    <button type="submit" class="btn-submit">
-                        <span>Send Me The Plan</span>
-                        <i class="fa-solid fa-paper-plane"></i>
-                    </button>
+                    <div class="hp-quiz-step" data-hp-step="3">
+                        <p class="hp-quiz-q">How many days a week can you train?</p>
+                        <div class="hp-quiz-options">
+                            <button type="button" class="hp-quiz-opt" data-key="days" data-val="3-4" aria-pressed="false">3&ndash;4 days</button>
+                            <button type="button" class="hp-quiz-opt" data-key="days" data-val="5" aria-pressed="false">5 days</button>
+                            <button type="button" class="hp-quiz-opt" data-key="days" data-val="6" aria-pressed="false">6 days</button>
+                        </div>
+                    </div>
 
-                    <p class="form-error" id="plan-form-error" hidden></p>
-                </form>
+                    <div class="hp-quiz-footer">
+                        <button type="button" class="hp-quiz-back-btn" id="hp-quiz-back" hidden><i class="fa-solid fa-arrow-left"></i> Back</button>
+                        <span></span>
+                    </div>
+                    <span class="hp-quiz-step-count" id="hp-quiz-step-count">Question 1 of 3</span>
 
-                <div class="form-success" id="plan-form-success">
-                    <i class="fa-solid fa-circle-check"></i>
-                    <h3>Check your inbox</h3>
-                    <p>The full 12-week plan is on its way to your email now.</p>
-                    <a href="files/hyrox-training-plan.pdf" class="btn-primary" download>
-                        Download The PDF Now <i class="fa-solid fa-download"></i>
-                    </a>
+                    <div class="hp-quiz-step hp-quiz-result-step" data-hp-step="result" id="hp-quiz-result">
+                        <div class="hp-quiz-result-icon"><i class="fa-solid fa-circle-check"></i></div>
+                        <p class="hp-quiz-result-eyebrow">Your plan</p>
+                        <p class="hp-quiz-result-name" id="hp-result-title"></p>
+
+                        <div id="hp-result-weeks"></div>
+
+                        <div class="hp-quiz-result-actions">
+                            <button type="button" class="btn-primary" id="hp-print-btn" onclick="window.print()">
+                                Print / Save As PDF <i class="fa-solid fa-print"></i>
+                            </button>
+                            <button type="button" class="hp-quiz-restart-btn" id="hp-quiz-restart"><i class="fa-solid fa-rotate-left"></i> Start Over</button>
+                        </div>
+
+                        <div class="hp-email-capture" id="hp-email-capture">
+                            <p>Want a copy in your inbox too?</p>
+                            <form class="hp-email-form" id="hp-email-form" name="hyrox-plan-email"
+                                  data-netlify="true" netlify-honeypot="bot-field" novalidate>
+                                <input type="hidden" name="form-name" value="hyrox-plan-email">
+                                <input type="hidden" name="plan-summary" id="hp-email-summary">
+                                <p class="form-hp" aria-hidden="true">
+                                    <label>Leave this field blank <input name="bot-field" tabindex="-1" autocomplete="off"></label>
+                                </p>
+                                <div class="hp-email-row">
+                                    <input type="email" id="hp-email-input" name="email" placeholder="your@email.com" autocomplete="email" required>
+                                    <button type="submit" class="btn-ghost">Email Me This</button>
+                                </div>
+                                <p class="form-error" id="hp-email-error" hidden></p>
+                            </form>
+                            <p class="hp-email-success" id="hp-email-success" hidden>
+                                <i class="fa-solid fa-circle-check"></i> Sent, check your inbox.
+                            </p>
+                        </div>
+                    </div>
                 </div>
             </section>
 
@@ -403,5 +439,7 @@
     </div>
 
     <script src="js/scripts.js"></script>
+    <script src="js/hyrox-plan.js"></script>
+    <script src="js/hyrox-plan-quiz.js"></script>
 </body>
 </html>

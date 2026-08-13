@@ -249,6 +249,77 @@ if (form) {
     });
 }
 
+// === HYROX PLAN FORM SUBMISSION ===
+// Same Netlify Forms pattern as the consultation form above, cut down to the
+// two fields this page actually needs.
+const planForm = document.getElementById('hyrox-plan-form');
+
+if (planForm) {
+    const planFormError = document.getElementById('plan-form-error');
+    const planFormSuccess = document.getElementById('plan-form-success');
+
+    planForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        if (planFormError) planFormError.hidden = true;
+
+        const name = document.getElementById('plan-name').value.trim();
+        const email = document.getElementById('plan-email').value.trim();
+        const consent = document.getElementById('plan-consent');
+
+        if (!name || !email || (consent && !consent.checked)) {
+            if (!name) shakeBorder(document.getElementById('plan-name'));
+            if (!email) shakeBorder(document.getElementById('plan-email'));
+            if (consent && !consent.checked) shakeBorder(consent.closest('.form-consent'));
+            if (planFormError) {
+                planFormError.textContent = 'Please fill in the required fields marked with an asterisk.';
+                planFormError.hidden = false;
+            }
+            return;
+        }
+
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            shakeBorder(document.getElementById('plan-email'));
+            if (planFormError) {
+                planFormError.textContent = 'That email address does not look right, please check it.';
+                planFormError.hidden = false;
+            }
+            return;
+        }
+
+        const submitBtn = planForm.querySelector('.btn-submit');
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Sending...';
+
+        const data = new FormData(planForm);
+        fetch('/', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: new URLSearchParams(data).toString()
+        })
+        .then(r => {
+            if (!r.ok) throw new Error('Form submission failed: ' + r.status);
+            planForm.style.display = 'none';
+            if (planFormSuccess) planFormSuccess.classList.add('show');
+            if (window.SharpeAnalytics) {
+                window.SharpeAnalytics.lead('hyrox-plan', {});
+            }
+        })
+        .catch(() => {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = '<span>Send Me The Plan</span> <i class="fa-solid fa-paper-plane"></i>';
+            shakeBorder(submitBtn);
+            if (planFormError) {
+                planFormError.textContent =
+                    'Something went wrong sending that. Please message Dom on WhatsApp on 07375 219353 ' +
+                    'and he will send the plan directly.';
+                planFormError.hidden = false;
+            }
+        });
+    });
+}
+
+
 function shakeBorder(el) {
     el.style.borderColor = '#ff4444';
     el.style.boxShadow = '0 0 0 3px rgba(255,68,68,0.15)';

@@ -5291,6 +5291,61 @@ main { counter-reset: section; }
     line-height: 1.65;
 }
 
+/* Race-result proof card: the same "a number that either happened or
+   didn't" logic as the InBody scans, applied to a finish time instead. */
+.race-proof-card {
+    display: flex;
+    gap: 32px;
+    align-items: center;
+    background: var(--bg-card);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-lg);
+    padding: 28px;
+    margin-bottom: 44px;
+}
+
+.race-proof-image {
+    flex-shrink: 0;
+    width: 220px;
+}
+
+.race-proof-image .inbody-img {
+    width: 100%;
+    height: auto;
+}
+
+.race-proof-stat {
+    display: flex;
+    flex-direction: column;
+}
+
+.race-proof-stat .stat-value {
+    font-size: 40px;
+}
+
+.race-proof-stat .stat-label {
+    text-align: left;
+    margin-bottom: 14px;
+}
+
+.race-proof-stat p {
+    margin: 0;
+    font-size: 14.5px;
+    line-height: 1.65;
+    color: var(--text-muted);
+}
+
+@media (max-width: 600px) {
+    .race-proof-card {
+        flex-direction: column;
+        text-align: center;
+        padding: 20px;
+    }
+
+    .race-proof-image { width: 160px; }
+    .race-proof-stat .stat-label { text-align: center; }
+}
+
 /* Comparison cells hold sentences, not figures: body font, left, wrapping. */
 .gg-table td {
     font-family: var(--font-body);

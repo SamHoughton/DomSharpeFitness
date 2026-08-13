@@ -36,6 +36,11 @@
   [headers.values]
     Cache-Control = "public, max-age=604800"
 
+[[headers]]
+  for = "/files/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
+
 # The old Netlify subdomain must not compete with the real domain in search.
 [[redirects]]
   from = "https://domsharpefitness.netlify.app/*"
@@ -102,4 +107,26 @@
 [[redirects]]
   from = "/gyms-in-letchworth"
   to = "/gyms-in-letchworth.html"
+  status = 200
+
+[[redirects]]
+  from = "/hyrox-training-plan.html"
+  to = "/hyrox-training-plan"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/hyrox-training-plan"
+  to = "/hyrox-training-plan.html"
+  status = 200
+
+[[redirects]]
+  from = "/hyrox-coaching.html"
+  to = "/hyrox-coaching"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/hyrox-coaching"
+  to = "/hyrox-coaching.html"
   status = 200

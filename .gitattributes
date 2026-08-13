@@ -1,0 +1,7 @@
+# Binary assets: never apply line-ending conversion, it corrupts them.
+*.pdf binary
+*.jpg binary
+*.jpeg binary
+*.png binary
+*.ico binary
+*.acr binary

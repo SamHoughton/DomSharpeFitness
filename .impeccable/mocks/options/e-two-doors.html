@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Option E: Two Doors</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0f0f0f;--amber:#C8923A;--mut:rgba(255,255,255,.64);--line:rgba(255,255,255,.14)}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--bg);color:#fff;font-family:'IBM Plex Sans',sans-serif}
+.nav{display:flex;align-items:center;gap:30px;padding:0 48px;height:76px;border-bottom:1px solid var(--line)}
+.logo{height:40px;width:auto;margin-right:auto}
+.nav a.l{font:500 12.5px 'IBM Plex Sans';letter-spacing:.14em;text-transform:uppercase;color:var(--mut);text-decoration:none}
+.btn{display:inline-block;background:var(--amber);color:#111;font:600 14px/1 'IBM Plex Sans';letter-spacing:.1em;text-transform:uppercase;padding:17px 28px;text-decoration:none}
+.btn.sm{padding:13px 20px;font-size:12.5px}
+.top{padding:40px 48px 26px}
+h1{font:700 92px/.98 'Oswald',sans-serif;text-transform:uppercase;white-space:nowrap}
+h1 em{font-style:normal;color:var(--amber)}
+.top p{margin-top:16px;max-width:66ch;font-size:17px;line-height:1.6;color:var(--mut)}
+.doors{display:grid;grid-template-columns:1fr 1fr;gap:20px;padding:0 48px}
+.door{position:relative;display:block;color:#fff;text-decoration:none;background:#171717;border:1px solid var(--line)}
+.door .im{height:320px;overflow:hidden;position:relative}
+.door .im img{width:100%;height:100%;object-fit:cover;display:block}
+.door.a .im img{object-position:50% 0%}
+.door.b .im img{object-position:50% 20%}
+.door .im::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(15,15,15,0) 45%,#171717 100%)}
+.tx{padding:6px 30px 28px;display:grid;gap:8px}
+.q{font:500 13px 'IBM Plex Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--amber)}
+.tx b{font:700 44px/1.05 'Oswald',sans-serif;text-transform:uppercase}
+.tx p{font-size:16px;line-height:1.55;color:var(--mut);max-width:46ch}
+.go{margin-top:6px;font:600 13px 'IBM Plex Sans';letter-spacing:.12em;text-transform:uppercase;color:var(--amber)}
+.cta{display:flex;align-items:center;gap:24px;padding:26px 48px 34px}
+.fine{font:400 13px/1.5 'IBM Plex Mono',monospace;color:var(--mut)}
+.hour{border-top:1px solid var(--line);padding:64px 48px 80px}
+.hour h2{font:700 56px/1 'Oswald',sans-serif;text-transform:uppercase;max-width:20ch}
+.hour .sub{margin-top:14px;color:var(--mut);font-size:17px}
+.bar{display:flex;margin-top:40px;height:84px;border:1px solid var(--line)}
+.seg{display:flex;align-items:flex-end;padding:10px 12px;border-right:1px solid var(--line);font:600 15px 'Oswald',sans-serif;letter-spacing:.06em;text-transform:uppercase;color:var(--mut)}
+.seg:last-child{border-right:0}
+.seg.hot{background:var(--amber);color:#111}
+.times{display:flex;margin-top:10px}
+.times span{font:500 13px 'IBM Plex Mono',monospace;color:var(--mut);padding-left:2px}
+</style></head><body>
+<header class="nav">
+<svg class="logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 100" aria-label="Sharpe Strength" role="img"><polyline points="8,8 36,50 8,92" fill="none" stroke="#ffffff" stroke-width="8" stroke-linecap="square" stroke-linejoin="miter"/><polyline points="30,8 58,50 30,92" fill="none" stroke="#C8923A" stroke-width="8" stroke-linecap="square" stroke-linejoin="miter"/><line x1="76" y1="20" x2="76" y2="80" stroke="rgba(255,255,255,0.25)" stroke-width="1.5"/><text x="94" y="60" font-family="Impact, 'Arial Black', sans-serif" font-size="46px" fill="#ffffff" letter-spacing="4">SHARPE</text><text x="96" y="84" font-family="'Helvetica Neue', Arial, sans-serif" font-weight="300" font-size="14px" fill="rgba(255,255,255,0.4)" letter-spacing="13">STRENGTH</text></svg>
+<a class="l" href="#">Results</a><a class="l" href="#">About</a><a class="l" href="#">First session</a><a class="l" href="#">HYROX</a><a class="l" href="#">Pricing</a><a class="l" href="#">FAQ</a>
+<a class="btn sm" href="#">Free consultation</a>
+</header>
+<section class="top">
+<h1>The scale isn&rsquo;t what <em>matters.</em></h1>
+<p>1:1 coaching in Hitchin and Letchworth, for people who want to lose fat or get stronger and are tired of starting again every January.</p>
+</section>
+<section class="doors" aria-label="Where to start">
+<a class="door a" href="#"><div class="im"><img src="/img/dom-transformation.jpg" alt="Dom Sharpe in 2022 and in 2025"></div><div class="tx"><span class="q">Put off by busy gyms?</span><b>I&rsquo;ve been where you are</b><p>A private PT studio. No gym floor, no audience. Good if being watched while you train is the thing that&rsquo;s been putting you off.</p><span class="go">See Studio 180, Letchworth &rarr;</span></div></a>
+<a class="door b" href="#"><div class="im"><img src="/img/dom-hyrox-hero.jpg" alt="Dom Sharpe pulling a battle rope during a HYROX London race"></div><div class="tx"><span class="q">Racing HYROX?</span><b>Competes, not just coaches</b><p>Dom races HYROX himself. Manchester finish time: 1:27:37. Coaching from someone who actually races it.</p><span class="go">See HYROX coaching &rarr;</span></div></a>
+</section>
+<div class="cta"><a class="btn" href="#">Get free consultation &rarr;</a><p class="fine">Not sure? The first consultation is free and there is nothing to sign.</p></div>
+<section class="hour">
+<h2>What an hour with Dom actually looks like</h2>
+<p class="sub">Nobody tells you what happens when you walk in. Here it is, minute by minute.</p>
+<div class="bar"><div class="seg" style="width:16.66%">Talk</div><div class="seg" style="width:16.66%">Movement screen</div><div class="seg hot" style="width:8.33%">Scan</div><div class="seg" style="width:50%">Train</div><div class="seg" style="width:8.33%">Next</div></div>
+<div class="times"><span style="width:16.66%">0&ndash;10</span><span style="width:16.66%">10&ndash;20</span><span style="width:8.33%">20&ndash;25</span><span style="width:50%">25&ndash;55</span><span style="width:8.33%">55&ndash;60</span></div>
+</section>
+</body></html>

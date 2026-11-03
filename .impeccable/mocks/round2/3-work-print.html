@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Option 3: The Work Print</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..800&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0c0b0a;--or:#E0902F;--paper:#f1ebe0;--mut:rgba(241,235,224,.74)}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--bg);color:var(--paper);font-family:'Bricolage Grotesque',sans-serif}
+body::before{content:'';position:fixed;inset:0;pointer-events:none;opacity:.14;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.55' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+.nav{display:flex;align-items:center;gap:30px;padding:0 48px;height:76px;border-bottom:1px solid rgba(241,235,224,.18)}
+.logo{height:40px;width:auto;margin-right:auto}
+.nav a.l{font:500 15px 'Bricolage Grotesque';color:var(--mut);text-decoration:none}
+.flag{position:relative;display:inline-block;background:var(--or);color:#1b1208;font:700 17px/1 'Bricolage Grotesque';padding:16px 34px 16px 24px;text-decoration:none;clip-path:polygon(0 0,100% 0,100% calc(100% - 15px),calc(100% - 15px) 100%,0 100%)}
+.flag.sm{padding:12px 28px 12px 18px;font-size:14px}
+.hero{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:56px;padding:44px 48px 6px;align-items:end}
+h1{font:800 92px/.94 'Bricolage Grotesque',sans-serif;font-stretch:80%;letter-spacing:-.02em}
+h1 em{font-style:normal;color:var(--or)}
+.lede{font:400 18px/1.6 'Bricolage Grotesque';color:var(--mut);max-width:40ch}
+.cta{margin-top:24px;display:flex;align-items:center;gap:22px;flex-wrap:wrap}
+.fine{font:400 13px/1.5 'Courier Prime',monospace;color:var(--mut);max-width:28ch}
+.strip{position:relative;margin-top:34px;background:#251a0d;padding:44px 48px;border-top:1px solid #3a2a14;border-bottom:1px solid #3a2a14}
+.strip::before,.strip::after{content:'';position:absolute;left:0;right:0;height:16px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='36' height='16'%3E%3Crect x='10' y='3' width='16' height='10' rx='2.5' fill='%230c0b0a'/%3E%3C/svg%3E") repeat-x}
+.strip::before{top:14px}.strip::after{bottom:14px}
+.frames{display:flex;gap:14px}
+.fr{flex:1;min-width:0}
+.fr .w{position:relative;aspect-ratio:3/4;background:#000;overflow:hidden;border:1px solid #4a3519}
+.fr img{width:100%;height:100%;object-fit:cover;display:block}
+.fr .n{margin-top:7px;font:400 11.5px 'Courier Prime',monospace;color:var(--or);display:flex;justify-content:space-between}
+.fr .t{display:grid;place-items:center;height:100%;text-align:center;padding:12px}
+.fr .t b{font:800 54px/1 'Bricolage Grotesque';font-stretch:80%;color:var(--paper)}
+.fr .t small{display:block;margin-top:8px;font:400 12px/1.4 'Courier Prime',monospace;color:var(--mut)}
+.x{position:absolute;inset:0;pointer-events:none}
+.x path{stroke:var(--or);stroke-width:4;fill:none;stroke-linecap:round}
+.cap{padding:22px 48px 0;font:400 13px/1.5 'Courier Prime',monospace;color:var(--mut)}
+.hour{padding:64px 48px 90px}
+.hour h2{font:800 56px/1 'Bricolage Grotesque';font-stretch:80%;letter-spacing:-.015em;max-width:18ch}
+.hour .s{margin-top:12px;color:var(--mut);font-size:17px}
+.reel{position:relative;margin-top:36px;background:#251a0d;padding:34px 28px;border-top:1px solid #3a2a14;border-bottom:1px solid #3a2a14}
+.reel::before,.reel::after{content:'';position:absolute;left:0;right:0;height:16px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='36' height='16'%3E%3Crect x='10' y='3' width='16' height='10' rx='2.5' fill='%230c0b0a'/%3E%3C/svg%3E") repeat-x}
+.reel::before{top:8px}.reel::after{bottom:8px}
+.cells{display:flex;gap:6px;height:88px}
+.cell{display:flex;flex-direction:column;justify-content:flex-end;padding:8px 11px;border:1px solid #4a3519;background:#0c0b0a;font:700 16px 'Bricolage Grotesque'}
+.cell small{font:400 11.5px 'Courier Prime',monospace;color:var(--or)}
+.cell.hot{background:var(--or);color:#1b1208}.cell.hot small{color:#1b1208}
+</style></head><body>
+<header class="nav">
+<svg class="logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 100" aria-label="Sharpe Strength" role="img"><polyline points="8,8 36,50 8,92" fill="none" stroke="#ffffff" stroke-width="8" stroke-linecap="square" stroke-linejoin="miter"/><polyline points="30,8 58,50 30,92" fill="none" stroke="#C8923A" stroke-width="8" stroke-linecap="square" stroke-linejoin="miter"/><line x1="76" y1="20" x2="76" y2="80" stroke="rgba(255,255,255,0.25)" stroke-width="1.5"/><text x="94" y="60" font-family="Impact, 'Arial Black', sans-serif" font-size="46px" fill="#ffffff" letter-spacing="4">SHARPE</text><text x="96" y="84" font-family="'Helvetica Neue', Arial, sans-serif" font-weight="300" font-size="14px" fill="rgba(255,255,255,0.4)" letter-spacing="13">STRENGTH</text></svg>
+<a class="l" href="#">Results</a><a class="l" href="#">About</a><a class="l" href="#">First session</a><a class="l" href="#">HYROX</a><a class="l" href="#">Pricing</a><a class="l" href="#">FAQ</a>
+<a class="flag sm" href="#">Free consultation</a>
+</header>
+<section class="hero">
+<h1>The scale isn&rsquo;t<br>what <em>matters.</em></h1>
+<div><p class="lede">1:1 coaching in Hitchin and Letchworth, for people who want to lose fat or get stronger and are tired of starting again every January.</p><div class="cta"><a class="flag" href="#">Book your free consultation</a><p class="fine">The first consultation is free and there is nothing to sign.</p></div></div>
+</section>
+<section class="strip" aria-label="Frames from the work print">
+<div class="frames">
+<div class="fr"><div class="w"><div class="t"><div><b>&minus;1.2 kg</b><small>the scale, 8 weeks</small></div></div><svg class="x" viewBox="0 0 100 133" preserveAspectRatio="none"><path d="M10 28 C 36 50, 62 82, 90 108"/><path d="M90 26 C 66 50, 36 84, 10 110"/></svg></div><div class="n"><span>01A</span><span>struck</span></div></div>
+<div class="fr"><div class="w"><img src="/img/inbody-progress.jpg" alt="InBody printout, 8 weeks"><svg class="x" viewBox="0 0 100 133" preserveAspectRatio="none"><path d="M18 52 C 8 70, 20 92, 52 94 C 86 96, 94 70, 82 54 C 70 40, 34 40, 20 56"/></svg></div><div class="n"><span>02A</span><span>&minus;4.2% fat</span></div></div>
+<div class="fr"><div class="w"><img src="/img/dom-hyrox-hero.jpg" alt="Dom Sharpe at HYROX London" style="object-position:50% 20%"></div><div class="n"><span>03A</span><span>Dom</span></div></div>
+<div class="fr"><div class="w"><img src="/img/inbody-progress2.jpeg" alt="InBody printout, 7 months"></div><div class="n"><span>04A</span><span>7 months</span></div></div>
+<div class="fr"><div class="w"><img src="/img/inbody-progress3.jpeg" alt="InBody printout, 1 month"></div><div class="n"><span>05A</span><span>1 month</span></div></div>
+<div class="fr"><div class="w"><img src="/img/inbody-progress4.jpeg" alt="InBody printout, 7 weeks"></div><div class="n"><span>06A</span><span>7 weeks</span></div></div>
+</div>
+</section>
+<p class="cap">Real printouts, real client numbers. Every client is tracked on an InBody scanner, not a bathroom scale. Struck: the scale. Circled: what the scan saw.</p>
+<section class="hour">
+<h2>What an hour with Dom actually looks like</h2>
+<p class="s">Nobody tells you what happens when you walk in. Here it is, minute by minute.</p>
+<div class="reel"><div class="cells">
+<div class="cell" style="flex:10">Talk<small>0&ndash;10</small></div><div class="cell" style="flex:10">Movement screen<small>10&ndash;20</small></div><div class="cell hot" style="flex:5">Scan<small>20&ndash;25</small></div><div class="cell" style="flex:30">Train<small>25&ndash;55</small></div><div class="cell" style="flex:5">Next<small>55&ndash;60</small></div>
+</div></div>
+</section>
+</body></html>

@@ -1,0 +1,26 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "side-tab",
+        "value": "*",
+        "files": [
+          "css/home.css"
+        ],
+        "createdAt": "2026-11-11T10:07:16.155Z",
+        "reason": "Claude's design decision: the 3px left rule on .step is the first-session timeline rail, one rail down the whole hour with amber only on the five scan minutes, not a card accent; also dismissed on the Hallmark record"
+      },
+      {
+        "rule": "flat-type-hierarchy",
+        "value": "*",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-11-11T10:07:16.542Z",
+        "reason": "Claude's check: rendered sizes step h1 48 to 120px, h2 32 to 56px, h3 20 to 31px, body 16px across 556 to 1440px wide; the hook reads index.html without css/home.css"
+      }
+    ]
+  }
+}

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <meta name="theme-color" content="#0e0c0a">
+    <meta name="theme-color" content="#0f0f0f">
     <meta name="description" content="1:1 personal training at Bannatyne Fairfield, Hitchin and Studio 180, Letchworth. Fat loss, strength and mobility coaching. First consultation free.">
     <title>Personal Trainer Hitchin &amp; Letchworth | Sharpe Strength</title>
 
@@ -26,9 +26,10 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bevan&family=Chivo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@600&family=IBM+Plex+Sans:wght@400;600&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="css/bill.css">
+    <script>document.documentElement.classList.add('js');</script>
+    <link rel="stylesheet" href="css/home.css">
 
     <!-- Analytics: GA4 + Google Ads. Paste your IDs in js/analytics.js -->
     <script src="js/analytics.js"></script>
@@ -207,7 +208,7 @@
     <header class="site-head" id="navbar">
         <div class="head-inner">
             <a href="#home" class="brand" aria-label="Sharpe Strength, back to top">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 100" role="img" aria-label="Sharpe Strength"><polyline points="8,8 36,50 8,92" fill="none" stroke="#ffffff" stroke-width="8" stroke-linecap="square" stroke-linejoin="miter"/><polyline points="30,8 58,50 30,92" fill="none" stroke="#C8923A" stroke-width="8" stroke-linecap="square" stroke-linejoin="miter"/><line x1="76" y1="20" x2="76" y2="80" stroke="rgba(255,255,255,0.25)" stroke-width="1.5"/><text x="94" y="60" font-family="Impact, 'Arial Black', sans-serif" font-size="46px" fill="#ffffff" letter-spacing="4">SHARPE</text><text x="96" y="84" font-family="'Helvetica Neue', Arial, sans-serif" font-weight="300" font-size="14px" fill="rgba(255,255,255,0.4)" letter-spacing="13">STRENGTH</text></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 100" role="img" aria-label="Sharpe Strength"><polyline class="logo-a" points="8,8 36,50 8,92" fill="none" stroke-width="8" stroke-linecap="square" stroke-linejoin="miter"/><polyline class="logo-b" points="30,8 58,50 30,92" fill="none" stroke-width="8" stroke-linecap="square" stroke-linejoin="miter"/><line class="logo-rule" x1="76" y1="20" x2="76" y2="80" stroke-width="1.5"/><text class="logo-word" x="94" y="60" font-size="46px" letter-spacing="4">SHARPE</text><text class="logo-sub" x="96" y="84" font-weight="300" font-size="14px" letter-spacing="13">STRENGTH</text></svg>
             </a>
 
             <ul class="nav-links" id="nav-links">
@@ -220,7 +221,7 @@
                 <li class="nav-cta-mobile"><a href="#contact" class="nav-link">Free consultation</a></li>
             </ul>
 
-            <a href="#contact" class="stub stub--sm head-cta">Free consultation</a>
+            <a href="#contact" class="btn btn--line head-cta">Free consultation</a>
 
             <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-links">
                 <span></span>
@@ -234,405 +235,417 @@
 
     <main id="main">
 
-    <!-- ===================== HERO: THE BILL =====================
-         The scale against the scan. Headline is draft copy from the design
-         brief and wants Dom's confirmation. Every figure is the featured
-         client's real InBody result, tagged for scripts/check-scan-data.js. -->
-    <section class="sheet hero" id="home">
-        <div class="wrap">
+    <!-- ===================== HERO: THE LEDGE =====================
+         Competition footage stands in until Dom's coaching shoot happens. The
+         headline is draft copy awaiting Dom's confirmation. The figures are the
+         featured client's real InBody result, tagged for scripts/check-scan-data.js. -->
+    <section class="hero" id="home">
+        <div class="hero-stage">
+            <figure class="hero-photo">
+                <img src="img/dom-hyrox-hero.jpg"
+                     srcset="/.netlify/images?url=/img/dom-hyrox-hero.jpg&w=640&fm=webp&q=75 640w,
+                             /.netlify/images?url=/img/dom-hyrox-hero.jpg&w=960&fm=webp&q=75 960w,
+                             /.netlify/images?url=/img/dom-hyrox-hero.jpg&w=1280&fm=webp&q=75 1280w,
+                             /.netlify/images?url=/img/dom-hyrox-hero.jpg&w=1600&fm=webp&q=75 1600w"
+                     sizes="(max-width: 60rem) 100vw, 56vw"
+                     alt="Dom Sharpe pulling a battle rope during a HYROX London race"
+                     width="1781" height="2494" loading="eager" fetchpriority="high" decoding="async">
+            </figure>
 
-            <div class="names" aria-hidden="true">
-                <div class="name name--scale"><span>The</span> <span>Scale</span></div>
-                <div class="vs">VS</div>
-                <div class="name name--scan"><span>The</span> <span>Scan</span></div>
-            </div>
+            <div class="container hero-grid">
+                <h1>The scale isn&rsquo;t what matters.</h1>
+                <p class="hero-sub lead">1:1 coaching in Hitchin and Letchworth, for people tired of starting again every January.</p>
+                <a href="#contact" class="btn hero-cta">Book your free consultation</a>
 
-            <div class="results-line">
-                <div>
-                    <div class="fig fig--scale">&minus;<span data-key="results.featured.weight.delta">1.2</span> kg</div>
-                    <p>Eight weeks of consistent training. That&rsquo;s everything the bathroom floor had to say about it.</p>
+                <div class="readout">
+                    <dl>
+                        <div>
+                            <dt>The scale</dt>
+                            <dd>&minus;<span data-key="results.featured.weight.delta">1.2</span> kg</dd>
+                        </div>
+                        <div class="is-scan">
+                            <dt>The scan</dt>
+                            <dd><span class="n">&minus;<span data-key="results.featured.fat.delta">4.2</span>%</span> fat</dd>
+                            <dd><span class="n">+<span data-key="results.featured.muscle.delta">1.5</span></span> kg muscle</dd>
+                        </div>
+                    </dl>
+                    <p class="readout-note">The same client, the same eight weeks, measured on an InBody.</p>
                 </div>
-                <div></div>
-                <div>
-                    <div class="fig">&minus;<span data-key="results.featured.fat.delta">4.2</span>% fat<br>+<span data-key="results.featured.muscle.delta">1.5</span> kg muscle</div>
-                    <p>The same client, the same eight weeks, measured on an InBody.</p>
-                </div>
             </div>
+        </div>
 
-            <div class="band"><h1>The scale isn&rsquo;t what matters.</h1></div>
-
-            <div class="low">
-                <p class="hero-sub">1:1 coaching in Hitchin and Letchworth, for people who want to lose fat or get stronger and are tired of starting again every January.</p>
-
-                <div class="under">
-                    <div class="u1">Body fat <span data-key="results.featured.fat.from">23.1</span> <span class="arr" aria-hidden="true"></span><span class="sr-only">to</span> <span data-key="results.featured.fat.to">18.9</span></div>
-                    <div class="u2">Muscle <span data-key="results.featured.muscle.from">34.7</span> <span class="arr" aria-hidden="true"></span><span class="sr-only">to</span> <span data-key="results.featured.muscle.to">36.2</span></div>
-                    <div class="u3">Weight <span data-key="results.featured.weight.from">79.8</span> <span class="arr" aria-hidden="true"></span><span class="sr-only">to</span> <span data-key="results.featured.weight.to">78.6</span></div>
-                    <p class="u4">One client, eight weeks. Every client is tracked on an InBody scanner, not a bathroom scale.</p>
-                </div>
-
-                <a href="#contact" class="stub stub--lg">Book your free consultation<small>The first consultation is free and there is nothing to sign.</small></a>
-            </div>
-
-            <div class="routes">
-                <a class="route" href="/personal-trainer-letchworth"><span>Put off by busy gyms?<small>See the private studio in Letchworth</small></span><span class="arr" aria-hidden="true"></span></a>
-                <a class="route" href="/hyrox-coaching"><span>Racing HYROX?<small>See HYROX coaching</small></span><span class="arr" aria-hidden="true"></span></a>
-            </div>
-
+        <div class="container doors">
+            <a class="route" href="/personal-trainer-letchworth"><span><span class="route-t">Put off by busy gyms?</span><small>See the private studio in Letchworth</small></span><span class="chev" aria-hidden="true"></span></a>
+            <a class="route" href="/hyrox-coaching"><span><span class="route-t">Racing HYROX?</span><small>See HYROX coaching</small></span><span class="chev" aria-hidden="true"></span></a>
         </div>
     </section>
 
-    <!-- ===================== RESULTS ===================== -->
-    <section class="sheet" id="transformations">
-        <div class="wrap">
-            <h2 class="h2">The proof is in the numbers.</h2>
-            <p class="lede">Same client, same eight weeks, measured two ways.</p>
+    <!-- ===================== RESULTS: MEASURED TWO WAYS =====================
+         The signature. One switch flips every result in this section between
+         what a bathroom scale saw and what the InBody saw. It is two native
+         radios and CSS :has(), so it needs no script; where :has() is missing
+         the switch hides and both readings show, one under the other. Every
+         figure is real InBody data, tagged for scripts/check-scan-data.js. -->
+    <section class="sheet results" id="transformations">
+        <div class="container">
+            <div class="head-split">
+                <h2>The proof is in the numbers.</h2>
+                <p class="lead">Same client, same eight weeks, measured two ways.</p>
+            </div>
 
-            <div class="split split--results">
-                <figure class="paste">
+            <fieldset class="measure">
+                <legend>Measured by</legend>
+                <div class="measure-seg">
+                    <input type="radio" name="measure" id="measure-scan" value="scan" checked>
+                    <label for="measure-scan">The InBody scan</label>
+                    <input type="radio" name="measure" id="measure-scale" value="scale">
+                    <label for="measure-scale">The bathroom scale</label>
+                </div>
+            </fieldset>
+
+            <article class="lead-result">
+                <figure class="print print--lead">
                     <img src="img/inbody-progress.jpg"
-                         srcset="/.netlify/images?url=/img/inbody-progress.jpg&w=300&fm=webp&q=75 300w,
-                                 /.netlify/images?url=/img/inbody-progress.jpg&w=400&fm=webp&q=75 400w,
+                         srcset="/.netlify/images?url=/img/inbody-progress.jpg&w=400&fm=webp&q=75 400w,
                                  /.netlify/images?url=/img/inbody-progress.jpg&w=640&fm=webp&q=75 640w"
-                         sizes="(max-width: 860px) 70vw, 360px"
+                         sizes="(max-width: 60rem) 80vw, 400px"
                          alt="InBody scan: body fat down from 23.1% to 18.9%, muscle up from 34.7kg to 36.2kg over 8 weeks"
                          width="640" height="1138" loading="lazy" decoding="async">
                     <figcaption>The InBody printout. <a href="img/inbody-progress.jpg" target="_blank" rel="noopener noreferrer" aria-label="Full scan: 8-week body recomposition">Full scan</a></figcaption>
                 </figure>
 
-                <div class="prose">
-                    <h3 class="h3">Body recomposition done right</h3>
-                    <p>This is what consistency and accountability actually looks like, measured over 8 weeks with InBody scanning.</p>
-                    <p>The scale only dropped 1.2kg, but the body composition shift is dramatic. Less fat, more muscle, better health. This is why Dom tracks beyond the scales.</p>
-                    <p>Eight weeks of consistent training, showing up, doing the work. That&rsquo;s everything the bathroom floor had to say about it.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ===================== THE REST OF THE CARD =====================
-         The second gallery folded into one ranked card. Biggest change, biggest
-         type. Every figure is the same real InBody data as before. -->
-    <section class="sheet" id="results-detail">
-        <div class="wrap">
-            <h2 class="h2">More than one client, more than one story.</h2>
-            <p class="lede">Four years of one client&rsquo;s scans, then three more who prove the scale is the wrong thing to watch.</p>
-
-            <div class="card-intro">
-
-            <article class="rank rank--1 rank--wide">
-                <div>
-                    <p class="rank-when">Four years, plotted &middot; Jan 2022 to Nov 2025</p>
-                    <h3 class="rank-t">What consistency actually looks like</h3>
-                    <p class="rank-note">From 96.5kg and 28.2% body fat to 74.6kg and 8.7%, skeletal muscle held within a kilo the entire way. Two real InBody scans, not a guess at what happened in between.</p>
-                    <dl class="figs">
-                        <div><dt>Weight</dt><dd>96.5kg to 74.6kg<small>down <span data-key="results.flagship.weight.delta">21.9kg</span></small></dd></div>
-                        <div><dt>Body fat</dt><dd><span data-key="results.flagship.fat.from">28.2%</span> to <span data-key="results.flagship.fat.to">8.7%</span><small>down 19.5 percentage points</small></dd></div>
-                        <div><dt>Skeletal muscle</dt><dd>40.2kg to 39.3kg<small>held, down 0.9kg</small></dd></div>
-                    </dl>
-                </div>
-            </article>
-
-            <article class="rank rank--2">
-                <div>
-                    <p class="rank-when">InBody &middot; Nov 2024 to Jun 2025 &middot; 7 months</p>
-                    <h3 class="rank-t">9.7kg down, muscle held</h3>
-                    <p class="rank-note">A proper cut. Nearly 10kg off the scale and body fat almost halved, while skeletal muscle stayed essentially untouched. That&rsquo;s the difference between losing fat and just losing weight.</p>
-                    <dl class="figs">
-                        <div><dt>Body fat</dt><dd><span data-key="results.card1.fat.from">24.2%</span> to <span data-key="results.card1.fat.to">15.4%</span><small>down 8.8%</small></dd></div>
-                        <div><dt>Weight</dt><dd>91.5kg to 81.8kg<small>down 9.7kg</small></dd></div>
-                        <div><dt>Muscle</dt><dd>40.2kg to 39.9kg<small>Held</small></dd></div>
-                    </dl>
-                </div>
-                <figure class="paste">
-                    <img src="img/inbody-progress2.jpeg" width="1000" height="1481"
-                         srcset="/.netlify/images?url=/img/inbody-progress2.jpeg&w=340&fm=webp&q=75 340w,
-                                 /.netlify/images?url=/img/inbody-progress2.jpeg&w=480&fm=webp&q=75 480w"
-                         sizes="(max-width: 860px) 60vw, 210px"
-                         alt="InBody scan: weight down from 91.5kg to 81.8kg, body fat down from 24.2% to 15.4%"
-                         loading="lazy" decoding="async">
-                    <figcaption><a href="img/inbody-progress2.jpeg" target="_blank" rel="noopener noreferrer" aria-label="Full scan: 9.7kg down, muscle held">Full scan</a></figcaption>
-                </figure>
-            </article>
-
-            <article class="rank rank--3">
-                <div>
-                    <p class="rank-when">InBody &middot; Jan to Feb 2026 &middot; 7 weeks</p>
-                    <h3 class="rank-t">Textbook body recomposition</h3>
-                    <p class="rank-note">Bodyweight up 0.3kg. If you only owned bathroom scales you&rsquo;d think nothing happened. In reality: 1.8kg of muscle gained and 4.2% body fat lost in seven weeks.</p>
-                    <dl class="figs">
-                        <div><dt>Muscle</dt><dd>25.1kg to 26.9kg<small>up 1.8kg</small></dd></div>
-                        <div><dt>Body fat</dt><dd>30.8% to 26.6%<small>down 4.2%</small></dd></div>
-                        <div><dt>Weight</dt><dd>66.1kg to 66.4kg<small>+0.3kg</small></dd></div>
-                    </dl>
-                </div>
-                <figure class="paste">
-                    <img src="img/inbody-progress4.jpeg" width="1000" height="1238"
-                         srcset="/.netlify/images?url=/img/inbody-progress4.jpeg&w=340&fm=webp&q=75 340w,
-                                 /.netlify/images?url=/img/inbody-progress4.jpeg&w=480&fm=webp&q=75 480w"
-                         sizes="(max-width: 860px) 60vw, 210px"
-                         alt="InBody scan: muscle up 1.8kg and body fat down 4.2% with bodyweight almost unchanged"
-                         loading="lazy" decoding="async">
-                    <figcaption><a href="img/inbody-progress4.jpeg" target="_blank" rel="noopener noreferrer" aria-label="Full scan: Textbook body recomposition">Full scan</a></figcaption>
-                </figure>
-            </article>
-
-            <article class="rank rank--4">
-                <div>
-                    <p class="rank-when">InBody &middot; Jul to Aug 2025 &middot; 1 month</p>
-                    <h3 class="rank-t">Fat down and muscle up, in four weeks</h3>
-                    <p class="rank-note">The scale barely moved, and that&rsquo;s the point. Body fat down 2.2% with muscle actually going up, one month into training. This is why Dom doesn&rsquo;t judge progress on bodyweight alone.</p>
-                    <dl class="figs">
-                        <div><dt>Body fat</dt><dd>32.8% to 30.6%<small>down 2.2%</small></dd></div>
-                        <div><dt>Muscle</dt><dd>38.6kg to 39.3kg<small>up 0.7kg</small></dd></div>
-                        <div><dt>Weight</dt><dd>99.7kg to 98kg<small>down 1.7kg</small></dd></div>
-                    </dl>
-                </div>
-                <figure class="paste">
-                    <img src="img/inbody-progress3.jpeg" width="914" height="1600"
-                         srcset="/.netlify/images?url=/img/inbody-progress3.jpeg&w=340&fm=webp&q=75 340w,
-                                 /.netlify/images?url=/img/inbody-progress3.jpeg&w=480&fm=webp&q=75 480w"
-                         sizes="(max-width: 860px) 60vw, 210px"
-                         alt="InBody scan: body fat down from 32.8% to 30.6% and muscle up 0.7kg in one month"
-                         loading="lazy" decoding="async">
-                    <figcaption><a href="img/inbody-progress3.jpeg" target="_blank" rel="noopener noreferrer" aria-label="Full scan: Fat down and muscle up, in four weeks">Full scan</a></figcaption>
-                </figure>
-            </article>
-
-            </div>
-
-            <div class="section-cta">
-                <p>Want results like this?</p>
-                <a href="#contact" class="stub">Get your free consultation</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- ===================== ABOUT ===================== -->
-    <section class="sheet" id="about">
-        <div class="wrap">
-            <div class="split split--about">
-                <div class="prose">
-                    <h2 class="h2">I&rsquo;ve been where you are.</h2>
-                    <p class="lede">I didn&rsquo;t always look or feel like this. My own transformation between 2022 and 2025 is the reason I&rsquo;m so passionate about helping others.</p>
-                    <p>Honestly, I didn&rsquo;t notice the change myself until I looked back at old photos. What made the difference wasn&rsquo;t some extreme diet or punishing programme. It was learning to enjoy my training, staying mindful (not strict) with food, and showing up consistently. I still drink. I still eat junk food, just in moderation most of the time.</p>
-                    <p>I&rsquo;m proud of what I&rsquo;ve achieved, and even more passionate about helping others find that same balance and confidence. I coach 1:1 from Bannatyne Fairfield in Hitchin and Studio 180 in Letchworth, across weight training, mobility, weight loss and accountability. Programmes built around your life, not the other way round.</p>
-
-                    <!-- Credentials: update with Dom's actual qualifications -->
-                    <ul class="credits" aria-label="Qualifications">
-                        <li>Level 3 Personal Trainer</li>
-                        <li>First Aid Certified</li>
-                        <li>REPs Registered</li>
-                        <li>HYROX Athlete</li>
-                    </ul>
-
-                    <p><a href="https://www.instagram.com/sharpe.strength/" target="_blank" rel="noopener noreferrer" class="text-link">Follow @sharpe.strength on Instagram</a></p>
-                </div>
-
-                <div class="about-prints">
-                    <!-- Dom's own 2022 to 2025 change, shown whole rather than as
-                         a cropped before/after: it happened gradually and
-                         without anything extreme. -->
-                    <figure class="paste paste--square">
-                        <img src="img/dom-transformation.jpg"
-                             srcset="/.netlify/images?url=/img/dom-transformation.jpg&w=360&fm=webp&q=75 360w,
-                                     /.netlify/images?url=/img/dom-transformation.jpg&w=520&fm=webp&q=75 520w,
-                                     /.netlify/images?url=/img/dom-transformation.jpg&w=700&fm=webp&q=75 700w"
-                             sizes="(max-width: 860px) 86vw, 480px"
-                             alt="Dom Sharpe in 2022 and in 2025, four photos showing his own transformation" width="1000" height="1000" loading="lazy" decoding="async">
-                        <figcaption>Dom. Left column 2022, right column 2025.</figcaption>
-                    </figure>
-
-                    <div class="achievement">
-                        <img src="img/dom-hyrox-finish-thumb.jpg"
-                             srcset="/.netlify/images?url=/img/dom-hyrox-finish-thumb.jpg&w=128&fm=webp&q=75 128w,
-                                     /.netlify/images?url=/img/dom-hyrox-finish-thumb.jpg&w=256&fm=webp&q=75 256w"
-                             sizes="96px"
-                             alt="Dom Sharpe celebrating after finishing a HYROX Manchester race" width="128" height="128" loading="lazy" decoding="async">
-                        <p>
-                            <strong>Competes, not just coaches.</strong>
-                            Dom races HYROX himself. Manchester finish time: 1:27:37.
-                            <a href="/hyrox-coaching" class="text-link">HYROX coaching</a>
-                        </p>
+                <div class="lead-body">
+                    <h3>Body recomposition done right</h3>
+                    <div class="flip">
+                        <div class="m m--scan">
+                            <p class="m-label">On the InBody</p>
+                            <p class="big"><span class="n">&minus;<span data-key="results.featured.fat.delta">4.2</span>%</span> fat<br><span class="n">+<span data-key="results.featured.muscle.delta">1.5</span></span> kg muscle</p>
+                            <dl class="figs">
+                                <div><dt>Body fat</dt><dd><span data-key="results.featured.fat.from">23.1</span>% to <span data-key="results.featured.fat.to">18.9</span>%</dd></div>
+                                <div><dt>Muscle</dt><dd><span data-key="results.featured.muscle.from">34.7</span>kg to <span data-key="results.featured.muscle.to">36.2</span>kg</dd></div>
+                            </dl>
+                            <p class="m-note">The scale only dropped 1.2kg, but the body composition shift is dramatic. Less fat, more muscle, better health.</p>
+                        </div>
+                        <div class="m m--scale">
+                            <p class="m-label">On the bathroom scale</p>
+                            <p class="big">&minus;<span data-key="results.featured.weight.delta">1.2</span> kg</p>
+                            <dl class="figs">
+                                <div><dt>Weight</dt><dd><span data-key="results.featured.weight.from">79.8</span>kg to <span data-key="results.featured.weight.to">78.6</span>kg</dd></div>
+                            </dl>
+                            <p class="m-note">Eight weeks of consistent training, showing up, doing the work. That&rsquo;s everything the bathroom floor had to say about it.</p>
+                        </div>
                     </div>
+                    <p class="lead-foot">One client, eight weeks. Every client is tracked on an InBody scanner, not a bathroom scale.</p>
+                </div>
+            </article>
+
+            <!-- The rest of the scans, ranked by the size of the change. -->
+            <div class="more" id="results-detail">
+                <div class="head-split">
+                    <h2>More than one client, more than one story.</h2>
+                    <p class="lead">Four years of one client&rsquo;s scans, then three more who prove the scale is the wrong thing to watch.</p>
+                </div>
+
+                <ol class="ledger">
+                    <li class="rank rank--1">
+                        <figure class="print">
+                            <img src="img/inbody-progress5.jpeg"
+                                 srcset="/.netlify/images?url=/img/inbody-progress5.jpeg&w=240&fm=webp&q=75 240w,
+                                         /.netlify/images?url=/img/inbody-progress5.jpeg&w=480&fm=webp&q=75 480w"
+                                 sizes="(max-width: 60rem) 40vw, 200px"
+                                 alt="InBody history: weight down from 96.5kg to 74.6kg, body fat down from 28.2% to 8.7%, skeletal muscle 40.2kg to 39.3kg, January 2022 to November 2025"
+                                 width="738" height="1600" loading="lazy" decoding="async">
+                            <figcaption><a href="img/inbody-progress5.jpeg" target="_blank" rel="noopener noreferrer" aria-label="Full scan: four years of consistency">Full scan</a></figcaption>
+                        </figure>
+                        <div class="rank-what">
+                            <p class="rank-when">Jan 2022 to Nov 2025, four years plotted</p>
+                            <h3>What consistency actually looks like</h3>
+                            <p class="rank-note">From 96.5kg and 28.2% body fat to 74.6kg and 8.7%, skeletal muscle held within a kilo the entire way. Two real InBody scans, not a guess at what happened in between.</p>
+                        </div>
+                        <div class="flip">
+                            <dl class="m m--scan figs">
+                                <div><dt>Body fat</dt><dd><span data-key="results.flagship.fat.from">28.2%</span> to <span data-key="results.flagship.fat.to">8.7%</span><small>down 19.5 percentage points</small></dd></div>
+                                <div><dt>Skeletal muscle</dt><dd>40.2kg to 39.3kg<small>held, down 0.9kg</small></dd></div>
+                            </dl>
+                            <dl class="m m--scale figs">
+                                <div><dt>Weight</dt><dd>96.5kg to 74.6kg<small>down <span data-key="results.flagship.weight.delta">21.9kg</span></small></dd></div>
+                            </dl>
+                        </div>
+                    </li>
+
+                    <li class="rank">
+                        <figure class="print">
+                            <img src="img/inbody-progress2.jpeg" width="1000" height="1481"
+                                 srcset="/.netlify/images?url=/img/inbody-progress2.jpeg&w=240&fm=webp&q=75 240w,
+                                         /.netlify/images?url=/img/inbody-progress2.jpeg&w=480&fm=webp&q=75 480w"
+                                 sizes="(max-width: 60rem) 40vw, 160px"
+                                 alt="InBody scan: weight down from 91.5kg to 81.8kg, body fat down from 24.2% to 15.4%"
+                                 loading="lazy" decoding="async">
+                            <figcaption><a href="img/inbody-progress2.jpeg" target="_blank" rel="noopener noreferrer" aria-label="Full scan: 9.7kg down, muscle held">Full scan</a></figcaption>
+                        </figure>
+                        <div class="rank-what">
+                            <p class="rank-when">Nov 2024 to Jun 2025, 7 months</p>
+                            <h3>9.7kg down, muscle held</h3>
+                            <p class="rank-note">A proper cut. Nearly 10kg off the scale and body fat almost halved, while skeletal muscle stayed essentially untouched. That&rsquo;s the difference between losing fat and just losing weight.</p>
+                        </div>
+                        <div class="flip">
+                            <dl class="m m--scan figs">
+                                <div><dt>Body fat</dt><dd><span data-key="results.card1.fat.from">24.2%</span> to <span data-key="results.card1.fat.to">15.4%</span><small>down 8.8%</small></dd></div>
+                                <div><dt>Muscle</dt><dd>40.2kg to 39.9kg<small>Held</small></dd></div>
+                            </dl>
+                            <dl class="m m--scale figs">
+                                <div><dt>Weight</dt><dd>91.5kg to 81.8kg<small>down 9.7kg</small></dd></div>
+                            </dl>
+                        </div>
+                    </li>
+
+                    <li class="rank">
+                        <figure class="print">
+                            <img src="img/inbody-progress4.jpeg" width="1000" height="1238"
+                                 srcset="/.netlify/images?url=/img/inbody-progress4.jpeg&w=240&fm=webp&q=75 240w,
+                                         /.netlify/images?url=/img/inbody-progress4.jpeg&w=480&fm=webp&q=75 480w"
+                                 sizes="(max-width: 60rem) 40vw, 160px"
+                                 alt="InBody scan: muscle up 1.8kg and body fat down 4.2% with bodyweight almost unchanged"
+                                 loading="lazy" decoding="async">
+                            <figcaption><a href="img/inbody-progress4.jpeg" target="_blank" rel="noopener noreferrer" aria-label="Full scan: Textbook body recomposition">Full scan</a></figcaption>
+                        </figure>
+                        <div class="rank-what">
+                            <p class="rank-when">Jan to Feb 2026, 7 weeks</p>
+                            <h3>Textbook body recomposition</h3>
+                            <p class="rank-note">Bodyweight up 0.3kg. If you only owned bathroom scales you&rsquo;d think nothing happened. In reality: 1.8kg of muscle gained and 4.2% body fat lost in seven weeks.</p>
+                        </div>
+                        <div class="flip">
+                            <dl class="m m--scan figs">
+                                <div><dt>Muscle</dt><dd>25.1kg to 26.9kg<small>up 1.8kg</small></dd></div>
+                                <div><dt>Body fat</dt><dd>30.8% to 26.6%<small>down 4.2%</small></dd></div>
+                            </dl>
+                            <dl class="m m--scale figs">
+                                <div><dt>Weight</dt><dd>66.1kg to 66.4kg<small>+0.3kg</small></dd></div>
+                            </dl>
+                        </div>
+                    </li>
+
+                    <li class="rank">
+                        <figure class="print">
+                            <img src="img/inbody-progress3.jpeg" width="914" height="1600"
+                                 srcset="/.netlify/images?url=/img/inbody-progress3.jpeg&w=240&fm=webp&q=75 240w,
+                                         /.netlify/images?url=/img/inbody-progress3.jpeg&w=480&fm=webp&q=75 480w"
+                                 sizes="(max-width: 60rem) 40vw, 160px"
+                                 alt="InBody scan: body fat down from 32.8% to 30.6% and muscle up 0.7kg in one month"
+                                 loading="lazy" decoding="async">
+                            <figcaption><a href="img/inbody-progress3.jpeg" target="_blank" rel="noopener noreferrer" aria-label="Full scan: Fat down and muscle up, in four weeks">Full scan</a></figcaption>
+                        </figure>
+                        <div class="rank-what">
+                            <p class="rank-when">Jul to Aug 2025, 1 month</p>
+                            <h3>Fat down and muscle up, in four weeks</h3>
+                            <p class="rank-note">The scale barely moved, and that&rsquo;s the point. Body fat down 2.2% with muscle actually going up, one month into training. This is why Dom doesn&rsquo;t judge progress on bodyweight alone.</p>
+                        </div>
+                        <div class="flip">
+                            <dl class="m m--scan figs">
+                                <div><dt>Body fat</dt><dd>32.8% to 30.6%<small>down 2.2%</small></dd></div>
+                                <div><dt>Muscle</dt><dd>38.6kg to 39.3kg<small>up 0.7kg</small></dd></div>
+                            </dl>
+                            <dl class="m m--scale figs">
+                                <div><dt>Weight</dt><dd>99.7kg to 98kg<small>down 1.7kg</small></dd></div>
+                            </dl>
+                        </div>
+                    </li>
+                </ol>
+
+                <div class="section-cta">
+                    <p>Want results like this?</p>
+                    <a href="#contact" class="btn">Get your free consultation</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ===================== WHAT I WON'T DO =====================
-         Draft copy from the design brief, written in Dom's voice. The four
-         claims need Dom's sign-off: see README, "Things that need Dom's
-         input". -->
-    <section class="sheet sheet--tight" id="why">
-        <div class="wrap">
-            <h2 class="h2">What I won&rsquo;t do</h2>
-            <p class="lede">Plenty of trainers will tell you what they do. This is what you won&rsquo;t get from Dom.</p>
+    <!-- ===================== DOM: THE BENTO =====================
+         His story, his race, what he won't do and what he coaches, as one
+         grid. "What I won't do" and the credentials are draft copy awaiting
+         Dom's sign-off: see README, "Things that need Dom's input". -->
+    <section class="sheet dom" id="about">
+        <div class="container bento">
+            <div class="tile tile--story">
+                <h2>I&rsquo;ve been where you are.</h2>
+                <p class="lead">I didn&rsquo;t always look or feel like this. My own transformation between 2022 and 2025 is the reason I&rsquo;m so passionate about helping others.</p>
+                <p>Honestly, I didn&rsquo;t notice the change myself until I looked back at old photos. What made the difference wasn&rsquo;t some extreme diet or punishing programme. It was learning to enjoy my training, staying mindful (not strict) with food, and showing up consistently. I still drink. I still eat junk food, just in moderation most of the time.</p>
+                <p>I coach 1:1 from Bannatyne Fairfield in Hitchin and Studio 180 in Letchworth. Programmes built around your life, not the other way round.</p>
 
-            <ul class="wont">
-                <li><span class="x" aria-hidden="true"></span><span>I won&rsquo;t put you on a crash diet.</span></li>
-                <li><span class="x" aria-hidden="true"></span><span>I won&rsquo;t tie you into a contract.</span></li>
-                <li><span class="x" aria-hidden="true"></span><span>I won&rsquo;t tell you the scale is the number that matters.</span></li>
-                <li><span class="x" aria-hidden="true"></span><span>If your problem is outside what I do, I&rsquo;ll say so and point you elsewhere.</span></li>
-            </ul>
+                <!-- Credentials: update with Dom's actual qualifications -->
+                <ul class="credits" aria-label="Qualifications">
+                    <li>Level 3 Personal Trainer</li>
+                    <li>First Aid Certified</li>
+                    <li>REPs Registered</li>
+                    <li>HYROX Athlete</li>
+                </ul>
 
-            <p class="closer">You don&rsquo;t need another generic plan. <span>You need someone who actually pays attention.</span></p>
+                <p><a href="https://www.instagram.com/sharpe.strength/" target="_blank" rel="noopener noreferrer" class="text-link">Follow @sharpe.strength on Instagram</a></p>
+            </div>
+
+            <!-- Dom's own 2022 to 2025 change, shown whole rather than as a
+                 cropped before/after: it happened gradually and without
+                 anything extreme. -->
+            <figure class="tile tile--photo">
+                <img src="img/dom-transformation.jpg"
+                     srcset="/.netlify/images?url=/img/dom-transformation.jpg&w=520&fm=webp&q=75 520w,
+                             /.netlify/images?url=/img/dom-transformation.jpg&w=933&fm=webp&q=75 933w"
+                     sizes="(max-width: 60rem) 100vw, 520px"
+                     alt="Dom Sharpe in 2022 and in 2025, four photos showing his own transformation" width="933" height="929" loading="lazy" decoding="async">
+                <figcaption>Dom. Left column 2022, right column 2025.</figcaption>
+            </figure>
+
+            <figure class="tile tile--race">
+                <img src="img/dom-hyrox-finish.jpg"
+                     srcset="/.netlify/images?url=/img/dom-hyrox-finish.jpg&w=480&fm=webp&q=75 480w,
+                             /.netlify/images?url=/img/dom-hyrox-finish.jpg&w=800&fm=webp&q=75 800w"
+                     sizes="(max-width: 60rem) 100vw, 420px"
+                     alt="Dom Sharpe celebrating after finishing a HYROX Manchester race" width="1018" height="1815" loading="lazy" decoding="async">
+                <figcaption>
+                    <strong>Competes, not just coaches.</strong>
+                    Dom races HYROX himself. Manchester finish time: <span class="time">1:27:37</span>.
+                    <a href="/hyrox-coaching" class="text-link">HYROX coaching</a>
+                </figcaption>
+            </figure>
+
+            <div class="tile tile--wont" id="why">
+                <h2>What I won&rsquo;t do</h2>
+                <p class="lead">Plenty of trainers will tell you what they do. This is what you won&rsquo;t get from Dom.</p>
+                <ul class="wont">
+                    <li><span class="x" aria-hidden="true"></span><span>I won&rsquo;t put you on a crash diet.</span></li>
+                    <li><span class="x" aria-hidden="true"></span><span>I won&rsquo;t tie you into a contract.</span></li>
+                    <li><span class="x" aria-hidden="true"></span><span>I won&rsquo;t tell you the scale is the number that matters.</span></li>
+                    <li><span class="x" aria-hidden="true"></span><span>If your problem is outside what I do, I&rsquo;ll say so and point you elsewhere.</span></li>
+                </ul>
+            </div>
+
+            <div class="tile tile--coach" id="services">
+                <h2>Four things, usually some mix of all four</h2>
+                <ul class="coaches">
+                    <li><h3>1:1 Personal Training</h3><p>Written entirely around you. Programme built for your goals, technique coached every session, progressive overload built in.</p></li>
+                    <li><h3>Weight Loss</h3><p>Fat loss that lasts. Practical nutrition guidance, training that burns fat rather than muscle, weekly check-ins.</p></li>
+                    <li><h3>Mobility &amp; Strength</h3><p>For stiffness and niggles. Movement screening, corrective exercise and flexibility work built into the programme.</p></li>
+                    <li><h3>Accountability</h3><p>Progress reviews, goal tracking and direct message support. Included with every coaching package.</p></li>
+                </ul>
+            </div>
         </div>
     </section>
 
-    <!-- ===================== FIRST SESSION: THE RUNNING ORDER =====================
-         The sled photo is HYROX competition footage, not the coaching floor.
-         Swap for a real venue shot when Dom's shoot happens. -->
-    <section class="sheet" id="first-session">
-        <div class="wrap">
-            <div class="split split--session">
-                <div class="session-intro">
-                    <h2 class="h2">What an hour with Dom actually looks like</h2>
-                    <p class="lede">Nobody tells you what happens when you walk in. Here it is, minute by minute.</p>
-                    <div class="hourbar" aria-hidden="true"><i style="width:16.667%"></i><i style="width:16.667%"></i><i class="hot" style="width:8.333%"></i><i style="width:50%"></i><i style="width:8.333%"></i></div>
-                    <figure class="paste">
+    <!-- ===================== FIRST SESSION: THE HOUR, TO SCALE =====================
+         Each stage's height is its share of the 60 minutes, so the scan reads
+         as the five minutes it is and training as the half hour it is. The sled
+         photo is HYROX competition footage, not the coaching floor: swap it for
+         a real session shot when Dom's shoot happens. -->
+    <section class="sheet hour" id="first-session">
+        <div class="container hour-grid">
+            <div class="hour-head">
+                <h2>What an hour with Dom actually looks like</h2>
+                <p class="lead">Nobody tells you what happens when you walk in. Here it is, minute by minute.</p>
+            </div>
+
+            <ol class="order">
+                <li style="--min: 10"><span class="when">0 to 10 min</span><div class="step"><h3>Talk</h3><p>Goals, injuries, what you&rsquo;ve tried before and what hasn&rsquo;t worked.</p></div></li>
+                <li style="--min: 10"><span class="when">10 to 20 min</span><div class="step"><h3>Movement screen</h3><p>Dom watches you squat, hinge and press before loading anything up.</p></div></li>
+                <li class="is-scan" style="--min: 5"><span class="when">20 to 25 min</span><div class="step"><h3>InBody scan</h3><p>Your actual starting numbers, not a guess from the bathroom scale.</p></div></li>
+                <li class="is-train" style="--min: 30"><span class="when">25 to 55 min</span><div class="step"><div><h3>Train</h3><p>Real lifting, coached rep by rep, at a level built around what you just showed him.</p></div>
+                    <figure class="step-photo">
                         <img src="img/dom-hyrox-sled.jpg"
                              srcset="/.netlify/images?url=/img/dom-hyrox-sled.jpg&w=400&fm=webp&q=75 400w,
                                      /.netlify/images?url=/img/dom-hyrox-sled.jpg&w=640&fm=webp&q=75 640w,
                                      /.netlify/images?url=/img/dom-hyrox-sled.jpg&w=900&fm=webp&q=75 900w"
-                             sizes="(max-width: 860px) 86vw, 420px"
-                             alt="Dom Sharpe pushing a sled at a HYROX race" loading="lazy" decoding="async">
+                             sizes="(max-width: 60rem) 90vw, 360px"
+                             alt="Dom Sharpe pushing a sled at a HYROX race" width="1320" height="2062" loading="lazy" decoding="async">
                         <figcaption>Dom, HYROX race. Not your first hour.</figcaption>
-                    </figure>
-                </div>
-
-                <ol class="order">
-                    <li><span class="when">0&ndash;10 min</span><div><h3 class="h3">Talk</h3><p>Goals, injuries, what you&rsquo;ve tried before and what hasn&rsquo;t worked.</p></div></li>
-                    <li><span class="when">10&ndash;20 min</span><div><h3 class="h3">Movement screen</h3><p>Dom watches you squat, hinge and press before loading anything up.</p></div></li>
-                    <li><span class="when">20&ndash;25 min</span><div><h3 class="h3">InBody scan</h3><p>Your actual starting numbers, not a guess from the bathroom scale.</p></div></li>
-                    <li><span class="when">25&ndash;55 min</span><div><h3 class="h3">Train</h3><p>Real lifting, coached rep by rep, at a level built around what you just showed him.</p></div></li>
-                    <li><span class="when">55&ndash;60 min</span><div><h3 class="h3">What&rsquo;s next</h3><p>What you do on your own before the next session, and why.</p></div></li>
-                </ol>
-            </div>
-        </div>
-    </section>
-
-    <!-- ===================== WHERE =====================
-         No venue photography exists yet; each venue leans on a click-to-load
-         map. Drive times and parking are left out rather than guessed at. -->
-    <section class="sheet" id="locations">
-        <div class="wrap">
-            <h2 class="h2">Two places to train</h2>
-            <p class="lede">Same coaching, two different rooms. Pick whichever one actually gets you there.</p>
-
-            <div class="venues">
-                <div class="venue">
-                    <h3 class="h3">Bannatyne Fairfield, Hitchin</h3>
-                    <address>Kingsley Ave, Fairfield Park, Hitchin SG5 4JJ</address>
-                    <p>A full health club: complete weights floor, cardio and equipment range. Usually busy. Good if you want the buzz and never want for kit.</p>
-                    <button type="button" class="map-facade"
-                            data-map-src="https://maps.google.com/maps?q=Bannatyne+Health+Club+Hitchin+Fairfield&output=embed"
-                            data-map-title="Bannatyne Fairfield, Hitchin">Show map</button>
-                    <a class="text-link" href="/personal-trainer-hitchin">More on training in Hitchin</a>
-                </div>
-
-                <div class="venue">
-                    <h3 class="h3">Studio 180, Letchworth</h3>
-                    <address>Unit 8 Business Centre East, Fifth Ave, Letchworth SG6 2TS</address>
-                    <p>A private PT studio. No gym floor, no audience. Good if being watched while you train is the thing that&rsquo;s been putting you off.</p>
-                    <button type="button" class="map-facade"
-                            data-map-src="https://maps.google.com/maps?q=Studio+180+Fifth+Avenue+Letchworth+SG6+2TS&output=embed"
-                            data-map-title="Studio 180, Letchworth">Show map</button>
-                    <a class="text-link" href="/personal-trainer-letchworth">More on training in Letchworth</a>
-                </div>
-            </div>
-
-            <p class="venues-note">Still not sure? If a busy gym floor is what&rsquo;s been putting you off, train at Studio 180. Weighing up gyms generally? Dom wrote an honest guide to every one of them in <a class="text-link" href="/gyms-in-hitchin">Hitchin</a> and in <a class="text-link" href="/gyms-in-letchworth">Letchworth</a>.</p>
-        </div>
-    </section>
-
-    <!-- ===================== WHAT DOM COACHES ===================== -->
-    <section class="sheet sheet--tight" id="services">
-        <div class="wrap">
-            <h2 class="h2">Four things, usually some mix of all four</h2>
-
-            <ul class="coaches">
-                <li><h3 class="h3">1:1 Personal Training</h3><p>Written entirely around you. Programme built for your goals, technique coached every session, progressive overload built in.</p></li>
-                <li><h3 class="h3">Weight Loss</h3><p>Fat loss that lasts. Practical nutrition guidance, training that burns fat rather than muscle, weekly check-ins.</p></li>
-                <li><h3 class="h3">Mobility &amp; Strength</h3><p>For stiffness and niggles. Movement screening, corrective exercise and flexibility work built into the programme.</p></li>
-                <li><h3 class="h3">Accountability</h3><p>Progress reviews, goal tracking and direct message support. Included with every coaching package.</p></li>
-            </ul>
+                    </figure></div></li>
+                <li style="--min: 5"><span class="when">55 to 60 min</span><div class="step"><h3>What&rsquo;s next</h3><p>What you do on your own before the next session, and why.</p></div></li>
+            </ol>
         </div>
     </section>
 
     <!-- ===================== PRICING =====================
          Prices come from data/pricing.json via scripts/sync-pricing.js. The
-         data-key spans must stay plain text-only elements for that script. -->
-    <section class="sheet" id="pricing">
-        <div class="wrap">
-            <h2 class="h2">Simple, honest pricing</h2>
-            <p class="lede">Everything Dom charges, in one place. No joining fee, nothing tying you in.</p>
+         data-key spans must stay plain text-only elements for that script.
+         js/analytics.js reads .pricing-card and its h3 for the package name. -->
+    <section class="sheet pricing" id="pricing">
+        <div class="container">
+            <div class="head-stack">
+                <h2>Simple, honest pricing</h2>
+                <p class="lead">Everything Dom charges, in one place. No joining fee, nothing tying you in.</p>
+            </div>
 
-            <div class="pricing-grid">
-
+            <div class="price-list">
                 <article class="pricing-card">
-                    <h3 class="h3">1-2-1 Personal Training</h3>
-                    <p class="price"><span class="price-currency">&pound;</span><span class="price-value" data-key="pricing.session.total" data-to="42">42</span></p>
-                    <p class="price-period">per session</p>
-                    <p>A personalised coaching session designed around your goals, experience and ability. Whether you want to build strength, lose weight, improve mobility or just feel more confident in the gym, every session is tailored to help you progress safely and effectively.</p>
-                    <a href="#contact" class="btn-line">Book a session</a>
+                    <h3>1-2-1 Personal Training</h3>
+                    <div class="price-box">
+                        <p class="price"><span class="price-currency">&pound;</span><span class="price-value" data-key="pricing.session.total" data-to="42">42</span></p>
+                        <p class="price-period">per session</p>
+                    </div>
+                    <p class="price-what">A personalised coaching session designed around your goals, experience and ability.</p>
+                    <a href="#contact" class="btn btn--line">Book a session</a>
                 </article>
 
                 <article class="pricing-card">
-                    <h3 class="h3">6-Week Coaching</h3>
-                    <p class="price"><span class="price-currency">&pound;</span><span class="price-value" data-key="pricing.coaching6.total" data-to="252">252</span></p>
-                    <p class="price-period" data-key="pricing.coaching6.perweek">&pound;42 per week</p>
-                    <p>Six weeks, one session a week, same time each week. Enough to build a habit.</p>
-                    <a href="#contact" class="btn-line">Enquire</a>
+                    <h3>6-Week Coaching</h3>
+                    <div class="price-box">
+                        <p class="price"><span class="price-currency">&pound;</span><span class="price-value" data-key="pricing.coaching6.total" data-to="252">252</span></p>
+                        <p class="price-period" data-key="pricing.coaching6.perweek">&pound;42 per week</p>
+                    </div>
+                    <p class="price-what">Six weeks, one session a week, same time each week. Enough to build a habit.</p>
+                    <a href="#contact" class="btn btn--line">Enquire</a>
                 </article>
 
                 <article class="pricing-card featured">
-                    <span class="pricing-flag">Recommended</span>
-                    <h3 class="h3">6-Week Coaching + App</h3>
-                    <p class="price"><span class="price-currency">&pound;</span><span class="price-value" data-key="pricing.app6.total" data-to="288">288</span></p>
-                    <p class="price-period" data-key="pricing.app6.perweek">&pound;48 per week</p>
-                    <p>Weekly sessions plus a programme in the app for the days you train on your own. This is what most clients end up on.</p>
-                    <a href="#contact" class="stub stub--ink">Get started</a>
+                    <h3>6-Week Coaching + App</h3>
+                    <div class="price-box">
+                        <p class="price"><span class="price-currency">&pound;</span><span class="price-value" data-key="pricing.app6.total" data-to="288">288</span></p>
+                        <p class="price-period" data-key="pricing.app6.perweek">&pound;48 per week</p>
+                    </div>
+                    <p class="price-what"><strong>Recommended.</strong> Weekly sessions plus a programme in the app for the days you train on your own. This is what most clients end up on.</p>
+                    <a href="#contact" class="btn">Get started</a>
                 </article>
 
                 <article class="pricing-card">
-                    <h3 class="h3">6-Week Programme + Check-ins</h3>
-                    <p class="price"><span class="price-currency">&pound;</span><span class="price-value" data-key="pricing.checkins6.total" data-to="180">180</span></p>
-                    <p class="price-period" data-key="pricing.checkins6.perweek">&pound;30 per week</p>
-                    <p>For people who already train and just want the programming handled.</p>
-                    <a href="#contact" class="btn-line">Enquire</a>
+                    <h3>6-Week Programme + Check-ins</h3>
+                    <div class="price-box">
+                        <p class="price"><span class="price-currency">&pound;</span><span class="price-value" data-key="pricing.checkins6.total" data-to="180">180</span></p>
+                        <p class="price-period" data-key="pricing.checkins6.perweek">&pound;30 per week</p>
+                    </div>
+                    <p class="price-what">For people who already train and just want the programming handled.</p>
+                    <a href="#contact" class="btn btn--line">Enquire</a>
                 </article>
-
             </div>
 
             <!-- One shared set of rows, so the four packages can be compared
                  line by line instead of four differently worded tick lists. -->
-            <div class="table-scroll" tabindex="0" role="region" aria-label="Pricing comparison, scrolls sideways on small screens">
-                <table class="compare">
-                    <caption class="sr-only">Feature comparison across all four pricing tiers</caption>
-                    <thead>
-                        <tr>
-                            <th scope="col"><span class="sr-only">Feature</span></th>
-                            <th scope="col">1-2-1 session</th>
-                            <th scope="col">6-Week coaching</th>
-                            <th scope="col" class="is-featured">6-Week + app</th>
-                            <th scope="col">6-Week + check-ins</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr><th scope="row">In-person coaching</th><td>1 &times; 60 min</td><td>6 &times; 60 min</td><td class="is-featured">6 &times; 60 min</td><td><span class="none" role="img" aria-label="Not included"></span></td></tr>
-                        <tr><th scope="row">Programme written for you</th><td><span class="none" role="img" aria-label="Not included"></span></td><td><span class="tick" role="img" aria-label="Included"></span></td><td class="is-featured"><span class="tick" role="img" aria-label="Included"></span></td><td><span class="tick" role="img" aria-label="Included"></span></td></tr>
-                        <tr><th scope="row">Technique coaching</th><td><span class="tick" role="img" aria-label="Included"></span></td><td><span class="tick" role="img" aria-label="Included"></span></td><td class="is-featured"><span class="tick" role="img" aria-label="Included"></span></td><td><span class="none" role="img" aria-label="Not included"></span></td></tr>
-                        <tr><th scope="row">Progress tracking</th><td><span class="tick" role="img" aria-label="Included"></span></td><td><span class="tick" role="img" aria-label="Included"></span></td><td class="is-featured"><span class="tick" role="img" aria-label="Included"></span></td><td><span class="tick" role="img" aria-label="Included"></span></td></tr>
-                        <tr><th scope="row">Goal setting</th><td><span class="none" role="img" aria-label="Not included"></span></td><td><span class="tick" role="img" aria-label="Included"></span></td><td class="is-featured"><span class="tick" role="img" aria-label="Included"></span></td><td><span class="tick" role="img" aria-label="Included"></span></td></tr>
-                        <tr><th scope="row">Programme in the app</th><td><span class="none" role="img" aria-label="Not included"></span></td><td><span class="none" role="img" aria-label="Not included"></span></td><td class="is-featured"><span class="tick" role="img" aria-label="Included"></span></td><td><span class="tick" role="img" aria-label="Included"></span></td></tr>
-                        <tr><th scope="row">Exercise demo videos</th><td><span class="none" role="img" aria-label="Not included"></span></td><td><span class="none" role="img" aria-label="Not included"></span></td><td class="is-featured"><span class="tick" role="img" aria-label="Included"></span></td><td><span class="tick" role="img" aria-label="Included"></span></td></tr>
-                        <tr><th scope="row">Programme adjustments</th><td><span class="none" role="img" aria-label="Not included"></span></td><td>Each session</td><td class="is-featured">Each session</td><td>Weekly</td></tr>
-                        <tr><th scope="row">Direct message support</th><td><span class="none" role="img" aria-label="Not included"></span></td><td><span class="none" role="img" aria-label="Not included"></span></td><td class="is-featured"><span class="tick" role="img" aria-label="Included"></span></td><td>Weekly check-in only</td></tr>
-                        <tr><th scope="row">Best for</th><td>Trying it out</td><td>Building a habit</td><td class="is-featured">Most clients</td><td>Training independently</td></tr>
-                    </tbody>
-                </table>
-            </div>
+            <details class="compare-wrap">
+                <summary>Compare every package, line by line</summary>
+                <div class="table-scroll" tabindex="0" role="region" aria-label="Pricing comparison, scrolls sideways on small screens">
+                    <table class="compare">
+                        <caption class="sr-only">Feature comparison across all four pricing tiers</caption>
+                        <thead>
+                            <tr>
+                                <th scope="col"><span class="sr-only">Feature</span></th>
+                                <th scope="col">1-2-1 session</th>
+                                <th scope="col">6-Week coaching</th>
+                                <th scope="col" class="is-featured">6-Week + app</th>
+                                <th scope="col">6-Week + check-ins</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><th scope="row">In-person coaching</th><td>1 &times; 60 min</td><td>6 &times; 60 min</td><td class="is-featured">6 &times; 60 min</td><td><span class="none" role="img" aria-label="Not included"></span></td></tr>
+                            <tr><th scope="row">Programme written for you</th><td><span class="none" role="img" aria-label="Not included"></span></td><td><span class="tick" role="img" aria-label="Included"></span></td><td class="is-featured"><span class="tick" role="img" aria-label="Included"></span></td><td><span class="tick" role="img" aria-label="Included"></span></td></tr>
+                            <tr><th scope="row">Technique coaching</th><td><span class="tick" role="img" aria-label="Included"></span></td><td><span class="tick" role="img" aria-label="Included"></span></td><td class="is-featured"><span class="tick" role="img" aria-label="Included"></span></td><td><span class="none" role="img" aria-label="Not included"></span></td></tr>
+                            <tr><th scope="row">Progress tracking</th><td><span class="tick" role="img" aria-label="Included"></span></td><td><span class="tick" role="img" aria-label="Included"></span></td><td class="is-featured"><span class="tick" role="img" aria-label="Included"></span></td><td><span class="tick" role="img" aria-label="Included"></span></td></tr>
+                            <tr><th scope="row">Goal setting</th><td><span class="none" role="img" aria-label="Not included"></span></td><td><span class="tick" role="img" aria-label="Included"></span></td><td class="is-featured"><span class="tick" role="img" aria-label="Included"></span></td><td><span class="tick" role="img" aria-label="Included"></span></td></tr>
+                            <tr><th scope="row">Programme in the app</th><td><span class="none" role="img" aria-label="Not included"></span></td><td><span class="none" role="img" aria-label="Not included"></span></td><td class="is-featured"><span class="tick" role="img" aria-label="Included"></span></td><td><span class="tick" role="img" aria-label="Included"></span></td></tr>
+                            <tr><th scope="row">Exercise demo videos</th><td><span class="none" role="img" aria-label="Not included"></span></td><td><span class="none" role="img" aria-label="Not included"></span></td><td class="is-featured"><span class="tick" role="img" aria-label="Included"></span></td><td><span class="tick" role="img" aria-label="Included"></span></td></tr>
+                            <tr><th scope="row">Programme adjustments</th><td><span class="none" role="img" aria-label="Not included"></span></td><td>Each session</td><td class="is-featured">Each session</td><td>Weekly</td></tr>
+                            <tr><th scope="row">Direct message support</th><td><span class="none" role="img" aria-label="Not included"></span></td><td><span class="none" role="img" aria-label="Not included"></span></td><td class="is-featured"><span class="tick" role="img" aria-label="Included"></span></td><td>Weekly check-in only</td></tr>
+                            <tr><th scope="row">Best for</th><td>Trying it out</td><td>Building a habit</td><td class="is-featured">Most clients</td><td>Training independently</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </details>
 
             <p class="pricing-note">First consultation is always free. <a class="text-link" href="#contact">Get in touch</a> to find out which option suits you best.</p>
         </div>
@@ -640,75 +653,83 @@
 
     <!-- ===================== CLIENT STORIES =====================
          Kat's result is the strongest single proof point (first marathon,
-         zero pain after years of back and hip trouble) so it leads. -->
-    <section class="sheet" id="testimonials">
-        <div class="wrap">
-            <h2 class="h2">Real people. Real results.</h2>
-            <p class="lede">Four clients, in their own words. Nothing trimmed to make it read better.</p>
+         zero pain after years of back and hip trouble) so it leads. Quotes
+         are the clients' own words, unedited. -->
+    <section class="sheet people" id="testimonials">
+        <div class="container">
+            <div class="head-stack">
+                <h2>Real people. Real results.</h2>
+                <p class="lead">Four clients, in their own words. Nothing trimmed to make it read better.</p>
+            </div>
 
             <div class="stories">
-            <article class="story story--lead">
-                <div class="story-who">
-                    <p class="story-name">Kat</p>
-                    <p>Running her first marathon, after years of back and hip trouble</p>
-                    <a href="https://www.instagram.com/katjay82/" target="_blank" rel="noopener noreferrer" class="text-link">@katjay82</a>
-                </div>
-                <div>
+                <article class="story story--lead">
+                    <div class="story-who">
+                        <p class="story-name">Kat</p>
+                        <p>Running her first marathon, after years of back and hip trouble</p>
+                        <a href="https://www.instagram.com/katjay82/" target="_blank" rel="noopener noreferrer" class="text-link">@katjay82</a>
+                    </div>
+                    <div class="story-say">
                     <p class="story-pull">&ldquo;I ran that marathon with zero pain, beating my goal time.&rdquo;</p>
-                    <blockquote>I started training with Dom early this year after having struggled with lower back and hip pain/discomfort for months (if not actually years). Having strength trained for many years I was confident I knew what I was doing, but I was also training to run my first Marathon and the constant limitations of the pain was getting to me. Let me just say, what an absolute game changer. Working with Dom once a week not only gave me the results I was looking for but it has taught me so much and enabled me to improve all aspects of my strength and fitness in ways I truly didn&rsquo;t expect. Dom is beyond knowledgeable, committed, attentive, listens to your needs and tailors everything to suit you as an individual. In a relatively short space of time my overall strength and fitness has improved, my weight training has come on leaps and bounds, I ran that marathon with zero pain beating my goal time, and I&rsquo;m enjoying every aspect of my training again. I&rsquo;d recommend him to anyone at any level no matter what the goal. I can&rsquo;t rate him highly enough.</blockquote>
-                </div>
-            </article>
-
-            <article class="story">
-                <div class="story-who">
-                    <p class="story-name">Alex</p>
-                    <p><span data-key="results.testimonialAlex.weight.from">96kg</span> to <span data-key="results.testimonialAlex.weight.to">79kg</span>, &minus;<span data-key="results.testimonialAlex.fat.delta">11%</span> body fat</p>
-                    <a href="https://www.instagram.com/al.tilli/" target="_blank" rel="noopener noreferrer" class="text-link">@al.tilli</a>
-                </div>
-                <div>
-                    <p class="story-pull">&ldquo;Having had several trainers over the years, Dom is by far the most personable, knowledgeable and motivating.&rdquo;</p>
                     <details class="story-more">
                         <summary>Read the whole thing</summary>
-                        <blockquote>When I first started working with Dom I was 96kg, overweight and with bad nutrition after a year or two of letting myself go! I wanted to get back on track but needed motivation and experience in how to do it. Dom has transformed me completely by working with me to lose body fat and retain muscle mass. I&rsquo;ve gone from 96kg down to 79kg and lost 11% body fat. His workouts are never dull and we mix it up a fair bit to keep it fresh. He has also been key in my nutrition plan. Having had several trainers over the years Dom is by far the most personable, knowledgeable and motivating. And... we are still going, there&rsquo;s more work to do!</blockquote>
+                        <blockquote>I started training with Dom early this year after having struggled with lower back and hip pain/discomfort for months (if not actually years). Having strength trained for many years I was confident I knew what I was doing, but I was also training to run my first Marathon and the constant limitations of the pain was getting to me. Let me just say, what an absolute game changer. Working with Dom once a week not only gave me the results I was looking for but it has taught me so much and enabled me to improve all aspects of my strength and fitness in ways I truly didn&rsquo;t expect. Dom is beyond knowledgeable, committed, attentive, listens to your needs and tailors everything to suit you as an individual. In a relatively short space of time my overall strength and fitness has improved, my weight training has come on leaps and bounds, I ran that marathon with zero pain beating my goal time, and I&rsquo;m enjoying every aspect of my training again. I&rsquo;d recommend him to anyone at any level no matter what the goal. I can&rsquo;t rate him highly enough.</blockquote>
                     </details>
-                </div>
-            </article>
+                    </div>
+                </article>
 
-            <article class="story">
-                <div class="story-who">
-                    <p class="story-name">Amber</p>
-                    <p>Strength &middot; 2+ years &middot; Best PT ever had</p>
-                </div>
-                <div>
-                    <p class="story-pull">&ldquo;I can honestly say he&rsquo;s the best PT I&rsquo;ve ever had.&rdquo;</p>
-                    <details class="story-more">
-                        <summary>Read the whole thing</summary>
-                        <blockquote>I&rsquo;ve been training with Dom at Sharpe Strength for over two years now, and I can honestly say he&rsquo;s the best PT I&rsquo;ve ever had. His knowledge is incredible. He knows exactly how to tailor every session to my goals, pushing me to achieve more than I ever thought possible, while always keeping things safe, effective and fun! He&rsquo;s happy to answer my questions thoroughly so I&rsquo;m always learning. But what really sets him apart is his kindness and approachable nature. I&rsquo;ve never felt intimidated or out of my depth, just supported and encouraged every step of the way. If you want expert guidance, motivation, and real results, Sharpe Strength is the BEST decision you can make!</blockquote>
-                    </details>
-                </div>
-            </article>
+                <article class="story">
+                    <div class="story-who">
+                        <p class="story-name">Alex</p>
+                        <p><span data-key="results.testimonialAlex.weight.from">96kg</span> to <span data-key="results.testimonialAlex.weight.to">79kg</span>, &minus;<span data-key="results.testimonialAlex.fat.delta">11%</span> body fat</p>
+                        <a href="https://www.instagram.com/al.tilli/" target="_blank" rel="noopener noreferrer" class="text-link">@al.tilli</a>
+                    </div>
+                    <div class="story-say">
+                        <p class="story-pull">&ldquo;Having had several trainers over the years, Dom is by far the most personable, knowledgeable and motivating.&rdquo;</p>
+                        <details class="story-more">
+                            <summary>Read the whole thing</summary>
+                            <blockquote>When I first started working with Dom I was 96kg, overweight and with bad nutrition after a year or two of letting myself go! I wanted to get back on track but needed motivation and experience in how to do it. Dom has transformed me completely by working with me to lose body fat and retain muscle mass. I&rsquo;ve gone from 96kg down to 79kg and lost 11% body fat. His workouts are never dull and we mix it up a fair bit to keep it fresh. He has also been key in my nutrition plan. Having had several trainers over the years Dom is by far the most personable, knowledgeable and motivating. And&hellip; we are still going, there&rsquo;s more work to do!</blockquote>
+                        </details>
+                    </div>
+                </article>
 
-            <article class="story">
-                <div class="story-who">
-                    <p class="story-name">Sally-Anne</p>
-                    <p>Fat loss &middot; Strength &middot; Mobility</p>
-                </div>
-                <div>
-                    <p class="story-pull">&ldquo;He met me exactly where I was: no ego, no judgement, just patience, encouragement and genuine expertise.&rdquo;</p>
-                    <details class="story-more">
-                        <summary>Read the whole thing</summary>
-                        <blockquote>Honestly, the best PT I&rsquo;ve ever worked with. From day one, he met me exactly where I was, no ego, no judgement, just patience, encouragement, and genuine expertise. I came in feeling nervous, unsure and in the worst shape of my life, but his deep experience and constant support have not only kept me injury-free, but helped me build real confidence and learn skills I never thought I&rsquo;d master. He&rsquo;s got a real knack for knowing what you need, not just generic fat loss plans or gym routines off the shelf. Thanks to his tailored programming, I&rsquo;ve seen steady fat loss alongside real gains in strength and mobility. Movements that once felt impossible are now part of my weekly sessions. My body just works better now! If you want someone who genuinely cares, knows his stuff inside out, and has the patience of a saint, this is your guy. Can&rsquo;t recommend him enough.</blockquote>
-                    </details>
-                </div>
-            </article>
+                <article class="story">
+                    <div class="story-who">
+                        <p class="story-name">Amber</p>
+                        <p>Strength, 2+ years, best PT ever had</p>
+                    </div>
+                    <div class="story-say">
+                        <p class="story-pull">&ldquo;I can honestly say he&rsquo;s the best PT I&rsquo;ve ever had.&rdquo;</p>
+                        <details class="story-more">
+                            <summary>Read the whole thing</summary>
+                            <blockquote>I&rsquo;ve been training with Dom at Sharpe Strength for over two years now, and I can honestly say he&rsquo;s the best PT I&rsquo;ve ever had. His knowledge is incredible. He knows exactly how to tailor every session to my goals, pushing me to achieve more than I ever thought possible, while always keeping things safe, effective and fun! He&rsquo;s happy to answer my questions thoroughly so I&rsquo;m always learning. But what really sets him apart is his kindness and approachable nature. I&rsquo;ve never felt intimidated or out of my depth, just supported and encouraged every step of the way. If you want expert guidance, motivation, and real results, Sharpe Strength is the BEST decision you can make!</blockquote>
+                        </details>
+                    </div>
+                </article>
+
+                <article class="story">
+                    <div class="story-who">
+                        <p class="story-name">Sally-Anne</p>
+                        <p>Fat loss, strength and mobility</p>
+                    </div>
+                    <div class="story-say">
+                        <p class="story-pull">&ldquo;He met me exactly where I was: no ego, no judgement, just patience, encouragement and genuine expertise.&rdquo;</p>
+                        <details class="story-more">
+                            <summary>Read the whole thing</summary>
+                            <blockquote>Honestly, the best PT I&rsquo;ve ever worked with. From day one, he met me exactly where I was, no ego, no judgement, just patience, encouragement, and genuine expertise. I came in feeling nervous, unsure and in the worst shape of my life, but his deep experience and constant support have not only kept me injury-free, but helped me build real confidence and learn skills I never thought I&rsquo;d master. He&rsquo;s got a real knack for knowing what you need, not just generic fat loss plans or gym routines off the shelf. Thanks to his tailored programming, I&rsquo;ve seen steady fat loss alongside real gains in strength and mobility. Movements that once felt impossible are now part of my weekly sessions. My body just works better now! If you want someone who genuinely cares, knows his stuff inside out, and has the patience of a saint, this is your guy. Can&rsquo;t recommend him enough.</blockquote>
+                        </details>
+                    </div>
+                </article>
             </div>
         </div>
     </section>
 
     <!-- ===================== FAQ ===================== -->
-    <section class="sheet sheet--tight" id="faq">
-        <div class="wrap wrap--prose">
-            <h2 class="h2">Got a question?</h2>
+    <section class="sheet faq" id="faq">
+        <div class="container faq-grid">
+            <div class="faq-head">
+                <h2>Got a question?</h2>
+            </div>
 
             <div class="faq-list">
                 <details class="faq-item" name="faq"><summary>Do I need to already be fit to start?</summary><p>Not at all. Dom works with all levels, from complete beginners to experienced lifters. The programme is built around where you are right now, not where you think you should be.</p></details>
@@ -722,30 +743,67 @@
 
             <div class="faq-cta">
                 <p>Something else on your mind? Just ask.</p>
-                <a href="#contact" class="btn-line">Get in touch</a>
+                <a href="#contact" class="btn btn--line">Get in touch</a>
             </div>
         </div>
     </section>
 
-    <!-- ===================== CONSULTATION FORM =====================
-         Ids, names and the Netlify attributes are what js/bill.js and
+    <!-- ===================== THE CLOSE: WHERE, THEN BOOK =====================
+         No venue photography exists yet; each venue leans on a click-to-load
+         map. Drive times and parking are left out rather than guessed at.
+         #contact sits on the booking band so every "Book" link lands on the
+         form. Ids, names and the Netlify attributes are what js/bill.js and
          Netlify Forms hook into. -->
-    <section class="sheet sheet--form" id="contact">
-        <div class="wrap">
-            <div class="split split--contact">
+    <section class="sheet close" id="locations">
+        <div class="container">
+            <div class="head-split">
+                <h2>Two places to train</h2>
+                <p class="lead">Same coaching, two different rooms. Pick whichever one actually gets you there.</p>
+            </div>
 
+            <div class="venues">
+                <div class="venue">
+                    <h3>Bannatyne Fairfield, Hitchin</h3>
+                    <address>Kingsley Ave, Fairfield Park, Hitchin SG5 4JJ</address>
+                    <p>A full health club: complete weights floor, cardio and equipment range. Usually busy. Good if you want the buzz and never want for kit.</p>
+                    <div class="venue-acts">
+                        <button type="button" class="btn btn--line map-facade"
+                                data-map-src="https://maps.google.com/maps?q=Bannatyne+Health+Club+Hitchin+Fairfield&output=embed"
+                                data-map-title="Bannatyne Fairfield, Hitchin">Show map</button>
+                        <a class="text-link" href="/personal-trainer-hitchin">More on training in Hitchin</a>
+                    </div>
+                </div>
+
+                <div class="venue">
+                    <h3>Studio 180, Letchworth</h3>
+                    <address>Unit 8 Business Centre East, Fifth Ave, Letchworth SG6 2TS</address>
+                    <p>A private PT studio. No gym floor, no audience. Good if being watched while you train is the thing that&rsquo;s been putting you off.</p>
+                    <div class="venue-acts">
+                        <button type="button" class="btn btn--line map-facade"
+                                data-map-src="https://maps.google.com/maps?q=Studio+180+Fifth+Avenue+Letchworth+SG6+2TS&output=embed"
+                                data-map-title="Studio 180, Letchworth">Show map</button>
+                        <a class="text-link" href="/personal-trainer-letchworth">More on training in Letchworth</a>
+                    </div>
+                </div>
+            </div>
+
+            <p class="venues-note">Still not sure? If a busy gym floor is what&rsquo;s been putting you off, train at Studio 180. Weighing up gyms generally? Dom wrote an honest guide to every one of them in <a class="text-link" href="/gyms-in-hitchin">Hitchin</a> and in <a class="text-link" href="/gyms-in-letchworth">Letchworth</a>.</p>
+        </div>
+
+        <div class="book-band" id="contact">
+            <div class="container book">
                 <div class="contact-info">
-                    <h2 class="h2">Book your free session</h2>
-                    <p class="lede">Fill in the form and Dom will be in touch to arrange your free consultation. No commitment, no pressure, just an honest conversation about what you want to achieve.</p>
+                    <h2>Book your free session</h2>
+                    <p class="lead">Fill in the form and Dom will be in touch to arrange your free consultation. No commitment, no pressure, just an honest conversation about what you want to achieve.</p>
+                    <p class="contact-free">The first consultation is free and there is nothing to sign.</p>
 
                     <dl class="contact-details">
-                        <div><dt>WhatsApp / phone</dt><dd><a href="https://wa.me/447375219353?text=Hi%20Dom%2C%20I%27d%20like%20to%20find%20out%20more%20about%20personal%20training." target="_blank" rel="noopener noreferrer">07375 219353</a></dd></div>
+                        <div><dt>WhatsApp or phone</dt><dd><a href="https://wa.me/447375219353?text=Hi%20Dom%2C%20I%27d%20like%20to%20find%20out%20more%20about%20personal%20training." target="_blank" rel="noopener noreferrer">07375 219353</a></dd></div>
                         <div><dt>Email</dt><dd><a href="mailto:sharpe.strength1@gmail.com">sharpe.strength1@gmail.com</a></dd></div>
                         <div><dt>Instagram</dt><dd><a href="https://www.instagram.com/sharpe.strength/" target="_blank" rel="noopener noreferrer">@sharpe.strength</a></dd></div>
                         <div><dt>First session</dt><dd>Free consultation</dd></div>
                     </dl>
 
-                    <!-- Addresses and maps live in the Where section, once. -->
                     <p class="contact-locations-note">Dom coaches from two venues in Hitchin and Letchworth. <a class="text-link" href="#locations">Compare them</a> if you&rsquo;re not sure which suits you.</p>
                 </div>
 
@@ -784,7 +842,7 @@
                                 <label for="goal">Primary goal <span class="required">*</span></label>
                                 <div class="select-wrap">
                                     <select id="goal" name="goal" required>
-                                        <option value="" disabled selected>Select your goal...</option>
+                                        <option value="" disabled selected>Select your goal&hellip;</option>
                                         <option value="weight-loss">Weight Loss</option>
                                         <option value="strength">Build Strength</option>
                                         <option value="mobility">Improve Mobility</option>
@@ -818,7 +876,7 @@
 
                         <div class="form-group">
                             <label for="message">Tell Dom about your goals</label>
-                            <textarea id="message" name="message" rows="4" placeholder="What are you looking to achieve? Any injuries or limitations? Anything else Dom should know..."></textarea>
+                            <textarea id="message" name="message" rows="4" placeholder="What are you looking to achieve? Any injuries or limitations? Anything else Dom should know&hellip;"></textarea>
                         </div>
 
                         <div class="form-group form-consent">
@@ -828,7 +886,7 @@
                             </label>
                         </div>
 
-                        <button type="submit" class="stub btn-submit"><span>Send consultation request</span><span class="arr" aria-hidden="true"></span></button>
+                        <button type="submit" class="btn btn-submit"><span>Send consultation request</span></button>
 
                         <p class="form-error" id="form-error" role="alert" hidden></p>
 
@@ -839,61 +897,64 @@
                     </form>
 
                     <div class="form-success" id="form-success">
-                        <h3 class="h3">Request sent.</h3>
+                        <h3>Request sent.</h3>
                         <p>Dom will be in touch shortly to arrange your free consultation. Looking forward to speaking with you.</p>
-                        <a href="#home" class="btn-line">Back to top</a>
+                        <a href="#home" class="btn btn--line">Back to top</a>
                     </div>
                 </div>
-
             </div>
         </div>
     </section>
 
     </main>
 
-    <!-- ===================== FOOTER ===================== -->
-    <footer class="site-foot">
-        <div class="foot-inner">
-            <div class="foot-brand">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 100" role="img" aria-label="Sharpe Strength"><polyline points="8,8 36,50 8,92" fill="none" stroke="#ffffff" stroke-width="8" stroke-linecap="square" stroke-linejoin="miter"/><polyline points="30,8 58,50 30,92" fill="none" stroke="#C8923A" stroke-width="8" stroke-linecap="square" stroke-linejoin="miter"/><line x1="76" y1="20" x2="76" y2="80" stroke="rgba(255,255,255,0.25)" stroke-width="1.5"/><text x="94" y="60" font-family="Impact, 'Arial Black', sans-serif" font-size="46px" fill="#ffffff" letter-spacing="4">SHARPE</text><text x="96" y="84" font-family="'Helvetica Neue', Arial, sans-serif" font-weight="300" font-size="14px" fill="rgba(255,255,255,0.4)" letter-spacing="13">STRENGTH</text></svg>
-                <p>Personal Trainer &amp; Strength Coach</p>
-                <p>Bannatyne Fairfield, Hitchin &middot; Studio 180, Letchworth</p>
-                <p>Weight Training &middot; Mobility &middot; Weight Loss &middot; Accountability</p>
+    <!-- ===================== FOOTER: THE STATEMENT ===================== -->
+    <footer class="site-foot footer">
+        <div class="container">
+            <p class="foot-statement">You don&rsquo;t need another generic plan.<br>You need someone who actually pays attention.</p>
+
+            <div class="foot-inner">
+                <div class="foot-brand">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 100" role="img" aria-label="Sharpe Strength"><polyline class="logo-a" points="8,8 36,50 8,92" fill="none" stroke-width="8" stroke-linecap="square" stroke-linejoin="miter"/><polyline class="logo-b" points="30,8 58,50 30,92" fill="none" stroke-width="8" stroke-linecap="square" stroke-linejoin="miter"/><line class="logo-rule" x1="76" y1="20" x2="76" y2="80" stroke-width="1.5"/><text class="logo-word" x="94" y="60" font-size="46px" letter-spacing="4">SHARPE</text><text class="logo-sub" x="96" y="84" font-weight="300" font-size="14px" letter-spacing="13">STRENGTH</text></svg>
+                    <p>Personal Trainer &amp; Strength Coach</p>
+                    <p>Bannatyne Fairfield, Hitchin<br>Studio 180, Letchworth</p>
+                    <p>Weight training, mobility, weight loss and accountability</p>
+                </div>
+
+                <nav class="foot-nav" aria-label="Quick links">
+                    <h2 class="foot-heading">Quick links</h2>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#transformations">Results</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#first-session">First session</a></li>
+                        <li><a href="#locations">Locations</a></li>
+                        <li><a href="#services">Coaching</a></li>
+                        <li><a href="#pricing">Pricing</a></li>
+                        <li><a href="#faq">FAQ</a></li>
+                        <li><a href="#contact">Free consultation</a></li>
+                        <li><a href="/personal-trainer-hitchin">Personal Trainer Hitchin</a></li>
+                        <li><a href="/personal-trainer-letchworth">Personal Trainer Letchworth</a></li>
+                        <li><a href="/gyms-in-hitchin">Gyms in Hitchin Guide</a></li>
+                        <li><a href="/gyms-in-letchworth">Gyms in Letchworth Guide</a></li>
+                        <li><a href="/hyrox-training-plan">Free HYROX Training Plan</a></li>
+                        <li><a href="/hyrox-coaching">HYROX Coaching</a></li>
+                    </ul>
+                </nav>
+
+                <div class="foot-contact">
+                    <h2 class="foot-heading">Follow Dom</h2>
+                    <a href="https://www.instagram.com/sharpe.strength/" target="_blank" rel="noopener noreferrer">@sharpe.strength</a>
+                    <a href="https://wa.me/447375219353?text=Hi%20Dom%2C%20I%27d%20like%20to%20find%20out%20more%20about%20personal%20training." target="_blank" rel="noopener noreferrer">WhatsApp 07375 219353</a>
+                    <a href="mailto:sharpe.strength1@gmail.com">sharpe.strength1@gmail.com</a>
+                    <p class="foot-dm">Email, DM or WhatsApp for a free consultation</p>
+                </div>
             </div>
 
-            <nav class="foot-nav" aria-label="Quick links">
-                <h2 class="foot-heading">Quick links</h2>
-                <ul>
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#transformations">Results</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#first-session">First session</a></li>
-                    <li><a href="#locations">Locations</a></li>
-                    <li><a href="#services">Coaching</a></li>
-                    <li><a href="#pricing">Pricing</a></li>
-                    <li><a href="#faq">FAQ</a></li>
-                    <li><a href="#contact">Free consultation</a></li>
-                    <li><a href="/personal-trainer-hitchin">Personal Trainer Hitchin</a></li>
-                    <li><a href="/personal-trainer-letchworth">Personal Trainer Letchworth</a></li>
-                    <li><a href="/gyms-in-hitchin">Gyms in Hitchin Guide</a></li>
-                    <li><a href="/gyms-in-letchworth">Gyms in Letchworth Guide</a></li>
-                    <li><a href="/hyrox-training-plan">Free HYROX Training Plan</a></li>
-                    <li><a href="/hyrox-coaching">HYROX Coaching</a></li>
-                </ul>
-            </nav>
-
-            <div class="foot-contact">
-                <h2 class="foot-heading">Follow Dom</h2>
-                <a href="https://www.instagram.com/sharpe.strength/" target="_blank" rel="noopener noreferrer">@sharpe.strength</a>
-                <a href="https://wa.me/447375219353?text=Hi%20Dom%2C%20I%27d%20like%20to%20find%20out%20more%20about%20personal%20training." target="_blank" rel="noopener noreferrer">WhatsApp 07375 219353</a>
-                <a href="mailto:sharpe.strength1@gmail.com">sharpe.strength1@gmail.com</a>
-                <p class="foot-dm">Email, DM or WhatsApp for a free consultation</p>
+            <div class="foot-bottom">
+                <p>&copy; 2026 Dom Sharpe Fitness. All rights reserved.</p>
+                <p><a href="/privacy">Privacy policy</a></p>
             </div>
-        </div>
-
-        <div class="foot-bottom">
-            <p>&copy; 2026 Dom Sharpe Fitness. All rights reserved.</p>
-            <p><a href="/privacy">Privacy policy</a></p>
         </div>
     </footer>
 

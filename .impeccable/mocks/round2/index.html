@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Dark redesign options, round 2</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#0f0f0f;color:#fff;font-family:system-ui,-apple-system,'Segoe UI',sans-serif;padding:32px 40px 60px}
+h1{font-size:28px;margin-bottom:6px}
+p.top{color:rgba(255,255,255,.7);margin-bottom:30px;max-width:80ch;line-height:1.5}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(440px,1fr));gap:34px}
+.opt a{display:block;color:inherit;text-decoration:none}
+.shot{position:relative;width:100%;aspect-ratio:1440/900;border:1px solid rgba(255,255,255,.22);overflow:hidden;background:#000}
+.shot iframe{position:absolute;left:0;top:0;width:1440px;height:900px;border:0;transform-origin:0 0;pointer-events:none}
+.opt h2{margin-top:12px;font-size:21px;color:#C8923A}
+.opt p{margin-top:5px;color:rgba(255,255,255,.76);line-height:1.5;font-size:15px}
+.opt .risk{color:rgba(255,255,255,.6)}
+.opt .go{display:inline-block;margin-top:9px;font-weight:600;font-size:14px;border-bottom:1px solid #C8923A}
+</style></head><body>
+<h1>Dark redesign options, round 2</h1>
+<p class="top">Three different worlds. All keep your dark ground and chevron logo. None uses Oswald, amber-highlighted headlines, mono caption labels or hairline stat boxes. Click one to open it full size and scroll the whole mockup.</p>
+<div class="grid">
+<div class="opt"><a href="1-fight-bill.html"><div class="shot"><iframe src="1-fight-bill.html" title="Option 1"></iframe></div><h2>1. The Fight Bill</h2><p>The scale versus the scan, set like a fight-night poster in heavy wood-type slab. The headline is the ruled bill band, the booking button is a ticket stub, and the other results stack beneath in shrinking type.</p><p class="risk">Risk: loud, and could read as boxing or gym-bro to a nervous beginner.</p><span class="go">Open full size</span></a></div>
+<div class="opt"><a href="2-honours-board.html"><div class="shot"><iframe src="2-honours-board.html" title="Option 2"></iframe></div><h2>2. The Honours Board</h2><p>A sign-written club honours board: dark green, gold lettering, Dom's portrait on a plaque, and each result entered like a record. The warmest and most British of the three.</p><p class="risk">Risk: could feel formal or traditional, less energetic.</p><span class="go">Open full size</span></a></div>
+<div class="opt"><a href="3-work-print.html"><div class="shot"><iframe src="3-work-print.html" title="Option 3"></iframe></div><h2>3. The Work Print</h2><p>Your real InBody printouts and photos as frames on a film strip, the scale's number struck through and the scan's circled in grease pencil. The most photo-led and editorial.</p><p class="risk">Risk: the film-editing idea is the least obvious to a first-time visitor.</p><span class="go">Open full size</span></a></div>
+</div>
+<script>
+function fit(){document.querySelectorAll('.shot').forEach(function(s){var f=s.querySelector('iframe');f.style.transform='scale('+(s.clientWidth/1440)+')';});}
+addEventListener('resize',fit);fit();
+</script>
+</body></html>

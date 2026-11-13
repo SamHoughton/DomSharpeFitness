@@ -1,0 +1,132 @@
+{
+  "title": "Choose the visual world",
+  "question": "Your copy is kind and plain-spoken. Your look is a hardcore gym brand. Which world should the whole site live in?",
+  "options": [
+    {
+      "id": "assigned",
+      "kind": "assigned",
+      "label": "Public Information",
+      "kicker": "THE ROLL",
+      "lineage": "British road signs, 1970s public information posters and Isotype diagrams",
+      "thesis": "Dom posts his numbers like a public notice: one plain fact per sign, readable by anyone in seconds.",
+      "palette": ["#0a58b8", "#d7141f", "#ffc400", "#00794a", "#f4f4f1", "#111111"],
+      "materials": ["flat spot colour", "sign panels with white borders", "Isotype pictograms", "duotone photo inserts"],
+      "viewport": "A huge red prohibition roundel over a bathroom scale, the headline in tight sentence-case type, a blue sign with the offer, one yellow booking button, and a two-line direction sign that sends nervous beginners and racers to different doors.",
+      "risk": "Without strict type and spacing it reads as a children's or council site instead of a confident one.",
+      "raised": [
+        {"from": "digital-design-canon-dark-first-developer-console", "raise": "The booking action sits alone in deliberate empty space, never crowded by neighbours."},
+        {"from": "signals-instruments-night-flight-six-pack", "raise": "Every figure shows its direction of travel (before, after, change), never a lone value."}
+      ],
+      "html": ".impeccable/mocks/decision/assigned.html"
+    },
+    {
+      "id": "model-pick",
+      "kind": "pick",
+      "label": "The Programme Card",
+      "kicker": "IMPECCABLE’S PICK",
+      "lineage": "1980s leisure-centre induction and programme cards",
+      "thesis": "The whole site is the coloured card a trainer fills in with biro: sets, weights, and the scan numbers week by week.",
+      "palette": ["#d6ecde", "#16213b", "#1c3fa8", "#c11a1a"],
+      "materials": ["coloured card stock", "typewriter caps", "biro handwriting", "rubber stamps"],
+      "viewport": "One pale green card ruled into a grid, the headline typed in capitals, three weeks of scan numbers written in biro with the scale column struck through, and a red stamp.",
+      "risk": "Handwriting and card nostalgia can tip into twee, and a card format fights a long page with pricing and booking.",
+      "html": ".impeccable/mocks/decision/model-pick.html"
+    },
+    {
+      "id": "challenger-teen-quiz",
+      "kind": "challenger",
+      "catalogId": "pop-culture-shelf-teen-magazine-quiz",
+      "label": "The Quiz Spread",
+      "verdict": "competitive",
+      "lineage": "1990s teen-magazine quiz spreads",
+      "thesis": "Self-selection as a ritual: circle what sounds like you, count the Bs, open the verdict.",
+      "palette": ["#ff2d8a", "#b7ff1a", "#f7f5ef", "#111111"],
+      "materials": ["newsprint", "halftone", "gel-pen circles", "torn collage"],
+      "viewport": "A tilted headline asking which one sounds like you, three lettered answers with one circled in pen, a torn halftone photo and a pink verdict box naming a scan, not a scale.",
+      "risk": "Pink and acid green read as teenage, and the collage noise competes with price and booking.",
+      "case": "Holds audience identification: circling an answer is the friendliest way to let a gym-shy beginner and a racer sort themselves. Loses on clarity, since the noise buries the numbers.",
+      "kept": "The circle-one-answer routing ritual.",
+      "html": ".impeccable/mocks/decision/challenger-teen-quiz.html",
+      "hero": "https://impeccable.style/worlds/cards/pop-culture-shelf-teen-magazine-quiz-hero.webp"
+    },
+    {
+      "id": "challenger-console",
+      "kind": "challenger",
+      "catalogId": "digital-design-canon-dark-first-developer-console",
+      "label": "Dark Console",
+      "verdict": "declined",
+      "lineage": "dark-first developer consoles",
+      "palette": ["#161616", "#2a2a2a", "#c8923a"],
+      "materials": ["graphite panels", "hairline seams"],
+      "case": "Fuses into what the site already is, and a nervous beginner reads it as more of the intimidating gym.",
+      "kept": "The primary action alone in deliberate empty space.",
+      "hero": "https://impeccable.style/worlds/cards/digital-design-canon-dark-first-developer-console-hero.webp"
+    },
+    {
+      "id": "challenger-six-pack",
+      "kind": "challenger",
+      "catalogId": "signals-instruments-night-flight-six-pack",
+      "label": "Night Instruments",
+      "verdict": "declined",
+      "lineage": "night-flight instrument panels",
+      "palette": ["#0b0d0c", "#e9f2ea", "#7dff9a"],
+      "materials": ["dials", "luminous markings"],
+      "case": "Measurement fits, but a glowing black cockpit is a gym brand again and cold to a beginner.",
+      "kept": "Trend shown alongside every value.",
+      "hero": "https://impeccable.style/worlds/cards/signals-instruments-night-flight-six-pack-hero.webp"
+    },
+    {
+      "id": "challenger-bbs",
+      "kind": "challenger",
+      "catalogId": "medium-native-ansi-bbs-nightboard",
+      "label": "Dial-up Nightboard",
+      "verdict": "declined",
+      "lineage": "ANSI bulletin boards",
+      "palette": ["#000000", "#00aaaa", "#aa00aa"],
+      "materials": ["character grid", "block glyphs"],
+      "case": "A tool-culture world with no link to Hertfordshire gym-goers.",
+      "kept": "Numbered exits as plain navigation.",
+      "hero": "https://impeccable.style/worlds/cards/medium-native-ansi-bbs-nightboard-hero.webp"
+    },
+    {
+      "id": "challenger-pickling",
+      "kind": "challenger",
+      "catalogId": "food-fermentation-culinary-theater-pickling-brine-calendar",
+      "label": "Brine Calendar",
+      "verdict": "declined",
+      "lineage": "pickling and fermentation calendars",
+      "palette": ["#f3d9cf", "#c8454a", "#7a9b4a"],
+      "materials": ["glass jars", "kraft labels"],
+      "case": "Day-count labels suit weeks of progress, but the subject has no pull for this audience.",
+      "kept": "Every result labelled with its day or week count.",
+      "hero": "https://impeccable.style/worlds/cards/food-fermentation-culinary-theater-pickling-brine-calendar-hero.webp"
+    },
+    {
+      "id": "challenger-gravity",
+      "kind": "challenger",
+      "catalogId": "dream-surreal-impossible-worlds-gravity-rain-garden",
+      "label": "Gravity Rain Garden",
+      "verdict": "declined",
+      "lineage": "surreal gravity gardens",
+      "palette": ["#5b6b5c", "#3a7be0", "#d64545"],
+      "materials": ["bent baselines", "cloud colour"],
+      "case": "Beautiful, and nothing in it explains personal training.",
+      "kept": "Colour that carries meaning, not decoration.",
+      "hero": "https://impeccable.style/worlds/cards/dream-surreal-impossible-worlds-gravity-rain-garden-hero.webp"
+    }
+  ],
+  "reroll": {"registers": ["safer", "bolder"]},
+  "buildPath": {"value": "code", "toggle": false},
+  "canon": true,
+  "canonCard": {
+    "kind": "canon",
+    "label": "The category standard",
+    "thesis": "A dark hero photo, a big uppercase promise, one gold button and a stats bar: what most personal trainers ship, at full craft.",
+    "palette": ["#0f0f0f", "#ffffff", "#c8923a"],
+    "materials": ["dark photography", "condensed uppercase type"],
+    "viewport": "Black ground, huge condensed headline, a gold booking button and a three-number bar under a framed athlete photo.",
+    "risk": "Indistinguishable from the competition by design, and close to the site you have now.",
+    "html": ".impeccable/mocks/decision/canon.html"
+  },
+  "steer": true
+}

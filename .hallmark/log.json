@@ -1,0 +1,34 @@
+[
+ {
+  "mode": "redesign",
+  "depth": "full",
+  "scope": "page",
+  "prompt": "a personal trainer's homepage in Hitchin and Letchworth that turns visitors into free consultation bookings",
+  "shape": "Bento Grid (About block) in an editorial column",
+  "theme": "brand",
+  "axes": "dark/display-condensed/warm",
+  "hero": "Ledge",
+  "nav": "floating bar",
+  "footer": "statement",
+  "imagery": "the owner's photographs 3, InBody printouts 5",
+  "photos": [],
+  "entry": "draw e46c34",
+  "fingerprint": "Ledge hero · head-split openers · ledger rows · bento · proportional timeline · price-list rows",
+  "sections": [
+   "Hero (Ledge, scale and scan readout)",
+   "Results (switch, lead printout, ledger of four)",
+   "About (bento: story, 2022 and 2025, HYROX finish, what I won't do, coaching)",
+   "First session (the hour to scale)",
+   "Pricing (price list, comparison behind a disclosure)",
+   "Client stories (band)",
+   "FAQ (rows)",
+   "Close (two venues, booking band)",
+   "Footer (statement)"
+  ],
+  "signature": "the same results measured two ways, the scale against an InBody, with a sticky switch across every client",
+  "waived": [
+   "37"
+  ],
+  "date": "2026-11-11"
+ }
+]

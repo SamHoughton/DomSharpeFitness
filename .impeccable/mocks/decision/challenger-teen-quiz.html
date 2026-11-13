@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>Quiz Spread, first viewport</title>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Libre+Baskerville:wght@400;700&family=Reenie+Beanie&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1440px;height:900px;overflow:hidden;background:#f7f5ef;font-family:"Libre Baskerville",Georgia,serif;color:#111}
+.hl{position:absolute;left:50px;top:40px;width:760px;transform:rotate(-2deg);font-family:Anton,Impact,sans-serif;font-size:150px;line-height:.92;text-transform:uppercase;color:#ff2d8a}
+.hl span{background:#b7ff1a;color:#111;padding:0 14px}
+.sub{position:absolute;left:60px;top:470px;width:620px;font-size:26px;line-height:1.4}
+.q{position:absolute;left:60px;top:600px;width:640px;font-size:24px}
+.q div{display:flex;align-items:center;gap:18px;padding:14px 0;border-bottom:3px dotted #111}
+.q b{width:44px;height:44px;border:3px solid #111;display:grid;place-items:center;font-family:Anton;font-size:26px}
+.q .on b{background:#b7ff1a}
+.q .on span{outline:5px solid #c9ced6;outline-offset:6px;border-radius:40px}
+.photo{position:absolute;right:56px;top:50px;width:560px;height:500px;background:#222;clip-path:polygon(2% 4%,98% 0,100% 94%,6% 100%);transform:rotate(2deg)}
+.photo::after{content:"";position:absolute;inset:0;background-image:radial-gradient(#fff 1.2px,transparent 1.6px);background-size:7px 7px;opacity:.35}
+.verdict{position:absolute;right:70px;bottom:60px;width:560px;background:#ff2d8a;color:#fff;border:6px solid #111;padding:26px 30px;transform:rotate(-1.5deg);font-family:Anton;font-size:44px;text-transform:uppercase;line-height:1.05}
+.verdict small{display:block;font-family:"Libre Baskerville";font-size:22px;text-transform:none;margin-top:12px}
+.tape{position:absolute;left:640px;top:30px;width:200px;height:54px;background:rgba(255,230,120,.8);transform:rotate(14deg)}
+</style></head><body>
+<div class="hl">Which one <span>sounds like you?</span></div>
+<div class="sub">Circle one. Count the Bs. Dom is Hitchin and Letchworth’s personal trainer, and he measures the answer.</div>
+<div class="q"><div><b>A</b><span>Gyms put me off. I don’t want an audience.</span></div><div class="on"><b>B</b><span>I want proper numbers, not a pep talk.</span></div><div><b>C</b><span>I race. I need real programming.</span></div></div>
+<div class="photo"></div><div class="tape"></div>
+<div class="verdict">Mostly Bs: you want a scan, not a scale.<small>Book the free consultation</small></div>
+</body></html>
+
+<!-- written after serve -->

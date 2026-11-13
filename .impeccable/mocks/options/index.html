@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Design options</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#0f0f0f;color:#fff;font-family:system-ui,-apple-system,'Segoe UI',sans-serif;padding:32px 40px 60px}
+h1{font-size:28px;margin-bottom:6px}
+p.top{color:rgba(255,255,255,.65);margin-bottom:30px;max-width:80ch;line-height:1.5}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(420px,1fr));gap:30px}
+.opt a{display:block;color:inherit;text-decoration:none}
+.shot{position:relative;width:100%;aspect-ratio:1440/900;border:1px solid rgba(255,255,255,.2);overflow:hidden;background:#000}
+.shot iframe{position:absolute;left:0;top:0;width:1440px;height:900px;border:0;transform-origin:0 0;pointer-events:none}
+.opt h2{margin-top:12px;font-size:20px;color:#C8923A}
+.opt p{margin-top:4px;color:rgba(255,255,255,.7);line-height:1.45;font-size:15px}
+.opt .go{display:inline-block;margin-top:8px;font-weight:600;font-size:14px;border-bottom:1px solid #C8923A}
+</style></head><body>
+<h1>Six design options</h1>
+<p class="top">All keep your dark theme, amber, chevron logo and Oswald headlines. Click any one to open it full size and scroll the whole mockup.</p>
+<div class="grid">
+<div class="opt"><a href="a-readout.html"><div class="shot"><iframe src="a-readout.html" title="A"></iframe></div><h2>A: The Readout</h2><p>Your site, with the scan numbers as giant amber figures and the scale's number struck out. Lowest risk.</p><span class="go">Open full size</span></a></div>
+<div class="opt"><a href="b-two-measures.html"><div class="shot"><iframe src="b-two-measures.html" title="B"></iframe></div><h2>B: Two Measures</h2><p>A split first screen: what the scale saw against what the InBody saw.</p><span class="go">Open full size</span></a></div>
+<div class="opt"><a href="c-timing-board.html"><div class="shot"><iframe src="c-timing-board.html" title="C"></iframe></div><h2>C: The Timing Board</h2><p>Amber dot-matrix figures on a race board, with Dom's 1:27:37. Most unusual.</p><span class="go">Open full size</span></a></div>
+<div class="opt"><a href="d-poster.html"><div class="shot"><iframe src="d-poster.html" title="D"></iframe></div><h2>D: Poster</h2><p>Giant headline type, Dom as a black-and-amber print, "What I won't do" as huge lines.</p><span class="go">Open full size</span></a></div>
+<div class="opt"><a href="e-two-doors.html"><div class="shot"><iframe src="e-two-doors.html" title="E"></iframe></div><h2>E: Two Doors</h2><p>Two big photo doors for the two audiences, then the hour as a 60-minute bar.</p><span class="go">Open full size</span></a></div>
+<div class="opt"><a href="f-the-wall.html"><div class="shot"><iframe src="f-the-wall.html" title="F"></iframe></div><h2>F: The Wall</h2><p>Your four real InBody printouts as the hero.</p><span class="go">Open full size</span></a></div>
+</div>
+<script>
+function fit(){document.querySelectorAll('.shot').forEach(function(s){var f=s.querySelector('iframe');f.style.transform='scale('+(s.clientWidth/1440)+')';});}
+addEventListener('resize',fit);fit();
+</script>
+</body></html>
